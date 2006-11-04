@@ -44,7 +44,7 @@ static void do_purge( const char* dir_path, gpointer user_data )
 
     if( ! (dir = g_dir_open( dir_path, 0, NULL )) )
         return;
-    while( file_name = g_dir_read_name( dir ) )
+    while( (file_name = g_dir_read_name( dir )) )
     {
         char* file_path;
 
