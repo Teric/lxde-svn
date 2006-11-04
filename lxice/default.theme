@@ -1,0 +1,79 @@
+ThemeDescription="LXIce Style"
+ThemeAuthor="Hong Jen Yee (PCMan)"
+Look=pixmap
+TitleBarHeight=20
+TitleButtonsRight="xmi"
+TitleButtonsSupported="xmis"
+BorderSizeX=4
+BorderSizeY=2
+DlgBorderSizeX=4
+DlgBorderSizeY=2
+CornerSizeX=22
+CornerSizeY=22
+MenuMouseTracking=1
+
+Gradients="titleAS.xpm titleAB.xpm"
+
+ColorNormalBorder="rgb:ED/E9/E3"
+ColorActiveBorder="rgb:ED/E9/E3"
+ColorNormalButton="rgb:ED/E9/E3"
+ColorActiveButton="rgb:ED/E9/E3"
+
+TitleBarJustify=50
+ColorNormalTitleBar="rgb:dc/dc/dc"
+ColorActiveTitleBar="rgb:40/7C/CA"
+ColorNormalTitleBarText="rgb:88/8a/85"
+ColorActiveTitleBarText="rgb:FF/FF/FF"
+ColorActiveTitleBarShadow="rgb:00/00/00"
+
+ColorNormalMenu="rgb:ED/E9/E3"
+ColorActiveMenuItem="rgb:55/98/D7"
+ColorNormalMenuItemText="rgb:00/00/00"
+ColorActiveMenuItemText="rgb:FF/FF/FF"
+ColorDisabledMenuItemText="rgb:80/80/80"
+
+ColorDialog="rgb:ED/E9/E3"
+ColorListBox="rgb:ED/E9/E3"
+ColorListBoxText="rgb:00/00/00"
+ColorListBoxSelection="rgb:55/98/D7"
+ColorListBoxSelectionText="rgb:FF/FF/FF"
+
+ColorMoveSizeStatus="rgb:ED/E9/E3"
+ColorMoveSizeStatusText="rgb:00/00/00"
+
+ColorDefaultTaskBar="rgb:ED/E9/E3"
+ColorNormalTaskBarApp="rgb:ED/E9/E3"
+ColorNormalTaskBarAppText="rgb:00/00/00"
+ColorActiveTaskBarApp="rgb:E0/E0/E0"
+ColorActiveTaskBarAppText="rgb:00/00/00"
+
+ColorLabel="rgb:ED/E9/E3"
+ColorLabelText="rgb:4c/59/a6"
+
+ColorScrollBar="rgb:D9/D2/C7"
+ColorScrollBarSlider="rgb:ED/E9/E3"
+ColorScrollBarButton="rgb:ED/E9/E3"
+ColorScrollBarButtonArrow="rgb:00/00/00"
+
+ColorToolTip="rgb:FF/FF/C0"
+ColorToolTipText="rgb:00/00/00"
+
+# Font
+#TitleFontNameXft		=	sans:size=12
+#MenuFontNameXft			=	sans:size=12
+#MinimizedWindowFontNameXft	=	sans:size=11
+#ActiveButtonFontNameXft		=	sans:size=11
+#NormalButtonFontNameXft		=	sans:size=11
+#ToolButtonFontNameXft		=	sans:size=11
+#NormalWorkspaceFontNameXft	=	sans:size=11
+#ActiveWorkspaceFontNameXft	=	sans:size=11
+#QuickSwitchFontNameXft		=	sans:size=11
+#ListBoxFontNameXft		=	sans:size=11
+#StatusFontNameXft		=	sans:size=11
+#ToolTipFontNameXft		=	sans:size=11
+#ActiveTaskBarFontNameXft	=	sans:size=11:bold
+#NormalTaskBarFontNameXft	=	sans:size=11
+#ClockFontNameXft		=	sans:size=11:bold
+#InputFontNameXft		=	sans:size=11
+
+TaskBarClockLeds=0
