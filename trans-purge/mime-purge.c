@@ -18,9 +18,6 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
  *
  * NOTE: This program requires glib 2.4+.
- * To compile this program, type following command:
- * 
- * gcc `pkg-config glib-2.0 --cflags --libs` -o desktop-purge desktop-purge.c
  *
  * Usage: sudo mime-purge
  */
@@ -30,6 +27,8 @@
 #include <sys/stat.h>
 #include <fcntl.h>
 #include <errno.h>
+#include <string.h>
+#include <unistd.h>
 
 const char desktop_ent[] = "Desktop Entry";
 const char mime_dir_name[] = "mime";
@@ -46,7 +45,7 @@ static void purge_file( const char* file_path, struct stat* statbuf )
         char* line;
         GString* result = g_string_sized_new(ori_len);
 
-        if( G_LIKELY(line = strtok( data, "\n" )) )
+        if( G_LIKELY((line = strtok( data, "\n" ))) )
         {
             do
             {
@@ -66,7 +65,7 @@ static void purge_file( const char* file_path, struct stat* statbuf )
                     while( lang[lang_len] && lang[lang_len] != '\"' )
                         ++lang_len;
 
-                    for( langs = g_get_language_names(); *langs; ++langs )
+                    for( langs = (const char**) g_get_language_names(); *langs; ++langs )
                     {
                         if( 0 == g_ascii_strncasecmp( *langs, lang, lang_len ) )
                             break;
@@ -77,7 +76,7 @@ static void purge_file( const char* file_path, struct stat* statbuf )
                 }
                 g_string_append( result, line );
                 g_string_append_c( result, '\n' );
-            }while( line = strtok(NULL, "\n") );
+            }while( (line = strtok(NULL, "\n")) );
 
             if( G_LIKELY( result->len < statbuf->st_size ) )
             {
@@ -88,7 +87,7 @@ static void purge_file( const char* file_path, struct stat* statbuf )
                     {
                         statbuf->st_size -= result->len;
                         saved_size += statbuf->st_size;
-                        g_print( "%s purged, save %d bytes\n", file_path, statbuf->st_size );
+                        g_print( "%s purged, save %d bytes\n", file_path, (int) statbuf->st_size );
                     }
                     else
                         g_print( "Error: %s\n", g_strerror( errno ) );
@@ -113,7 +112,7 @@ static void do_purge( const char* dir_path, gpointer user_data )
 
     if( ! (dir = g_dir_open( dir_path, 0, NULL )) )
         return;
-    while( file_name = g_dir_read_name( dir ) )
+    while( (file_name = (char *) g_dir_read_name( dir )) )
     {
         char* file_path;
 
@@ -142,7 +141,6 @@ static void mime_dir_foreach( GFunc func, gpointer user_data )
     const char** sys_dirs = (const char**)g_get_system_data_dirs();
     char* path;
     int i, len;
-    struct stat dir_stat;
 
     len = g_strv_length((gchar **) sys_dirs);
 
@@ -160,7 +158,7 @@ static void mime_dir_foreach( GFunc func, gpointer user_data )
 int main( int argc, char** argv )
 {
     g_print("MIME purge 0.1\nDeveloped by Hong Jen Yee (PCMan) <pcman.tw@gmail.com>\n\n");
-    mime_dir_foreach( do_purge, NULL );
+    mime_dir_foreach( (GFunc) do_purge, NULL );
     g_print( "%d KB saved\n", saved_size/1024 );
     return 0;
 }

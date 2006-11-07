@@ -18,16 +18,13 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
  *
  * NOTE: This program requires glib 2.4+.
- * To compile this program, type following command:
- * 
- * gcc `plg-config glib-2.0 --cflags --libs` -o desktop-purge desktop-purge.c
- * 
  */
 
 #include <glib.h>
 #include <sys/types.h>
 #include <sys/stat.h>
 #include <fcntl.h>
+#include <unistd.h>
 #include <errno.h>
 
 const char desktop_ent[] = "Desktop Entry";
@@ -37,7 +34,7 @@ static gsize saved_size = 0;
 
 static void do_purge( const char* dir_path, gpointer user_data )
 {
-    char* file_name;
+    gchar* file_name;
     GDir *dir;
     GKeyFile* file = g_key_file_new();
     struct stat statbuf;
@@ -68,7 +65,7 @@ static void do_purge( const char* dir_path, gpointer user_data )
                 continue;
             }
 
-            if( data = g_key_file_to_data( file, &len, NULL ) )
+            if( (data = g_key_file_to_data( file, &len, NULL )) )
             {
                 char* pdata = data;
                 while( *pdata && *pdata == '\n' )
@@ -86,7 +83,8 @@ static void do_purge( const char* dir_path, gpointer user_data )
                         {
                             statbuf.st_size -= len;
                             saved_size += statbuf.st_size;
-                            g_print( "%s purged, save %d bytes\n", file_path, statbuf.st_size );
+                            g_print( "%s purged, save %d bytes\n", 
+			             file_path, (int) statbuf.st_size );
                         }
                         else
                             g_print( "Error: %s\n", g_strerror( errno ) );
@@ -116,7 +114,6 @@ static void app_dirs_foreach( GFunc func, gpointer user_data )
     const char** sys_dirs = (const char**)g_get_system_data_dirs();
     char* path;
     int i, len;
-    struct stat dir_stat;
 
     len = g_strv_length((gchar **) sys_dirs);
 
@@ -134,7 +131,7 @@ static void app_dirs_foreach( GFunc func, gpointer user_data )
 int main( int argc, char** argv )
 {
     g_print("Desktop purge 0.1\nDeveloped by Hong Jen Yee (PCMan) <pcman.tw@gmail.com>\n\n");
-    app_dirs_foreach( do_purge, NULL );
+    app_dirs_foreach( (GFunc) do_purge, NULL );
     g_print( "%d KB saved\n", saved_size/1024 );
     return 0;
 }
