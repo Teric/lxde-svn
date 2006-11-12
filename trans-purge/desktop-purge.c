@@ -34,7 +34,7 @@ static gsize saved_size = 0;
 
 static void do_purge( const char* dir_path, gpointer user_data )
 {
-    gchar* file_name;
+    G_CONST_RETURN gchar* file_name;
     GDir *dir;
     GKeyFile* file = g_key_file_new();
     struct stat statbuf;
