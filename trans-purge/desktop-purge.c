@@ -35,7 +35,7 @@ static char* file_to_purge = NULL;
 static GOptionEntry option_entries[] = 
 {
     { "keep-locales", 'k', 0, G_OPTION_ARG_STRING, &keep_locales, "Specify the locales you want to keep, seperated by colon. By default only the locale currently in use will be kept.", "locale1:locale2:..." },
-    { "file-to-purge", 'f', 0, G_OPTION_ARG_FILENAME, &file_to_purge, "Specify a file to purge. By default the whole mime-database on the system will be purged", "FILE" },
+    { "file-to-purge", 'f', 0, G_OPTION_ARG_FILENAME, &file_to_purge, "Specify a file to purge. By default the whole desktop-database on the system will be purged", "FILE" },
     { NULL }
 };
 
@@ -149,7 +149,7 @@ int main( int argc, char** argv )
 
     g_print("Desktop purge 0.1\nDeveloped by Hong Jen Yee (PCMan) <pcman.tw@gmail.com>\n\n");
 
-    context = g_option_context_new("- test tree model performance");
+    context = g_option_context_new("- purge unnecessary locales in desktop database");
     g_option_context_add_main_entries(context, option_entries, NULL);
 
     if( !g_option_context_parse(context, &argc, &argv, &error) )

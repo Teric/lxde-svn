@@ -32,6 +32,17 @@
 #include <string.h>
 #include <unistd.h>
 
+static char* keep_locales = NULL;
+static char* file_to_purge = NULL;
+static char* dir_to_purge = NULL;
+static GOptionEntry option_entries[] = 
+{
+    { "keep-locales", 'k', 0, G_OPTION_ARG_STRING, &keep_locales, "Specify the locales you want to keep, seperated by colon. By default only the locale currently in use will be kept.", "locale1:locale2:..." },
+    { "dir-to-purge", 'f', 0, G_OPTION_ARG_FILENAME, &dir_to_purge, "Specify a directory to purge. By default /usr/sharegconf/schemas and /etc/gconf/schemas will be purged", "DIR" },
+    { "file-to-purge", 'f', 0, G_OPTION_ARG_FILENAME, &file_to_purge, "Specify a file to purge. By default the whole gconf schema will be purged", "FILE" },
+    { NULL }
+};
+
 static gsize saved_size = 0;
 
 static void purge_file( const char* file_path, struct stat* statbuf )
@@ -173,15 +184,48 @@ static void do_purge( const char* dir_path )
 
 int main( int argc, char** argv )
 {
-    const char* dir;
-    if( argc < 2 )
-        dir = "/usr/share/gconf/schemas";
-    else
-        dir = argv[1];
+    GError *error = NULL;
+    GOptionContext *context;
+
     g_print("GConf purge 0.1\nDeveloped by Hong Jen Yee (PCMan) <pcman.tw@gmail.com>\n\n");
-    do_purge( dir );
-    if( argc < 2 ) /* Default */
-        do_purge( "/etc/gconf/schemas" );
+
+    context = g_option_context_new("- purge unnecessary locales in gconf schemas");
+    g_option_context_add_main_entries(context, option_entries, NULL);
+
+    if( !g_option_context_parse(context, &argc, &argv, &error) )
+    {
+        g_print("Error: %s\n", error->message);
+        g_error_free( error );
+        return 1;
+    }
+
+    if( keep_locales ) /* reserved locales */
+        g_setenv( "LANGUAGE", keep_locales, TRUE );
+
+    if( file_to_purge )
+    {
+        struct stat statbuf;
+        if( 0 == stat( file_to_purge, &statbuf ) )
+            purge_file( file_to_purge, &statbuf );
+        else
+            g_print( "Error - file %s cannot be opened", file_to_purge );
+    }
+    else
+    {
+        const char* dir;
+
+        if( ! dir_to_purge )
+            dir = "/usr/share/gconf/schemas";
+        else
+            dir = dir_to_purge;
+
+        do_purge( dir );
+
+        if( ! dir_to_purge ) /* Default */
+            do_purge( "/etc/gconf/schemas" );
+    }
+
     g_print( "%d KB saved\n", saved_size/1024 );
+
     return 0;
 }

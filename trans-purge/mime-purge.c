@@ -171,7 +171,7 @@ int main( int argc, char** argv )
 
     g_print("MIME purge 0.1\nDeveloped by Hong Jen Yee (PCMan) <pcman.tw@gmail.com>\n\n");
 
-    context = g_option_context_new("- test tree model performance");
+    context = g_option_context_new("- purge unnecessary locales in mime database");
     g_option_context_add_main_entries(context, option_entries, NULL);
 
     if( !g_option_context_parse(context, &argc, &argv, &error) )
