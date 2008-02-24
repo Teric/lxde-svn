@@ -70,10 +70,10 @@ static void gtk_xine_realize       (GtkWidget      *widget);
 static void gtk_xine_unrealize     (GtkWidget      *widget);
 
 static gint gtk_xine_expose        (GtkWidget      *widget,
-				    GdkEventExpose *event);
+                    GdkEventExpose *event);
 
 static void gtk_xine_size_allocate (GtkWidget      *widget,
-				    GtkAllocation  *allocation);
+                    GtkAllocation  *allocation);
 
 static GtkWidgetClass *parent_class = NULL;
 
@@ -93,9 +93,9 @@ GtkType gtk_xine_get_type (void) {
       0 /* n_preallocs */,
       (GInstanceInitFunc) gtk_xine_instance_init,
     };
-    
+
     gtk_xine_type = g_type_register_static (GTK_TYPE_WIDGET,
-					    "GtkXine", &gtk_xine_info, (GTypeFlags)0);
+                        "GtkXine", &gtk_xine_info, (GTypeFlags)0);
   }
 
   return gtk_xine_type;
@@ -133,7 +133,7 @@ static void gtk_xine_instance_init (GtkXine *this) {
    */
 
   this->xine            = xine_new();
-  
+
   snprintf (this->configfile, 255, "%s/.gxine/config", getenv ("HOME"));
   xine_config_load (this->xine, this->configfile);
 
@@ -163,7 +163,7 @@ static void gtk_xine_instance_init (GtkXine *this) {
 
 #if 0
   printf ("gtkxine: extensions: '%s'\n",
-	  xine_get_file_extensions (this->xine));
+      xine_get_file_extensions (this->xine));
 #endif
 
 }
@@ -180,10 +180,10 @@ static void gtk_xine_finalize (GObject *object) {
 
 
 static void dest_size_cb (void *gxine_gen,
-			  int video_width, int video_height,
-			  double video_pixel_aspect,
-			  int *dest_width, int *dest_height,
-			  double *dest_pixel_aspect)  {
+              int video_width, int video_height,
+              double video_pixel_aspect,
+              int *dest_width, int *dest_height,
+              double *dest_pixel_aspect)  {
 
   GtkXine   *gxine = (GtkXine *) gxine_gen;
 
@@ -217,8 +217,8 @@ static gboolean gtk_xine_idle_resize (GtkXine *gtx) {
 
 #ifdef LOG
   printf ("gtkxine: idle resize to %d x %d\n",
-	  video_width, video_height);
-#endif    
+      video_width, video_height);
+#endif
 
   gdk_threads_enter ();
 
@@ -228,12 +228,12 @@ static gboolean gtk_xine_idle_resize (GtkXine *gtx) {
   gtx->widget.allocation.width = video_width;
   gtx->widget.allocation.height = video_height;
   gtk_widget_set_size_request (&gtx->widget,
-			       video_width, video_height);
+                   video_width, video_height);
   gtk_widget_queue_resize (gtk_widget_get_parent (GTK_WIDGET (gtx)));
-  while (gtk_events_pending ()) 
+  while (gtk_events_pending ())
     gtk_main_iteration ();
 
-  gtk_window_set_resizable (toplevel, TRUE);  
+  gtk_window_set_resizable (toplevel, TRUE);
 
   gdk_threads_leave ();
 
@@ -247,12 +247,12 @@ static gboolean gtk_xine_idle_resize (GtkXine *gtx) {
 
 
 static void frame_output_cb (void *gxine_gen,
-			     int video_width, int video_height,
-			     double video_pixel_aspect,
-			     int *dest_x, int *dest_y,
-			     int *dest_width, int *dest_height,
-			     double *dest_pixel_aspect,
-			     int *win_x, int *win_y) {
+                 int video_width, int video_height,
+                 double video_pixel_aspect,
+                 int *dest_x, int *dest_y,
+                 int *dest_width, int *dest_height,
+                 double *dest_pixel_aspect,
+                 int *win_x, int *win_y) {
 
   GtkXine   *gtx = (GtkXine *) gxine_gen;
 
@@ -288,14 +288,14 @@ static void frame_output_cb (void *gxine_gen,
       /* size changed? */
 
       if ( (video_width != gtx->oldwidth) ||
-	   (video_height != gtx->oldheight) ) {
+       (video_height != gtx->oldheight) ) {
 
 
-	gtx->oldwidth = video_width;
-	gtx->oldheight = video_height;
+    gtx->oldwidth = video_width;
+    gtx->oldheight = video_height;
 
-	/* why can't we do this right here? */
-	g_idle_add ((GSourceFunc) gtk_xine_idle_resize, gtx);
+    /* why can't we do this right here? */
+    g_idle_add ((GSourceFunc) gtk_xine_idle_resize, gtx);
       }
 
       gtx->resize_factor = 0.0;
@@ -319,9 +319,9 @@ static xine_video_port_t *load_video_out_driver(GtkXine *this) {
   vis.screen            = this->screen;
   vis.d                 = this->video_window;
   res_h                 = (DisplayWidth  (this->display, this->screen)*1000
-			   / DisplayWidthMM (this->display, this->screen));
+               / DisplayWidthMM (this->display, this->screen));
   res_v                 = (DisplayHeight (this->display, this->screen)*1000
-			   / DisplayHeightMM (this->display, this->screen));
+               / DisplayHeightMM (this->display, this->screen));
   this->display_ratio   = res_v / res_h;
 
   if (fabs(this->display_ratio - 1.0) < 0.01) {
@@ -347,32 +347,32 @@ static xine_video_port_t *load_video_out_driver(GtkXine *this) {
       i++;
     }
     choices[i+1]=0;
-    
+
 
     /* try to init video with stored information */
     i = xine_config_register_enum (this->xine,
-				   "video.driver", 0,
-				   choices,
-				   "video driver to use",
-				   NULL, 10, NULL, NULL);
+                   "video.driver", 0,
+                   choices,
+                   "video driver to use",
+                   NULL, 10, NULL, NULL);
     video_driver_id = choices[i];
   }
   if (strcmp (video_driver_id, "auto")) {
 
     video_port=xine_open_video_driver (this->xine,
-				      video_driver_id,
-				      XINE_VISUAL_TYPE_X11,
-				      (void *) &vis);
+                      video_driver_id,
+                      XINE_VISUAL_TYPE_X11,
+                      (void *) &vis);
     if (video_port)
       return video_port;
     else
       printf ("gtkxine: video driver %s failed.\n",
-	      video_driver_id); /* => auto-detect */
+          video_driver_id); /* => auto-detect */
   }
 
   return xine_open_video_driver (this->xine, NULL,
-				 XINE_VISUAL_TYPE_X11,
-				 (void *) &vis);
+                 XINE_VISUAL_TYPE_X11,
+                 (void *) &vis);
 }
 
 static xine_audio_port_t *load_audio_out_driver (GtkXine *this) {
@@ -395,14 +395,14 @@ static xine_audio_port_t *load_audio_out_driver (GtkXine *this) {
       i++;
     }
     choices[i+1]=0;
-    
+
 
     /* try to init audio with stored information */
     i = xine_config_register_enum (this->xine,
-				   "audio.driver", 0,
-				   choices,
-				   "audio driver to use",
-				   NULL, 10, NULL, NULL);
+                   "audio.driver", 0,
+                   choices,
+                   "audio driver to use",
+                   NULL, 10, NULL, NULL);
     audio_driver_id = choices[i];
   }
 
@@ -430,136 +430,139 @@ static void* xine_thread (void *this_gen) {
   while (1) {
 
     XEvent event;
-
+g_debug("BEFORE");
     XNextEvent (this->display, &event);
 
     /* printf ("gtkxine: got an event (%d)\n", event.type);  */
+g_debug( "HERE: %d", event.type );
+continue;
 
     switch (event.type) {
     case Expose:
 
       if (event.xexpose.count != 0)
-	break;
-
+    break;
+#if 0
       xine_gui_send_vo_data (this->stream,
-			     XINE_GUI_SEND_EXPOSE_EVENT, &event);
+                 XINE_GUI_SEND_EXPOSE_EVENT, &event);
+#endif
       break;
 
 
     case FocusOut: /* when in fullscreen mode, keep the focus */
       if (this->fullscreen_mode) {
-	XLockDisplay (this->display);
-	XSetInputFocus (this->display,
-			this->fullscreen_window, RevertToNone, CurrentTime);
-	XUnlockDisplay (this->display);
+    XLockDisplay (this->display);
+    XSetInputFocus (this->display,
+            this->fullscreen_window, RevertToNone, CurrentTime);
+    XUnlockDisplay (this->display);
       }
       break;
 
-    case MotionNotify: 
+    case MotionNotify:
       {
-	XMotionEvent     *mevent = (XMotionEvent *) &event;
-	x11_rectangle_t   rect;
-	xine_event_t      event;
-	xine_input_data_t input;
-	
+    XMotionEvent     *mevent = (XMotionEvent *) &event;
+    x11_rectangle_t   rect;
+    xine_event_t      event;
+    xine_input_data_t input;
+
 #ifdef LOG
-	printf("gtkxine: mouse event: mx=%d my=%d\n",mevent->x, mevent->y); 
+    printf("gtkxine: mouse event: mx=%d my=%d\n",mevent->x, mevent->y);
 #endif
-	
-	rect.x = mevent->x;
-	rect.y = mevent->y;
-	rect.w = 0;
-	rect.h = 0;
-	
-	xine_gui_send_vo_data (this->stream, 
-			       XINE_GUI_SEND_TRANSLATE_GUI_TO_VIDEO, 
-			       (void*)&rect);
-	
-	event.type        = XINE_EVENT_INPUT_MOUSE_MOVE;
-	event.data        = &input;
-	event.data_length = sizeof(input);
-	input.button      = 0; /*  no buttons, just motion */
-	input.x           = rect.x;
-	input.y           = rect.y;
-	xine_event_send (this->stream, &event);
 
-	if (this->fullscreen_mode && !this->cursor_visible) {
+    rect.x = mevent->x;
+    rect.y = mevent->y;
+    rect.w = 0;
+    rect.h = 0;
 
-	  /*
-	   * make mouse pointer visible
-	   */
-	  
-	  XLockDisplay (this->display);
-	  XDefineCursor (this->display, this->fullscreen_window,
-			 this->on_cursor);
-	  XFlush (this->display);
-	  XUnlockDisplay (this->display);
+    xine_gui_send_vo_data (this->stream,
+                   XINE_GUI_SEND_TRANSLATE_GUI_TO_VIDEO,
+                   (void*)&rect);
 
-	  this->cursor_visible = TRUE;
-	}
+    event.type        = XINE_EVENT_INPUT_MOUSE_MOVE;
+    event.data        = &input;
+    event.data_length = sizeof(input);
+    input.button      = 0; /*  no buttons, just motion */
+    input.x           = rect.x;
+    input.y           = rect.y;
+    xine_event_send (this->stream, &event);
+
+    if (this->fullscreen_mode && !this->cursor_visible) {
+
+      /*
+       * make mouse pointer visible
+       */
+
+      XLockDisplay (this->display);
+      XDefineCursor (this->display, this->fullscreen_window,
+             this->on_cursor);
+      XFlush (this->display);
+      XUnlockDisplay (this->display);
+
+      this->cursor_visible = TRUE;
+    }
       }
       break;
-      
-    case ButtonPress: 
+
+    case ButtonPress:
       {
-	XButtonEvent *bevent = (XButtonEvent *) &event;
-	
+    XButtonEvent *bevent = (XButtonEvent *) &event;
+
 #ifdef LOG
-	printf("gtkxine: mouse button event: mx=%d my=%d\n",
-	       bevent->x, bevent->y); 
+    printf("gtkxine: mouse button event: mx=%d my=%d\n",
+           bevent->x, bevent->y);
 #endif
-	
-	if (bevent->button == Button1) {
-	  
-	  x11_rectangle_t   rect;
-	  xine_event_t      event;
-	  xine_input_data_t input;
-	  
-	  rect.x = bevent->x;
-	  rect.y = bevent->y;
-	  rect.w = 0;
-	  rect.h = 0;
-	  
-	  xine_gui_send_vo_data (this->stream, 
-				 XINE_GUI_SEND_TRANSLATE_GUI_TO_VIDEO, 
-				 (void*)&rect);
-	  
-	  event.type        = XINE_EVENT_INPUT_MOUSE_BUTTON;
-	  event.data        = &input;
-	  event.data_length = sizeof(input);
-	  input.button      = 1;
-	  input.x           = rect.x;
-	  input.y           = rect.y;
-	  xine_event_send (this->stream, &event);
-	}
+
+    if (bevent->button == Button1) {
+
+      x11_rectangle_t   rect;
+      xine_event_t      event;
+      xine_input_data_t input;
+
+      rect.x = bevent->x;
+      rect.y = bevent->y;
+      rect.w = 0;
+      rect.h = 0;
+
+      xine_gui_send_vo_data (this->stream,
+                 XINE_GUI_SEND_TRANSLATE_GUI_TO_VIDEO,
+                 (void*)&rect);
+
+      event.type        = XINE_EVENT_INPUT_MOUSE_BUTTON;
+      event.data        = &input;
+      event.data_length = sizeof(input);
+      input.button      = 1;
+      input.x           = rect.x;
+      input.y           = rect.y;
+      xine_event_send (this->stream, &event);
+    }
       }
       break;
 
     case KeyPress:
       {
-	GdkEventKey    gdk_event;
-	XKeyEvent     *kevent = (XKeyEvent *) &event;
-	char           buffer [20];
-	int            bufsize=20;
-	KeySym         keysym;
-	XComposeStatus compose;
-	int            ret;
+    GdkEventKey    gdk_event;
+    XKeyEvent     *kevent = (XKeyEvent *) &event;
+    char           buffer [20];
+    int            bufsize=20;
+    KeySym         keysym;
+    XComposeStatus compose;
+    int            ret;
 
-	XLookupString (kevent, buffer, bufsize,
-		       &keysym, &compose);
+    XLookupString (kevent, buffer, bufsize,
+               &keysym, &compose);
 
-	gdk_event.keyval = keysym;
+    gdk_event.keyval = keysym;
 
-	gdk_event.type   = GDK_KEY_PRESS;
-	gdk_event.window = this->toplevel;
-	gdk_event.time   = kevent->time;
-	gdk_event.state  = (GdkModifierType) kevent->state;
-	gdk_event.string = strdup (buffer);
-	gdk_event.length = 1;
+    gdk_event.type   = GDK_KEY_PRESS;
+    gdk_event.window = this->toplevel;
+    gdk_event.time   = kevent->time;
+    gdk_event.state  = (GdkModifierType) kevent->state;
+    gdk_event.string = strdup (buffer);
+    gdk_event.length = 1;
 
-	gtk_signal_emit_by_name (GTK_OBJECT (gtk_widget_get_toplevel (GTK_WIDGET (this))),
-				 "key_press_event",
-				 &gdk_event, &ret);
+    gtk_signal_emit_by_name (GTK_OBJECT (gtk_widget_get_toplevel (GTK_WIDGET (this))),
+                 "key_press_event",
+                 &gdk_event, &ret);
       }
 
       break;
@@ -567,7 +570,7 @@ static void* xine_thread (void *this_gen) {
 
     if (event.type == this->completion_event) {
       xine_gui_send_vo_data (this->stream,
-			     XINE_GUI_SEND_COMPLETION_EVENT, &event);
+                 XINE_GUI_SEND_COMPLETION_EVENT, &event);
       /* printf ("gtkxine: completion event\n"); */
     }
   }
@@ -577,8 +580,8 @@ static void* xine_thread (void *this_gen) {
 }
 
 static gboolean configure_cb  (GtkWidget *widget,
-			       GdkEventConfigure *event,
-			       gpointer user_data) {
+                   GdkEventConfigure *event,
+                   gpointer user_data) {
 
   GtkXine      *this;
 
@@ -599,7 +602,7 @@ static void reset_screen_saver (GtkXine *this) {
     XTestFakeKeyEvent (gdk_display, this->xtest_keycode, True, CurrentTime);
     XTestFakeKeyEvent (gdk_display, this->xtest_keycode, False, CurrentTime);
     XSync (gdk_display, False);
-  } else 
+  } else
 #endif
     {
       XResetScreenSaver (gdk_display);
@@ -613,7 +616,7 @@ static gint gtk_timeout_cb (gpointer data) {
   if (gtx->fullscreen_mode && gtx->cursor_visible) {
     XLockDisplay (gtx->display);
     XDefineCursor (gtx->display, gtx->fullscreen_window,
-		   gtx->no_cursor);
+           gtx->no_cursor);
     XFlush (gtx->display);
     gtx->cursor_visible = FALSE;
     XUnlockDisplay (gtx->display);
@@ -654,11 +657,11 @@ static void gtk_xine_realize (GtkWidget *widget) {
   black_pixel = BlackPixel (gdk_display, screen);
 
   this->video_window = XCreateSimpleWindow (gdk_display,
-					    GDK_WINDOW_XWINDOW (gtk_widget_get_parent_window(widget)),
-					    0, 0,
-					    widget->allocation.width,
-					    widget->allocation.height, 1,
-					    black_pixel, black_pixel);
+                        GDK_WINDOW_XWINDOW (gtk_widget_get_parent_window(widget)),
+                        0, 0,
+                        widget->allocation.width,
+                        widget->allocation.height, 1,
+                        black_pixel, black_pixel);
 
   widget->window = gdk_window_foreign_new (this->video_window);
 
@@ -676,8 +679,8 @@ static void gtk_xine_realize (GtkWidget *widget) {
    * track configure events of toplevel window
    */
   g_signal_connect (gtk_widget_get_toplevel (widget),
-		    "configure-event",
-		    G_CALLBACK (configure_cb), this);
+            "configure-event",
+            G_CALLBACK (configure_cb), this);
 
 
   if (!XInitThreads ()) {
@@ -703,8 +706,8 @@ static void gtk_xine_realize (GtkWidget *widget) {
   }
 
   XSelectInput (this->display, this->video_window,
-		StructureNotifyMask | ExposureMask |
-		ButtonPressMask | PointerMotionMask);
+        StructureNotifyMask | ExposureMask |
+        ButtonPressMask | PointerMotionMask);
 
   /*
    * load audio, video drivers
@@ -724,14 +727,14 @@ static void gtk_xine_realize (GtkWidget *widget) {
    */
 
   this->stream = xine_stream_new (this->xine, this->audio_port,
-				  this->video_port);
+                  this->video_port);
 
   values.foreground = BlackPixel (this->display, this->screen);
   values.background = WhitePixel (this->display, this->screen);
 
   this->gc = XCreateGC (this->display, this->video_window,
-			(GCForeground | GCBackground),
-			&values);
+            (GCForeground | GCBackground),
+            &values);
 
 
   XUnlockDisplay (this->display);
@@ -744,9 +747,9 @@ static void gtk_xine_realize (GtkWidget *widget) {
                                 this->video_window,
                                 bm_no_data, 8, 8);
   this->no_cursor = XCreatePixmapCursor(this->display, bm_no, bm_no,
-					(XColor *) &black_pixel,
-					(XColor *) &black_pixel,
-					0, 0);
+                    (XColor *) &black_pixel,
+                    (XColor *) &black_pixel,
+                    0, 0);
   this->on_cursor = XCreateFontCursor (this->display, XC_left_ptr);
   this->cursor_visible = TRUE;
 
@@ -799,8 +802,8 @@ static void gtk_xine_unrealize (GtkWidget *widget) {
 }
 
 
-GtkWidget *gtk_xine_new (const gchar *video_driver_id, 
-			 const gchar *audio_driver_id) {
+GtkWidget *gtk_xine_new (const gchar *video_driver_id,
+             const gchar *audio_driver_id) {
 
   GtkWidget *this=GTK_WIDGET (gtk_type_new (gtk_xine_get_type ()));
 
@@ -819,7 +822,7 @@ GtkWidget *gtk_xine_new (const gchar *video_driver_id,
 
 
 static gint gtk_xine_expose (GtkWidget *widget,
-			     GdkEventExpose *event) {
+                 GdkEventExpose *event) {
 /*
   GtkXine *this = GTK_XINE (widget);
 */
@@ -840,10 +843,10 @@ static void gtk_xine_size_allocate (GtkWidget *widget, GtkAllocation *allocation
 
   if (GTK_WIDGET_REALIZED (widget)) {
     gdk_window_move_resize (widget->window,
-			    allocation->x,
-			    allocation->y,
-			    allocation->width,
-			    allocation->height);
+                allocation->x,
+                allocation->y,
+                allocation->width,
+                allocation->height);
   }
 }
 
@@ -855,13 +858,13 @@ gint gtk_xine_open (GtkXine *gtx, const gchar *mrl) {
 
   if (verbosity)
     printf ("gtkxine: calling xine_open, mrl = '%s'\n",
-	    mrl);
+        mrl);
 
   return xine_open (gtx->stream, mrl);
 }
 
 gint gtk_xine_play (GtkXine *gtx,
-		    gint pos, gint start_time) {
+            gint pos, gint start_time) {
 
   gint res;
 
@@ -871,31 +874,31 @@ gint gtk_xine_play (GtkXine *gtx,
 
   if (verbosity)
     printf ("gtkxine: calling xine_play start_pos = %d, start_time = %d\n",
-	    pos, start_time);
+        pos, start_time);
 
   /*
    * visualization
    */
 
   if (!xine_get_stream_info (gtx->stream, XINE_STREAM_INFO_HAS_VIDEO)) {
-    
+
     if (!gtx->vis_plugin && gtx->vis_plugin_id) {
 
       xine_post_out_t  *audio_source;
       xine_post_in_t   *input;
       xine_cfg_entry_t  cfg;
 
-      gtx->vis_plugin = xine_post_init (gtx->xine, gtx->vis_plugin_id, 0, 
-					&gtx->audio_port, 
-					&gtx->video_port);
+      gtx->vis_plugin = xine_post_init (gtx->xine, gtx->vis_plugin_id, 0,
+                    &gtx->audio_port,
+                    &gtx->video_port);
 
       xine_config_lookup_entry (gtx->xine, "post.goom_height", &cfg);
       cfg.num_value = 240;
       xine_config_update_entry (gtx->xine, &cfg);
-      
+
       xine_config_lookup_entry (gtx->xine, "post.goom_width", &cfg);
       cfg.num_value = 480;
-      xine_config_update_entry (gtx->xine, &cfg);   
+      xine_config_update_entry (gtx->xine, &cfg);
 
 
       audio_source = xine_get_audio_source (gtx->stream);
@@ -921,7 +924,7 @@ gint gtk_xine_play (GtkXine *gtx,
 }
 
 gint gtk_xine_trick_mode (GtkXine *gtx,
-			  gint mode, gint value) {
+              gint mode, gint value) {
 
   g_return_val_if_fail (gtx != NULL, 0);
   g_return_val_if_fail (GTK_IS_XINE (gtx), 0);
@@ -931,8 +934,8 @@ gint gtk_xine_trick_mode (GtkXine *gtx,
 }
 
 gint gtk_xine_get_pos_length (GtkXine *gtx, gint *pos_stream,
-			      gint *pos_time,
-			      gint *length_time) {
+                  gint *pos_time,
+                  gint *length_time) {
   g_return_val_if_fail (gtx != NULL, 0);
   g_return_val_if_fail (GTK_IS_XINE (gtx), 0);
   g_return_val_if_fail (gtx->stream != NULL, 0);
@@ -1047,16 +1050,16 @@ void gtk_xine_set_fullscreen (GtkXine *gtx, gint fullscreen) {
   XLockDisplay (gtx->display);
 
   if (fullscreen) {
-    
+
     int screen = DefaultScreen (gtx->display);
 
     gtx->fullscreen_window = XCreateSimpleWindow (gtx->display,
-						  RootWindow (gtx->display, screen),
-						  0, 0,
-						  gtx->fullscreen_width, 
-						  gtx->fullscreen_height, 1,
-						  BlackPixel(gtx->display, screen),
-						  BlackPixel(gtx->display, screen));
+                          RootWindow (gtx->display, screen),
+                          0, 0,
+                          gtx->fullscreen_width,
+                          gtx->fullscreen_height, 1,
+                          BlackPixel(gtx->display, screen),
+                          BlackPixel(gtx->display, screen));
 
     hint.flags       = PPosition | PSize | PMinSize | PWinGravity;
     hint.x           = 0;
@@ -1068,9 +1071,9 @@ void gtk_xine_set_fullscreen (GtkXine *gtx, gint fullscreen) {
     hint.win_gravity = StaticGravity;
 
     /* set Properties for window manager (always before mapping) */
-    XSetStandardProperties (gtx->display, gtx->fullscreen_window, 
-			    window_title, window_title, None, NULL, 0, &hint);
-    
+    XSetStandardProperties (gtx->display, gtx->fullscreen_window,
+                window_title, window_title, None, NULL, 0, &hint);
+
     XSetWMNormalHints (gtx->display, gtx->fullscreen_window, &hint);
 
     /* XSetWMHints (gtx->display, gtx->fullscreen_window, &hint);*/
@@ -1083,14 +1086,14 @@ void gtk_xine_set_fullscreen (GtkXine *gtx, gint fullscreen) {
     {
       static Atom           XA_WIN_LAYER = None;
       long                  propvalue[1];
- 
+
       if (XA_WIN_LAYER == None)
-	XA_WIN_LAYER = XInternAtom(gtx->display, "_WIN_LAYER", False);
-      
+    XA_WIN_LAYER = XInternAtom(gtx->display, "_WIN_LAYER", False);
+
       propvalue[0] = 20;
       XChangeProperty(gtx->display, gtx->fullscreen_window, XA_WIN_LAYER,
-		      XA_CARDINAL, 32, PropModeReplace, 
-		      (unsigned char *)propvalue, 1);
+              XA_CARDINAL, 32, PropModeReplace,
+              (unsigned char *)propvalue, 1);
     }
 
     /*
@@ -1100,18 +1103,18 @@ void gtk_xine_set_fullscreen (GtkXine *gtx, gint fullscreen) {
     {
       static Atom           XA_WIN_STATE = None;
       long                  propvalue[2];
-    
-      if (XA_WIN_STATE == None)
-	XA_WIN_STATE = XInternAtom (gtx->display, "_NET_WM_STATE", False);
 
-      propvalue[0] = XInternAtom (gtx->display, "_NET_WM_STATE_FULLSCREEN", 
-				  False);
+      if (XA_WIN_STATE == None)
+    XA_WIN_STATE = XInternAtom (gtx->display, "_NET_WM_STATE", False);
+
+      propvalue[0] = XInternAtom (gtx->display, "_NET_WM_STATE_FULLSCREEN",
+                  False);
       propvalue[1] = 0;
 
-      XChangeProperty (gtx->display, gtx->fullscreen_window, 
-		       XA_WIN_STATE, XA_ATOM, 
-		       32, PropModeReplace, 
-		       (unsigned char *)propvalue, 1);
+      XChangeProperty (gtx->display, gtx->fullscreen_window,
+               XA_WIN_STATE, XA_ATOM,
+               32, PropModeReplace,
+               (unsigned char *)propvalue, 1);
       XFlush(gtx->display);
 
     }
@@ -1124,15 +1127,15 @@ void gtk_xine_set_fullscreen (GtkXine *gtx, gint fullscreen) {
     mwmhints.flags = MWM_HINTS_DECORATIONS;
     mwmhints.decorations = 0;
     XChangeProperty (gtx->display, gtx->fullscreen_window, prop, prop, 32,
-		     PropModeReplace, (unsigned char *) &mwmhints,
-		     PROP_MWM_HINTS_ELEMENTS);
+             PropModeReplace, (unsigned char *) &mwmhints,
+             PROP_MWM_HINTS_ELEMENTS);
 
     XSetTransientForHint(gtx->display, gtx->fullscreen_window, None);
     XRaiseWindow(gtx->display, gtx->fullscreen_window);
 
     XSelectInput(gtx->display, gtx->fullscreen_window,
-		 ExposureMask | KeyPressMask | ButtonPressMask 
-		 | StructureNotifyMask | FocusChangeMask | PointerMotionMask);
+         ExposureMask | KeyPressMask | ButtonPressMask
+         | StructureNotifyMask | FocusChangeMask | PointerMotionMask);
 
     XMapWindow (gtx->display, gtx->fullscreen_window);
 
@@ -1142,25 +1145,25 @@ void gtk_xine_set_fullscreen (GtkXine *gtx, gint fullscreen) {
 
     do  {
       XMaskEvent(gtx->display,
-		 StructureNotifyMask,
-		 &xev) ;
+         StructureNotifyMask,
+         &xev) ;
     } while (xev.type != MapNotify || xev.xmap.event != gtx->fullscreen_window);
 
-    XSetInputFocus (gtx->display, gtx->fullscreen_window, 
-		    RevertToNone, CurrentTime);
+    XSetInputFocus (gtx->display, gtx->fullscreen_window,
+            RevertToNone, CurrentTime);
 
-    XMoveWindow (gtx->display, gtx->fullscreen_window, 0, 0); 
+    XMoveWindow (gtx->display, gtx->fullscreen_window, 0, 0);
 
     xine_gui_send_vo_data (gtx->stream,
-			   XINE_GUI_SEND_DRAWABLE_CHANGED,
-			   (void*)gtx->fullscreen_window);
+               XINE_GUI_SEND_DRAWABLE_CHANGED,
+               (void*)gtx->fullscreen_window);
 
     /*
      * switch off mouse cursor
      */
 
     XDefineCursor(gtx->display, gtx->fullscreen_window,
-		  gtx->no_cursor);
+          gtx->no_cursor);
     XFlush(gtx->display);
 
     gtx->cursor_visible = FALSE;
@@ -1168,8 +1171,8 @@ void gtk_xine_set_fullscreen (GtkXine *gtx, gint fullscreen) {
   } else {
 
     xine_gui_send_vo_data (gtx->stream,
-			   XINE_GUI_SEND_DRAWABLE_CHANGED,
-			   (void*)gtx->video_window);
+               XINE_GUI_SEND_DRAWABLE_CHANGED,
+               (void*)gtx->video_window);
 
     XDestroyWindow (gtx->display, gtx->fullscreen_window);
 
@@ -1191,18 +1194,18 @@ gint gtk_xine_is_fullscreen (GtkXine *gtx) {
 }
 
 gint gtk_xine_get_current_frame (GtkXine *gtx,
-				 gint *width,
-				 gint *height,
-				 gint *ratio_code,
-				 gint *format,
-				 uint8_t *img) {
+                 gint *width,
+                 gint *height,
+                 gint *ratio_code,
+                 gint *format,
+                 uint8_t *img) {
 
   g_return_val_if_fail (gtx != NULL, 0);
   g_return_val_if_fail (GTK_IS_XINE (gtx), 0);
   g_return_val_if_fail (gtx->stream != NULL, 0);
 
   return xine_get_current_frame (gtx->stream, width, height, ratio_code, format,
-				 img);
+                 img);
 }
 
 gint gtk_xine_get_log_section_count (GtkXine *gtx) {
@@ -1223,7 +1226,7 @@ gchar **gtk_xine_get_log_names (GtkXine *gtx) {
 }
 
 gchar **gtk_xine_get_log (GtkXine *gtx,
-			  gint buf) {
+              gint buf) {
 
   g_return_val_if_fail (gtx != NULL, NULL);
   g_return_val_if_fail (GTK_IS_XINE (gtx), NULL);
@@ -1233,8 +1236,8 @@ gchar **gtk_xine_get_log (GtkXine *gtx,
 }
 
 void gtk_xine_register_log_cb (GtkXine *gtx,
-			       xine_log_cb_t cb,
-			       void *user_data) {
+                   xine_log_cb_t cb,
+                   void *user_data) {
   g_return_if_fail (gtx != NULL);
   g_return_if_fail (GTK_IS_XINE (gtx));
   g_return_if_fail (gtx->xine != NULL);
@@ -1252,9 +1255,9 @@ gchar **gtk_xine_get_browsable_input_plugin_ids (GtkXine *gtx) {
 }
 
 xine_mrl_t **gtk_xine_get_browse_mrls (GtkXine *gtx,
-				       const gchar *plugin_id,
-				       const gchar *start_mrl,
-				       gint *num_mrls) {
+                       const gchar *plugin_id,
+                       const gchar *start_mrl,
+                       gint *num_mrls) {
   g_return_val_if_fail (gtx != NULL, NULL);
   g_return_val_if_fail (GTK_IS_XINE (gtx), NULL);
   g_return_val_if_fail (gtx->xine != NULL, NULL);
@@ -1273,8 +1276,8 @@ gchar **gtk_xine_get_autoplay_input_plugin_ids (GtkXine *gtx) {
 }
 
 gchar **gtk_xine_get_autoplay_mrls (GtkXine *gtx,
-				    const gchar *plugin_id,
-				    gint *num_mrls) {
+                    const gchar *plugin_id,
+                    gint *num_mrls) {
   g_return_val_if_fail (gtx != NULL, NULL);
   g_return_val_if_fail (GTK_IS_XINE (gtx), NULL);
   g_return_val_if_fail (gtx->xine != NULL, NULL);
@@ -1283,7 +1286,7 @@ gchar **gtk_xine_get_autoplay_mrls (GtkXine *gtx,
 }
 
 gchar *gtk_xine_get_file_extensions (GtkXine *gtx) {
-  
+
   g_return_val_if_fail (gtx != NULL, NULL);
   g_return_val_if_fail (GTK_IS_XINE (gtx), NULL);
   g_return_val_if_fail (gtx->xine != NULL, NULL);
@@ -1292,7 +1295,7 @@ gchar *gtk_xine_get_file_extensions (GtkXine *gtx) {
 }
 
 gchar *gtk_xine_get_mime_types (GtkXine *gtx) {
-  
+
   g_return_val_if_fail (gtx != NULL, NULL);
   g_return_val_if_fail (GTK_IS_XINE (gtx), NULL);
   g_return_val_if_fail (gtx->xine != NULL, NULL);
@@ -1301,92 +1304,92 @@ gchar *gtk_xine_get_mime_types (GtkXine *gtx) {
 }
 
 const gchar *gtk_xine_config_register_string (GtkXine *gtx,
-					      const gchar *key,
-					      const gchar *def_value,
-					      const gchar *description,
-					      const gchar *help,
-					      gint   exp_level,
-					      xine_config_cb_t changed_cb,
-					      void *cb_data) {
+                          const gchar *key,
+                          const gchar *def_value,
+                          const gchar *description,
+                          const gchar *help,
+                          gint   exp_level,
+                          xine_config_cb_t changed_cb,
+                          void *cb_data) {
 
   g_return_val_if_fail (gtx != NULL, NULL);
   g_return_val_if_fail (GTK_IS_XINE (gtx), NULL);
   g_return_val_if_fail (gtx->xine != NULL, NULL);
 
-  return (gchar *) xine_config_register_string (gtx->xine, key, def_value, 
-						description, help,
-						exp_level, changed_cb, cb_data);
+  return (gchar *) xine_config_register_string (gtx->xine, key, def_value,
+                        description, help,
+                        exp_level, changed_cb, cb_data);
 }
-  
+
 gint gtk_xine_config_register_range  (GtkXine *gtx,
-				      const gchar *key,
-				      gint def_value,
-				      gint min, gint max,
-				      const gchar *description,
-				      const gchar *help,
-				      gint   exp_level,
-				      xine_config_cb_t changed_cb,
-				      void *cb_data) {
+                      const gchar *key,
+                      gint def_value,
+                      gint min, gint max,
+                      const gchar *description,
+                      const gchar *help,
+                      gint   exp_level,
+                      xine_config_cb_t changed_cb,
+                      void *cb_data) {
   g_return_val_if_fail (gtx != NULL, 0);
   g_return_val_if_fail (GTK_IS_XINE (gtx), 0);
   g_return_val_if_fail (gtx->xine != NULL, 0);
 
   return xine_config_register_range (gtx->xine, key, def_value, min, max,
-				     description, help,
-				     exp_level, changed_cb, cb_data);
+                     description, help,
+                     exp_level, changed_cb, cb_data);
 }
-  
+
 gint gtk_xine_config_register_enum   (GtkXine *gtx,
-				      const gchar *key,
-				      gint def_value,
-				      gchar **values,
-				      const gchar *description,
-				      const gchar *help,
-				      gint   exp_level,
-				      xine_config_cb_t changed_cb,
-				      void *cb_data) {
+                      const gchar *key,
+                      gint def_value,
+                      gchar **values,
+                      const gchar *description,
+                      const gchar *help,
+                      gint   exp_level,
+                      xine_config_cb_t changed_cb,
+                      void *cb_data) {
   g_return_val_if_fail (gtx != NULL, 0);
   g_return_val_if_fail (GTK_IS_XINE (gtx), 0);
   g_return_val_if_fail (gtx->xine != NULL, 0);
 
   return xine_config_register_enum (gtx->xine, key, def_value, values,
-				    description, help,
-				    exp_level, changed_cb, cb_data);
+                    description, help,
+                    exp_level, changed_cb, cb_data);
 }
-  
+
 gint gtk_xine_config_register_num  (GtkXine *gtx,
-				    const gchar *key,
-				    gint def_value,
-				    const gchar *description,
-				    const gchar *help,
-				    gint   exp_level,
-				    xine_config_cb_t changed_cb,
-				    void *cb_data) {
+                    const gchar *key,
+                    gint def_value,
+                    const gchar *description,
+                    const gchar *help,
+                    gint   exp_level,
+                    xine_config_cb_t changed_cb,
+                    void *cb_data) {
   g_return_val_if_fail (gtx != NULL, 0);
   g_return_val_if_fail (GTK_IS_XINE (gtx), 0);
   g_return_val_if_fail (gtx->xine != NULL, 0);
 
   return xine_config_register_num (gtx->xine, key, def_value,
-				   description, help,
-				   exp_level, changed_cb, cb_data);
+                   description, help,
+                   exp_level, changed_cb, cb_data);
 }
-  
+
 gint gtk_xine_config_register_bool (GtkXine *gtx,
-				    const gchar *key,
-				    gint def_value,
-				    const gchar *description,
-				    const gchar *help,
-				    gint   exp_level,
-				    xine_config_cb_t changed_cb,
-				    void *cb_data) {
+                    const gchar *key,
+                    gint def_value,
+                    const gchar *description,
+                    const gchar *help,
+                    gint   exp_level,
+                    xine_config_cb_t changed_cb,
+                    void *cb_data) {
 
   g_return_val_if_fail (gtx != NULL, 0);
   g_return_val_if_fail (GTK_IS_XINE (gtx), 0);
   g_return_val_if_fail (gtx->xine != NULL, 0);
 
   return xine_config_register_bool (gtx->xine, key, def_value,
-				    description, help,
-				    exp_level, changed_cb, cb_data);
+                    description, help,
+                    exp_level, changed_cb, cb_data);
 }
 
 int gtk_xine_config_get_first_entry (GtkXine *gtx, xine_cfg_entry_t *entry) {
@@ -1406,8 +1409,8 @@ int gtk_xine_config_get_next_entry (GtkXine *gtx, xine_cfg_entry_t *entry) {
 }
 
 int gtk_xine_config_lookup_entry (GtkXine *gtx,
-				  const gchar *key,
-				  xine_cfg_entry_t *entry) {
+                  const gchar *key,
+                  xine_cfg_entry_t *entry) {
   g_return_val_if_fail (gtx != NULL, 0);
   g_return_val_if_fail (GTK_IS_XINE (gtx), 0);
   g_return_val_if_fail (gtx->xine != NULL, 0);
@@ -1416,7 +1419,7 @@ int gtk_xine_config_lookup_entry (GtkXine *gtx,
 }
 
 void gtk_xine_config_update_entry (GtkXine *gtx,
-				   xine_cfg_entry_t *entry) {
+                   xine_cfg_entry_t *entry) {
   g_return_if_fail (gtx != NULL);
   g_return_if_fail (GTK_IS_XINE (gtx));
   g_return_if_fail (gtx->xine != NULL);
@@ -1425,7 +1428,7 @@ void gtk_xine_config_update_entry (GtkXine *gtx,
 }
 
 void gtk_xine_config_load (GtkXine *gtx,
-			   const gchar *cfg_filename) {
+               const gchar *cfg_filename) {
   g_return_if_fail (gtx != NULL);
   g_return_if_fail (GTK_IS_XINE (gtx));
   g_return_if_fail (gtx->xine != NULL);
@@ -1434,7 +1437,7 @@ void gtk_xine_config_load (GtkXine *gtx,
 }
 
 void gtk_xine_config_save (GtkXine *gtx,
-			   const gchar *cfg_filename) {
+               const gchar *cfg_filename) {
   g_return_if_fail (gtx != NULL);
   g_return_if_fail (GTK_IS_XINE (gtx));
   g_return_if_fail (gtx->xine != NULL);
@@ -1452,7 +1455,7 @@ void gtk_xine_config_reset (GtkXine *gtx) {
 }
 
 void gtk_xine_event_send (GtkXine *gtx,
-			  const xine_event_t *event) {
+              const xine_event_t *event) {
 
   g_return_if_fail (gtx != NULL);
   g_return_if_fail (GTK_IS_XINE (gtx));
@@ -1463,7 +1466,7 @@ void gtk_xine_event_send (GtkXine *gtx,
 
 
 void gtk_xine_set_resize_factor (GtkXine *gtx,
-				 double factor /* 0.0 => don't resize */) {
+                 double factor /* 0.0 => don't resize */) {
 
   g_return_if_fail (gtx != NULL);
   g_return_if_fail (GTK_IS_XINE (gtx));
@@ -1473,53 +1476,53 @@ void gtk_xine_set_resize_factor (GtkXine *gtx,
 }
 
 void  gtk_xine_set_vis (GtkXine *gtx,
-			char *id) /* NULL to disable */ {
+            char *id) /* NULL to disable */ {
 
   g_return_if_fail (gtx != NULL);
   g_return_if_fail (GTK_IS_XINE (gtx));
- 
+
   if (gtx->vis_plugin_id)
     free (gtx->vis_plugin_id);
   if (id)
     gtx->vis_plugin_id = strdup (id);
   else
     gtx->vis_plugin_id = NULL;
-    
+
 
   if (gtx->stream) {
     if (xine_get_status (gtx->stream) == XINE_STATUS_PLAY) {
 
       if (gtx->vis_plugin) {
-	xine_post_out_t *pp;
-      
-	pp = xine_get_audio_source (gtx->stream);
-	xine_post_wire_audio_port (pp, gtx->audio_port);
-	xine_post_dispose (gtx->xine, gtx->vis_plugin);
-	gtx->vis_plugin = NULL;
+    xine_post_out_t *pp;
+
+    pp = xine_get_audio_source (gtx->stream);
+    xine_post_wire_audio_port (pp, gtx->audio_port);
+    xine_post_dispose (gtx->xine, gtx->vis_plugin);
+    gtx->vis_plugin = NULL;
       }
 
       if (gtx->vis_plugin_id) {
-	xine_post_out_t  *audio_source;
-	xine_post_in_t   *input;
-	xine_cfg_entry_t  cfg;
-	
-	gtx->vis_plugin = xine_post_init (gtx->xine, gtx->vis_plugin_id, 0, 
-					  &gtx->audio_port, 
-					  &gtx->video_port);
-	
-	xine_config_lookup_entry (gtx->xine, "post.goom_height", &cfg);
-	cfg.num_value = 240;
-	xine_config_update_entry (gtx->xine, &cfg);
-	
-	xine_config_lookup_entry (gtx->xine, "post.goom_width", &cfg);
-	cfg.num_value = 480;
-	xine_config_update_entry (gtx->xine, &cfg);   
-	
-	
-	audio_source = xine_get_audio_source (gtx->stream);
-	input = xine_post_input (gtx->vis_plugin, "audio in");
-	
-	xine_post_wire (audio_source, input);
+    xine_post_out_t  *audio_source;
+    xine_post_in_t   *input;
+    xine_cfg_entry_t  cfg;
+
+    gtx->vis_plugin = xine_post_init (gtx->xine, gtx->vis_plugin_id, 0,
+                      &gtx->audio_port,
+                      &gtx->video_port);
+
+    xine_config_lookup_entry (gtx->xine, "post.goom_height", &cfg);
+    cfg.num_value = 240;
+    xine_config_update_entry (gtx->xine, &cfg);
+
+    xine_config_lookup_entry (gtx->xine, "post.goom_width", &cfg);
+    cfg.num_value = 480;
+    xine_config_update_entry (gtx->xine, &cfg);
+
+
+    audio_source = xine_get_audio_source (gtx->stream);
+    input = xine_post_input (gtx->vis_plugin, "audio in");
+
+    xine_post_wire (audio_source, input);
       }
     }
   }

@@ -25,7 +25,7 @@ Lxine *init_lxine(void)
 {
     Lxine *new_win;
 
-    new_win = g_malloc(sizeof(Lxine)); 
+    new_win = g_malloc(sizeof(Lxine));
     new_win->status = LXINE_STATUS_NOMRL;
 
     return new_win;
@@ -58,7 +58,7 @@ GtkWidget *create_pixmap(gchar *filename)
     else {
         gchar *pathname = g_strdup_printf(PIXMAP_DIR "/%s", filename);
         pixmap = gtk_image_new_from_file(pathname);
-        g_free(pathname); 
+        g_free(pathname);
     }
 
     return pixmap;
@@ -74,7 +74,7 @@ GdkPixbuf *load_pixmap (const gchar *filename)
     else {
         gchar *pathname = g_strdup_printf(PIXMAP_DIR "/%s", filename);
         pixmap = gdk_pixbuf_new_from_file(pathname, NULL);
-        g_free(pathname); 
+        g_free(pathname);
     }
 
     return pixmap;
@@ -109,7 +109,7 @@ GtkWidget *create_ctlbar(void)
     gtk_widget_set_size_request (play_b, 40, 40);
     gtk_button_set_relief (GTK_BUTTON (play_b), GTK_RELIEF_HALF);
     g_signal_connect (G_OBJECT (play_b), "clicked",
-		      G_CALLBACK (play_clicked), (gpointer) "cool button");
+              G_CALLBACK (play_clicked), (gpointer) "cool button");
 
     play_i = create_pixmap ("play.xpm");
     gtk_widget_show (play_i);
@@ -123,7 +123,7 @@ GtkWidget *create_ctlbar(void)
     gtk_widget_set_size_request (stop_b, 40, 40);
     gtk_button_set_relief (GTK_BUTTON (stop_b), GTK_RELIEF_HALF);
     g_signal_connect (G_OBJECT (stop_b), "clicked",
-		      G_CALLBACK (stop_clicked), (gpointer) "cool button");
+              G_CALLBACK (stop_clicked), (gpointer) "cool button");
 
     stop_i = create_pixmap ("stop.xpm");
     gtk_widget_show (stop_i);
@@ -203,6 +203,9 @@ gint main(int argc, char **argv)
     gint i;
     char *mrl = NULL;
 
+    g_thread_init(NULL);
+    gdk_threads_init();
+
     /* Init GTK */
     gtk_set_locale();
     gtk_init(&argc, &argv);
@@ -237,6 +240,6 @@ gint main(int argc, char **argv)
 
     /* main */
     gtk_main ();
-    
+
     return 0;
 }
