@@ -9,7 +9,7 @@ do
     echo
     echo "Configuring $sub"
     echo
-
+    ./autogen.sh
     ./configure "$@"
     cd ..
 done
