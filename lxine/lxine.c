@@ -159,7 +159,7 @@ gint create_window(void)
     GtkWidget *bar;
 
     player->window = gtk_window_new(GTK_WINDOW_TOPLEVEL);
-    gtk_window_set_title(GTK_WINDOW(player->window), _("Embedix Media Player"));
+    gtk_window_set_title(GTK_WINDOW(player->window), _("Lxine Media Player"));
     gtk_window_set_icon(GTK_WINDOW(player->window), load_pixmap("lxine.png"));
 
     /* setting that when get exit signal, call delete_event() */
