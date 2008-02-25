@@ -2,7 +2,7 @@
 
 echo 'Install packages needed for building LXDE from source code.'
 
-apt-get -y install subversion wget libgtk2.0-dev libgamin-dev pkg-config libstartup-notification0-dev shared-mime-info desktop-file-utils libhal-dev libdbus-glib-1-dev libhal-storage-dev automake1.9 autoconf libxmu-dev libxpm-dev libsm-dev libice-dev smproxy libjpeg62-dev autotools-dev build-essential
+apt-get -y install subversion wget libgtk2.0-dev libgamin-dev pkg-config libstartup-notification0-dev shared-mime-info desktop-file-utils libhal-dev libdbus-glib-1-dev libhal-storage-dev automake1.9 autoconf libxmu-dev libxpm-dev libsm-dev libice-dev smproxy libjpeg62-dev autotools-dev build-essential hsetroot
 
 mkdir lxde_build
 cd lxde_build
