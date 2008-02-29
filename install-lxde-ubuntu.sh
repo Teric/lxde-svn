@@ -37,7 +37,7 @@ wget http://icculus.org/openbox/releases/openbox_3.4.6.1-0_i386.deb
 wget http://icculus.org/openbox/obconf/obconf_2.0.3-0_i386.deb
 
 echo "Uninstal the old version of OpenBox included in Ubuntu..."
-apt-get remove openbox obconf
+apt-get remove openbox obconf libobrender libobparser
 
 echo "Install the latest package from OpenBox official website."
 gdebi openbox_3.4.6.1-0_i386.deb
