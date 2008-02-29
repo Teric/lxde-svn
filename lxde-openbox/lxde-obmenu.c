@@ -26,6 +26,7 @@
 #include <stdio.h>
 #include <string.h>
 #include <glib/gi18n.h>
+#include <locale.h>
 
 void print_config_menu()
 {
@@ -75,6 +76,8 @@ void print_root_menu()
 
 int main(int argc, char** argv)
 {
+    setlocale( LC_ALL, "" );
+
 #ifdef ENABLE_NLS
     bindtextdomain ( GETTEXT_PACKAGE, PACKAGE_LOCALE_DIR );
     bind_textdomain_codeset ( GETTEXT_PACKAGE, "UTF-8" );
