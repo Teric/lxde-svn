@@ -138,7 +138,7 @@ gboolean on_key_press( GtkWidget* w, GdkEventKey* evt, TermWin* term_win )
 {
     gboolean alt = ((evt->state & GDK_MOD1_MASK) == GDK_MOD1_MASK);
     gboolean ctrl_shift = ((evt->state & (GDK_CONTROL_MASK|GDK_SHIFT_MASK)) == (GDK_CONTROL_MASK|GDK_SHIFT_MASK));
-    int key = g_ascii_toupper( evt->keyval );
+    int key = gdk_keyval_to_upper( evt->keyval );
 
     if( alt )
     {
@@ -154,19 +154,7 @@ gboolean on_key_press( GtkWidget* w, GdkEventKey* evt, TermWin* term_win )
                 gtk_widget_grab_focus( gtk_notebook_get_nth_page(term_win->nb, idx) );
             }
         }
-        else if( key == GDK_T ) /* Alt + T => new tab */
-        {
-            int idx = term_window_add_page_with_cmd( w, NULL, NULL, NULL );
-            gtk_notebook_set_current_page( term_win->nb, idx );
-            gtk_widget_grab_focus( gtk_notebook_get_nth_page(term_win->nb, idx) );
-        }
-        else if( key == GDK_N ) /* Alt + N => new window */
-        {
-            GtkWidget* win = term_window_new();
-            term_window_add_page_with_cmd( win, g_get_current_dir(), g_getenv("SHELL"), NULL );
-            gtk_widget_show( win );
-        }
-        else if( key == GDK_Z ) /* Alt + Z => previous tab */
+        else if( key == GDK_Left ) /* Alt + Left => previous tab */
         {
             int idx = gtk_notebook_get_current_page( term_win->nb );
             if( --idx >= 0 )
@@ -175,7 +163,7 @@ gboolean on_key_press( GtkWidget* w, GdkEventKey* evt, TermWin* term_win )
                 gtk_widget_grab_focus( gtk_notebook_get_nth_page(term_win->nb, idx) );
             }
         }
-        else if( key == GDK_X ) /* Alt + X => next tab */
+        else if( key == GDK_Right ) /* Alt + Right => next tab */
         {
             int idx = gtk_notebook_get_current_page( term_win->nb );
             if( ++idx < gtk_notebook_get_n_pages( term_win->nb ) )
@@ -183,6 +171,26 @@ gboolean on_key_press( GtkWidget* w, GdkEventKey* evt, TermWin* term_win )
                 gtk_notebook_set_current_page( term_win->nb, idx );
                 gtk_widget_grab_focus( gtk_notebook_get_nth_page(term_win->nb, idx) );
             }
+        }
+        else
+        {
+            return FALSE;
+        }
+        return TRUE;
+    }
+    else if( ctrl_shift )
+    {
+        if( key == GDK_T ) /* Ctrl + Shift + T => new tab */
+        {
+            int idx = term_window_add_page_with_cmd( w, NULL, NULL, NULL );
+            gtk_notebook_set_current_page( term_win->nb, idx );
+            gtk_widget_grab_focus( gtk_notebook_get_nth_page(term_win->nb, idx) );
+        }
+        else if( key == GDK_N ) /* Ctrl+Shift + N => new window */
+        {
+            GtkWidget* win = term_window_new();
+            term_window_add_page_with_cmd( win, g_get_current_dir(), g_getenv("SHELL"), NULL );
+            gtk_widget_show( win );
         }
         else
         {
