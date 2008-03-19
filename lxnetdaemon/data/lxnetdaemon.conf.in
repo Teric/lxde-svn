@@ -1,0 +1,11 @@
+# Network Daemon Configuration file
+[ethernet]
+up=ifup %s
+down=ifdown %s
+repair=@prefix@/share/lxnetdaemon/ethrepair.sh %s
+
+[wireless]
+up=ifconfig %s up
+down=ifconfig %s down
+repair=@prefix@/share/lxnetdaemon/wifirepair.sh %s
+connect=@prefix@/share/lxnetdaemon/wificonnect.sh "%s" "%s" %d "%s"
