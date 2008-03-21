@@ -29,7 +29,7 @@
 
 #include "lxnm.h"
 
-LxND *lxnd;
+LxND *lxnm;
 
 static char*
 hex2asc(char *hexsrc)
@@ -60,7 +60,7 @@ lxnm_isifname(const char *ifname)
 	bzero(&ifr, sizeof(ifr));
 
 	strncpy(ifr.ifr_name, ifname, sizeof(ifr.ifr_name));
-	if (ioctl(lxnd->sockfd, SIOCGIFFLAGS, &ifr)<0)
+	if (ioctl(lxnm->sockfd, SIOCGIFFLAGS, &ifr)<0)
 		return FALSE;
 
 	return TRUE;
@@ -89,7 +89,7 @@ lxnm_parse_command(GIOChannel *gio, const char *cmd)
 			/* interface name */
 			p = strtok(NULL, " ");
 			if (lxnm_isifname(p)) {
-				cmdstr = g_strdup_printf(lxnd->setting->eth_up, p);
+				cmdstr = g_strdup_printf(lxnm->setting->eth_up, p);
 				pthread_create(&actionThread, NULL, CommandProcess, cmdstr);
 			}
 			break;
@@ -97,7 +97,7 @@ lxnm_parse_command(GIOChannel *gio, const char *cmd)
 			/* interface name */
 			p = strtok(NULL, " ");
 			if (lxnm_isifname(p)) {
-				cmdstr = g_strdup_printf(lxnd->setting->eth_down, p);
+				cmdstr = g_strdup_printf(lxnm->setting->eth_down, p);
 				pthread_create(&actionThread, NULL, CommandProcess, cmdstr);
 			}
 			break;
@@ -105,7 +105,7 @@ lxnm_parse_command(GIOChannel *gio, const char *cmd)
 			/* interface name */
 			p = strtok(NULL, " ");
 			if (lxnm_isifname(p)) {
-				cmdstr = g_strdup_printf(lxnd->setting->eth_repair, p);
+				cmdstr = g_strdup_printf(lxnm->setting->eth_repair, p);
 				pthread_create(&actionThread, NULL, CommandProcess, cmdstr);
 			}
 			break;
@@ -113,7 +113,7 @@ lxnm_parse_command(GIOChannel *gio, const char *cmd)
 			/* interface name */
 			p = strtok(NULL, " ");
 			if (lxnm_isifname(p)) {
-				cmdstr = g_strdup_printf(lxnd->setting->wifi_up, p);
+				cmdstr = g_strdup_printf(lxnm->setting->wifi_up, p);
 				pthread_create(&actionThread, NULL, CommandProcess, cmdstr);
 			}
 			break;
@@ -121,7 +121,7 @@ lxnm_parse_command(GIOChannel *gio, const char *cmd)
 			/* interface name */
 			p = strtok(NULL, " ");
 			if (lxnm_isifname(p)) {
-				cmdstr = g_strdup_printf(lxnd->setting->wifi_down, p);
+				cmdstr = g_strdup_printf(lxnm->setting->wifi_down, p);
 				pthread_create(&actionThread, NULL, CommandProcess, cmdstr);
 			}
 			break;
@@ -129,7 +129,7 @@ lxnm_parse_command(GIOChannel *gio, const char *cmd)
 			/* interface name */
 			p = strtok(NULL, " ");
 			if (lxnm_isifname(p)) {
-				cmdstr = g_strdup_printf(lxnd->setting->wifi_repair, p);
+				cmdstr = g_strdup_printf(lxnm->setting->wifi_repair, p);
 				pthread_create(&actionThread, NULL, CommandProcess, cmdstr);
 			}
 			break;
@@ -164,12 +164,18 @@ lxnm_parse_command(GIOChannel *gio, const char *cmd)
 
 //				printf("CONNECT:%s:%s:%d:%s\n", ifname, essid, en_type, password);
 				p = strtok(NULL, " ");
-				if (p!=NULL)
-					cmdstr = g_strdup_printf(lxnd->setting->wifi_connect,
+				if (p!=NULL) {
+					if (strncmp(essid, "NULL", 4)!=0)
+						cmdstr = g_strdup_printf(lxnm->setting->wifi_connect,
 										ifname, hex2asc(essid), en_type, password);
-				else
-					cmdstr = g_strdup_printf(lxnd->setting->wifi_connect,
+				} else {
+					if (strncmp(essid, "NULL", 4)!=0)
+						cmdstr = g_strdup_printf(lxnm->setting->wifi_connect,
 										ifname, hex2asc(essid), en_type, password, p);
+					else
+						cmdstr = g_strdup_printf(lxnm->setting->wifi_connect,
+										ifname, "", en_type, password, p);
+				}
 
 				printf("%s\n", cmdstr);
 				pthread_create(&actionThread, NULL, CommandProcess, cmdstr);
@@ -318,9 +324,9 @@ main(void)
 	}
 
 	/* initiate socket for network device */
-	lxnd = (LxND *)malloc(sizeof(lxnd));
-	lxnd->sockfd = socket(AF_INET, SOCK_DGRAM, 0);
-	if (lxnd->sockfd < 0)
+	lxnm = (LxND *)malloc(sizeof(lxnm));
+	lxnm->sockfd = socket(AF_INET, SOCK_DGRAM, 0);
+	if (lxnm->sockfd < 0)
 		g_error("Cannot create socket!");
 
 	/* initiate key_file */
@@ -334,24 +340,24 @@ main(void)
 	}
 
 
-	lxnd->setting = (Setting *)malloc(sizeof(Setting));
+	lxnm->setting = (Setting *)malloc(sizeof(Setting));
 
 	/* ethernet setting */
-	lxnd->setting->eth_up = g_key_file_get_string(keyfile, "ethernet", "up", NULL);
-	lxnd->setting->eth_down = g_key_file_get_string(keyfile, "ethernet", "down", NULL);
-	lxnd->setting->eth_repair = g_key_file_get_string(keyfile, "ethernet", "repair", NULL);
+	lxnm->setting->eth_up = g_key_file_get_string(keyfile, "ethernet", "up", NULL);
+	lxnm->setting->eth_down = g_key_file_get_string(keyfile, "ethernet", "down", NULL);
+	lxnm->setting->eth_repair = g_key_file_get_string(keyfile, "ethernet", "repair", NULL);
 
 	/* wireless setting */
-	lxnd->setting->wifi_up = g_key_file_get_string(keyfile, "wireless", "up", NULL);
-	lxnd->setting->wifi_down = g_key_file_get_string(keyfile, "wireless", "down", NULL);
-	lxnd->setting->wifi_repair = g_key_file_get_string(keyfile, "wireless", "repair", NULL);
-	lxnd->setting->wifi_connect = g_key_file_get_string(keyfile, "wireless", "connect", NULL);
+	lxnm->setting->wifi_up = g_key_file_get_string(keyfile, "wireless", "up", NULL);
+	lxnm->setting->wifi_down = g_key_file_get_string(keyfile, "wireless", "down", NULL);
+	lxnm->setting->wifi_repair = g_key_file_get_string(keyfile, "wireless", "repair", NULL);
+	lxnm->setting->wifi_connect = g_key_file_get_string(keyfile, "wireless", "connect", NULL);
 
 	GMainLoop *loop = g_main_loop_new(NULL, FALSE);
 	lxnm_init_socket();
 	g_main_loop_run(loop); /* Wheee! */
 
-	close(lxnd->sockfd);
+	close(lxnm->sockfd);
 	return 0;
 }
 
