@@ -10,6 +10,7 @@ INCLUDES = \
 	$(G_CAST_CHECKS)
 
 lxnetdaemon_SOURCES = \
+	lxnetdaemon.h \
 	lxnetdaemon.c
 
 lxnetdaemon_LDADD = \
