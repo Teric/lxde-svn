@@ -9,6 +9,6 @@ EXTRA_DIST = \
 	intltool-update.in
 
 install-exec-hook:
-	for script in $(datadir)/lxnm/*.sh; do \
+	for script in $(DESTDIR)/$(datadir)/lxnm/*.sh; do \
 	    chmod +x $$script; \
 	done
