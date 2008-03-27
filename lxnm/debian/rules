@@ -25,7 +25,13 @@ endif
 ifneq "$(wildcard /usr/share/misc/config.guess)" ""
 	cp -f /usr/share/misc/config.guess config.guess
 endif
-	./configure --host=$(DEB_HOST_GNU_TYPE) --build=$(DEB_BUILD_GNU_TYPE) --prefix=/usr --mandir=\$${prefix}/share/man --infodir=\$${prefix}/share/info CFLAGS="$(CFLAGS)" LDFLAGS="-Wl,-z,defs"
+	./configure \
+	--host=$(DEB_HOST_GNU_TYPE) \
+	--build=$(DEB_BUILD_GNU_TYPE) \
+	--prefix=/usr \
+	--mandir=\$${prefix}/share/man \
+	--infodir=\$${prefix}/share/info \
+	CFLAGS="$(CFLAGS)" LDFLAGS="-Wl,-z,defs"
 
 
 build: build-stamp
@@ -35,7 +41,7 @@ build-stamp:  config.status
 
 	# Add here commands to compile the package.
 	$(MAKE)
-	#docbook-to-man debian/lxde-common.sgml > lxde-common.1
+	#docbook-to-man debian/lxnm.sgml > lxnm.1
 
 	touch $@
 
@@ -56,8 +62,8 @@ install: build
 	dh_clean -k 
 	dh_installdirs
 
-	# Add here commands to install the package into debian/lxde-common.
-	$(MAKE) DESTDIR=$(CURDIR)/debian/lxde-common install
+	# Add here commands to install the package into debian/lxnm.
+	$(MAKE) DESTDIR=$(CURDIR)/debian/lxnm install
 
 
 # Build architecture-independent files here.
@@ -65,29 +71,20 @@ binary-indep: build install
 # We have nothing to do by default.
 
 # Build architecture-dependent files here.
-#binary-arch: build install
+binary-arch: build install
 	dh_testdir
 	dh_testroot
 	dh_installchangelogs
-	dh_installdocs -i
-#	dh_installexamples
+	dh_installdocs
+	dh_installexamples
 #	dh_install
-#	dh_installmenu
-#	dh_installdebconf	
-#	dh_installlogrotate
-#	dh_installemacsen
-#	dh_installpam
-#	dh_installmime
-#	dh_python
-#	dh_installinit
-#	dh_installcron
+	dh_installinit
 #	dh_installinfo
 	dh_installman
-	dh_link usr/share/doc/lxde-common usr/share/doc/lxde
+	dh_link
 	dh_strip
 	dh_compress
 	dh_fixperms
-#	dh_perl
 #	dh_makeshlibs
 	dh_installdeb
 	dh_shlibdeps

@@ -1,0 +1,7 @@
+lxnm (0.1.2-1) unstable; urgency=low
+
+  * Initial release (Closes: #nnnn)  <nnnn is the bug number of your ITP>
+
+ -- Andrew Lee <andrew@linux.org.tw>  Thu, 27 Mar 2008 02:25:44 +0800
+
+
