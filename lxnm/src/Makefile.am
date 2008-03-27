@@ -1,6 +1,6 @@
 ## Process this file with automake to produce Makefile.in
 
-bin_PROGRAMS = lxnm
+sbin_PROGRAMS = lxnm
 
 INCLUDES = \
 	-I$(top_srcdir) \
