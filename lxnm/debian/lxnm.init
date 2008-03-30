@@ -36,13 +36,7 @@ fi
 set -e
 
 case "$1" in
-  debug)
-	echo -n "Starting $DESC: "
-	start-stop-daemon --start --quiet --exec $DAEMON -- $DAEMON_OPTS &
-	echo "$NAME."
-	;;
   start)
-	if [ "$START_BATMAND" != "YES" ] ; then exit 0 ; fi
 	echo -n "Starting $DESC: "
 	start-stop-daemon --start --quiet --exec $DAEMON -- $DAEMON_OPTS &
 	echo "$NAME."

@@ -7,11 +7,12 @@ Standards-Version: 3.7.3
 
 Package: lxnm
 Architecture: any
-Depends: ${shlibs:Depends}, ${misc:Depends}, net-tools, wpasupplicant, wireless-tools, dhcp3-client 
+Depends: ${shlibs:Depends}, ${misc:Depends}, net-tools, wpasupplicant, wireless-tools, dhcp3-client, lxpanel 
 Description: Lightweight X11 Network Manager
- LXNM(Lightweight X11 Network Manager) is a lite network manager daemon 
- attempts to make networking configuration and setup as painless and 
- automatic as possible.
+ LXNM(Lightweight X11 Network Manager) is a script-based lightweight 
+ network manager with fewer dependencies. It attempts to make networking 
+ configuration and setup as painless and automatic as possible.
  .
- LXNM is default Network Manager for LXDE(the Lightweight X11 Desktop
- Environment) project.
+ LXNM is the default Network Manager for LXDE(the Lightweight X11 
+ Desktop Environment) project. It currently only works with netstat 
+ plugin of lxpanel.
