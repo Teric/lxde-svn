@@ -11,26 +11,27 @@ if [ A"$3" = A"0" ]; then
 	# without encryption
 	ifconfig $1 up
 	if [ A"$5" = A ]; then
-		iwconfig $1 essid "$2"
+		iwconfig $1 essid "$2" key off
 	else
-		iwconfig $1 ap $5
+		iwconfig $1 ap $5 key off
 	fi
+
 	dhclient $1 -1 -d -pf /var/run/dhclient_${1}.pid
 elif [ A"$3" = A"1" ]; then
-	# WEP
-	echo "network={" > /tmp/lxnd.$1.wep
-	echo "     ssid=\"$2\"" >> /tmp/lxnd.$1.wep
-	if [ ! A"$5" = A ]; then
-		echo "     bssid=\"$5\"" >> /tmp/lxnd.$1.wep
+	if [ -f /var/run/dhclient_${1}.pid ]; then
+		kill `cat /var/run/dhclient_${1}.pid`
+		rm /var/run/dhclient_${1}.pid
 	fi
-	echo "     key_mgmt=NONE" >> /tmp/lxnd.$1.wep
-	echo -e "     wep_key0=\"$4\"" >> /tmp/lxnd.$1.wep
-	echo "}" >> /tmp/lxnd.$1.wep
 
-	wpa_supplicant -BDwext -c/tmp/lxnd.$1.wep -i$1
+	# WEP
+	ifconfig $1 up
+	if [ A"$5" = A ]; then
+		iwconfig $1 essid "$2" key "s:$4"
+	else
+		iwconfig $1 ap $5 key "s:$4"
+	fi
+
 	dhclient $1 -1 -d -pf /var/run/dhclient_${1}.pid
-
-	rm -fr /tmp/lxnd.$1.wep
 elif [ A"$3" = A"2" ]; then
 	# WPA-PSK
 	echo "ctrl_interface=/var/run/wpa_supplicant" > /tmp/lxnd.$1.wpa-psk
