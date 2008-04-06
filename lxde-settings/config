@@ -1,5 +1,5 @@
 [GTK]
-iNet/DoubleClickTime=
+#iNet/DoubleClickTime=400
 #iNet/DoubleClickDistance
 #iNet/DndDragThreshold
 #iNet/CursorBlink
@@ -8,7 +8,7 @@ sNet/ThemeName=Clearlooks
 sNet/IconThemeName=nuoveXT.2.2
 #iGtk/CanChangeAccels=0
 #cGtk/ColorPalette
-sGtk/FontName=Sans 11
+sGtk/FontName=Sans 10
 #iGtk/IconSizes
 #sGtk/KeyThemeName
 iGtk/ToolbarStyle=3
