@@ -228,7 +228,7 @@ int main(int argc, char** argv)
 	{
 		g_error( "Only one setting daemon can be executed." );
 		XUngrabServer( dpy );
-		XCloseDiaplay( dpy );
+		XCloseDisplay( dpy );
 		return 1;
 	}
 	XSetSelectionOwner( dpy, CMD_ATOM, DefaultRootWindow( dpy ), CurrentTime );
