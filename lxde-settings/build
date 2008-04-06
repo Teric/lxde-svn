@@ -1,0 +1,4 @@
+#!/bin/sh
+cd src
+gcc `pkg-config glib-2.0 --cflags --libs` -lX11  *.c -o lxde-settings
+
