@@ -6,7 +6,7 @@ iNet/DoubleClickTime=
 #iNet/CursorBlinkTime
 sNet/ThemeName=Clearlooks
 sNet/IconThemeName=nuoveXT.2.2
-iGtk/CanChangeAccels=0
+#iGtk/CanChangeAccels=0
 #cGtk/ColorPalette
 sGtk/FontName=Sans 11
 #iGtk/IconSizes
@@ -19,19 +19,19 @@ iGtk/ToolbarStyle=3
 sGtk/FileChooserBackend=
 iGtk/ButtonImages=1
 iGtk/MenuImages=1
-iGtk/MenuBarAccel=1
+#iGtk/MenuBarAccel=1
 #sGtk/CursorThemeName
 #iGtk/CursorThemeSize
-iGtk/ShowInputMethodMenu=1
-iGtk/ShowUnicodeMenu=1
+#iGtk/ShowInputMethodMenu=1
+#iGtk/ShowUnicodeMenu=1
 #iGtk/TimeoutInitial
 #iGtk/TimeoutRepeat
 #cGtk/ColorScheme
-iGtk/EnableAnimations=1
+#iGtk/EnableAnimations=1
 iXft/Antialias=1
 #iXft/Hinting
 #iXft/HintStyle
 #iXft/RGBA
 #iXft/DPI
-sNet/FallbackIconTheme=hicolor
+#sNet/FallbackIconTheme=hicolor
 #iGtk/TouchscreenMode

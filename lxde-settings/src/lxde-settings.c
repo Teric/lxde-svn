@@ -64,9 +64,9 @@ static void load_settings()
 	file = g_build_filename( g_get_user_config_dir(), "lxde/config", NULL );
 	ret = g_key_file_load_from_file( kf, file, 0, NULL );
 	g_free( file );
-	
+
 	if( ! ret )
-		ret = g_key_file_load_from_file( kf, "/etc/xdg/lxde/config", 0, NULL );
+		ret = g_key_file_load_from_file( kf, PACKAGE_DATA_DIR"/lxde/config", 0, NULL );
 
 	if( ret )
 	{
