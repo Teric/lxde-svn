@@ -1,7 +1,7 @@
 /*
  *      lxde-settings.c - XSettings daemon of LXDE
  *      
- *      Copyright 2008 PCMan <pcman@debian>
+ *      Copyright 2008 PCMan <pcman.tw@gmail.com>
  *      
  *      This program is free software; you can redistribute it and/or modify
  *      it under the terms of the GNU General Public License as published by
