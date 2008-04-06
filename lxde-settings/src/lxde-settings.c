@@ -39,8 +39,15 @@
 #include "xsettings-manager.h"
 #include "xutils.h"
 
+typedef enum{
+	LXS_RELOAD,
+	LXS_LAST_CMD
+}LXS_CMD;
+
 static Display* dpy;
-XSettingsManager **managers = NULL;
+static XSettingsManager **managers = NULL;
+
+static Atom CMD_ATOM; /* for private client message */
 
 static void
 terminate_cb (void *data)
@@ -66,7 +73,7 @@ static void load_settings()
 	g_free( file );
 
 	if( ! ret )
-		ret = g_key_file_load_from_file( kf, PACKAGE_DATA_DIR"/lxde/config", 0, NULL );
+		ret = g_key_file_load_from_file( kf, PACKAGE_DATA_DIR"/config", 0, NULL );
 
 	if( ret )
 	{
@@ -79,7 +86,7 @@ static void load_settings()
 			for( key = keys; *key; ++key )
 			{
 				const char* name = *key + 1;
-g_debug( "%s", name );
+
 				switch( **key )
 				{
 					case 's':	/* string */
@@ -167,9 +174,29 @@ static gboolean create_settings(  )
 	return TRUE;
 }
 
+static void send_internal_command( int cmd )
+{
+	Window root = DefaultRootWindow(dpy);
+    XEvent ev;
+
+	memset(&ev, 0, sizeof(ev) );
+	ev.xclient.type = ClientMessage;
+	ev.xclient.window = root;
+	ev.xclient.message_type = CMD_ATOM;
+	ev.xclient.format = 8;
+
+	ev.xclient.data.l[0] = cmd;
+
+	XSendEvent(dpy, root, False,
+			   SubstructureRedirectMask|SubstructureNotifyMask, &ev);
+	XSync(dpy, False);
+}
+
 int main(int argc, char** argv)
 {
 	setlocale( LC_ALL, "" );
+
+	/* Currently i18n is not needed */
 /*
 	bindtextdomain (GETTEXT_PACKAGE, GNOMELOCALEDIR);
 	bind_textdomain_codeset (GETTEXT_PACKAGE, "UTF-8");
@@ -180,9 +207,18 @@ int main(int argc, char** argv)
 	if( ! dpy )
 		return 1;
 
+	CMD_ATOM = XInternAtom( dpy, "LXDE_SETTINGS", False );
+
+	if( argc > 1 && 0 == strcmp( argv[1] , "reload") )
+	{
+		send_internal_command( LXS_RELOAD );
+		XCloseDisplay( dpy );
+		return 0;
+	}
+
 	if( ! create_settings( dpy ) )
 		return 1;
-		
+
 	load_settings();
 
 	while( TRUE )
@@ -191,10 +227,23 @@ int main(int argc, char** argv)
 		XSettingsManager**mgr;
 
 		XNextEvent( dpy, &evt );
-		for( mgr = managers; *mgr; ++mgr )
+		if( evt.type == ClientMessage && evt.xproperty.atom == CMD_ATOM )
 		{
-			if( xsettings_manager_get_window( *mgr ) == evt.xany.window )
-				xsettings_manager_process_event( *mgr, &evt );
+			int cmd = evt.xclient.data.b[0];
+			switch( cmd )
+			{
+				case LXS_RELOAD:	/* reload all settings */
+				load_settings();
+				break;
+			}
+		}
+		else if( evt.type ==  SelectionClear )
+		{
+			for( mgr = managers; *mgr; ++mgr )
+			{
+				if( xsettings_manager_get_window( *mgr ) == evt.xany.window )
+					xsettings_manager_process_event( *mgr, &evt );
+			}
 		}
 	}
 

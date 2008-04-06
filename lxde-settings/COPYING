@@ -1,3 +1,16 @@
+This program uses source code from gnome-settings-daemon.
+	The files taken from gnome-settings-daemon are:
+	src/xsettings-manager.c, src/xsettings-manager.h,
+	src/xsettings-common.c, src/xsettings-common.h,
+	src/xutils.c,src/xutils.h
+
+	Copyright (C) 2001 Owen Taylor, Matthias Clasen, Red Hat, Inc.
+	Originally licensed under MIT X license.
+
+Other parts are written by LXDE team.
+	Copyright (C) 2008 Hong Jen Yee <pcman.tw@gmail.com>
+	Licensed under GNU General Public License version 2
+
 		    GNU GENERAL PUBLIC LICENSE
 		       Version 2, June 1991
 
