@@ -41,6 +41,7 @@
 
 typedef enum{
 	LXS_RELOAD,
+	LXS_EXIT,
 	LXS_LAST_CMD
 }LXS_CMD;
 
@@ -209,12 +210,29 @@ int main(int argc, char** argv)
 
 	CMD_ATOM = XInternAtom( dpy, "LXDE_SETTINGS", False );
 
-	if( argc > 1 && 0 == strcmp( argv[1] , "reload") )
+	if( argc > 1 )
 	{
-		send_internal_command( LXS_RELOAD );
+		if(  0 == strcmp( argv[1] , "reload") )
+			send_internal_command( LXS_RELOAD );
+		else if(  0 == strcmp( argv[1] , "exit") )
+			send_internal_command( LXS_EXIT );
+		else
+			goto out;
 		XCloseDisplay( dpy );
 		return 0;
 	}
+	out:
+
+	XGrabServer( dpy );
+	if( XGetSelectionOwner( dpy, CMD_ATOM ) )
+	{
+		g_error( "Only one setting daemon can be executed." );
+		XUngrabServer( dpy );
+		XCloseDiaplay( dpy );
+		return 1;
+	}
+	XSetSelectionOwner( dpy, CMD_ATOM, DefaultRootWindow( dpy ), CurrentTime );
+	XUngrabServer( dpy );
 
 	if( ! create_settings( dpy ) )
 		return 1;
@@ -232,8 +250,11 @@ int main(int argc, char** argv)
 			int cmd = evt.xclient.data.b[0];
 			switch( cmd )
 			{
-				case LXS_RELOAD:	/* reload all settings */
+			case LXS_RELOAD:	/* reload all settings */
 				load_settings();
+				break;
+			case LXS_EXIT:
+				goto _exit;
 				break;
 			}
 		}
@@ -246,6 +267,11 @@ int main(int argc, char** argv)
 			}
 		}
 	}
+
+_exit:
+	XGrabServer( dpy );
+	XSetSelectionOwner( dpy, CMD_ATOM, DefaultRootWindow( dpy ), None );
+	XUngrabServer( dpy );
 
 	XCloseDisplay( dpy );
 
