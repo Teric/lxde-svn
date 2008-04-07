@@ -1,6 +1,5 @@
 ## Process this file with automake to produce Makefile.in
 
-bin_PROGRAMS = lxnetctl
 noinst_PROGRAMS = lxnetctl
 
 INCLUDES = \
