@@ -17,15 +17,19 @@
  */
 
 #include <glib.h>
+
 #include <sys/socket.h>
 #include <sys/un.h>
 #include <sys/ioctl.h>
 #include <net/if.h>
+
 #include <stdio.h>
+#include <stdlib.h>
 #include <unistd.h>
 #include <fcntl.h>
 #include <errno.h>
 #include <string.h>
+#include <pthread.h>
 
 #include "lxnm.h"
 
