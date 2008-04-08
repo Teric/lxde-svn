@@ -1,4 +1,3 @@
-
 /**
  * Copyright (c) 2008 LxDE Developers, see the file AUTHORS for details.
  *
@@ -16,6 +15,7 @@
  * along with this program; if not, write to the Free Software Foundation,
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
  */
+
 #include <glib.h>
 #include <sys/socket.h>
 #include <sys/un.h>
@@ -29,7 +29,7 @@
 
 #include "lxnm.h"
 
-LxND *lxnm;
+static LxND *lxnm;
 
 static char*
 hex2asc(char *hexsrc)
@@ -326,8 +326,10 @@ main(void)
 	/* initiate socket for network device */
 	lxnm = (LxND *)malloc(sizeof(lxnm));
 	lxnm->sockfd = socket(AF_INET, SOCK_DGRAM, 0);
-	if (lxnm->sockfd < 0)
+	if (lxnm->sockfd < 0) {
 		g_error("Cannot create socket!");
+		return -1;
+	}
 
 	/* initiate key_file */
 	keyfile = g_key_file_new();
