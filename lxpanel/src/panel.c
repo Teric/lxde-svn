@@ -45,7 +45,6 @@ gchar *cprofile = "default";
 static int config = 0;
 FbEv *fbev = NULL;
 
-//#define DEBUG
 #include "dbg.h"
 
 int log_level;
@@ -71,7 +70,6 @@ void panel_set_wm_strut(Panel *p)
     gulong data[12] = { 0 };
     int i = 4;
 
-    ENTER;
     if (!GTK_WIDGET_MAPPED (p->topgwin))
         return;
     if ( ! p->setstrut )
@@ -109,7 +107,7 @@ void panel_set_wm_strut(Panel *p)
         break;
     default:
         ERR("wrong edge %d. strut won't be set\n", p->edge);
-        RET();
+        return;
     }
     DBG("type %d. width %d. from %d to %d\n", i, data[i], data[4 + i*2], data[5 + i*2]);
 
@@ -120,16 +118,14 @@ void panel_set_wm_strut(Panel *p)
     XChangeProperty(GDK_DISPLAY(), p->topxwin, a_NET_WM_STRUT,
           XA_CARDINAL, 32, PropModeReplace,  (unsigned char *) data, 4);
 
-    RET();
+    return;
 }
 
 static void
-print_wmdata(Panel *p)
+dbg_print_wmdata(Panel *p)
 {
     int i;
 
-    ENTER;
-    RET();
     DBG("desktop %d/%d\n", p->curdesk, p->desknum);
     DBG("workarea\n");
     for (i = 0; i < p->wa_len/4; i++)
@@ -138,7 +134,7 @@ print_wmdata(Panel *p)
               p->workarea[4*i + 1],
               p->workarea[4*i + 2],
               p->workarea[4*i + 3]);
-    RET();
+    return;
 }
 
 
@@ -187,7 +183,6 @@ panel_event_filter(GdkXEvent *xevent, GdkEvent *event, Panel *p)
     Window win;
     XEvent *ev = (XEvent *) xevent;
 
-    ENTER;
     DBG("win = 0x%x\n", ev->xproperty.window);
     if (ev->type != PropertyNotify ) {
         /* private client message from lxpanelctl */
@@ -235,7 +230,7 @@ panel_event_filter(GdkXEvent *xevent, GdkEvent *event, Panel *p)
             DBG("A_NET_WORKAREA\n");
             g_free( p->workarea );
             p->workarea = get_xaproperty (GDK_ROOT_WINDOW(), a_NET_WORKAREA, XA_CARDINAL, &p->wa_len);
-            print_wmdata(p);
+            /* dbg_print_wmdata(p); */
         } else
             RET(GDK_FILTER_CONTINUE);
         RET(GDK_FILTER_REMOVE);
@@ -252,8 +247,7 @@ panel_event_filter(GdkXEvent *xevent, GdkEvent *event, Panel *p)
 static gint
 panel_delete_event(GtkWidget * widget, GdkEvent * event, gpointer data)
 {
-    ENTER;
-    RET(FALSE);
+    return FALSE;;
 }
 
 static gint
@@ -262,7 +256,7 @@ panel_destroy_event(GtkWidget * widget, GdkEvent * event, gpointer data)
     //Panel *p = (Panel *) data;
     //if (!p->self_destroy)
     gtk_main_quit();
-    RET(FALSE);
+    return FALSE;;
 }
 
 static void
@@ -366,13 +360,12 @@ panel_size_req(GtkWidget *widget, GtkRequisition *req, Panel *p)
     req->width  = p->aw;
     req->height = p->ah;
 
-    RET( TRUE );
+    return TRUE;
 }
 
 static gint
 panel_size_alloc(GtkWidget *widget, GtkAllocation *a, Panel *p)
 {
-    ENTER;
     if (p->widthtype == WIDTH_REQUEST)
         p->width = (p->orientation == ORIENT_HORIZ) ? a->width : a->height;
     if (p->heighttype == HEIGHT_REQUEST)
@@ -380,20 +373,19 @@ panel_size_alloc(GtkWidget *widget, GtkAllocation *a, Panel *p)
     calculate_position(p);
 
     if (a->width == p->aw && a->height == p->ah && a->x == p->ax && a->y == p ->ay) {
-        RET(TRUE);
+        return TRUE;
     }
 
     gtk_window_move(GTK_WINDOW(p->topgwin), p->ax, p->ay);
     panel_set_wm_strut(p);
-    RET(TRUE);
+    return TRUE;
 }
 
 static  gboolean
 panel_configure_event (GtkWidget *widget, GdkEventConfigure *e, Panel *p)
 {
-    ENTER;
     if (e->width == p->cw && e->height == p->ch && e->x == p->cx && e->y == p->cy)
-        RET(TRUE);
+        return TRUE;
     p->cw = e->width;
     p->ch = e->height;
     p->cx = e->x;
@@ -402,15 +394,14 @@ panel_configure_event (GtkWidget *widget, GdkEventConfigure *e, Panel *p)
     if (p->transparent)
         fb_bg_notify_changed_bg(p->bg);
 
-    RET(FALSE);
+    return FALSE;;
 }
 
 static gint
 panel_popupmenu_configure(GtkWidget *widget, gpointer user_data)
 {
-    ENTER;
     configure();
-    RET(TRUE);
+    return TRUE;
 }
 
 static gint
@@ -472,8 +463,6 @@ panel_start_gui(Panel *p)
     Atom state[3];
     XWMHints wmhints;
     guint32 val;
-
-    ENTER;
 
     // main toplevel window
     p->topgwin =  gtk_window_new(GTK_WINDOW_TOPLEVEL);
@@ -562,7 +551,7 @@ panel_start_gui(Panel *p)
     gtk_object_sink( p->tooltips );
 #endif
 
-    RET();
+    return;
 }
 
 void panel_set_orientation(Panel *p)
@@ -605,7 +594,6 @@ panel_parse_global(Panel *p, char **fp)
     line s;
     s.len = 256;
 
-    ENTER;
     while (lxpanel_get_line(fp, &s) != LINE_NONE) {
         if (s.type == LINE_VAR) {
             if (!g_ascii_strcasecmp(s.t[0], "edge")) {
@@ -660,13 +648,13 @@ panel_parse_global(Panel *p, char **fp)
                 p->logout_command = g_strdup( s.t[1] );
             } else {
                 ERR( "lxpanel: %s - unknown var in Global section\n", s.t[0]);
-                RET(0);
+                return FALSE;
             }
         } else if (s.type == LINE_BLOCK_END) {
             break;
         } else {
             ERR( "lxpanel: illegal in this context %s\n", s.str);
-            RET(0);
+            return FALSE;
         }
     }
     panel_set_orientation( p );
@@ -689,10 +677,10 @@ panel_parse_global(Panel *p, char **fp)
     p->curdesk = get_net_current_desktop();
     p->desknum = get_net_number_of_desktops();
     p->workarea = get_xaproperty (GDK_ROOT_WINDOW(), a_NET_WORKAREA, XA_CARDINAL, &p->wa_len);
-    print_wmdata(p);
+    /* dbg_print_wmdata(p); */
 
     panel_start_gui(p);
-    RET(1);
+    return TRUE;
 }
 
 static int
@@ -704,7 +692,6 @@ panel_parse_plugin(Panel *p, char **fp)
     int expand , padding, border;
     char* pconfig = NULL;
 
-    ENTER;
     s.len = 256;
     border = expand = padding = 0;
     while (lxpanel_get_line(fp, &s) != LINE_BLOCK_END) {
@@ -769,13 +756,13 @@ panel_parse_plugin(Panel *p, char **fp)
     p->plugins = g_list_append(p->plugins, plug);
 
     g_free( type );
-    RET(1);
+    return TRUE;
 
  error:
     g_free(type);
     if (plug)
           plugin_put(plug);
-    RET(0);
+    return FALSE;
 }
 
 
@@ -785,7 +772,6 @@ panel_start( Panel *p, char **fp )
     line s;
 
     /* parse global section */
-    ENTER;
     s.len = 256;
     memset(p, 0, sizeof(Panel));
     p->allign = ALLIGN_CENTER;
@@ -806,15 +792,15 @@ panel_start( Panel *p, char **fp )
 
     if ((lxpanel_get_line(fp, &s) != LINE_BLOCK_START) || g_ascii_strcasecmp(s.t[0], "Global")) {
         ERR( "lxpanel: config file must start from Global section\n");
-        RET(0);
+        return FALSE;
     }
     if (!panel_parse_global(p, fp))
-        RET(0);
+        return FALSE;
 
     while (lxpanel_get_line(fp, &s) != LINE_NONE) {
         if ((s.type  != LINE_BLOCK_START) || g_ascii_strcasecmp(s.t[0], "Plugin")) {
             ERR( "lxpanel: expecting Plugin section\n");
-            RET(0);
+            return FALSE;
         }
         panel_parse_plugin(p, fp);
     }
@@ -823,23 +809,20 @@ panel_start( Panel *p, char **fp )
     /* update backgrond of panel and all plugins */
     panel_update_background( p );
 
-    print_wmdata(p);
-    RET(1);
+    /* dbg_print_wmdata(p); */
+    return TRUE;
 }
 
 static void
 delete_plugin(gpointer data, gpointer udata)
 {
-    ENTER;
     plugin_stop((Plugin *)data);
     plugin_put((Plugin *)data);
-    RET();
+    return;
 }
 
 void panel_stop(Panel *p)
 {
-    ENTER;
-
     g_list_foreach(p->plugins, delete_plugin, NULL);
     g_list_free(p->plugins);
     p->plugins = NULL;
@@ -863,14 +846,13 @@ void panel_stop(Panel *p)
     gdk_flush();
     XFlush(GDK_DISPLAY());
     XSync(GDK_DISPLAY(), True);
-    RET();
+    return;
 }
 
 
 static void
 usage()
 {
-    ENTER;
     g_print(_("lxpanel %s - lightweight GTK2+ panel for UNIX desktops\n"), version);
     g_print(_("Command line options:\n"));
     g_print(_(" --help      -- print this help and exit\n"));
@@ -892,7 +874,6 @@ load_profile(gchar *profile)
     gchar *fname;
     char* ret;
 
-    ENTER;
     LOG(LOG_INFO, "loading %s profile\n", profile);
     /* check private configuration directory */
     fname = get_config_file_path( profile, FALSE );
@@ -922,12 +903,11 @@ handle_error(Display * d, XErrorEvent * ev)
 {
     char buf[256];
 
-    ENTER;
     if (log_level >= LOG_WARN) {
         XGetErrorText(GDK_DISPLAY(), ev->error_code, buf, 256);
         LOG(LOG_WARN, "lxpanel : X error: %s\n", buf);
     }
-    RET();
+    return;
 }
 
 /* Lightweight lock related functions - X clipboard hacks */
@@ -998,7 +978,6 @@ main(int argc, char *argv[], char *env[])
     void configure();
     char *fp, *pfp; /* point to current position of profile data in memory */
 
-    ENTER;
     //printf("sizeof(gulong)=%d\n", sizeof(gulong));
     setlocale(LC_CTYPE, "");
 
