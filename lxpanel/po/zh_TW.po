@@ -559,11 +559,11 @@ msgstr "靜音"
 
 #: ../src/plugins/netstat/netstat.c:135
 msgid "<Hidden Access Point>"
-msgstr "<隱藏的 Access Point>"
+msgstr "<隱藏的無線存取點>"
 
 #: ../src/plugins/netstat/netstat.c:168
 msgid "Wireless Networks not found in range"
-msgstr "範圍內找不到無限網路"
+msgstr "範圍內找不到無線網路"
 
 #. Repair
 #: ../src/plugins/netstat/netstat.c:204
