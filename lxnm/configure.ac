@@ -35,6 +35,7 @@ AC_OUTPUT([
   utils/Makefile
   data/Makefile
   data/lxnm.conf
+  man/Makefile
 ])
 
 echo

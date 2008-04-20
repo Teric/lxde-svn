@@ -1,4 +1,4 @@
-SUBDIRS = src utils data
+SUBDIRS = src utils data man
 
 EXTRA_DIST = \
 	autogen.sh \
