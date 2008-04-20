@@ -75,7 +75,7 @@ manpage.1: manpage.sgml
     networking configuration and setup as painless and automatic as possible.
     </para>
 
-    <para>&dhpackage; is the default Network Manager for LXDE project.
+    <para><command>&dhpackage;</command> is the default Network Manager for LXDE project.
     It currently only works with netstat plugin of lxpanel.
     </para>
    
