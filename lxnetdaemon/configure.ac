@@ -1,5 +1,5 @@
 AC_PREREQ(2.53)
-AC_INIT(lxnetdaemon, 0.1.1, http://lxde.sourceforge.net/)
+AC_INIT(lxnetdaemon, 0.1.1, http://lxde.org/)
 AM_INIT_AUTOMAKE
 AM_MAINTAINER_MODE
 AM_CONFIG_HEADER(config.h)
