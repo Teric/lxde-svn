@@ -1,3 +1,3 @@
 #!/bin/sh
-ifdown $1
-ifup $1
+ifdown $LXNM_IFNAME
+ifup $LXNM_IFNAME

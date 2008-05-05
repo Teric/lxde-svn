@@ -33,4 +33,15 @@ typedef struct {
 	Setting *setting;
 } LxND;
 
+typedef struct {
+	char *ifname;
+	char *essid;
+	char *apaddr;
+	char *key;
+	char *protocol;
+	char *key_mgmt;
+	char *group;
+	char *pairwise;
+} wificonn;
+
 #endif

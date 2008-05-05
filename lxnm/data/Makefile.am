@@ -3,7 +3,11 @@ default_config_DATA = lxnm.conf
 default_configdir = $(datadir)/lxnm
 
 lxnm_scripts_DATA = \
+	ethup.sh \
+	ethdown.sh \
 	ethrepair.sh \
+	wifiup.sh \
+	wifidown.sh \
 	wifirepair.sh \
 	wificonnect.sh
 

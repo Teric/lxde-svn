@@ -1,56 +1,56 @@
 #!/bin/sh
 # <ifname> <essid> <en_type> <password> <bssid>
 
-
-if [ A"$3" = A"0" ]; then
-	if [ -f /var/run/dhclient_${1}.pid ]; then
-		kill `cat /var/run/dhclient_${1}.pid`
-		rm /var/run/dhclient_${1}.pid
+if [ A"$LXNM_WIFI_PROTO" = A"NONE" ]; then
+	if [ -f /var/run/dhclient_$LXNM_IFNAME.pid ]; then
+		kill `cat /var/run/dhclient_$LXNM_IFNAME.pid`
+		rm /var/run/dhclient_$LXNM_IFNAME.pid
 	fi
 
 	# without encryption
-	ifconfig $1 up
-	if [ A"$5" = A ]; then
-		iwconfig $1 essid "$2" key off
+	ifconfig $LXNM_IFNAME up
+	if [ A"$LXNM_WIFI_ESSID" = A ]; then
+		iwconfig $LXNM_IFNAME essid "$LXNM_WIFI_ESSID" key off
 	else
-		iwconfig $1 ap $5 key off
+		iwconfig $LXNM_IFNAME ap $LXNM_WIFI_APADDR key off
 	fi
 
-	dhclient $1 -1 -d -pf /var/run/dhclient_${1}.pid
-elif [ A"$3" = A"1" ]; then
-	if [ -f /var/run/dhclient_${1}.pid ]; then
-		kill `cat /var/run/dhclient_${1}.pid`
-		rm /var/run/dhclient_${1}.pid
+	dhclient $LXNM_IFNAME -1 -d -pf /var/run/dhclient_$LXNM_IFNAME.pid
+elif [ A"$LXNM_WIFI_PROTO" = A"WEP" ]; then
+	if [ -f /var/run/dhclient_$LXNM_IFNAME.pid ]; then
+		kill `cat /var/run/dhclient_$LXNM_IFNAME.pid`
+		rm /var/run/dhclient_$LXNM_IFNAME.pid
 	fi
 
 	# WEP
-	ifconfig $1 up
-	if [ A"$5" = A ]; then
-		iwconfig $1 essid "$2" key "s:$4"
+	ifconfig $LXNM_IFNAME up
+	if [ A"$LXNM_WIFI_ESSID" = A ]; then
+		iwconfig $LXNM_IFNAME essid "$LXNM_WIFI_ESSID" key "s:$LXNM_WIFI_KEY"
 	else
-		iwconfig $1 ap $5 key "s:$4"
+		iwconfig $LXNM_IFNAME ap $LXNM_WIFI_APADDR key "s:$LXNM_WIFI_KEY"
 	fi
 
-	dhclient $1 -1 -d -pf /var/run/dhclient_${1}.pid
-elif [ A"$3" = A"2" ]; then
-	# WPA-PSK
-	echo "ctrl_interface=/var/run/wpa_supplicant" > /tmp/lxnd.$1.wpa-psk
-	echo "ctrl_interface_group=0" >> /tmp/lxnd.$1.wpa-psk
-	echo "ap_scan=1" >> /tmp/lxnd.$1.wpa-psk
-	echo "fast_reauth=1" >> /tmp/lxnd.$1.wpa-psk
-	echo "eapol_version=1" >> /tmp/lxnd.$1.wpa-psk
-
-	echo "network={" >> /tmp/lxnd.$1.wpa-psk
-	echo "        ssid=\"$2\"" >> /tmp/lxnd.$1.wpa-psk
-	if [ ! A"$5" = A ]; then
-		echo "     bssid=\"$5\"" >> /tmp/lxnd.$1.wpa-psk
+	dhclient $LXNM_IFNAME -1 -d -pf /var/run/dhclient_$LXNM_IFNAME.pid
+else
+	if [ -f /var/run/dhclient_$LXNM_IFNAME.pid ]; then
+		kill `cat /var/run/dhclient_$LXNM_IFNAME.pid`
+		rm /var/run/dhclient_$LXNM_IFNAME.pid
 	fi
-	echo "        psk=\"$4\"" >> /tmp/lxnd.$1.wpa-psk
-	echo "        priority=5" >> /tmp/lxnd.$1.wpa-psk
-	echo "}" >> /tmp/lxnd.$1.wpa-psk
 
-	wpa_supplicant -BDwext -c/tmp/lxnd.$1.wpa-psk -i$1
-	dhclient $1 -1 -d -pf /var/run/dhclient_${1}.pid
+	# start trying to associate with the WPA network using SSID test.
+	wpa_supplicant -g/var/run/wpa_supplicant-global -B
 
-	rm -fr /tmp/lxnd.$1.wpa-psk
+	wpa_cli -g/var/run/wpa_supplicant-global interface_remove $LXNM_IFNAME
+	wpa_cli -g/var/run/wpa_supplicant-global interface_add $LXNM_IFNAME "" wext /var/run/wpa_supplicant
+
+	wpa_cli -i$LXNM_IFNAME add_network
+	wpa_cli -i$LXNM_IFNAME set_network 0 ssid '$LXNM_WIFI_ESSID'
+	wpa_cli -i$LXNM_IFNAME set_network 0 key_mgmt $LXNM_WIFI_KEYMGMT
+	wpa_cli -i$LXNM_IFNAME set_network 0 psk '"$LXNM_WIFI_KEY"'
+	wpa_cli -i$LXNM_IFNAME set_network 0 pairwise $LXNM_WIFI_PAIRWISE
+	wpa_cli -i$LXNM_IFNAME set_network 0 group $LXNM_WIFI_GROUP
+	wpa_cli -i$LXNM_IFNAME set_network 0 proto $LXNM_WIFI_PROTO
+	wpa_cli -i$LXNM_IFNAME enable_network 0
+
+	dhclient $LXNM_IFNAME -1 -d -pf /var/run/dhclient_$LXNM_IFNAME.pid
 fi

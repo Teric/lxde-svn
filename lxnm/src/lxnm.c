@@ -35,6 +35,27 @@
 
 static LxND *lxnm;
 
+static const char *protocol_name[] = {
+	"NONE",
+	"WEP",
+	"WPA",
+};
+
+static const char *cypher_name[] = {
+	"NONE",
+	"WEP40",
+	"TKIP",
+	"WRAP",
+	"CCMP",
+	"WEP104",
+};
+
+static const char *key_mgmt_name[] = {
+	"NONE",
+	"IEEE8021X",
+	"WPA-PSK",
+};
+
 static char*
 hex2asc(char *hexsrc)
 {
@@ -76,6 +97,113 @@ CommandProcess(void *arg)
 	return system((char *)arg);
 }
 
+static int
+ethernet_up(void *arg)
+{
+	char *p;
+	/* interface name */
+	p = strtok((char *)arg, " ");
+	if (lxnm_isifname(p)) {
+		setenv("LXNM_IFNAME", p, 1);
+		return system(lxnm->setting->eth_up);
+	}
+}
+
+static int
+ethernet_down(void *arg)
+{
+	char *p;
+	/* interface name */
+	p = strtok((char *)arg, " ");
+	if (lxnm_isifname(p)) {
+		setenv("LXNM_IFNAME", p, 1);
+		return system(lxnm->setting->eth_down);
+	}
+}
+
+static int
+ethernet_repair(void *arg)
+{
+	char *p;
+	/* interface name */
+	p = strtok((char *)arg, " ");
+	if (lxnm_isifname(p)) {
+		setenv("LXNM_IFNAME", p, 1);
+		return system(lxnm->setting->eth_repair);
+	}
+}
+
+static int
+wireless_up(void *arg)
+{
+	char *p;
+	/* interface name */
+	p = strtok((char *)arg, " ");
+	if (lxnm_isifname(p)) {
+		setenv("LXNM_IFNAME", p, 1);
+		return system(lxnm->setting->wifi_up);
+	}
+}
+
+static int
+wireless_down(void *arg)
+{
+	char *p;
+	/* interface name */
+	p = strtok((char *)arg, " ");
+	if (lxnm_isifname(p)) {
+		setenv("LXNM_IFNAME", p, 1);
+		return system(lxnm->setting->wifi_down);
+	}
+}
+
+static int
+wireless_repair(void *arg)
+{
+	char *p;
+	/* interface name */
+	p = strtok((char *)arg, " ");
+	if (lxnm_isifname(p)) {
+		setenv("LXNM_IFNAME", p, 1);
+		return system(lxnm->setting->wifi_repair);
+	}
+}
+
+static int
+wireless_connect(void *arg)
+{
+	char *p;
+	/* <interface> <essid> <apaddr> <key> <protocol> <key_mgmt> <grpup> <pairwise> */
+	/* interface name */
+	p = strtok((char *)arg, " ");
+	if (lxnm_isifname(p)) {
+		setenv("LXNM_IFNAME", p, 1);
+		/* ESSID */
+		p = strtok(NULL, " ");
+		setenv("LXNM_WIFI_ESSID", hex2asc(p), 1);
+		/* AP Addr */
+		p = strtok(NULL, " ");
+		setenv("LXNM_WIFI_APADDR", p, 1);
+		/* key */
+		p = strtok(NULL, " ");
+		setenv("LXNM_WIFI_KEY", hex2asc(p), 1);
+		/* protocol */
+		p = strtok(NULL, " ");
+		setenv("LXNM_WIFI_PROTO", protocol_name[atoi(p)], 1);
+		/* key_mgmt */
+		p = strtok(NULL, " ");
+		setenv("LXNM_WIFI_KEYMGMT", key_mgmt_name[atoi(p)], 1);
+		/* group */
+		p = strtok(NULL, " ");
+		setenv("LXNM_WIFI_GROUP", cypher_name[atoi(p)], 1);
+		/* pairwise */
+		p = strtok(NULL, " ");
+		setenv("LXNM_WIFI_PAIRWISE", cypher_name[atoi(p)], 1);
+
+		return system(lxnm->setting->wifi_connect);
+	}
+}
+
 static void
 lxnm_parse_command(GIOChannel *gio, const char *cmd)
 {
@@ -83,108 +211,32 @@ lxnm_parse_command(GIOChannel *gio, const char *cmd)
 	int i, command;
     pthread_t actionThread;
 
-//	printf("%s\n", p);
+	cmdstr = g_strdup(cmd);
 	/* Command */
 	p = strtok((char *)cmd, " ");
 	command = atoi(p);
 	switch(command) {
 		case LXNM_VERSION:
 		case LXNM_ETHERNET_UP:
-			/* interface name */
-			p = strtok(NULL, " ");
-			if (lxnm_isifname(p)) {
-				cmdstr = g_strdup_printf(lxnm->setting->eth_up, p);
-				pthread_create(&actionThread, NULL, CommandProcess, cmdstr);
-			}
+			pthread_create(&actionThread, NULL, ethernet_up, (void *)cmdstr+2);
 			break;
 		case LXNM_ETHERNET_DOWN:
-			/* interface name */
-			p = strtok(NULL, " ");
-			if (lxnm_isifname(p)) {
-				cmdstr = g_strdup_printf(lxnm->setting->eth_down, p);
-				pthread_create(&actionThread, NULL, CommandProcess, cmdstr);
-			}
+			pthread_create(&actionThread, NULL, ethernet_down, (void *)cmdstr+2);
 			break;
 		case LXNM_ETHERNET_REPAIR:
-			/* interface name */
-			p = strtok(NULL, " ");
-			if (lxnm_isifname(p)) {
-				cmdstr = g_strdup_printf(lxnm->setting->eth_repair, p);
-				pthread_create(&actionThread, NULL, CommandProcess, cmdstr);
-			}
+			pthread_create(&actionThread, NULL, ethernet_repair, (void *)cmdstr+2);
 			break;
 		case LXNM_WIRELESS_UP:
-			/* interface name */
-			p = strtok(NULL, " ");
-			if (lxnm_isifname(p)) {
-				cmdstr = g_strdup_printf(lxnm->setting->wifi_up, p);
-				pthread_create(&actionThread, NULL, CommandProcess, cmdstr);
-			}
+			pthread_create(&actionThread, NULL, wireless_up, (void *)cmdstr+2);
 			break;
 		case LXNM_WIRELESS_DOWN:
-			/* interface name */
-			p = strtok(NULL, " ");
-			if (lxnm_isifname(p)) {
-				cmdstr = g_strdup_printf(lxnm->setting->wifi_down, p);
-				pthread_create(&actionThread, NULL, CommandProcess, cmdstr);
-			}
+			pthread_create(&actionThread, NULL, wireless_down, (void *)cmdstr+2);
 			break;
 		case LXNM_WIRELESS_REPAIR:
-			/* interface name */
-			p = strtok(NULL, " ");
-			if (lxnm_isifname(p)) {
-				cmdstr = g_strdup_printf(lxnm->setting->wifi_repair, p);
-				pthread_create(&actionThread, NULL, CommandProcess, cmdstr);
-			}
+			pthread_create(&actionThread, NULL, wireless_repair, (void *)cmdstr+2);
 			break;
 		case LXNM_WIRELESS_CONNECT:
-			{
-			char *ifname;
-			char *essid;
-			char *password;
-			int en_type;
-
-			/* interface name */
-			p = strtok(NULL, " ");
-			if (lxnm_isifname(p)) {
-				ifname = p;
-
-				/* ESSID */
-				p = strtok(NULL, " ");
-				essid = p;
-
-				/* Encryption Type */
-				p = strtok(NULL, " ");
-				if (strncmp(p, "OFF", 3)==0)
-					en_type = LXNM_ENCRYPTION_OFF;
-				else if (strncmp(p, "WEP", 3)==0)
-					en_type = LXNM_ENCRYPTION_WEP;
-				else if (strncmp(p, "WPA_PSK", 3)==0)
-					en_type = LXNM_ENCRYPTION_WPA_PSK;
-
-				/* password */
-				p = strtok(NULL, " ");
-				password = p;
-
-//				printf("CONNECT:%s:%s:%d:%s\n", ifname, essid, en_type, password);
-				p = strtok(NULL, " ");
-				if (p!=NULL) {
-					if (strncmp(essid, "NULL", 4)!=0)
-						cmdstr = g_strdup_printf(lxnm->setting->wifi_connect,
-										ifname, hex2asc(essid), en_type, password);
-				} else {
-					if (strncmp(essid, "NULL", 4)!=0)
-						cmdstr = g_strdup_printf(lxnm->setting->wifi_connect,
-										ifname, hex2asc(essid), en_type, password, p);
-					else
-						cmdstr = g_strdup_printf(lxnm->setting->wifi_connect,
-										ifname, "", en_type, password, p);
-				}
-
-				printf("%s\n", cmdstr);
-				pthread_create(&actionThread, NULL, CommandProcess, cmdstr);
-			}
-			}
+			pthread_create(&actionThread, NULL, wireless_connect, (void *)cmdstr+2);
 			break;
 		default:
 			printf("Unknown command");
@@ -322,11 +374,11 @@ main(void)
 	pid_t pid;
 
 	/* Run daemon in the background */
-	pid = fork();
+/*	pid = fork();
 	if (pid>0) {
 		return 0;
 	}
-
+*/
 	/* initiate socket for network device */
 	lxnm = (LxND *)malloc(sizeof(lxnm));
 	lxnm->sockfd = socket(AF_INET, SOCK_DGRAM, 0);
