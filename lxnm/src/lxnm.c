@@ -343,8 +343,10 @@ lxnm_init_socket()
 		g_error("Listen on socket failed: %s\n", g_strerror(errno));
 
 	/* owner and permision */
-	chown(LXNM_SOCKET, 0, 0);
-	chmod(LXNM_SOCKET, 0666);
+	if (chown(LXNM_SOCKET, 0, 0) < 0)
+		g_error("Change LXNM_SOCKET owner failed: %s\n", g_strerror(errno));
+	if (chmod(LXNM_SOCKET, 0666) < 0)
+		g_error("Change LXNM_SOCKET permision failed: %s\n", g_strerror(errno));
 
 	/* create I/O channel */
 	gio = g_io_channel_unix_new(skfd);
@@ -393,7 +395,7 @@ main(void)
 
 	/* Load config */
 	if (!g_key_file_load_from_file (keyfile, PACKAGE_DATA_DIR "/lxnm/lxnm.conf", flags, &error)) {
-		g_error (error->message);
+		g_error ("[conf-file] %s", error->message);
 		return -1;
 	}
 
