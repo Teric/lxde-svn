@@ -374,11 +374,11 @@ main(void)
 	pid_t pid;
 
 	/* Run daemon in the background */
-/*	pid = fork();
+	pid = fork();
 	if (pid>0) {
 		return 0;
 	}
-*/
+
 	/* initiate socket for network device */
 	lxnm = (LxND *)malloc(sizeof(lxnm));
 	lxnm->sockfd = socket(AF_INET, SOCK_DGRAM, 0);
