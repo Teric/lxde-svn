@@ -1,4 +1,3 @@
-
 /**
  * Copyright (c) 2008 LxDE Developers, see the file AUTHORS for details.
  *
@@ -16,6 +15,7 @@
  * along with this program; if not, write to the Free Software Foundation,
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
  */
+
 #include <glib.h>
 #include <sys/socket.h>
 #include <sys/un.h>
@@ -27,7 +27,8 @@
 
 #define LXNM_SOCKET "/var/run/lxnm.socket"
 
-void
+#if 0
+static void
 lxnetctl_send_message(GIOChannel *gio, const char *cmd, ...)
 {
 	GString *str;
@@ -52,6 +53,7 @@ lxnetctl_send_message(GIOChannel *gio, const char *cmd, ...)
 
 	//netcommon_write_chars_all (channel, str->str, str->len, NULL);
 }
+#endif
 
 static gboolean
 lxnetctl_read_channel(GIOChannel *gio, GIOCondition condition, gpointer data)
@@ -107,7 +109,9 @@ main(void)
 	g_io_add_watch(gio, G_IO_IN | G_IO_HUP, lxnetctl_read_channel, NULL);
 
 	/* send command */
-	if (g_io_channel_write_chars(gio, "7 ath0 1F WEP testest", -1, &len, NULL)==G_IO_STATUS_ERROR)
+	if (g_io_channel_write_chars(gio,
+				     "7 ath0 1F WEP testest",
+				     -1, &len, NULL) == G_IO_STATUS_ERROR)
 		g_error("Error writing!");
 
 	g_io_channel_flush(gio, NULL);
