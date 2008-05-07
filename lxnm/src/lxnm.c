@@ -413,9 +413,12 @@ main(void)
 	lxnm->setting->wifi_repair = g_key_file_get_string(keyfile, "wireless", "repair", NULL);
 	lxnm->setting->wifi_connect = g_key_file_get_string(keyfile, "wireless", "connect", NULL);
 
-	GMainLoop *loop = g_main_loop_new(NULL, FALSE);
-	lxnm_init_socket();
-	g_main_loop_run(loop); /* Wheee! */
+	/* LXNM main loop */
+	{
+		GMainLoop *loop = g_main_loop_new(NULL, FALSE);
+		lxnm_init_socket();
+		g_main_loop_run(loop); /* Wheee! */
+	}
 
 	close(lxnm->sockfd);
 	return 0;
