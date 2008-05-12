@@ -10,7 +10,7 @@ if [ A"$LXNM_WIFI_PROTO" = A"NONE" ]; then
 	# without encryption
 	ifconfig $LXNM_IFNAME up
 	if [ A"$LXNM_WIFI_ESSID" = A ]; then
-		iwconfig $LXNM_IFNAME essid "$LXNM_WIFI_ESSID" key off
+		iwconfig $LXNM_IFNAME essid '$LXNM_WIFI_ESSID' key off
 	else
 		iwconfig $LXNM_IFNAME ap $LXNM_WIFI_APADDR key off
 	fi
@@ -25,9 +25,9 @@ elif [ A"$LXNM_WIFI_PROTO" = A"WEP" ]; then
 	# WEP
 	ifconfig $LXNM_IFNAME up
 	if [ A"$LXNM_WIFI_ESSID" = A ]; then
-		iwconfig $LXNM_IFNAME essid "$LXNM_WIFI_ESSID" key "s:$LXNM_WIFI_KEY"
+		iwconfig $LXNM_IFNAME essid '$LXNM_WIFI_ESSID' key 's:$LXNM_WIFI_KEY'
 	else
-		iwconfig $LXNM_IFNAME ap $LXNM_WIFI_APADDR key "s:$LXNM_WIFI_KEY"
+		iwconfig $LXNM_IFNAME ap $LXNM_WIFI_APADDR key 's:$LXNM_WIFI_KEY'
 	fi
 
 	dhclient $LXNM_IFNAME -1 -d -pf /var/run/dhclient_$LXNM_IFNAME.pid
