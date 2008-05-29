@@ -25,7 +25,11 @@ elif [ A"$LXNM_WIFI_PROTO" = A"WEP" ]; then
 	# WEP
 	ifconfig $LXNM_IFNAME up
 	if [ ! A"$LXNM_WIFI_ESSID" = A ]; then
-		iwconfig $LXNM_IFNAME essid "$LXNM_WIFI_ESSID" key "s:$LXNM_WIFI_KEY"
+		if [ `echo "$LXNM_WIFI_KEY"` = 5 ] || [ `echo "$LXNM_WIFI_KEY"` = 13 ]; then
+			iwconfig $LXNM_IFNAME essid "$LXNM_WIFI_ESSID" key "s:$LXNM_WIFI_KEY"
+		else
+			iwconfig $LXNM_IFNAME essid "$LXNM_WIFI_ESSID" key "$LXNM_WIFI_KEY"
+		fi
 	fi
 
 	dhclient $LXNM_IFNAME -1 -d -pf /var/run/dhclient_$LXNM_IFNAME.pid
