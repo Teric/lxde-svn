@@ -25,7 +25,7 @@ elif [ A"$LXNM_WIFI_PROTO" = A"WEP" ]; then
 	# WEP
 	ifconfig $LXNM_IFNAME up
 	if [ ! A"$LXNM_WIFI_ESSID" = A ]; then
-		if [ `echo "$LXNM_WIFI_KEY"` = 5 ] || [ `echo "$LXNM_WIFI_KEY"` = 13 ]; then
+		if [ `echo "$LXNM_WIFI_KEY"` = 6 ] || [ `echo "$LXNM_WIFI_KEY"` = 14 ]; then
 			iwconfig $LXNM_IFNAME essid "$LXNM_WIFI_ESSID" key "s:$LXNM_WIFI_KEY"
 		else
 			iwconfig $LXNM_IFNAME essid "$LXNM_WIFI_ESSID" key "$LXNM_WIFI_KEY"
