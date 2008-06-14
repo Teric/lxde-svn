@@ -1,18 +1,6 @@
-default_config_DATA = lxnm.conf
+default_config_DATA = lxterminal.conf
 
-default_configdir = $(datadir)/lxnm
-
-lxnm_scripts_DATA = \
-	ethup.sh \
-	ethdown.sh \
-	ethrepair.sh \
-	wifiup.sh \
-	wifidown.sh \
-	wifirepair.sh \
-	wificonnect.sh
-
-lxnm_scriptsdir= $(datadir)/lxnm
+default_configdir = $(datadir)/lxterminal
 
 EXTRA_DIST = \
-	lxnm.conf.in \
-	$(lxnm_scripts_DATA)
+	lxterminal.conf.in
