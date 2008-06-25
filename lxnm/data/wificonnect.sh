@@ -2,11 +2,6 @@
 # <ifname> <essid> <en_type> <password> <bssid>
 
 if [ A"$LXNM_WIFI_PROTO" = A"NONE" ]; then
-	if [ -f /var/run/dhclient_$LXNM_IFNAME.pid ]; then
-		kill `cat /var/run/dhclient_$LXNM_IFNAME.pid`
-		rm /var/run/dhclient_$LXNM_IFNAME.pid
-	fi
-
 	# without encryption
 	ifconfig $LXNM_IFNAME up
 	if [ A"$LXNM_WIFI_ESSID" = A ]; then
@@ -15,13 +10,8 @@ if [ A"$LXNM_WIFI_PROTO" = A"NONE" ]; then
 		iwconfig $LXNM_IFNAME ap "$LXNM_WIFI_APADDR" key off
 	fi
 
-	dhclient $LXNM_IFNAME -1 -d -pf /var/run/dhclient_$LXNM_IFNAME.pid
+	dhcpcd --renew $LXNM_IFNAME
 elif [ A"$LXNM_WIFI_PROTO" = A"WEP" ]; then
-	if [ -f /var/run/dhclient_$LXNM_IFNAME.pid ]; then
-		kill `cat /var/run/dhclient_$LXNM_IFNAME.pid`
-		rm /var/run/dhclient_$LXNM_IFNAME.pid
-	fi
-
 	# WEP
 	ifconfig $LXNM_IFNAME up
 	if [ ! A"$LXNM_WIFI_ESSID" = A ]; then
@@ -32,13 +22,8 @@ elif [ A"$LXNM_WIFI_PROTO" = A"WEP" ]; then
 		fi
 	fi
 
-	dhclient $LXNM_IFNAME -1 -d -pf /var/run/dhclient_$LXNM_IFNAME.pid
+	dhcpcd --renew $LXNM_IFNAME
 else
-	if [ -f /var/run/dhclient_$LXNM_IFNAME.pid ]; then
-		kill `cat /var/run/dhclient_$LXNM_IFNAME.pid`
-		rm /var/run/dhclient_$LXNM_IFNAME.pid
-	fi
-
 	# start trying to associate with the WPA network using SSID test.
 	wpa_supplicant -g/var/run/wpa_supplicant-global -B
 
@@ -54,5 +39,5 @@ else
 	wpa_cli -i$LXNM_IFNAME set_network 0 proto "$LXNM_WIFI_PROTO"
 	wpa_cli -i$LXNM_IFNAME enable_network 0
 
-	dhclient $LXNM_IFNAME -1 -d -pf /var/run/dhclient_$LXNM_IFNAME.pid
+	dhcpcd --renew $LXNM_IFNAME
 fi

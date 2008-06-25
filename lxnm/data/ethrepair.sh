@@ -1,3 +1,4 @@
 #!/bin/sh
-ifdown $LXNM_IFNAME
-ifup $LXNM_IFNAME
+ifconfig $LXNM_IFNAME down
+ifconfig $LXNM_IFNAME up
+dhcpcd --renew $LXNM_IFNAME
