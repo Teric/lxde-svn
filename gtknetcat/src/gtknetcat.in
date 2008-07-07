@@ -2,8 +2,8 @@
 import pygtk
 pygtk.require("2.0")
 import gtk
-from gnc import gnc
+from gtknetcat import gtknetcat
 
 if __name__ == '__main__':
-    wiz = gnc.Wizard()
+    wiz = gtknetcat.Wizard()
     gtk.main()
