@@ -161,7 +161,9 @@ class Wizard:
             files=' '
             dirs=[]
             for it in self.send_list:
-                files += ("'%s' " % it[1])
+                # special char like single quote should be escaped
+                files += ("'%s' " % it[1].replace("'", "'\\''") )
+                # FIXME: how to escape dir names correctly for transformation pattern?
                 dir = os.path.dirname(it[1])
                 if not dir in dirs:
                     dirs.append( dir )
