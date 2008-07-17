@@ -31,9 +31,9 @@ else
 	wpa_cli -g/var/run/wpa_supplicant-global interface_add $LXNM_IFNAME "" wext /var/run/wpa_supplicant
 
 	wpa_cli -i$LXNM_IFNAME add_network
-	wpa_cli -i$LXNM_IFNAME set_network 0 ssid "$LXNM_WIFI_ESSID"
+	wpa_cli -i$LXNM_IFNAME set_network 0 ssid \""$LXNM_WIFI_ESSID"\"
 	wpa_cli -i$LXNM_IFNAME set_network 0 key_mgmt "$LXNM_WIFI_KEYMGMT"
-	wpa_cli -i$LXNM_IFNAME set_network 0 psk "$LXNM_WIFI_KEY"
+	wpa_cli -i$LXNM_IFNAME set_network 0 psk \""$LXNM_WIFI_KEY"\"
 	wpa_cli -i$LXNM_IFNAME set_network 0 pairwise "$LXNM_WIFI_PAIRWISE"
 	wpa_cli -i$LXNM_IFNAME set_network 0 group "$LXNM_WIFI_GROUP"
 	wpa_cli -i$LXNM_IFNAME set_network 0 proto "$LXNM_WIFI_PROTO"
