@@ -1,16 +1,17 @@
 This package was debianized by Andrew Lee <andrew@linux.org.tw> on
-Sun, 20 Apr 2008 12:31:15 +0800.
+Fri, 09 May 2008 04:05:07 +0800.
 
-It was downloaded from http://lxde.sourceforge.net
+It was downloaded from http://sourceforge.net/projects/lxde/
 
 Upstream Author: 
 
     Hong Jen Yee (PCMan)  <pcman.tw@gmail.com>
-    Ying-Chun Liu (PaulLiu) <grandpaul@gmail.com>
 
-Copyright Holder: 
+Copyright: 
 
-    Copyright (C) 2008 Hong Jen Yee (PCMan)
+    Copyright (C) Johannes Zellner <webmaster@nebulon.de>
+    Copyright (C) 翼varo Lopes <alvieboy@alvie.com>
+    Copyright (C) 2008 Hong Jen Yee (PCMan)  <pcman.tw@gmail.com>
 
 License:
 
@@ -26,12 +27,8 @@ License:
  
     You should have received a copy of the GNU General Public License
     along with this package; if not, write to the Free Software
-    Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  
-    02110-1301 USA.
+    Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301 USA
 
-On Debian systems, the complete text of the GNU General
-Public License can be found in `/usr/share/common-licenses/GPL'.
 
 The Debian packaging is (C) 2008, Andrew Lee <andrew@linux.org.tw> and
-is licensed under the GPL, see above.
-
+is licensed under the GPL, see `/usr/share/common-licenses/GPL'.
