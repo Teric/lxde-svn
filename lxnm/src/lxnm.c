@@ -21,6 +21,7 @@
 #include <sys/socket.h>
 #include <sys/un.h>
 #include <sys/ioctl.h>
+#include <sys/stat.h>
 #include <net/if.h>
 
 #include <stdio.h>
@@ -92,12 +93,6 @@ lxnm_isifname(const char *ifname)
 }
 
 static int
-CommandProcess(void *arg)
-{
-	return system((char *)arg);
-}
-
-static int
 ethernet_up(void *arg)
 {
 	char *p;
@@ -107,6 +102,7 @@ ethernet_up(void *arg)
 		setenv("LXNM_IFNAME", p, 1);
 		return system(lxnm->setting->eth_up);
 	}
+	return 0;
 }
 
 static int
@@ -119,6 +115,7 @@ ethernet_down(void *arg)
 		setenv("LXNM_IFNAME", p, 1);
 		return system(lxnm->setting->eth_down);
 	}
+	return 0;
 }
 
 static int
@@ -131,6 +128,7 @@ ethernet_repair(void *arg)
 		setenv("LXNM_IFNAME", p, 1);
 		return system(lxnm->setting->eth_repair);
 	}
+	return 0;
 }
 
 static int
@@ -143,6 +141,7 @@ wireless_up(void *arg)
 		setenv("LXNM_IFNAME", p, 1);
 		return system(lxnm->setting->wifi_up);
 	}
+	return 0;
 }
 
 static int
@@ -155,6 +154,7 @@ wireless_down(void *arg)
 		setenv("LXNM_IFNAME", p, 1);
 		return system(lxnm->setting->wifi_down);
 	}
+	return 0;
 }
 
 static int
@@ -167,6 +167,7 @@ wireless_repair(void *arg)
 		setenv("LXNM_IFNAME", p, 1);
 		return system(lxnm->setting->wifi_repair);
 	}
+	return 0;
 }
 
 static int
@@ -202,14 +203,15 @@ wireless_connect(void *arg)
 
 		return system(lxnm->setting->wifi_connect);
 	}
+	return 0;
 }
 
 static void
 lxnm_parse_command(GIOChannel *gio, const char *cmd)
 {
 	char *p, *cmdstr;
-	int i, command;
-    pthread_t actionThread;
+	int command;
+	pthread_t actionThread;
 
 	cmdstr = g_strdup(cmd);
 	/* Command */
@@ -218,28 +220,36 @@ lxnm_parse_command(GIOChannel *gio, const char *cmd)
 	switch(command) {
 		case LXNM_VERSION:
 		case LXNM_ETHERNET_UP:
-			pthread_create(&actionThread, NULL, ethernet_up, (void *)cmdstr+2);
+			pthread_create(&actionThread, NULL,
+					(void *) ethernet_up, (void *)cmdstr+2);
 			break;
 		case LXNM_ETHERNET_DOWN:
-			pthread_create(&actionThread, NULL, ethernet_down, (void *)cmdstr+2);
+			pthread_create(&actionThread, NULL,
+					(void *) ethernet_down, (void *)cmdstr+2);
 			break;
 		case LXNM_ETHERNET_REPAIR:
-			pthread_create(&actionThread, NULL, ethernet_repair, (void *)cmdstr+2);
+			pthread_create(&actionThread, NULL,
+					(void *) ethernet_repair, (void *)cmdstr+2);
 			break;
 		case LXNM_WIRELESS_UP:
-			pthread_create(&actionThread, NULL, wireless_up, (void *)cmdstr+2);
+			pthread_create(&actionThread, NULL,
+					(void *) wireless_up, (void *)cmdstr+2);
 			break;
 		case LXNM_WIRELESS_DOWN:
-			pthread_create(&actionThread, NULL, wireless_down, (void *)cmdstr+2);
+			pthread_create(&actionThread, NULL,
+					(void *) wireless_down, (void *)cmdstr+2);
 			break;
 		case LXNM_WIRELESS_REPAIR:
-			pthread_create(&actionThread, NULL, wireless_repair, (void *)cmdstr+2);
+			pthread_create(&actionThread, NULL,
+					(void *) wireless_repair, (void *)cmdstr+2);
 			break;
 		case LXNM_WIRELESS_CONNECT:
-			pthread_create(&actionThread, NULL, wireless_connect, (void *)cmdstr+2);
+			pthread_create(&actionThread, NULL,
+					(void *) wireless_connect, (void *)cmdstr+2);
 			break;
 		default:
 			printf("Unknown command");
+			break;
 	}
 
 	/* Args */
