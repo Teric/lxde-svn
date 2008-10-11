@@ -1,0 +1,66 @@
+# Chinese/Traditional translation of lxshortcut.
+# Copyright (C) 2008 THE lxshortcut'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the lxshortcut package.
+# Hong Jen Yee (PCMan) <pcman.tw@gmail.com>, 2008.
+#
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: lxshortcut 0.1\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2008-10-11 11:01+0800\n"
+"PO-Revision-Date: 2008-10-11 11:04+0800\n"
+"Last-Translator: Hong Jen Yee (PCMan) <pcman.tw@gmail.com>\n"
+"Language-Team: Chinese/Traditional <zh-l10n@linux.org.tw>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit"
+
+#: ../src/lxshortcut.c:34
+msgid "[FILE]"
+msgstr "[檔案]"
+
+#: ../data/lxshortcut.glade.h:1
+msgid "Advanced"
+msgstr "進階"
+
+#: ../data/lxshortcut.glade.h:2
+msgid "Application Shortcut"
+msgstr "應用程式捷徑"
+
+#: ../data/lxshortcut.glade.h:3
+msgid "Change _Icon"
+msgstr "更換圖示(_I)"
+
+#: ../data/lxshortcut.glade.h:4
+msgid "Command:"
+msgstr "指令："
+
+#: ../data/lxshortcut.glade.h:5
+msgid "General"
+msgstr "一般"
+
+#: ../data/lxshortcut.glade.h:6
+msgid "Name:"
+msgstr "名稱："
+
+#: ../data/lxshortcut.glade.h:7
+msgid "Runs in terminal emulator"
+msgstr "在終端機模擬器內執行"
+
+#: ../data/lxshortcut.glade.h:8
+msgid "Tooltip:"
+msgstr "工具提示："
+
+#: ../data/lxshortcut.glade.h:9
+msgid "_Browse..."
+msgstr "瀏覽...(B_)"
+
+#: ../data/lxshortcut.glade.h:10
+msgid "gtk-cancel"
+msgstr ""
+
+#: ../data/lxshortcut.glade.h:11
+msgid "gtk-ok"
+msgstr ""
+
