@@ -1,0 +1,65 @@
+# German translation of lxshortcut.
+# Copyright (C) 2008 THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the lxshortcut package.
+# Mario Blättermann <mbl103@t-online.de>, 2008.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2008-10-11 11:01+0800\n"
+"PO-Revision-Date: 2008-10-18 22:16+0200\n"
+"Last-Translator: Mario Blättermann <mbl103@t-online.de>\n"
+"Language-Team: German <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: ../src/lxshortcut.c:34
+msgid "[FILE]"
+msgstr "[DATEI]"
+
+#: ../data/lxshortcut.glade.h:1
+msgid "Advanced"
+msgstr "Erweitert"
+
+#: ../data/lxshortcut.glade.h:2
+msgid "Application Shortcut"
+msgstr ""
+
+#: ../data/lxshortcut.glade.h:3
+msgid "Change _Icon"
+msgstr "_Symbol ändern"
+
+#: ../data/lxshortcut.glade.h:4
+msgid "Command:"
+msgstr "Befehl:"
+
+#: ../data/lxshortcut.glade.h:5
+msgid "General"
+msgstr "Allgemein"
+
+#: ../data/lxshortcut.glade.h:6
+msgid "Name:"
+msgstr "Name:"
+
+#: ../data/lxshortcut.glade.h:7
+msgid "Runs in terminal emulator"
+msgstr "Im Terminal ausführen"
+
+#: ../data/lxshortcut.glade.h:8
+msgid "Tooltip:"
+msgstr "Minihilfe:"
+
+#: ../data/lxshortcut.glade.h:9
+msgid "_Browse..."
+msgstr "_Durchsuchen …"
+
+#: ../data/lxshortcut.glade.h:10
+msgid "gtk-cancel"
+msgstr "gtk-cancel"
+
+#: ../data/lxshortcut.glade.h:11
+msgid "gtk-ok"
+msgstr "gtk-ok"
