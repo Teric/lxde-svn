@@ -1,0 +1,69 @@
+# Finnish trasnlation for LXShortcut
+# Copyright (C) 2008
+# This file is distributed under the same license as the PACKAGE package.
+# Elias Julkunen <elias.julkunen@gmail.com>, 2008.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2008-11-09 13:07+0200\n"
+"PO-Revision-Date: 2008-11-09 13:09+0200\n"
+"Last-Translator: Elias Julkunen <elias.julkunen@gmail.com>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: ../src/lxshortcut.c:41
+msgid "input file"
+msgstr "syötetiedosto"
+
+#: ../src/lxshortcut.c:41
+msgid "file name or desktop id"
+msgstr "tiedoston nimi tai työpöydän tunnus"
+
+#: ../src/lxshortcut.c:42
+msgid "file name"
+msgstr "tiedoston nmi"
+
+#: ../data/lxshortcut.glade.h:1
+msgid "Advanced"
+msgstr "Lisäasetukset"
+
+#: ../data/lxshortcut.glade.h:2
+msgid "Application Shortcut"
+msgstr "Sovelluksen pikakuvake"
+
+#: ../data/lxshortcut.glade.h:3
+msgid "Change _Icon"
+msgstr "Vaihda _kuvaketta"
+
+#: ../data/lxshortcut.glade.h:4
+msgid "Command:"
+msgstr "Komento:"
+
+#: ../data/lxshortcut.glade.h:5
+msgid "General"
+msgstr "Yleiset"
+
+#: ../data/lxshortcut.glade.h:6
+msgid "Name:"
+msgstr "Nimi:"
+
+#: ../data/lxshortcut.glade.h:7
+msgid "Runs in terminal emulator"
+msgstr "Suorita pääteohjelmassa"
+
+#: ../data/lxshortcut.glade.h:8
+msgid "Tooltip:"
+msgstr "Työkluvihje:"
+
+#: ../data/lxshortcut.glade.h:9
+msgid "Use startup notification"
+msgstr "Käytä käynnistyksen huomautusta"
+
+#: ../data/lxshortcut.glade.h:10
+msgid "_Browse..."
+msgstr "_Selaa..."
+

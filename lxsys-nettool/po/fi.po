@@ -1,0 +1,56 @@
+# Finnish translation for LXSys Nettool
+# Copyright (C) 2008
+# This file is distributed under the same license as the PACKAGE package.
+# Elias Julkunen <elias.julkunen@gmail.com>, 2008.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2008-11-09 13:18+0200\n"
+"PO-Revision-Date: 2008-11-09 13:20+0200\n"
+"Last-Translator: Elias Julkunen <elias.julkunen@gmail.com>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#. generate title of dialog
+#: ../src/lxsys-nettool.c:65
+#, c-format
+msgid "%s Settings"
+msgstr "%s asetukset"
+
+#. create General page
+#: ../src/lxsys-nettool.c:85
+msgid "General"
+msgstr "Yleiset"
+
+#: ../src/lxsys-nettool.c:90
+msgid "IP Address:"
+msgstr "IP-osoite"
+
+#: ../src/lxsys-nettool.c:100
+msgid "Netmask:"
+msgstr "Verkon peitto:"
+
+#: ../src/lxsys-nettool.c:110
+msgid "Gateway:"
+msgstr "Yhdyskäytävä:"
+
+#: ../src/lxsys-nettool.c:120
+msgid "Name Server:"
+msgstr "Nimipalvelin:"
+
+#: ../src/lxsys-nettool.c:134
+msgid "_Apply"
+msgstr "_Hyväksy"
+
+#: ../src/lxsys-nettool.c:135
+msgid "_OK"
+msgstr "_OK"
+
+#: ../src/lxsys-nettool.c:136
+msgid "_Cancel"
+msgstr "_Peruuta"
+
