@@ -226,6 +226,7 @@ static gboolean on_viewport_expose( GtkWidget* w, GdkEventExpose* evt, gpointer 
 
     if( GTK_WIDGET_DRAWABLE(w) && evt->window == ((GtkViewport*)w)->bin_window )
     {
+      if (!pixmap) {
         cairo_t *cr;
         cairo_pattern_t* pat;
 
@@ -244,8 +245,7 @@ static gboolean on_viewport_expose( GtkWidget* w, GdkEventExpose* evt, gpointer 
         cairo_fill(cr);
         //cairo_pattern_destroy(pat);
         cairo_destroy(cr);
-
-/*
+      } else {
         GdkGC* gc = gdk_gc_new(evt->window);
 
         gdk_gc_set_tile( gc, pixmap );
@@ -255,7 +255,7 @@ static gboolean on_viewport_expose( GtkWidget* w, GdkEventExpose* evt, gpointer 
         gdk_draw_rectangle( evt->window, gc, TRUE, evt->area.x, evt->area.y, evt->area.width, evt->area.height );
 
         gdk_gc_unref( gc );
-*/
+      }
     }
 
     // call handler of tha parent GtkContainer class to propagate the event to children
@@ -531,7 +531,7 @@ static void create_notebook_pages()
 		GtkWidget* image;
 		GtkWidget* go_up_bar = gtk_hbox_new( FALSE, 2 );
 		GdkPixbuf* pixbuf=NULL;
-		GdkPixmap* pixmap;
+		GdkPixmap* pixmap=NULL;
 		GdkGC *pixmap_gc=NULL;
 		char* file;
         PageData* page_data;
@@ -580,11 +580,9 @@ static void create_notebook_pages()
 
         // set background
         gtk_widget_set_app_paintable( viewport, TRUE );
-/*
-        file = g_build_filename( BACKGROUND_DIR, groups[i].background, NULL );
+        file = g_build_filename( BACKGROUND_DIR, gmenu_tree_directory_get_menu_id(dir), NULL );
         pixbuf = gdk_pixbuf_new_from_file( file, NULL );
         g_free( file );
-*/
         if( pixbuf )
         {
             pixmap = gdk_pixmap_new( gdk_get_default_root_window(), gdk_pixbuf_get_width(pixbuf), gdk_pixbuf_get_height(pixbuf), -1 );
