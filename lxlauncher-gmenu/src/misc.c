@@ -73,7 +73,7 @@ GdkPixbuf* lxlauncher_load_icon( const char* name, int size, gboolean use_fallba
                     g_free( icon_name );
                 }
             }
-            else  /* no file extension, it could be an icon name in the icon theme */
+            if (!icon)  /* no file extension, it could be an icon name in the icon theme */
             {
                 icon = vfs_load_icon( theme, name, size );
             }
