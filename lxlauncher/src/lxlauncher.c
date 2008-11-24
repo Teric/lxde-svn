@@ -867,7 +867,7 @@ static void create_notebook_pages()
     // build pages for toplevel groups
 	for( l = app_dir_root->children; l; l = l->next )
 	{
-	    GtkWidget* *viewport;
+	    GtkWidget* viewport;
 		GtkAdjustment* adj;
 		GtkWidget* scroll = gtk_scrolled_window_new(NULL, NULL);
 		GtkWidget* page_vbox = gtk_vbox_new(FALSE, 0);
