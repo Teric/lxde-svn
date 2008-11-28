@@ -1,0 +1,7 @@
+The LXDE project is developed by LXDE team.
+http://lxde.org/
+Copyright (C) 2008 Hong Jen Yee (PCMan) <pcman.tw@gmail.com>
+
+The XSettings-related parts of lxde-settings-daemon use MIT licensed 
+source code from gnome-settings-daemon:
+Copyright (C) 2001 Owen Taylor, Matthias Clasen, Red Hat, Inc.
