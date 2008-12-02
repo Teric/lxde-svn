@@ -156,7 +156,6 @@
 	      <child>
 		<widget class="GtkVButtonBox" id="vbuttonbox1">
 		  <property name="border_width">12</property>
-		  <property name="visible">True</property>
 		  <property name="layout_style">GTK_BUTTONBOX_START</property>
 		  <property name="spacing">6</property>
 
@@ -233,11 +232,11 @@
 	  </child>
 
 	  <child>
-	    <widget class="GtkVBox" id="vbox1">
+	    <widget class="GtkVBox" id="adv_page">
 	      <property name="border_width">12</property>
 	      <property name="visible">True</property>
 	      <property name="homogeneous">False</property>
-	      <property name="spacing">0</property>
+	      <property name="spacing">6</property>
 
 	      <child>
 		<widget class="GtkHBox" id="hbox2">
@@ -271,14 +270,18 @@
 		  </child>
 
 		  <child>
-		    <widget class="GtkComboBoxEntry" id="wm">
+		    <widget class="GtkEntry" id="wm">
 		      <property name="visible">True</property>
-		      <property name="items">icewm
-metacity
-openbox</property>
-		      <property name="add_tearoffs">False</property>
+		      <property name="tooltip" translatable="yes">Command line used to launch window manager
+(The default window manager command for LXDE should be openbox-lxde)</property>
+		      <property name="can_focus">True</property>
+		      <property name="editable">True</property>
+		      <property name="visibility">True</property>
+		      <property name="max_length">0</property>
+		      <property name="text" translatable="yes"></property>
 		      <property name="has_frame">True</property>
-		      <property name="focus_on_click">True</property>
+		      <property name="invisible_char">●</property>
+		      <property name="activates_default">False</property>
 		    </widget>
 		    <packing>
 		      <property name="padding">0</property>
@@ -298,7 +301,7 @@ openbox</property>
 		<widget class="GtkHBox" id="hbox3">
 		  <property name="visible">True</property>
 		  <property name="homogeneous">False</property>
-		  <property name="spacing">6</property>
+		  <property name="spacing">12</property>
 
 		  <child>
 		    <widget class="GtkImage" id="image1">
@@ -320,7 +323,9 @@ openbox</property>
 		  <child>
 		    <widget class="GtkLabel" id="label5">
 		      <property name="visible">True</property>
-		      <property name="label" translatable="yes">Do &lt;b&gt;NOT&lt;/b&gt; touch this unless you know exactly what you are doing.</property>
+		      <property name="label" translatable="yes">&lt;b&gt;Warning:&lt;/b&gt; Do &lt;b&gt;NOT&lt;/b&gt; touch this unless you know exactly what you are doing.
+
+&lt;b&gt;NOTE:&lt;/b&gt; This setting will take effect on next login.</property>
 		      <property name="use_underline">False</property>
 		      <property name="use_markup">True</property>
 		      <property name="justify">GTK_JUSTIFY_LEFT</property>

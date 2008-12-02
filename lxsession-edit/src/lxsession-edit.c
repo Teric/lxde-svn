@@ -18,6 +18,7 @@
  *      Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
  *      MA 02110-1301, USA.
  */
+
 #ifdef HAVE_CONFIG_H
 #include <config.h>
 #endif
@@ -33,7 +34,16 @@ enum {
     COL_NAME,
     COL_COMMENT,
     COL_DESKTOP_ID,
+    COL_SRC_FILE,
+    COL_FLAGS,
     N_COLS
+};
+
+enum {
+    NONE = 0,
+    NOT_SHOW_IN = 1 << 0,
+    ONLY_SHOW_IN = 1 << 1,
+    ORIGINALLY_ENABLED = 1 << 15
 };
 
 static char* session_name = "LXDE";
@@ -41,27 +51,33 @@ static GtkListStore* autostart_list = NULL;
 static const char grp[] = "Desktop Entry";
 
 
-static gboolean is_desktop_file_enabled(GKeyFile* kf)
+static gboolean is_desktop_file_enabled(GKeyFile* kf, int *flags)
 {
     char** not_show_in;
     char** only_show_in;
     gsize n, i;
 
+    *flags = 0;
+
     not_show_in = g_key_file_get_string_list(kf, grp, "NotShowIn", &n, NULL);
     if( not_show_in )
     {
+        *flags |= NOT_SHOW_IN;
         for( i = 0; i < n; ++i )
+        {
             if(strcmp(not_show_in[i], session_name) == 0)
             {
                 g_strfreev(not_show_in);
                 return FALSE;
             }
+        }
         g_strfreev(not_show_in);
     }
 
     only_show_in = g_key_file_get_string_list(kf, grp, "OnlyShowIn", &n, NULL);
     if( only_show_in )
     {
+        *flags |= ONLY_SHOW_IN;
         for( i = 0; i < n; ++i )
             if(strcmp(only_show_in[i], session_name) == 0)
                 break;
@@ -76,9 +92,9 @@ static gboolean is_desktop_file_enabled(GKeyFile* kf)
 static gboolean is_desktop_file_valid(GKeyFile* kf)
 {
     char* tmp;
-    /* FIXME: is this correct? */
-    if( g_key_file_get_boolean(kf, grp, "NoDisplay", NULL) )
+    if( g_key_file_get_boolean(kf, grp, "Hidden", NULL) )
         return FALSE;
+
     if( tmp = g_key_file_get_string(kf, grp, "Type", NULL) )
     {
         if( strcmp(tmp, "Application") )
@@ -88,6 +104,7 @@ static gboolean is_desktop_file_valid(GKeyFile* kf)
         }
         g_free(tmp);
     }
+
     if( tmp = g_key_file_get_string(kf, grp, "TryExec", NULL) )
     {
         char* prg = g_find_program_in_path(tmp);
@@ -128,7 +145,10 @@ static void add_autostart_file(char* desktop_id, char* file, GKeyFile* kf)
             char* name = g_key_file_get_locale_string(kf, grp, "Name", NULL, NULL);
             char* icon = g_key_file_get_locale_string(kf, grp, "Icon", NULL, NULL);
             char* comment = g_key_file_get_locale_string(kf, grp, "Comment", NULL, NULL);
-            gboolean enabled = is_desktop_file_enabled(kf);
+            int flags;
+            gboolean enabled = is_desktop_file_enabled(kf, &flags);
+            if( enabled )
+                flags |= ORIGINALLY_ENABLED;
             gtk_list_store_append(autostart_list, &it);
             gtk_list_store_set( autostart_list, &it,
                                 COL_ENABLED, enabled,
@@ -136,6 +156,8 @@ static void add_autostart_file(char* desktop_id, char* file, GKeyFile* kf)
                                 /* COL_ICON, pix, */
                                 COL_COMMENT, comment,
                                 COL_DESKTOP_ID, desktop_id,
+                                COL_SRC_FILE, file,
+                                COL_FLAGS, flags,
                                 -1 );
             g_free(name);
             g_free(icon);
@@ -166,9 +188,159 @@ static void load_autostart()
     g_hash_table_destroy( hash );
 }
 
+/* FIXME:
+ * If the system-wide desktop file can meet our needs,
+ * remove the user-specific one instead of changing its key values. */
+static void update_enable_state(GKeyFile* kf, gboolean enabled, int flags)
+{
+    if( flags & NOT_SHOW_IN ) /* the desktop file contains NotShowIn key */
+    {
+        gsize n, i;
+        char** list = g_key_file_get_string_list(kf, grp, "NotShowIn", &n, NULL);
+        if( enabled ) /* remove our DE from NotShowIn */
+        {
+            for( i = 0; i < n; ++i )
+            {
+                if( strcmp(list[i], session_name) == 0 )
+                {
+                    g_free(list[i]);
+                    memcpy( list + i, list + i + 1, (n-i) * sizeof(char*) );
+                    --n;
+                    break;
+                }
+            }
+        }
+        else /* add our DE to NotShowIn */
+        {
+            ++n;
+            if( list )
+                list = g_realloc( list, sizeof(char*) * (n + 1) );
+            else
+                list = g_new( char*, n + 1 );
+            list[n-1] = g_strdup(session_name);
+            list[n] = NULL;
+        }
+        if( n > 0 )
+            g_key_file_set_string_list( kf, grp, "NotShowIn", list, n );
+        else
+            g_key_file_remove_key(kf, grp, "NotShowIn", NULL);
+        g_strfreev(list);
+    }
+    else if( flags & ONLY_SHOW_IN )
+    {
+        gsize n, i;
+        char** list = g_key_file_get_string_list(kf, grp, "OnlyShowIn", &n, NULL);
+        if( enabled ) /* add our DE to OnlyShowIn */
+        {
+            ++n;
+            if( list )
+                list = g_realloc( list, sizeof(char*) * (n + 1) );
+            else
+                list = g_new( char*, n + 1 );
+            list[n-1] = g_strdup(session_name);
+            list[n] = NULL;
+        }
+        else /* remove our DE to OnlyShowIn */
+        {
+            for( i = 0; i < n; ++i )
+            {
+                if( strcmp(list[i], session_name) == 0 )
+                {
+                    g_free(list[i]);
+                    memcpy( list + i, list + i + 1, (n-i) * sizeof(char*) );
+                    --n;
+                    break;
+                }
+            }
+        }
+        if( n > 0 )
+            g_key_file_set_string_list(kf, grp, "OnlyShowIn", list, n );
+        else
+            g_key_file_remove_key(kf, grp, "OnlyShowIn", NULL);
+        g_strfreev(list);
+    }
+    else
+    {
+        if( !enabled )
+        {
+            char** list[2];
+            list[0] = session_name;
+            list[1] = NULL;
+            g_key_file_set_string_list( kf, grp, "NotShowIn", list, 1);
+        }
+        else
+        {
+            /* nothing to do */
+        }
+    }
+}
+
 static void save_autostart()
 {
+    GtkTreeIter it;
+    GKeyFile* kf;
+    char* dirname;
+    if( ! gtk_tree_model_get_iter_first(autostart_list, &it) )
+        return;
 
+    /* create user autostart dir */
+    dirname = g_build_filename(g_get_user_config_dir(), "autostart", NULL);
+    g_mkdir_with_parents(dirname, 0700);
+    g_free(dirname);
+
+    /* update desktop files in autostart dir */
+    kf = g_key_file_new();
+    do
+    {
+        int flags;
+        gboolean enabled;
+        gtk_tree_model_get( autostart_list, &it,
+                            COL_ENABLED, &enabled,
+                            COL_FLAGS, &flags, -1);
+
+        /* enabled state is changed */
+        if( enabled != !!(flags & ORIGINALLY_ENABLED) )
+        {
+            char* desktop_id, *src_file;
+            gtk_tree_model_get( autostart_list, &it,
+                                COL_DESKTOP_ID, &desktop_id,
+                                COL_SRC_FILE, &src_file,
+                                -1);
+
+            /* load the source desktop file */
+            if( g_key_file_load_from_file( kf, src_file, G_KEY_FILE_KEEP_TRANSLATIONS, NULL) )
+            {
+                char* file, *data;
+                gsize len;
+                /* update enabled state */
+                update_enable_state(kf, enabled, flags);
+                data = g_key_file_to_data(kf, &len, NULL);
+                file = g_build_filename(  g_get_user_config_dir(), "autostart", desktop_id, NULL );
+                /* save it to user-specific autostart dir */
+                g_debug("src:%s, save to: %s", src_file, file);
+                g_file_set_contents(file, data, len, NULL);
+                g_free(file);
+                g_free(data);
+            }
+            g_free(desktop_id);
+            g_free(src_file);
+        }
+    }while( gtk_tree_model_iter_next(autostart_list, &it) );
+    g_key_file_free(kf);
+}
+
+static void on_enable_toggled(GtkCellRendererToggle* render,
+                              char* tp_str, gpointer user_data)
+{
+    GtkTreePath* tp = gtk_tree_path_new_from_string(tp_str);
+    GtkTreeIter it;
+    if( gtk_tree_model_get_iter(autostart_list, &it, tp) )
+    {
+        gboolean enabled;
+        gtk_tree_model_get(autostart_list, &it, COL_ENABLED, &enabled, -1 );
+        gtk_list_store_set(autostart_list, &it, COL_ENABLED, !enabled, -1 );
+    }
+    gtk_tree_path_free(tp);
 }
 
 static void init_list_view( GtkTreeView* view )
@@ -180,11 +352,14 @@ static void init_list_view( GtkTreeView* view )
                                         GDK_TYPE_PIXBUF,
                                         G_TYPE_STRING,
                                         G_TYPE_STRING,
-                                        G_TYPE_STRING );
+                                        G_TYPE_STRING,
+                                        G_TYPE_STRING,
+                                        G_TYPE_INT );
 
     render = gtk_cell_renderer_toggle_new();
     col = gtk_tree_view_column_new_with_attributes(_("Enabled"), render, "active", COL_ENABLED, NULL );
     gtk_tree_view_append_column(view, col);
+    g_signal_connect(render, "toggled", G_CALLBACK(on_enable_toggled), NULL);
 
     render = gtk_cell_renderer_pixbuf_new();
     col = gtk_tree_view_column_new_with_attributes(_("Application"), render, "pixbuf", COL_ICON, NULL );
@@ -202,9 +377,10 @@ static void init_list_view( GtkTreeView* view )
 int main(int argc, char** argv)
 {
     GtkBuilder *builder;
-    GtkWidget *dlg, *autostarts, *wm;
+    GtkWidget *dlg, *autostarts, *wm, *adv_page;
     GKeyFile* kf;
-    char* cfg;
+    char *cfg, *wm_cmd = NULL;
+    gboolean loaded;
 
 #ifdef ENABLE_NLS
     bindtextdomain ( GETTEXT_PACKAGE, PACKAGE_LOCALE_DIR );
@@ -222,6 +398,7 @@ int main(int argc, char** argv)
 
     dlg = gtk_builder_get_object( builder, "dlg" );
     autostarts = gtk_builder_get_object( builder, "autostarts" );
+    adv_page = gtk_builder_get_object( builder, "adv_page" );
     wm = gtk_builder_get_object( builder, "wm" );
     g_object_unref(builder);
 
@@ -232,20 +409,72 @@ int main(int argc, char** argv)
     load_autostart();
     gtk_tree_view_set_model( autostarts, autostart_list );
 
-#if 0
-    /* wm */
-    kf = g_key_file_new();
-    if( g_key_file_load_from_file(kf, file, 0, NULL )
+    /* if we are running under LXSession */
+    if( g_getenv("_LXSESSION_PID") )
     {
+        /* wm settings (only show this when we are under lxsession) */
+        kf = g_key_file_new();
+        cfg = g_build_filename( g_get_user_config_dir(), "lxsession", session_name, "config", NULL );
+        loaded = g_key_file_load_from_file(kf, cfg, 0, NULL);
+        if( !loaded )
+        {
+            const char* const *dirs = g_get_system_config_dirs();
+            const char* const *dir;
+            g_free(cfg);
+            for( dir = dirs; *dir; ++dir )
+            {
+                cfg = g_build_filename( *dir, "lxsession", session_name, "config", NULL );
+                loaded = g_key_file_load_from_file(kf, cfg, 0, NULL);
+                g_free( cfg );
+                if( loaded )
+                    break;
+            }
+        }
+        if( loaded )
+            wm_cmd = g_key_file_get_string(kf, "Session", "window_manager", NULL);
 
+        if( ! wm_cmd || !*wm_cmd )
+        {
+            g_free(wm_cmd);
+            /* If it's our favorite, LXDE */
+            if( strcmp(g_getenv("DESKTOP_SESSION"), "LXDE") == 0 )
+                wm_cmd = g_strdup("openbox-lxde");
+            else
+                wm_cmd = g_strdup("openbox");
+        }
+        gtk_entry_set_text(wm, wm_cmd);
     }
-    g_key_file_free(kf);
-#endif
+    else
+    {
+        gtk_widget_destroy(adv_page);
+        wm = adv_page = NULL;
+        wm_cmd = NULL;
+    }
 
     if( gtk_dialog_run(dlg) == GTK_RESPONSE_OK )
     {
         save_autostart();
+
+        if( wm ) /* if wm settin is available. */
+        {
+            char* dir;
+            dir = g_build_filename( g_get_user_config_dir(), "lxsession", session_name, NULL );
+            g_mkdir_with_parents( dir, 0700 );
+            cfg = g_build_filename( dir, "config", NULL );
+            g_free( dir );
+            wm_cmd = gtk_entry_get_text(wm);
+            if( wm_cmd )
+            {
+                char* data;
+                gsize len;
+                g_key_file_set_string( kf, "Session", "window_manager", wm_cmd );
+                data = g_key_file_to_data(kf, &len, NULL);
+                g_file_set_contents(cfg, data, len, NULL);
+                g_free( wm_cmd );
+            }
+        }
     }
+    g_key_file_free(kf);
 
     gtk_widget_destroy(dlg);
     return 0;

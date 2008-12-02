@@ -3,8 +3,9 @@
 name=lxsession-edit
 base_path=/home/pcman/Projects/lxde/trunk/lxsession-edit/
 make_in_base_path=false
+description=
+run_cmd=
 
 [files]
 current_page=0
-FILE_NAME_0=6193;C;0;16;0;1;0;/home/pcman/Projects/lxde/trunk/lxsession-edit/src/lxsession-edit.c;
-FILE_NAME_1=9978;C;0;16;0;1;0;/home/pcman/Projects/lxde/trunk/lxsession-lite/lxsession/autostart.c;
+FILE_NAME_0=15223;C;0;16;0;1;0;/home/pcman/Projects/lxde/trunk/lxsession-edit/src/lxsession-edit.c;
