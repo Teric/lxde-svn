@@ -1,18 +1,18 @@
-# SOME DESCRIPTIVE TITLE.
-# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
-# This file is distributed under the same license as the PACKAGE package.
-# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+# Finnish translation for LXSession-edit
+# Copyright (C) 2008
+# This file is distributed under the same license as the LXSession-edit package.
+# Elias Julkunen <elias.julkunen@gmail.com>, 2008.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-12-02 19:52+0200\n"
-"PO-Revision-Date: 2008-12-02 20:42+0200\n"
+"POT-Creation-Date: 2008-12-02 20:50+0200\n"
+"PO-Revision-Date: 2008-12-02 20:50+0200\n"
 "Last-Translator: Elias Julkunen <elias.julkunen@gmail.com>\n"
-"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language-Team: Finnish <laatu@lokalisointi.org>\n"
 "MIME-Version: 1.0\n"
-"Content-Type: text/plain; charset=utf-8\n"
+"Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
 #: ../src/lxsession-edit.c:360
@@ -42,7 +42,7 @@ msgid "Advanced Options"
 msgstr "Lisäasetukset"
 
 #: ../data/lxsession-edit.glade.h:5
-msgid "Applications automaticlly started after entering desktop:"
+msgid "Applications automatically started after entering desktop:"
 msgstr "Automaattisesti käynnistettävät  ohjelmat työpöydälle pääsyn jälkeen:"
 
 #: ../data/lxsession-edit.glade.h:6
