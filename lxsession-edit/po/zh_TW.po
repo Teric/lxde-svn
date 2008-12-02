@@ -1,0 +1,55 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: lxsession-edit 0.1\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2008-12-02 04:46+0800\n"
+"PO-Revision-Date: 2008-12-02 04:47+0800\n"
+"Last-Translator: \n"
+"Language-Team: zh_TW <pcman.tw@gmail.com>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Poedit-Language: Chinese\n"
+"X-Poedit-Country: TAIWAN\n"
+
+#: src/lxsession-edit.c:185
+msgid "Enabled"
+msgstr "啟用"
+
+#: src/lxsession-edit.c:189
+msgid "Application"
+msgstr "應用程式"
+
+#: src/lxsession-edit.c:197
+msgid "Comment"
+msgstr "說明"
+
+#: data/lxsession-edit.glade:9
+msgid "Desktop Session Settings"
+msgstr "桌面工作階段設定"
+
+#: data/lxsession-edit.glade:97
+msgid "Applications automaticlly started after entering desktop:"
+msgstr "在進入桌面後自動啟動的應用程式："
+
+#: data/lxsession-edit.glade:215
+msgid "Automatically Started Applications"
+msgstr "自動啟動程式"
+
+#: data/lxsession-edit.glade:251
+msgid "Window Manager: "
+msgstr "視窗管理程式："
+
+#: data/lxsession-edit.glade:323
+msgid "Do <b>NOT</b> touch this unless you know exactly what you are doing."
+msgstr "除非你真的知道自己在做什麼，否則<b>不要</b>碰這個選項。"
+
+#: data/lxsession-edit.glade:361
+msgid "Advanced Options"
+msgstr "進階選項"
+
