@@ -35,6 +35,14 @@ static GtkWidget *dlg, *icon, *change_icon, *name, *cmd, *browse, *tooltip, *ter
 static gboolean no_display = FALSE;
 static char* ifile = NULL;
 static char* ofile = NULL;
+
+static char* icon_name_val = NULL;
+
+static GtkWidget* themed_icon_view = NULL;
+static GtkTreeModel* themed_icon_model = NULL;
+static GThreadPool* thread_pool = NULL;
+static GAsyncQueue* icon_queue = NULL;
+
 static GOptionEntry opt_entries[] =
 {
     {"no-display", 'n', 0, G_OPTION_ARG_NONE, &no_display, NULL, NULL},
@@ -43,14 +51,198 @@ static GOptionEntry opt_entries[] =
     { NULL }
 };
 
-static void on_change_icon( GtkButton* btn, GtkImage* icon )
+static GdkPixbuf* vfs_load_icon( GtkIconTheme* theme, const char* icon_name, int size );
+
+static void on_update_preview( GtkFileChooser* chooser, GtkWidget* img )
+{
+    char* file = gtk_file_chooser_get_preview_filename( chooser );
+    if( file )
+    {
+        GdkPixbuf* pix = gdk_pixbuf_new_from_file_at_scale( file, 48, 48, TRUE, NULL );
+        if( pix )
+        {
+            gtk_image_set_from_pixbuf( img, pix );
+            g_object_unref( pix );
+            return;
+        }
+    }
+    gtk_image_clear( img );
+}
+
+static void on_switch_page( GtkNotebook* notebook, GtkWidget* page, int n, gpointer user_data )
 {
 
 }
 
+static void on_toggle_theme( GtkToggleButton* btn, GtkNotebook* notebook )
+{
+    gtk_notebook_set_current_page( notebook, 0 );
+}
+
+static void on_toggle_files( GtkToggleButton* btn, GtkNotebook* notebook )
+{
+    gtk_notebook_set_current_page( notebook, 1 );
+}
+
+static gpointer load_themed_icon( GtkIconTheme* theme )
+{
+    GdkPixbuf* pix;
+    char* icon_name = g_async_queue_pop( icon_queue );
+    gdk_threads_enter();
+    pix = vfs_load_icon( theme, icon_name, 48 );
+    gdk_threads_leave();
+    g_thread_yield();
+    if( pix )
+    {
+        GtkTreeIter it;
+        gdk_threads_enter();
+        gtk_list_store_append( themed_icon_model, &it );
+        gtk_list_store_set( themed_icon_model, &it, 0, pix, 1, icon_name, -1 );
+        g_object_unref( pix );
+        gdk_threads_leave();
+    }
+    g_thread_yield();
+    if( g_async_queue_length(icon_queue) == 0 )
+    {
+        gdk_threads_enter();
+        if( gtk_icon_view_get_model(themed_icon_view) == NULL )
+        {
+            gtk_icon_view_set_model(themed_icon_view, themed_icon_model);
+            if( GTK_WIDGET_REALIZED(themed_icon_view) )
+                gdk_window_set_cursor(themed_icon_view->window, NULL);
+        }
+        gdk_threads_leave();
+    }
+    /* g_debug("load: %s", icon_name); */
+    g_free(icon_name);
+    return NULL;
+}
+
+static void on_change_icon( GtkButton* btn, GtkImage* icon )
+{
+    GtkBuilder* builder;
+    GtkWidget *chooser_dlg, *chooser, *preview, *icons, *notebook;
+    GtkFileFilter* filter;
+    GtkIconTheme* theme;
+    GList *contexts, *l;
+
+    builder = gtk_builder_new();
+    gtk_builder_add_from_file( builder, PACKAGE_DATA_DIR "/choose-icon.ui", NULL );
+    chooser_dlg = gtk_builder_get_object( builder, "dlg" );
+    chooser = gtk_builder_get_object( builder, "chooser" );
+    themed_icon_view = icons = gtk_builder_get_object( builder, "icons" );
+    notebook = gtk_builder_get_object( builder, "notebook" );
+    g_signal_connect( gtk_builder_get_object(builder,"theme"), "toggled", G_CALLBACK(on_toggle_theme), notebook );
+    g_signal_connect( gtk_builder_get_object(builder,"files"), "toggled", G_CALLBACK(on_toggle_files), notebook );
+
+    gtk_window_set_default_size( chooser_dlg, 600, 440 );
+    gtk_window_set_transient_for( chooser_dlg, dlg );
+
+    preview = gtk_image_new();
+    gtk_widget_show( preview );
+    gtk_file_chooser_set_preview_widget( chooser, preview );
+    g_signal_connect( chooser, "update-preview", G_CALLBACK(on_update_preview), preview );
+
+    filter = gtk_file_filter_new();
+    gtk_file_filter_set_name( filter, _("Image files") );
+    gtk_file_filter_add_pixbuf_formats( filter );
+    gtk_file_chooser_add_filter( chooser, filter );
+
+    gtk_widget_show(chooser_dlg);
+    while (gtk_events_pending ())
+        gtk_main_iteration();
+
+    gdk_window_set_cursor(themed_icon_view->window, gdk_cursor_new(GDK_WATCH));
+
+    /* load themed icons */
+    thread_pool = g_thread_pool_new( load_themed_icon, builder, 1, TRUE, NULL );
+    g_thread_pool_set_max_threads(thread_pool, 1, NULL);
+    icon_queue = g_async_queue_new();
+
+    themed_icon_model = gtk_list_store_new( 2, GDK_TYPE_PIXBUF, G_TYPE_STRING );
+    theme = gtk_icon_theme_get_default();
+
+    gtk_icon_view_set_pixbuf_column( icons, 0 );
+    gtk_icon_view_set_item_width(icons, 80);
+    gtk_icon_view_set_text_column( icons, 1 );
+
+    /* GList* contexts = gtk_icon_theme_list_contexts( theme ); */
+    contexts = g_list_alloc();
+    /* FIXME: we should enable more contexts */
+    /* http://standards.freedesktop.org/icon-naming-spec/icon-naming-spec-latest.html#context */
+    contexts->data = g_strdup("Applications");
+    for( l = contexts; l; l = l->next )
+    {
+        /* g_debug(l->data); */
+        GList* icon_names = gtk_icon_theme_list_icons( theme, (char*)l->data );
+        GList* icon_name;
+        for( icon_name = icon_names; icon_name; icon_name = icon_name->next )
+        {
+            g_async_queue_push( icon_queue, icon_name->data );
+            g_thread_pool_push( thread_pool, theme, NULL );
+        }
+        g_list_free( icon_names );
+        g_free( l->data );
+    }
+    g_list_free( contexts );
+
+    if( gtk_dialog_run( chooser_dlg ) == GTK_RESPONSE_OK )
+    {
+        char* icon_name = NULL;
+        GdkPixbuf* pix = NULL;
+        if( gtk_notebook_get_current_page(notebook) == 0 )
+        {
+            GList* sels = gtk_icon_view_get_selected_items(icons);
+            GtkTreePath* tp = (GtkTreePath*)sels->data;
+            GtkTreeIter it;
+            if( gtk_tree_model_get_iter(themed_icon_model, &it, tp) )
+            {
+                gtk_tree_model_get(themed_icon_model, &it, 1, &icon_name, -1);
+                pix = vfs_load_icon(gtk_icon_theme_get_default(), icon_name, 48);
+            }
+            g_list_foreach(sels, (GFunc)gtk_tree_path_free, NULL);
+            g_list_free(sels);
+        }
+        else
+        {
+            icon_name = gtk_file_chooser_get_filename( chooser );
+            pix = gdk_pixbuf_new_from_file_at_scale(icon_name, 32, 32, TRUE, NULL);
+        }
+        gtk_image_set_from_pixbuf(icon, pix);
+        g_object_unref(pix);
+        g_free(icon_name_val);
+        icon_name_val = icon_name;
+    }
+    g_thread_pool_free( thread_pool, TRUE, FALSE );
+    gtk_widget_destroy( chooser_dlg );
+}
+
+static gboolean exe_filter( const GtkFileFilterInfo* inf, gpointer user_data )
+{
+    return g_file_test( inf->filename, G_FILE_TEST_IS_EXECUTABLE );
+}
+
 static void on_browse_cmd( GtkButton* btn, gpointer user_data )
 {
+    GtkWidget* chooser;
+    GtkFileFilter* filter;
+    chooser = gtk_file_chooser_dialog_new( _("Choose an executable file"),
+                                        NULL, GTK_FILE_CHOOSER_ACTION_OPEN,
+                                        GTK_STOCK_CANCEL, GTK_RESPONSE_CANCEL,
+                                        GTK_STOCK_OPEN, GTK_RESPONSE_OK, NULL );
+    gtk_file_chooser_set_current_folder( chooser, "/usr/bin" );
+    filter = gtk_file_filter_new();
+    gtk_file_filter_set_name( filter, _("Executable files") );
+    gtk_file_filter_add_custom( filter, GTK_FILE_FILTER_FILENAME, exe_filter, NULL, NULL );
+    gtk_file_chooser_add_filter( chooser, filter );
 
+    if( gtk_dialog_run( chooser ) == GTK_RESPONSE_OK )
+    {
+        char* file = gtk_file_chooser_get_filename( chooser );
+        gtk_entry_set_text( cmd, file );
+        g_free( file );
+    }
+    gtk_widget_destroy( chooser );
 }
 
 static GdkPixbuf* load_icon_file( const char* file_name, int size )
@@ -70,7 +262,7 @@ static GdkPixbuf* load_icon_file( const char* file_name, int size )
     return icon;
 }
 
-static GdkPixbuf* vfs_load_icon( GtkIconTheme* theme, const char* icon_name, int size )
+GdkPixbuf* vfs_load_icon( GtkIconTheme* theme, const char* icon_name, int size )
 {
     GdkPixbuf* icon = NULL;
     const char* file;
@@ -179,6 +371,10 @@ int main(int argc, char** argv)
     textdomain ( GETTEXT_PACKAGE );
 #endif
 
+    /* init threading support */
+    g_thread_init(NULL);
+    gdk_threads_init();
+
     /* initialize GTK+ and parse the command line arguments */
     if( G_UNLIKELY( ! gtk_init_with_args( &argc, &argv, "", opt_entries, GETTEXT_PACKAGE, &err ) ) )
     {
@@ -220,6 +416,9 @@ int main(int argc, char** argv)
         if( strchr( ifile, '/' ) )  /* if this is a file path */
         {
             g_key_file_load_from_file( kf, ifile, G_KEY_FILE_KEEP_COMMENTS|G_KEY_FILE_KEEP_TRANSLATIONS, NULL );
+
+            if( ! ofile ) /* store to the same file if not otherwise specified. */
+                ofile = g_strdup(ifile);
         }
         else /* otherwise treat it as desktop id */
         {
@@ -232,11 +431,10 @@ int main(int argc, char** argv)
         }
 
         /* icon */
-        str = g_key_file_get_string( kf, GRP_NAME, "Icon", NULL );
+        icon_name_val = str = g_key_file_get_string( kf, GRP_NAME, "Icon", NULL );
         pix = load_icon( str, 48, TRUE );
         gtk_image_set_from_pixbuf( icon, pix );
         g_object_unref( pix );
-        g_free( str );
 
         /* name */
         str = g_key_file_get_locale_string( kf, GRP_NAME, "Name", NULL, NULL );
@@ -308,6 +506,9 @@ int main(int argc, char** argv)
         if( lang )
             g_key_file_set_locale_string( kf, GRP_NAME, "Name", lang, gtk_entry_get_text( name ) );
 
+        g_key_file_set_string( kf, GRP_NAME, "Icon", icon_name_val );
+        g_free(icon_name_val);
+
         g_key_file_set_string( kf, GRP_NAME, "Exec", gtk_entry_get_text( cmd ) );
 
         if( lang )
@@ -335,6 +536,7 @@ int main(int argc, char** argv)
             {
                 g_error_free( err );
             }
+            g_free(str);
         }
     }
 
@@ -342,5 +544,5 @@ int main(int argc, char** argv)
 
     g_key_file_free( kf );
 
-	return 0;
+    return 0;
 }

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-11-09 13:07+0200\n"
+"POT-Creation-Date: 2008-12-06 06:14+0800\n"
 "PO-Revision-Date: 2008-11-09 13:09+0200\n"
 "Last-Translator: Elias Julkunen <elias.julkunen@gmail.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -15,55 +15,78 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: ../src/lxshortcut.c:41
+#: src/lxshortcut.c:49
 msgid "input file"
 msgstr "syötetiedosto"
 
-#: ../src/lxshortcut.c:41
+#: src/lxshortcut.c:49
 msgid "file name or desktop id"
 msgstr "tiedoston nimi tai työpöydän tunnus"
 
-#: ../src/lxshortcut.c:42
+#: src/lxshortcut.c:50
 msgid "file name"
 msgstr "tiedoston nmi"
 
-#: ../data/lxshortcut.glade.h:1
-msgid "Advanced"
-msgstr "Lisäasetukset"
+#: src/lxshortcut.c:147 data/choose-icon.glade:114
+msgid "Image files"
+msgstr ""
 
-#: ../data/lxshortcut.glade.h:2
+#: src/lxshortcut.c:229
+msgid "Choose an executable file"
+msgstr ""
+
+#: src/lxshortcut.c:235
+msgid "Executable files"
+msgstr ""
+
+#: data/lxshortcut.glade:5
 msgid "Application Shortcut"
 msgstr "Sovelluksen pikakuvake"
 
-#: ../data/lxshortcut.glade.h:3
+#: data/lxshortcut.glade:42
 msgid "Change _Icon"
 msgstr "Vaihda _kuvaketta"
 
-#: ../data/lxshortcut.glade.h:4
-msgid "Command:"
-msgstr "Komento:"
-
-#: ../data/lxshortcut.glade.h:5
-msgid "General"
-msgstr "Yleiset"
-
-#: ../data/lxshortcut.glade.h:6
-msgid "Name:"
-msgstr "Nimi:"
-
-#: ../data/lxshortcut.glade.h:7
-msgid "Runs in terminal emulator"
-msgstr "Suorita pääteohjelmassa"
-
-#: ../data/lxshortcut.glade.h:8
+#: data/lxshortcut.glade:79
 msgid "Tooltip:"
 msgstr "Työkluvihje:"
 
-#: ../data/lxshortcut.glade.h:9
-msgid "Use startup notification"
-msgstr "Käytä käynnistyksen huomautusta"
+#: data/lxshortcut.glade:92
+msgid "Runs in terminal emulator"
+msgstr "Suorita pääteohjelmassa"
 
-#: ../data/lxshortcut.glade.h:10
+#: data/lxshortcut.glade:107
+msgid "Name:"
+msgstr "Nimi:"
+
+#: data/lxshortcut.glade:130
+msgid "Command:"
+msgstr "Komento:"
+
+#: data/lxshortcut.glade:155
 msgid "_Browse..."
 msgstr "_Selaa..."
 
+#: data/lxshortcut.glade:181
+msgid "General"
+msgstr "Yleiset"
+
+#: data/lxshortcut.glade:205
+msgid "Use startup notification"
+msgstr "Käytä käynnistyksen huomautusta"
+
+#: data/lxshortcut.glade:223
+msgid "Advanced"
+msgstr "Lisäasetukset"
+
+#: data/choose-icon.glade:8
+msgid "Choose An Icon..."
+msgstr ""
+
+#: data/choose-icon.glade:95
+msgid "System icon theme"
+msgstr ""
+
+#: data/choose-icon.glade:137
+msgid "<b>Choose Icon From:</b>"
+msgstr ""
