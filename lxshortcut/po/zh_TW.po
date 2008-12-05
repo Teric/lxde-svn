@@ -28,8 +28,7 @@ msgstr "檔名或 desktop id"
 msgid "file name"
 msgstr "檔名"
 
-#: src/lxshortcut.c:147
-#: data/choose-icon.glade:114
+#: src/lxshortcut.c:147 data/choose-icon.glade:114
 msgid "Image files"
 msgstr "影像檔"
 
@@ -95,4 +94,3 @@ msgstr "<b>選擇圖示從：</b>"
 
 #~ msgid "[FILE]"
 #~ msgstr "[檔案]"
-
