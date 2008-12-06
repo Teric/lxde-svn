@@ -16,7 +16,6 @@ pkg_modules="glib-2.0 >= 2.6.0 \
              gtk+-2.0 >= 2.6.0 \
              gthread-2.0 \
              lxpanel \
-             libmenu-cache \
              alsa"
 
 PKG_CHECK_MODULES(PACKAGE, [$pkg_modules])
