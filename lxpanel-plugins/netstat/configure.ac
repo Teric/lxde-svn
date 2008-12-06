@@ -1,5 +1,5 @@
 AC_PREREQ(2.57)
-AC_INIT(lxpanel-volumealsa, 0.1)
+AC_INIT(lxpanel-netstat, 0.1)
 AM_CONFIG_HEADER(config.h)
 AM_INIT_AUTOMAKE
 AC_PROG_INTLTOOL
@@ -20,6 +20,8 @@ pkg_modules="glib-2.0 >= 2.6.0 \
 PKG_CHECK_MODULES(PACKAGE, [$pkg_modules])
 AC_SUBST(PACKAGE_CFLAGS)
 AC_SUBST(PACKAGE_LIBS)
+
+AC_CHECK_HEADERS(iwlib.h)
 
 prefix=$(pkg-config --variable=prefix lxpanel)
 LXPANEL_LIBDIR=$(pkg-config --variable=libdir lxpanel)/lxpanel

@@ -21,6 +21,12 @@ PKG_CHECK_MODULES(PACKAGE, [$pkg_modules])
 AC_SUBST(PACKAGE_CFLAGS)
 AC_SUBST(PACKAGE_LIBS)
 
+prefix=$(pkg-config --variable=prefix lxpanel)
+LXPANEL_LIBDIR=$(pkg-config --variable=libdir lxpanel)/lxpanel
+LXPANEL_DATADIR=$(pkg-config --variable=datadir lxpanel)/lxpanel
+AC_SUBST(LXPANEL_LIBDIR)
+AC_SUBST(LXPANEL_DATADIR)
+
 GETTEXT_PACKAGE=$PACKAGE
 AC_SUBST(GETTEXT_PACKAGE)
 AC_DEFINE_UNQUOTED(GETTEXT_PACKAGE,"$GETTEXT_PACKAGE", [Gettext package.])

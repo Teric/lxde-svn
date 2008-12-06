@@ -5,9 +5,9 @@ EXTRA_DIST = \
 	intltool-merge.in \
 	intltool-update.in
 
-nstall-data-local:
-	cp -fr $(srcdir)/data/* $(DESTDIR)/${datadir}
+install-data-local:
+	cp -fr $(srcdir)/data/* $(DESTDIR)/$(LXPANEL_DATADIR)/images
 
 install-exec-hook:
-	rm -f $(DESTDIR)$(libdir)/lxpanel/plugins/*.la
-	rm -f $(DESTDIR)$(libdir)/lxpanel/plugins/*.a
+	rm -f $(DESTDIR)$(LXPANEL_LIBDIR)/plugins/*.la
+	rm -f $(DESTDIR)$(LXPANEL_LIBDIR)/plugins/*.a

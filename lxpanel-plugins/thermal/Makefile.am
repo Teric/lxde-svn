@@ -6,5 +6,5 @@ EXTRA_DIST = \
 	intltool-update.in
 
 install-exec-hook:
-	rm -f $(DESTDIR)$(libdir)/lxpanel/plugins/*.la
-	rm -f $(DESTDIR)$(libdir)/lxpanel/plugins/*.a
+	rm -f $(DESTDIR)$(LXPANEL_LIBDIR)/plugins/*.la
+	rm -f $(DESTDIR)$(LXPANEL_LIBDIR)/plugins/*.a
