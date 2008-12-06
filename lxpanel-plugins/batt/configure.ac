@@ -1,5 +1,5 @@
 AC_PREREQ(2.57)
-AC_INIT(lxpanel-volumealsa, 0.1)
+AC_INIT(lxpanel-batt, 0.1)
 AM_CONFIG_HEADER(config.h)
 AM_INIT_AUTOMAKE
 AC_PROG_INTLTOOL
@@ -16,14 +16,13 @@ pkg_modules="glib-2.0 >= 2.6.0 \
              gtk+-2.0 >= 2.6.0 \
              gthread-2.0 \
              lxpanel \
-             libmenu-cache \
-             alsa"
+             libmenu-cache"
 
 PKG_CHECK_MODULES(PACKAGE, [$pkg_modules])
 AC_SUBST(PACKAGE_CFLAGS)
 AC_SUBST(PACKAGE_LIBS)
 
-GETTEXT_PACKAGE=lxpanel-volumealsa
+GETTEXT_PACKAGE=lxpanel-batt
 AC_SUBST(GETTEXT_PACKAGE)
 AC_DEFINE_UNQUOTED(GETTEXT_PACKAGE,"$GETTEXT_PACKAGE", [Gettext package.])
 

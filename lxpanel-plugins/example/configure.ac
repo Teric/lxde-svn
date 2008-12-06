@@ -1,5 +1,5 @@
 AC_PREREQ(2.57)
-AC_INIT(lxpanel-volumealso, 0.1)
+AC_INIT(lxpanel-volumealsa, 0.1)
 AM_CONFIG_HEADER(config.h)
 AM_INIT_AUTOMAKE
 AC_PROG_INTLTOOL
