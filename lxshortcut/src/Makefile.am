@@ -1,7 +1,8 @@
 INCLUDES = \
 	-DPACKAGE_DATA_DIR=\""$(datadir)"/lxshortcut\" \
 	-DPACKAGE_LOCALE_DIR=\""$(prefix)/$(DATADIRNAME)/locale"\" \
-	@GTK_CFLAGS@
+	@GTK_CFLAGS@ \
+	-Werror-implicit-function-declaration
 
 bin_PROGRAMS = lxshortcut
 
