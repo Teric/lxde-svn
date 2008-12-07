@@ -1,1 +1,2 @@
-volume is a lxpanel plugin for display and control volume.
+volume is a lxpanel plugin for display and control volume utilizing
+OSS (Open Sound System).
