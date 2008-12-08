@@ -25,10 +25,7 @@
 #include <gdk-pixbuf/gdk-pixbuf.h>
 #include <alsa/asoundlib.h>
 #include <poll.h>
-#include <lxpanel/panel.h>
-#include <lxpanel/misc.h>
 #include <lxpanel/plugin.h>
-#include <lxpanel/dbg.h>
 
 #define ICONS_VOLUME PACKAGE_DATA_DIR "/lxpanel/images/volume.png"
 #define ICONS_MUTE PACKAGE_DATA_DIR "/lxpanel/images/mute.png"

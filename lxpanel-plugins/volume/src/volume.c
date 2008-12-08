@@ -21,17 +21,12 @@
 #include <stdlib.h>
 #include <fcntl.h>
 #include <unistd.h>
-
 #include <glib/gi18n.h>
 #include <gdk-pixbuf/gdk-pixbuf.h>
 
-#include <lxpanel/panel.h>
-#include <lxpanel/misc.h>
 #include <lxpanel/plugin.h>
-#include <lxpanel/dbg.h>
 
 #include "volume-impl.h"
-
 #include "volume_xpm.h"
 #undef const
 

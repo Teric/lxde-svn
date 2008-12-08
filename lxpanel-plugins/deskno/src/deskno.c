@@ -5,10 +5,6 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <glib/gi18n.h>
-
-#include <lxpanel/dbg.h>
-#include <lxpanel/misc.h>
-#include <lxpanel/panel.h>
 #include <lxpanel/plugin.h>
 
 typedef struct {
@@ -33,8 +29,6 @@ clicked( GtkWidget *widget, gpointer data)
     Xclimsg(GDK_ROOT_WINDOW(), a_NET_CURRENT_DESKTOP, newdesk, 0, 0, 0, 0);
     RET();
 }
-
-
 
 static gint
 name_update(GtkWidget *widget, deskno *dc)

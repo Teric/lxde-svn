@@ -27,9 +27,6 @@
 #include <gdk-pixbuf/gdk-pixbuf.h>
 #include <string.h>
 #include <X11/XKBlib.h>
-
-#include <lxpanel/panel.h>
-#include <lxpanel/misc.h>
 #include <lxpanel/plugin.h>
 /*
 enum {

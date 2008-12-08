@@ -42,12 +42,7 @@
 #include <semaphore.h> /* used by update() and alarmProcess() for alarms */
 #include <stdlib.h>
 #include <string.h>
-
-#include <lxpanel/dbg.h>
-#include <lxpanel/misc.h> /* used for the line struct */
-#include <lxpanel/panel.h> /* used to determine panel orientation */
 #include <lxpanel/plugin.h>
-#include <lxpanel/glib-mem.h> /* compatibility macros for g_slice* */
 
 #define BATTERY_DIRECTORY "/proc/acpi/battery/" /* must be slash-terminated */
 #define BATTERY_SYSFS_DIRECTORY "/sys/class/power_supply/"

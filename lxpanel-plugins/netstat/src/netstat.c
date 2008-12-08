@@ -27,10 +27,7 @@
 #include <glib/gi18n.h>
 #include <pthread.h>
 #include <iwlib.h>
-#include <lxpanel/panel.h>
-#include <lxpanel/misc.h>
 #include <lxpanel/plugin.h>
-#include <lxpanel/dbg.h>
 #include "nsconfig.h"
 #include "netstat.h"
 #include "lxnm_client.h"

@@ -3,11 +3,7 @@
 #include <stdlib.h>
 #include <glib/gi18n.h>
 #include <string.h>
-
-#include <lxpanel/panel.h>
-#include <lxpanel/misc.h>
 #include <lxpanel/plugin.h>
-#include <lxpanel/dbg.h>
 
 #define THERMAL_DIRECTORY "/proc/acpi/thermal_zone/" /* must be slash-terminated */
 #define THERMAL_TEMPF  "temperature"

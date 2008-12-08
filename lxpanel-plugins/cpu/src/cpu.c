@@ -25,11 +25,7 @@
 #include <sys/sysinfo.h>
 #include <stdlib.h>
 #include <glib/gi18n.h>
-
 #include <lxpanel/plugin.h>
-#include <lxpanel/panel.h>
-#include <lxpanel/misc.h>
-#include <lxpanel/dbg.h>
 
 #define KILOBYTE 1024
 #define MAX_WGSIZE 100
@@ -41,7 +37,6 @@ typedef unsigned long tick;
 struct cpu_stat {
     tick u, n, s, i;
 };
-
 
 typedef struct {
     GdkGC *gc_cpu;
