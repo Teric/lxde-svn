@@ -193,7 +193,7 @@ static gboolean netproc_parse_status(const char *buffer,
 
 	return TRUE;
 }
-
+#if 0
 FILE *netproc_open()
 {
 	return fopen("/proc/net/dev", "r");
@@ -203,7 +203,7 @@ void netproc_close(FILE *fp)
 {
 	fclose(fp);
 }
-
+#endif
 int netproc_scandevice(int sockfd, int iwsockfd, FILE *fp, NETDEVLIST_PTR *netdev_list)
 {
 	char buffer[512];
@@ -503,9 +503,8 @@ void netproc_listener(FNETD *fnetd)
 {
 	if (fnetd->sockfd) {
 		netproc_alive(fnetd->netdevlist);
-		fnetd->netdev_fp = netproc_open();
+		lseek(fnetd->netdev_fp, SEEK_SET, 0);
 		netproc_scandevice(fnetd->sockfd, fnetd->iwsockfd, fnetd->netdev_fp, &fnetd->netdevlist);
-		netproc_close(fnetd->netdev_fp);
 	}
 }
 

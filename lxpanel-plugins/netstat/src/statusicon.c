@@ -66,12 +66,12 @@ void statusicon_destroy(struct statusicon *icon)
 }
 
 
-void set_statusicon_image_from_file(struct statusicon *widget, const char *filename)
+inline void set_statusicon_image_from_file(struct statusicon *widget, const char *filename)
 {
     gtk_image_set_from_file(widget->icon, filename);
 }
 
-void set_statusicon_tooltips(struct statusicon *widget, const char *tooltips)
+inline void set_statusicon_tooltips(struct statusicon *widget, const char *tooltips)
 {
     gtk_tooltips_set_tip(widget->tooltips, widget->main, tooltips, NULL);
 }
