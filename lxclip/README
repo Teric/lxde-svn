@@ -1,6 +1,0 @@
-lxclip is a small program used to hold the text in the clipboard.
-Under X11, the content of clipboard get lost when the owner program
-of that data is terminated. This behavior is quite different from 
-Windows. So, this little program is used to hold the text data for you.
-The clipboard text will still be available even after the owner of 
-that data is terminated.

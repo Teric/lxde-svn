@@ -1,6 +1,0 @@
-src/glib-mem.h
-src/lxvt.c
-src/term.c
-src/term.h
-src/window.c
-src/window.h
