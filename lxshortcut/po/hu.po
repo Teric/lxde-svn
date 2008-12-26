@@ -25,7 +25,8 @@ msgstr ""
 msgid "file name"
 msgstr ""
 
-#: src/lxshortcut.c:147 data/choose-icon.glade:114
+#: src/lxshortcut.c:147
+#: data/choose-icon.glade:114
 msgid "Image files"
 msgstr ""
 
@@ -79,21 +80,20 @@ msgstr "Haladó"
 
 #: data/choose-icon.glade:8
 msgid "Choose An Icon..."
-msgstr ""
+msgstr "Válassz ikont..."
 
 #: data/choose-icon.glade:95
 msgid "System icon theme"
-msgstr ""
+msgstr "Rendszer ikon téma"
 
 #: data/choose-icon.glade:137
 msgid "<b>Choose Icon From:</b>"
-msgstr ""
+msgstr "<b>Válassz ikont innen:</b>"
 
 #~ msgid "[FILE]"
 #~ msgstr "[FÁJL]"
-
 #~ msgid "gtk-cancel"
 #~ msgstr "Mégsem"
-
 #~ msgid "gtk-ok"
 #~ msgstr "Ok"
+
