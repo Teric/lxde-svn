@@ -396,18 +396,18 @@ int main(int argc, char** argv)
     if( !gtk_builder_add_from_file( builder, PACKAGE_DATA_DIR "/lxsession-edit/lxsession-edit.ui", NULL ) )
         return 1;
 
-    dlg = gtk_builder_get_object( builder, "dlg" );
-    autostarts = gtk_builder_get_object( builder, "autostarts" );
-    adv_page = gtk_builder_get_object( builder, "adv_page" );
-    wm = gtk_builder_get_object( builder, "wm" );
+    dlg = (GtkWidget*) gtk_builder_get_object( builder, "dlg" );
+    autostarts = (GtkWidget*) gtk_builder_get_object( builder, "autostarts" );
+    adv_page = (GtkWidget*) gtk_builder_get_object( builder, "adv_page" );
+    wm = (GtkWidget*) gtk_builder_get_object( builder, "wm" );
     g_object_unref(builder);
 
-    gtk_dialog_set_alternative_button_order(dlg, GTK_RESPONSE_OK, GTK_RESPONSE_CANCEL, -1);
+    gtk_dialog_set_alternative_button_order((GtkDialog*)dlg, GTK_RESPONSE_OK, GTK_RESPONSE_CANCEL, -1);
 
     /* autostart list */
-    init_list_view(autostarts);
+    init_list_view((GtkTreeView*)autostarts);
     load_autostart();
-    gtk_tree_view_set_model( autostarts, autostart_list );
+    gtk_tree_view_set_model( (GtkTreeView*)autostarts, (GtkTreeModel*)autostart_list );
 
     /* if we are running under LXSession */
     if( g_getenv("_LXSESSION_PID") )
@@ -442,7 +442,7 @@ int main(int argc, char** argv)
             else
                 wm_cmd = g_strdup("openbox");
         }
-        gtk_entry_set_text(wm, wm_cmd);
+        gtk_entry_set_text((GtkEntry*)wm, wm_cmd);
     }
     else
     {
@@ -451,7 +451,7 @@ int main(int argc, char** argv)
         wm_cmd = NULL;
     }
 
-    if( gtk_dialog_run(dlg) == GTK_RESPONSE_OK )
+    if( gtk_dialog_run((GtkDialog*)dlg) == GTK_RESPONSE_OK )
     {
         save_autostart();
 
@@ -462,7 +462,7 @@ int main(int argc, char** argv)
             g_mkdir_with_parents( dir, 0700 );
             cfg = g_build_filename( dir, "config", NULL );
             g_free( dir );
-            wm_cmd = gtk_entry_get_text(wm);
+            wm_cmd = (char*)gtk_entry_get_text((GtkEntry*)wm);
             if( wm_cmd )
             {
                 char* data;
