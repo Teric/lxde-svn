@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-12-06 06:14+0800\n"
+"POT-Creation-Date: 2009-01-25 16:53+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -16,78 +16,78 @@ msgstr ""
 "Content-Type: text/plain; charset=CHARSET\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: src/lxshortcut.c:49
+#: ../src/lxshortcut.c:49
 msgid "input file"
 msgstr ""
 
-#: src/lxshortcut.c:49
+#: ../src/lxshortcut.c:49
 msgid "file name or desktop id"
 msgstr ""
 
-#: src/lxshortcut.c:50
+#: ../src/lxshortcut.c:50
 msgid "file name"
 msgstr ""
 
-#: src/lxshortcut.c:147 data/choose-icon.glade:114
+#: ../src/lxshortcut.c:147 ../data/choose-icon.glade.h:3
 msgid "Image files"
 msgstr ""
 
-#: src/lxshortcut.c:229
+#: ../src/lxshortcut.c:229
 msgid "Choose an executable file"
 msgstr ""
 
-#: src/lxshortcut.c:235
+#: ../src/lxshortcut.c:235
 msgid "Executable files"
 msgstr ""
 
-#: data/lxshortcut.glade:5
-msgid "Application Shortcut"
-msgstr ""
-
-#: data/lxshortcut.glade:42
-msgid "Change _Icon"
-msgstr ""
-
-#: data/lxshortcut.glade:79
-msgid "Tooltip:"
-msgstr ""
-
-#: data/lxshortcut.glade:92
-msgid "Runs in terminal emulator"
-msgstr ""
-
-#: data/lxshortcut.glade:107
-msgid "Name:"
-msgstr ""
-
-#: data/lxshortcut.glade:130
-msgid "Command:"
-msgstr ""
-
-#: data/lxshortcut.glade:155
-msgid "_Browse..."
-msgstr ""
-
-#: data/lxshortcut.glade:181
-msgid "General"
-msgstr ""
-
-#: data/lxshortcut.glade:205
-msgid "Use startup notification"
-msgstr ""
-
-#: data/lxshortcut.glade:223
+#: ../data/lxshortcut.glade.h:1
 msgid "Advanced"
 msgstr ""
 
-#: data/choose-icon.glade:8
+#: ../data/lxshortcut.glade.h:2
+msgid "Application Shortcut"
+msgstr ""
+
+#: ../data/lxshortcut.glade.h:3
+msgid "Change _Icon"
+msgstr ""
+
+#: ../data/lxshortcut.glade.h:4
+msgid "Command:"
+msgstr ""
+
+#: ../data/lxshortcut.glade.h:5
+msgid "General"
+msgstr ""
+
+#: ../data/lxshortcut.glade.h:6
+msgid "Name:"
+msgstr ""
+
+#: ../data/lxshortcut.glade.h:7
+msgid "Runs in terminal emulator"
+msgstr ""
+
+#: ../data/lxshortcut.glade.h:8
+msgid "Tooltip:"
+msgstr ""
+
+#: ../data/lxshortcut.glade.h:9
+msgid "Use startup notification"
+msgstr ""
+
+#: ../data/lxshortcut.glade.h:10
+msgid "_Browse..."
+msgstr ""
+
+#: ../data/choose-icon.glade.h:1
+msgid "<b>Choose Icon From:</b>"
+msgstr ""
+
+#: ../data/choose-icon.glade.h:2
 msgid "Choose An Icon..."
 msgstr ""
 
-#: data/choose-icon.glade:95
+#: ../data/choose-icon.glade.h:4
 msgid "System icon theme"
-msgstr ""
-
-#: data/choose-icon.glade:137
-msgid "<b>Choose Icon From:</b>"
 msgstr ""
