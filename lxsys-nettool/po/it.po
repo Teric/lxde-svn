@@ -1,0 +1,58 @@
+# Translation of lxsys-nettool to Italian
+# Copyright (C) 2009 Fabio Barone <phonky at gmx.net>
+# This file is distributed under the same license as the lxsys-nettool package
+# Fabio Barone <phonky at gmx.net>, 2009
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: lxsys-nettool 0.1\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2009-01-06 23:57+0100\n"
+"PO-Revision-Date: 2009-01-07 00:25+0100\n"
+"Last-Translator: Fabio Barone <phonky@gmx.net>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Poedit-Language: Italian\n"
+"X-Poedit-Country: ITALY\n"
+"Language-Team: \n"
+
+#. generate title of dialog
+#: ../src/lxsys-nettool.c:65
+#, c-format
+msgid "%s Settings"
+msgstr "Impostazioni %s"
+
+#. create General page
+#: ../src/lxsys-nettool.c:85
+msgid "General"
+msgstr "Generale"
+
+#: ../src/lxsys-nettool.c:90
+msgid "IP Address:"
+msgstr "Indirizzo IP:"
+
+#: ../src/lxsys-nettool.c:100
+msgid "Netmask:"
+msgstr "Maschera rete (netmask):"
+
+#: ../src/lxsys-nettool.c:110
+msgid "Gateway:"
+msgstr "Gateway:"
+
+#: ../src/lxsys-nettool.c:120
+msgid "Name Server:"
+msgstr "Nameserver:"
+
+#: ../src/lxsys-nettool.c:134
+msgid "_Apply"
+msgstr "_Applicare"
+
+#: ../src/lxsys-nettool.c:135
+msgid "_OK"
+msgstr "_OK"
+
+#: ../src/lxsys-nettool.c:136
+msgid "_Cancel"
+msgstr "_Cancellare"
+

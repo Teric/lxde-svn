@@ -15,7 +15,7 @@ AM_PATH_PYTHON
 #AC_SUBST(PYGTK_CFLAGS)
 #AC_SUBST(PYGTK_LIBS)
 
-ALL_LINGUAS="zh_TW zh_CN de fi hu fr es sv et"
+ALL_LINGUAS="zh_TW zh_CN de fi hu fr es sv et it"
 
 GETTEXT_PACKAGE=gtknetcat
 AC_SUBST(GETTEXT_PACKAGE)

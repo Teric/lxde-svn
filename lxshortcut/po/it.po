@@ -1,0 +1,103 @@
+# Translation of lxshortcut to Italian
+# Copyright (C) 2009 Fabio Barone <phonky at gmx.net>
+# This file is distributed under the same license as the lxshortcut package
+# Fabio Barone <phonky at gmx.net>, 2009
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: lxshortcut 0.1\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2009-01-06 23:57+0100\n"
+"PO-Revision-Date: 2009-01-07 00:25+0100\n"
+"Last-Translator: Fabio Barone <phonky@gmx.net>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Poedit-Language: Italian\n"
+"X-Poedit-Country: ITALY\n"
+"Language-Team: \n"
+
+#: ../src/lxshortcut.c:49
+#, fuzzy
+msgid "input file"
+msgstr "File di input"
+
+#: ../src/lxshortcut.c:49
+#, fuzzy
+msgid "file name or desktop id"
+msgstr "voce file o id della scrivania"
+
+#: ../src/lxshortcut.c:50
+#, fuzzy
+msgid "file name"
+msgstr "File di input"
+
+#: ../src/lxshortcut.c:147
+#: ../data/choose-icon.glade.h:3
+msgid "Image files"
+msgstr "Immagini"
+
+#: ../src/lxshortcut.c:229
+#, fuzzy
+msgid "Choose an executable file"
+msgstr "File di input"
+
+#: ../src/lxshortcut.c:235
+#, fuzzy
+msgid "Executable files"
+msgstr "Esegue in un emulatore di terminale"
+
+#: ../data/lxshortcut.glade.h:1
+msgid "Advanced"
+msgstr "Avanzato"
+
+#: ../data/lxshortcut.glade.h:2
+#, fuzzy
+msgid "Application Shortcut"
+msgstr "Shortcut applicazioni"
+
+#: ../data/lxshortcut.glade.h:3
+msgid "Change _Icon"
+msgstr "Cambiare _icono"
+
+#: ../data/lxshortcut.glade.h:4
+msgid "Command:"
+msgstr "Comando:"
+
+#: ../data/lxshortcut.glade.h:5
+msgid "General"
+msgstr "Generale"
+
+#: ../data/lxshortcut.glade.h:6
+msgid "Name:"
+msgstr "Voce:"
+
+#: ../data/lxshortcut.glade.h:7
+#, fuzzy
+msgid "Runs in terminal emulator"
+msgstr "Esegue in un emulatore di terminale"
+
+#: ../data/lxshortcut.glade.h:8
+msgid "Tooltip:"
+msgstr "Aiuti tooltip:"
+
+#: ../data/lxshortcut.glade.h:9
+msgid "Use startup notification"
+msgstr "Usare notificazione di avvio"
+
+#: ../data/lxshortcut.glade.h:10
+msgid "_Browse..."
+msgstr "_Sfogliare..."
+
+#: ../data/choose-icon.glade.h:1
+msgid "<b>Choose Icon From:</b>"
+msgstr "<b>Scegliere un icono da: </b>"
+
+#: ../data/choose-icon.glade.h:2
+msgid "Choose An Icon..."
+msgstr "Scegliero un icono..."
+
+#: ../data/choose-icon.glade.h:4
+msgid "System icon theme"
+msgstr "Tema di icone del sistema"
+
