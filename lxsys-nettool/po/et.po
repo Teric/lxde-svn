@@ -1,0 +1,57 @@
+# lxsys-nettool eesti tõlge
+# Estonian translation of lxsys-nettool
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# Mattias Põldaru <mahfiaz gmail com>, 2009.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: lxsys-nettool\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2009-01-19 09:48+0200\n"
+"PO-Revision-Date: 2009-01-19 09:49+0300\n"
+"Last-Translator: Mattias Põldaru <mahfiaz gmail com>\n"
+"Language-Team: Gnome Estonian Translation Team <gnome-et linux ee>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#. generate title of dialog
+#: ../src/lxsys-nettool.c:65
+#, c-format
+msgid "%s Settings"
+msgstr "%s sätted"
+
+#. create General page
+#: ../src/lxsys-nettool.c:85
+msgid "General"
+msgstr "Üldine"
+
+#: ../src/lxsys-nettool.c:90
+msgid "IP Address:"
+msgstr "IP aadress:"
+
+#: ../src/lxsys-nettool.c:100
+msgid "Netmask:"
+msgstr "Võrgumask:"
+
+#: ../src/lxsys-nettool.c:110
+msgid "Gateway:"
+msgstr "Võrgulüüs:"
+
+#: ../src/lxsys-nettool.c:120
+msgid "Name Server:"
+msgstr "Nimeserver:"
+
+#: ../src/lxsys-nettool.c:134
+msgid "_Apply"
+msgstr "_Rakenda"
+
+#: ../src/lxsys-nettool.c:135
+msgid "_OK"
+msgstr "_Olgu"
+
+#: ../src/lxsys-nettool.c:136
+msgid "_Cancel"
+msgstr "_Loobu"
+
