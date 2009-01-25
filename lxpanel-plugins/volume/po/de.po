@@ -1,0 +1,30 @@
+# German translation of lxpanel-plugins (volume)
+# Mario Blättermann <mariobl@gnome.org>, 2009.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2009-01-25 16:29+0100\n"
+"PO-Revision-Date: 2009-01-25 16:29+0100\n"
+"Last-Translator: Mario Blättermann <mariobl@gnome.org>\n"
+"Language-Team: German <translation@mailinglists.lxde.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Poedit-Language: German\n"
+"X-Poedit-Country: GERMANY\n"
+
+#. FIXME: display current level in tooltip. ex: "Volume Control: 80%"
+#: ../src/volume.c:299
+msgid "Volume control"
+msgstr "Lautstärke"
+
+#: ../src/volume.c:311
+msgid "Volume Control"
+msgstr "Lautstärkeregler"
+
+#: ../src/volume-impl.c:109
+msgid "Volume"
+msgstr "Lautstärke"
+

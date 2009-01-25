@@ -1,2 +1,4 @@
-src/lxterminal.c
-src/preferences.c
+src/volume.c
+src/volume-impl.c
+src/volume-impl.h
+src/volume_xpm.h
