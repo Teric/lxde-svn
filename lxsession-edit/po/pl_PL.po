@@ -1,0 +1,69 @@
+# translation of lxsession-edit.po to Polish
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+#
+# Grzegorz Gibas <amigib@gmail.com>, 2009.
+msgid ""
+msgstr ""
+"Project-Id-Version: lxsession-edit\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2008-12-02 16:52+0800\n"
+"PO-Revision-Date: 2009-01-11 00:20+0100\n"
+"Last-Translator: Grzegorz Gibas <amigib@gmail.com>\n"
+"Language-Team: Polish\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: KBabel 1.11.4\n"
+
+#: src/lxsession-edit.c:360
+msgid "Enabled"
+msgstr "Włączone"
+
+#: src/lxsession-edit.c:365
+msgid "Application"
+msgstr "Aplikacja"
+
+#: src/lxsession-edit.c:373
+msgid "Comment"
+msgstr "Komentarz"
+
+#: data/lxsession-edit.glade:9
+msgid "Desktop Session Settings"
+msgstr "Ustawienia sesji"
+
+#: data/lxsession-edit.glade:97
+msgid "Applications automaticlly started after entering desktop:"
+msgstr "Programy uruchamiane automatycznie po zalogowaniu:"
+
+#: data/lxsession-edit.glade:214
+msgid "Automatically Started Applications"
+msgstr "Automatycznie Uruchomione Aplikacje"
+
+#: data/lxsession-edit.glade:250
+msgid "Window Manager: "
+msgstr "Menedżer Okien: "
+
+#: data/lxsession-edit.glade:275
+msgid ""
+"Command line used to launch window manager\n"
+"(The default window manager command for LXDE should be openbox-lxde)"
+msgstr ""
+"Polecenie użyte do uruchomienia menedżera okien\n"
+"(Domyślnie dla LXDE powinno być openbox-lxde"
+
+#: data/lxsession-edit.glade:326
+msgid ""
+"<b>Warning:</b> Do <b>NOT</b> touch this unless you know exactly what you "
+"are doing.\n"
+"\n"
+"<b>NOTE:</b> This setting will take effect on next login."
+msgstr ""
+"<b>Uwaga:</b> <b>Nie</b> dotykaj tego chyba, że dokładnie wiesz co robisz.\n"
+"\n"
+"<b>NOTA:</b> Efekty zmian będą widoczne po następnym logowaniu."
+
+#: data/lxsession-edit.glade:366
+msgid "Advanced Options"
+msgstr "Zaawansowane Opcje"
+
