@@ -1,0 +1,58 @@
+# Arabic translations for PACKAGE package.
+# Copyright (C) 2009 THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# أحمد فرغل <ahmad.farghal@gmail.com>, 2009.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: LXSys-nettool\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2009-01-27 15:20+0200\n"
+"PO-Revision-Date: 2009-01-27 15:23+0200\n"
+"Last-Translator: Ahmad Farghal <ahmad.farghal@gmail.com>\n"
+"Language-Team: Arabic\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#. generate title of dialog
+#: ../src/lxsys-nettool.c:65
+#, c-format
+msgid "%s Settings"
+msgstr "إعدادات %s"
+
+#. create General page
+#: ../src/lxsys-nettool.c:85
+msgid "General"
+msgstr "عامة"
+
+#: ../src/lxsys-nettool.c:90
+msgid "IP Address:"
+msgstr "عنوان IP:"
+
+#: ../src/lxsys-nettool.c:100
+msgid "Netmask:"
+msgstr "قناع الشبكة:"
+
+#: ../src/lxsys-nettool.c:110
+msgid "Gateway:"
+msgstr "البوابة:"
+
+#: ../src/lxsys-nettool.c:120
+msgid "Name Server:"
+msgstr "خادوم أسماء النطاق:"
+
+#: ../src/lxsys-nettool.c:134
+msgid "_Apply"
+msgstr "_طبّق"
+
+#: ../src/lxsys-nettool.c:135
+msgid "_OK"
+msgstr "_موافق"
+
+#: ../src/lxsys-nettool.c:136
+msgid "_Cancel"
+msgstr "أ_لغِ"
+
+
+ 	  	 
