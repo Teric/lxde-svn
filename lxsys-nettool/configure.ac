@@ -24,7 +24,7 @@ GETTEXT_PACKAGE=lxsys-nettool
 AC_SUBST(GETTEXT_PACKAGE)
 AC_DEFINE_UNQUOTED(GETTEXT_PACKAGE,"$GETTEXT_PACKAGE", [Gettext package.])
 
-ALL_LINGUAS="cs de zh_CN hu fi es et sv it ar"
+ALL_LINGUAS="de zh_CN cs hu fi es et sv it ar da"
 AM_GLIB_GNU_GETTEXT
 
 AC_OUTPUT([
