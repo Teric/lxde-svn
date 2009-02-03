@@ -3,30 +3,30 @@
 # This file is distributed under the same license as the PACKAGE package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 #
-#, fuzzy
 msgid ""
 msgstr ""
-"Project-Id-Version: PACKAGE VERSION\n"
+"Project-Id-Version: lxsession-edit\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2009-02-03 01:10+0100\n"
-"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
-"Language-Team: LANGUAGE <LL@li.org>\n"
+"PO-Revision-Date: 2009-02-03 01:08+0100\n"
+"Last-Translator: Martin Bagge <brother@bsnet.se>\n"
+"Language-Team: da <vidarjb@gmail.com>\n"
 "MIME-Version: 1.0\n"
-"Content-Type: text/plain; charset=CHARSET\n"
+"Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"X-Poedit-Language: Danish\n"
 
 #: ../src/lxsession-edit.c:360
 msgid "Enabled"
-msgstr ""
+msgstr "Aktiveret"
 
 #: ../src/lxsession-edit.c:365
 msgid "Application"
-msgstr ""
+msgstr "Applikation"
 
 #: ../src/lxsession-edit.c:373
 msgid "Comment"
-msgstr ""
+msgstr "Kommentar"
 
 #: ../data/lxsession-edit.glade.h:1
 msgid ""
@@ -35,29 +35,34 @@ msgid ""
 "\n"
 "<b>NOTE:</b> This setting will take effect on next login."
 msgstr ""
+"<b>Advarsel: GØR IKKE</b> noget her med mindre du ved nøjagtig hvad du gør.\n"
+"\n"
+"<b>BEMÆRK:</b> Denne indstilling træder i kraft efter næste log ind."
 
 #: ../data/lxsession-edit.glade.h:4
 msgid "Advanced Options"
-msgstr ""
+msgstr "Avancerede Indstillinger"
 
 #: ../data/lxsession-edit.glade.h:5
 msgid "Applications automatically started after entering desktop:"
-msgstr ""
+msgstr "Applikationer der er startet automatisk efter opstart af skrivebordet:"
 
 #: ../data/lxsession-edit.glade.h:6
 msgid "Automatically Started Applications"
-msgstr ""
+msgstr "Applikationer der Startes Automatisk "
 
 #: ../data/lxsession-edit.glade.h:7
 msgid ""
 "Command line used to launch window manager\n"
 "(The default window manager command for LXDE should be openbox-lxde)"
 msgstr ""
+"Kommando der starter vindues behandleren\n"
+"(Standard vindues behandler for LXDE, bør være openbox-lxde)"
 
 #: ../data/lxsession-edit.glade.h:9
 msgid "Desktop Session Settings"
-msgstr ""
+msgstr "Indstillinger for session"
 
 #: ../data/lxsession-edit.glade.h:10
 msgid "Window Manager: "
-msgstr ""
+msgstr "Vindues håndterer:"

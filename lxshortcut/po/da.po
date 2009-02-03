@@ -3,91 +3,91 @@
 # This file is distributed under the same license as the PACKAGE package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 #
-#, fuzzy
 msgid ""
 msgstr ""
-"Project-Id-Version: PACKAGE VERSION\n"
+"Project-Id-Version: lxshortcut\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2009-02-03 01:11+0100\n"
-"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
-"Language-Team: LANGUAGE <LL@li.org>\n"
+"PO-Revision-Date: 2009-01-21 14:21+0100\n"
+"Last-Translator: Vidar Jon Bauge <vidarjb@gmail.com>\n"
+"Language-Team: da <vidarjb@gmail.com>\n"
 "MIME-Version: 1.0\n"
-"Content-Type: text/plain; charset=CHARSET\n"
+"Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"X-Poedit-Language: Danish\n"
 
 #: ../src/lxshortcut.c:49
 msgid "input file"
-msgstr ""
+msgstr "Fil"
 
 #: ../src/lxshortcut.c:49
 msgid "file name or desktop id"
-msgstr ""
+msgstr "Filnavn eller skriveords ID"
 
 #: ../src/lxshortcut.c:50
 msgid "file name"
-msgstr ""
+msgstr "Filnavn"
 
 #: ../src/lxshortcut.c:147 ../data/choose-icon.glade.h:3
 msgid "Image files"
-msgstr ""
+msgstr "Billedfiler"
 
 #: ../src/lxshortcut.c:229
 msgid "Choose an executable file"
-msgstr ""
+msgstr "Vælg en eksekverbar fil"
 
 #: ../src/lxshortcut.c:235
 msgid "Executable files"
-msgstr ""
+msgstr "Eksekverbare filer"
 
 #: ../data/lxshortcut.glade.h:1
 msgid "Advanced"
-msgstr ""
+msgstr "Adanceret"
 
 #: ../data/lxshortcut.glade.h:2
 msgid "Application Shortcut"
-msgstr ""
+msgstr "Genvej til Applikation"
 
 #: ../data/lxshortcut.glade.h:3
 msgid "Change _Icon"
-msgstr ""
+msgstr "Skift _Ikon"
 
 #: ../data/lxshortcut.glade.h:4
 msgid "Command:"
-msgstr ""
+msgstr "Kommando:"
 
 #: ../data/lxshortcut.glade.h:5
 msgid "General"
-msgstr ""
+msgstr "Generelt"
 
 #: ../data/lxshortcut.glade.h:6
 msgid "Name:"
-msgstr ""
+msgstr "Navn:"
 
 #: ../data/lxshortcut.glade.h:7
 msgid "Runs in terminal emulator"
-msgstr ""
+msgstr "Kør i terminal emulator"
 
 #: ../data/lxshortcut.glade.h:8
 msgid "Tooltip:"
-msgstr ""
+msgstr "Værktøjstip:"
 
 #: ../data/lxshortcut.glade.h:9
 msgid "Use startup notification"
-msgstr ""
+msgstr "Benyt underrettelse om opstart"
 
 #: ../data/lxshortcut.glade.h:10
 msgid "_Browse..."
-msgstr ""
+msgstr "Gennemse"
 
 #: ../data/choose-icon.glade.h:1
 msgid "<b>Choose Icon From:</b>"
-msgstr ""
+msgstr "<b>Vælg Ikon Fra:</b>"
 
 #: ../data/choose-icon.glade.h:2
 msgid "Choose An Icon..."
-msgstr ""
+msgstr "Vælg ikon..."
 
 #: ../data/choose-icon.glade.h:4
 msgid "System icon theme"
-msgstr ""
+msgstr "System ikon tema"
