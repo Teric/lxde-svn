@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gtknetcat\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-01-05 00:16+0100\n"
+"POT-Creation-Date: 2009-02-06 23:13+0100\n"
 "PO-Revision-Date: 2009-01-06 20:11+0100\n"
 "Last-Translator: Martin Bagge <brother@bsnet.se>\n"
 "Language-Team: Swedish <tp-sv@listor.tp-sv.se>\n"
@@ -110,4 +110,3 @@ msgstr "Skicka filer till en annan dator"
 #: ../data/wizard.glade.h:11
 msgid "What do you want to do?"
 msgstr "Vad vill du göra?"
-

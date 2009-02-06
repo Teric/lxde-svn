@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gtknetcat\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-07-07 11:58+0200\n"
+"POT-Creation-Date: 2009-02-06 23:12+0100\n"
 "PO-Revision-Date: 2008-07-07 12:18+0200\n"
 "Last-Translator: SZERVÁC Attila <sas@321hu>\n"
 "Language-Team: Hungarian <debian-l10n-hungarian@lists.debian.org>\n"
@@ -50,19 +50,19 @@ msgstr "Fogadás..."
 msgid "Sending..."
 msgstr "Küldés..."
 
-#: ../src/gtknetcat.py:179
+#: ../src/gtknetcat.py:181
 msgid "Execute command:"
 msgstr "Parancs futtatása:"
 
-#: ../src/gtknetcat.py:179
+#: ../src/gtknetcat.py:181
 msgid "Processing..."
 msgstr "Feldolgozás..."
 
-#: ../src/gtknetcat.py:207
+#: ../src/gtknetcat.py:209
 msgid "Path"
 msgstr "Útvonal"
 
-#: ../src/gtknetcat.py:230
+#: ../src/gtknetcat.py:232
 msgid "Select files to send"
 msgstr "Jelöld ki a küldendő fájlokat"
 
@@ -109,4 +109,3 @@ msgstr "Fájlok küldése más gépre"
 #: ../data/wizard.glade.h:11
 msgid "What do you want to do?"
 msgstr "Mit tennél?"
-

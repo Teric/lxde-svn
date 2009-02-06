@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gtknetcat\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-07-07 11:58+0200\n"
+"POT-Creation-Date: 2009-02-06 23:13+0100\n"
 "PO-Revision-Date: 2008-07-07 12:18+0200\n"
 "Last-Translator: Mario Blättermann <mario.blaettermann@t-online.de>\n"
 "Language-Team: German <LL@li.org>\n"
@@ -50,19 +50,19 @@ msgstr "Empfange ..."
 msgid "Sending..."
 msgstr "Sende ..."
 
-#: ../src/gtknetcat.py:179
+#: ../src/gtknetcat.py:181
 msgid "Execute command:"
 msgstr "Befehl ausführen:"
 
-#: ../src/gtknetcat.py:179
+#: ../src/gtknetcat.py:181
 msgid "Processing..."
 msgstr "Verarbeite ..."
 
-#: ../src/gtknetcat.py:207
+#: ../src/gtknetcat.py:209
 msgid "Path"
 msgstr "Pfad"
 
-#: ../src/gtknetcat.py:230
+#: ../src/gtknetcat.py:232
 msgid "Select files to send"
 msgstr "Dateien zum Senden auswählen"
 
@@ -109,4 +109,3 @@ msgstr "Dateien zu einem anderen Computer senden"
 #: ../data/wizard.glade.h:11
 msgid "What do you want to do?"
 msgstr "Was möchten Sie tun?"
-

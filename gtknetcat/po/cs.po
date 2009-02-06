@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gtknetcat 0.1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-01-08 19:25+0100\n"
+"POT-Creation-Date: 2009-02-06 23:12+0100\n"
 "PO-Revision-Date: 2009-01-08 23:57+0100\n"
 "Last-Translator: Michal Várady <miko.vaji@gmail.com>\n"
 "Language-Team: Czech\n"
@@ -109,4 +109,3 @@ msgstr "Odeslat soubory na jiný počítač"
 #: ../data/wizard.glade.h:11
 msgid "What do you want to do?"
 msgstr "Co chcete provést?"
-

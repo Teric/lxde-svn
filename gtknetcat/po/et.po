@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-01-19 08:57+0200\n"
+"POT-Creation-Date: 2009-02-06 23:12+0100\n"
 "PO-Revision-Date: 2009-01-19 09:05+0300\n"
 "Last-Translator: Mattias Põldaru <mahfiaz gmail com>\n"
 "Language-Team: Gnome Estonian Translation Team <gnome-et linux ee>\n"
@@ -109,4 +109,3 @@ msgstr "Failide saatmine teise arvutisse"
 #: ../data/wizard.glade.h:11
 msgid "What do you want to do?"
 msgstr "Mida sa tahad teha?"
-
