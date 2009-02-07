@@ -1,0 +1,55 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: lspanel-plugins/therm\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2009-02-06 22:12+0100\n"
+"PO-Revision-Date: \n"
+"Last-Translator: Michal Várady <miko.vaji@gmail.com>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Poedit-Language: Czech\n"
+"X-Poedit-Country: CZECH REPUBLIC\n"
+"X-Poedit-SourceCharset: utf-8\n"
+
+#: ../src/thermal.c:291
+msgid "Normal"
+msgstr "Běžné"
+
+#: ../src/thermal.c:292
+msgid "Warning1"
+msgstr "Varování1"
+
+#: ../src/thermal.c:293
+msgid "Warning2"
+msgstr "Varování2"
+
+#: ../src/thermal.c:294
+msgid "Automatic sensor location"
+msgstr "Automatické umístění senzoru"
+
+#: ../src/thermal.c:295
+msgid "Sensor"
+msgstr "Senzor"
+
+#: ../src/thermal.c:296
+msgid "Automatic temperature levels"
+msgstr "Automatické úrovně teploty"
+
+#: ../src/thermal.c:297
+msgid "Warning1 Temperatur"
+msgstr "Teplota varování1"
+
+#: ../src/thermal.c:298
+msgid "Warning2 Temperatur"
+msgstr "Teplota varování2"
+
+#: ../src/thermal.c:340
+msgid "Temperature Monitor"
+msgstr "Sledování teplot"
+
+#: ../src/thermal.c:342
+msgid "Display system temperature, by kesler.daniel@gmail.com"
+msgstr "Zobrazuje teplotu systému, od kesler.daniel@gmail.com"
+

@@ -1,0 +1,23 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: lxpanel-plugins/cpu\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2009-02-06 22:08+0100\n"
+"PO-Revision-Date: \n"
+"Last-Translator: Michal Várady <miko.vaji@gmail.com>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Poedit-Language: Czech\n"
+"X-Poedit-Country: CZECH REPUBLIC\n"
+"X-Poedit-SourceCharset: utf-8\n"
+
+#: ../src/cpu.c:218
+msgid "CPU Usage Monitor"
+msgstr "Sledování využití procesoru"
+
+#: ../src/cpu.c:220
+msgid "Display CPU usage"
+msgstr "Zobrazuje využití procesoru"
+
