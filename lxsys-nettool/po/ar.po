@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: LXSys-nettool\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-01-27 15:20+0200\n"
+"POT-Creation-Date: 2009-02-09 02:47+0100\n"
 "PO-Revision-Date: 2009-01-27 15:23+0200\n"
 "Last-Translator: Ahmad Farghal <ahmad.farghal@gmail.com>\n"
 "Language-Team: Arabic\n"
@@ -53,6 +53,3 @@ msgstr "_موافق"
 #: ../src/lxsys-nettool.c:136
 msgid "_Cancel"
 msgstr "أ_لغِ"
-
-
- 	  	 

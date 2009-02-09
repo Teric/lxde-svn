@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: lxsys-nettool\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-01-19 09:48+0200\n"
+"POT-Creation-Date: 2009-02-09 02:47+0100\n"
 "PO-Revision-Date: 2009-01-19 09:49+0300\n"
 "Last-Translator: Mattias Põldaru <mahfiaz gmail com>\n"
 "Language-Team: Gnome Estonian Translation Team <gnome-et linux ee>\n"
@@ -54,4 +54,3 @@ msgstr "_Olgu"
 #: ../src/lxsys-nettool.c:136
 msgid "_Cancel"
 msgstr "_Loobu"
-

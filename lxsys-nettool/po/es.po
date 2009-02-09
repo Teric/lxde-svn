@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: lxsys-nettool\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-12-09 13:36-0500\n"
+"POT-Creation-Date: 2009-02-09 02:47+0100\n"
 "PO-Revision-Date: 2008-12-09 21:23-0500\n"
 "Last-Translator: Julio Napurí Carlos <julionc@gmail.com>\n"
 "Language-Team: Spanish <es@li.org>\n"
@@ -56,4 +56,3 @@ msgstr "_Aceptar"
 #: ../src/lxsys-nettool.c:136
 msgid "_Cancel"
 msgstr "_Cancelar"
-
