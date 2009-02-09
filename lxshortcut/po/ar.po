@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: LXShortcut\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-01-26 20:36+0200\n"
+"POT-Creation-Date: 2009-02-09 02:43+0100\n"
 "PO-Revision-Date: 2009-01-26 20:56+0200\n"
 "Last-Translator: Ahmad Farghal <ahmad.farghal@gmail.com>\n"
 "Language-Team: Arabic\n"
@@ -27,8 +27,7 @@ msgstr "اسم الملف أو هوية سطح المكتب"
 msgid "file name"
 msgstr "اسم الملف"
 
-#: ../src/lxshortcut.c:147
-#: ../data/choose-icon.glade.h:3
+#: ../src/lxshortcut.c:147 ../data/choose-icon.glade.h:3
 msgid "Image files"
 msgstr "ملفات صور"
 
@@ -91,6 +90,3 @@ msgstr "انتق أيقونة"
 #: ../data/choose-icon.glade.h:4
 msgid "System icon theme"
 msgstr "سمة أيقونات النظام"
-
-
- 	  	 

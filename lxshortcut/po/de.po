@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-01-25 16:53+0100\n"
+"POT-Creation-Date: 2009-02-09 02:43+0100\n"
 "PO-Revision-Date: 2009-01-25 16:56+0100\n"
 "Last-Translator: Mario Blättermann <mariobl@gnome.org>\n"
 "Language-Team: German <translation@mailinglists.lxde.org>\n"
@@ -29,8 +29,7 @@ msgstr "Dateiname oder Desktop-ID"
 msgid "file name"
 msgstr "Dateiname"
 
-#: ../src/lxshortcut.c:147
-#: ../data/choose-icon.glade.h:3
+#: ../src/lxshortcut.c:147 ../data/choose-icon.glade.h:3
 msgid "Image files"
 msgstr "Bilddateien"
 
@@ -96,8 +95,9 @@ msgstr "Symbolthema des Systems"
 
 #~ msgid "[FILE]"
 #~ msgstr "[DATEI]"
+
 #~ msgid "gtk-cancel"
 #~ msgstr "gtk-cancel"
+
 #~ msgid "gtk-ok"
 #~ msgstr "gtk-ok"
-

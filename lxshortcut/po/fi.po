@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-12-06 11:53+0200\n"
+"POT-Creation-Date: 2009-02-09 02:43+0100\n"
 "PO-Revision-Date: 2008-12-06 11:55+0200\n"
 "Last-Translator: Elias Julkunen <elias.julkunen@gmail.com>\n"
 "Language-Team: Finnish <laatu@lokalisointi.org>\n"
@@ -27,8 +27,7 @@ msgstr "tiedoston nimi tai työpöydän tunnus"
 msgid "file name"
 msgstr "tiedoston nmi"
 
-#: ../src/lxshortcut.c:147
-#: ../data/choose-icon.glade.h:3
+#: ../src/lxshortcut.c:147 ../data/choose-icon.glade.h:3
 msgid "Image files"
 msgstr "Kuvatiedostot"
 
@@ -91,4 +90,3 @@ msgstr "Valitse kuvake..."
 #: ../data/choose-icon.glade.h:4
 msgid "System icon theme"
 msgstr "Järjestelmän kuvaketeema"
-

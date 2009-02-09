@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: lxshortcut\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-12-09 13:35-0500\n"
+"POT-Creation-Date: 2009-02-09 02:43+0100\n"
 "PO-Revision-Date: 2008-12-09 21:25-0500\n"
 "Last-Translator: Julio Napurí Carlos <julionc@gmail.com>\n"
 "Language-Team: Spanish <es@li.org>\n"
@@ -30,8 +30,7 @@ msgstr "nombre de archivo o id del escritorio"
 msgid "file name"
 msgstr "nombre de archivo"
 
-#: ../src/lxshortcut.c:147
-#: ../data/choose-icon.glade.h:3
+#: ../src/lxshortcut.c:147 ../data/choose-icon.glade.h:3
 msgid "Image files"
 msgstr "Los archivos de imagen"
 
@@ -94,4 +93,3 @@ msgstr "Elija un icono"
 #: ../data/choose-icon.glade.h:4
 msgid "System icon theme"
 msgstr "Icono del tema del sistema"
-
