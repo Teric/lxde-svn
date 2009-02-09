@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: lxsession-edit\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-12-02 16:52+0800\n"
+"POT-Creation-Date: 2009-02-09 02:34+0100\n"
 "PO-Revision-Date: 2009-01-19 09:44+0300\n"
 "Last-Translator: Mattias Põldaru <mahfiaz gmail com>\n"
 "Language-Team: Gnome Estonian Translation Team <gnome-et linux ee>\n"
@@ -16,45 +16,22 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: src/lxsession-edit.c:360
+#: ../src/lxsession-edit.c:360
 msgid "Enabled"
 msgstr "Lubatud"
 
-#: src/lxsession-edit.c:365
+#: ../src/lxsession-edit.c:365
 msgid "Application"
 msgstr "Rakendus"
 
-#: src/lxsession-edit.c:373
+#: ../src/lxsession-edit.c:373
 msgid "Comment"
 msgstr "Kommentaar"
 
-#: data/lxsession-edit.glade:9
-msgid "Desktop Session Settings"
-msgstr "Töölauaseansi sätted"
-
-#: data/lxsession-edit.glade:97
-msgid "Applications automaticlly started after entering desktop:"
-msgstr "Koos töölauaga käivitatakse rakendused:"
-
-#: data/lxsession-edit.glade:214
-msgid "Automatically Started Applications"
-msgstr "Isekäivituvad rakendused"
-
-#: data/lxsession-edit.glade:250
-msgid "Window Manager: "
-msgstr "Aknahaldur:"
-
-#: data/lxsession-edit.glade:275
+#: ../data/lxsession-edit.glade.h:1
 msgid ""
-"Command line used to launch window manager\n"
-"(The default window manager command for LXDE should be openbox-lxde)"
-msgstr ""
-"Aknahalduri käivistamise käsurida\n"
-"(vaikimisi LXDE aknahaldur on openbox-lxde)"
-
-#: data/lxsession-edit.glade:326
-msgid ""
-"<b>Warning:</b> Do <b>NOT</b> touch this unless you know exactly what you are doing.\n"
+"<b>Warning:</b> Do <b>NOT</b> touch this unless you know exactly what you "
+"are doing.\n"
 "\n"
 "<b>NOTE:</b> This setting will take effect on next login."
 msgstr ""
@@ -62,7 +39,31 @@ msgstr ""
 "\n"
 "<b>Märkus:</b> Selle sätte muutmine avaldub järgmisel sisselogimisel."
 
-#: data/lxsession-edit.glade:366
+#: ../data/lxsession-edit.glade.h:4
 msgid "Advanced Options"
 msgstr "Laiendatud valikud"
 
+#: ../data/lxsession-edit.glade.h:5
+#, fuzzy
+msgid "Applications automatically started after entering desktop:"
+msgstr "Koos töölauaga käivitatakse rakendused:"
+
+#: ../data/lxsession-edit.glade.h:6
+msgid "Automatically Started Applications"
+msgstr "Isekäivituvad rakendused"
+
+#: ../data/lxsession-edit.glade.h:7
+msgid ""
+"Command line used to launch window manager\n"
+"(The default window manager command for LXDE should be openbox-lxde)"
+msgstr ""
+"Aknahalduri käivistamise käsurida\n"
+"(vaikimisi LXDE aknahaldur on openbox-lxde)"
+
+#: ../data/lxsession-edit.glade.h:9
+msgid "Desktop Session Settings"
+msgstr "Töölauaseansi sätted"
+
+#: ../data/lxsession-edit.glade.h:10
+msgid "Window Manager: "
+msgstr "Aknahaldur:"

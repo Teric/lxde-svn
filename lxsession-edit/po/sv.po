@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: lxsession-edit\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-01-05 01:30+0100\n"
+"POT-Creation-Date: 2009-02-09 02:34+0100\n"
 "PO-Revision-Date: 2009-01-05 12:38+0100\n"
 "Last-Translator: Daniel Nylander <po@danielnylander.se>\n"
 "Language-Team: Swedish <tp-sv@listor.tp-sv.se>\n"
@@ -29,13 +29,15 @@ msgstr "Kommentar"
 
 #: ../data/lxsession-edit.glade.h:1
 msgid ""
-"<b>Warning:</b> Do <b>NOT</b> touch this unless you know exactly what you are doing.\n"
+"<b>Warning:</b> Do <b>NOT</b> touch this unless you know exactly what you "
+"are doing.\n"
 "\n"
 "<b>NOTE:</b> This setting will take effect on next login."
 msgstr ""
 "<b>Varning:</b> Rör <b>INTE</b> denna såvida du inte vet exakt vad du gör.\n"
 "\n"
-"<b>OBSERVERA:</b> Denna inställning kommer att bli aktiv vid nästa inloggning."
+"<b>OBSERVERA:</b> Denna inställning kommer att bli aktiv vid nästa "
+"inloggning."
 
 #: ../data/lxsession-edit.glade.h:4
 msgid "Advanced Options"
@@ -64,4 +66,3 @@ msgstr "Inställningar för skrivbordssession"
 #: ../data/lxsession-edit.glade.h:10
 msgid "Window Manager: "
 msgstr "Fönsterhanterare: "
-

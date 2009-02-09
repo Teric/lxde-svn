@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: LXSession-edit\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-01-26 20:22+0200\n"
+"POT-Creation-Date: 2009-02-09 02:34+0100\n"
 "PO-Revision-Date: 2009-01-26 20:30+0200\n"
 "Last-Translator: Ahmad Farghal <ahmad.farghal@gmail.com>\n"
 "Language-Team: Arabic\n"
@@ -29,7 +29,8 @@ msgstr "التعليق"
 
 #: ../data/lxsession-edit.glade.h:1
 msgid ""
-"<b>Warning:</b> Do <b>NOT</b> touch this unless you know exactly what you are doing.\n"
+"<b>Warning:</b> Do <b>NOT</b> touch this unless you know exactly what you "
+"are doing.\n"
 "\n"
 "<b>NOTE:</b> This setting will take effect on next login."
 msgstr ""
@@ -64,6 +65,3 @@ msgstr "إعدادات جلسة سطح المكتب"
 #: ../data/lxsession-edit.glade.h:10
 msgid "Window Manager: "
 msgstr "مدير النوافذ:"
-
-
- 	  	 
