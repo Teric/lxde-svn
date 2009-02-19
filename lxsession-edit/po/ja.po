@@ -1,63 +1,69 @@
-# SOME DESCRIPTIVE TITLE.
-# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
-# This file is distributed under the same license as the PACKAGE package.
-# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+# Japanese translations for lxsession-edit package
+# lxsession-edit パッケージに対する日本語訳.
+# Copyright (C) 2008-2009 THE lxsession-edit'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the lxsession-edit package.
+# Hironao Komatsu <hironao@users.sourceforge.net>, 2009.
 #
-#, fuzzy
 msgid ""
 msgstr ""
-"Project-Id-Version: PACKAGE VERSION\n"
+"Project-Id-Version: lxsession-edit 0.1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-02-09 02:34+0100\n"
-"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
-"Language-Team: LANGUAGE <LL@li.org>\n"
+"POT-Creation-Date: 2008-12-02 16:52+0800\n"
+"PO-Revision-Date: 2009-02-18 12:49+0900\n"
+"Last-Translator: Hironao Komatsu <hironao@users.sourceforge.net>\n"
+"Language-Team: Japanese <translation-team-ja@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
-"Content-Type: text/plain; charset=CHARSET\n"
+"Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
 
-#: ../src/lxsession-edit.c:360
+#: src/lxsession-edit.c:360
 msgid "Enabled"
-msgstr ""
+msgstr "有効"
 
-#: ../src/lxsession-edit.c:365
+#: src/lxsession-edit.c:365
 msgid "Application"
-msgstr ""
+msgstr "アプリケーション"
 
-#: ../src/lxsession-edit.c:373
+#: src/lxsession-edit.c:373
 msgid "Comment"
-msgstr ""
+msgstr "コメント"
 
-#: ../data/lxsession-edit.glade.h:1
+#: data/lxsession-edit.glade:9
+msgid "Desktop Session Settings"
+msgstr "デスクトップセッションの設定"
+
+#: data/lxsession-edit.glade:97
+msgid "Applications automaticlly started after entering desktop:"
+msgstr "デスクトップ環境下で自動的に開始するアプリケーション:"
+
+#: data/lxsession-edit.glade:214
+msgid "Automatically Started Applications"
+msgstr "自動的に開始するアプリケーション"
+
+#: data/lxsession-edit.glade:250
+msgid "Window Manager: "
+msgstr "ウィンドウマネージャ: "
+
+#: data/lxsession-edit.glade:275
+msgid ""
+"Command line used to launch window manager\n"
+"(The default window manager command for LXDE should be openbox-lxde)"
+msgstr ""
+"ウィンドウマネージャを立ち上げるコマンドライン\n"
+"(LXDE のデフォルトのウィンドウマネージャのコマンドは openbox-lxde です)"
+
+#: data/lxsession-edit.glade:326
 msgid ""
 "<b>Warning:</b> Do <b>NOT</b> touch this unless you know exactly what you "
 "are doing.\n"
 "\n"
 "<b>NOTE:</b> This setting will take effect on next login."
 msgstr ""
+"<b>警告:</b> 何をしているかよく分からないときはこれを<b>いじらないでください</b>。\n"
+"\n"
+"<b>NOTE:</b> この設定は次回のログインから有効です。"
 
-#: ../data/lxsession-edit.glade.h:4
+#: data/lxsession-edit.glade:366
 msgid "Advanced Options"
-msgstr ""
-
-#: ../data/lxsession-edit.glade.h:5
-msgid "Applications automatically started after entering desktop:"
-msgstr ""
-
-#: ../data/lxsession-edit.glade.h:6
-msgid "Automatically Started Applications"
-msgstr ""
-
-#: ../data/lxsession-edit.glade.h:7
-msgid ""
-"Command line used to launch window manager\n"
-"(The default window manager command for LXDE should be openbox-lxde)"
-msgstr ""
-
-#: ../data/lxsession-edit.glade.h:9
-msgid "Desktop Session Settings"
-msgstr ""
-
-#: ../data/lxsession-edit.glade.h:10
-msgid "Window Manager: "
-msgstr ""
+msgstr "高度な設定"
