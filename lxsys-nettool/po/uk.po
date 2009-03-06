@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2009-02-09 02:47+0100\n"
-"PO-Revision-Date: 2009-03-04 21:57+0100\n"
+"PO-Revision-Date: 2009-03-06 00:04+0100\n"
 "Last-Translator: Y P <yupadmin@gmail.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -33,7 +33,7 @@ msgstr "IP адреса:"
 
 #: ../src/lxsys-nettool.c:100
 msgid "Netmask:"
-msgstr "Маска сітки:"
+msgstr "Маска мережі:"
 
 #: ../src/lxsys-nettool.c:110
 msgid "Gateway:"
