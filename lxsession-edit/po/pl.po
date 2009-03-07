@@ -3,13 +3,14 @@
 # This file is distributed under the same license as the PACKAGE package.
 #
 # Grzegorz Gibas <amigib@gmail.com>, 2009.
+# Artur Kruszewski <mazdac@gmail.com>, 2009.
 msgid ""
 msgstr ""
 "Project-Id-Version: lxsession-edit\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2009-02-09 02:34+0100\n"
-"PO-Revision-Date: 2009-01-11 00:20+0100\n"
-"Last-Translator: Grzegorz Gibas <amigib@gmail.com>\n"
+"PO-Revision-Date: 2009-03-07 13:06-0000\n"
+"Last-Translator: Artur Kruszewski <mazdac@gmail.com>\n"
 "Language-Team: Polish\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -30,8 +31,7 @@ msgstr "Komentarz"
 
 #: ../data/lxsession-edit.glade.h:1
 msgid ""
-"<b>Warning:</b> Do <b>NOT</b> touch this unless you know exactly what you "
-"are doing.\n"
+"<b>Warning:</b> Do <b>NOT</b> touch this unless you know exactly what you are doing.\n"
 "\n"
 "<b>NOTE:</b> This setting will take effect on next login."
 msgstr ""
@@ -44,9 +44,8 @@ msgid "Advanced Options"
 msgstr "Zaawansowane Opcje"
 
 #: ../data/lxsession-edit.glade.h:5
-#, fuzzy
 msgid "Applications automatically started after entering desktop:"
-msgstr "Programy uruchamiane automatycznie po zalogowaniu:"
+msgstr "Programy uruchamiane automatycznie po wejściu na pulpit:"
 
 #: ../data/lxsession-edit.glade.h:6
 msgid "Automatically Started Applications"
@@ -67,3 +66,6 @@ msgstr "Ustawienia sesji"
 #: ../data/lxsession-edit.glade.h:10
 msgid "Window Manager: "
 msgstr "Menedżer Okien: "
+
+
+ 	  	 
