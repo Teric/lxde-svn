@@ -1,0 +1,35 @@
+# Indonesian translations for lxpanel-volumealsa package.
+# Copyright (C) 2009 THE lxpanel-volumealsa'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the lxpanel-volumealsa package.
+# Andhika Padmawan <andhika.padmawan@gmail.com>, 2009.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: lxpanel-volumealsa\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2009-02-06 22:12+0100\n"
+"PO-Revision-Date: 2009-03-09 17:21+0700\n"
+"Last-Translator: Andhika Padmawan <andhika.padmawan@gmail.com>\n"
+"Language-Team: Indonesian <translation-team-id@lists.sourceforge.net>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#. create frame
+#: ../src/volumealsa.c:306
+msgid "Volume"
+msgstr "Volume"
+
+#: ../src/volumealsa.c:323
+msgid "Mute"
+msgstr "Diam"
+
+#. FIXME: display current level in tooltip. ex: "Volume Control: 80%"
+#: ../src/volumealsa.c:396
+msgid "Volume control"
+msgstr "Kendali volume"
+
+#: ../src/volumealsa.c:410
+msgid "Volume Control"
+msgstr "Kendali Volume"
+

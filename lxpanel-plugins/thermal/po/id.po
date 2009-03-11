@@ -1,0 +1,59 @@
+# Indonesian translations for lxpanel-thermal package.
+# Copyright (C) 2009 THE lxpanel-thermal'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the lxpanel-thermal package.
+# Andhika Padmawan <andhika.padmawan@gmail.com>, 2009.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: lxpanel-thermal\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2009-02-06 22:12+0100\n"
+"PO-Revision-Date: 2009-03-09 17:17+0700\n"
+"Last-Translator: Andhika Padmawan <andhika.padmawan@gmail.com>\n"
+"Language-Team: Indonesian <translation-team-id@lists.sourceforge.net>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: ../src/thermal.c:291
+msgid "Normal"
+msgstr "Normal"
+
+#: ../src/thermal.c:292
+msgid "Warning1"
+msgstr "Peringatan1"
+
+#: ../src/thermal.c:293
+msgid "Warning2"
+msgstr "Peringatan2"
+
+#: ../src/thermal.c:294
+msgid "Automatic sensor location"
+msgstr "Lokasi sensor otomatis"
+
+#: ../src/thermal.c:295
+msgid "Sensor"
+msgstr "Sensor"
+
+#: ../src/thermal.c:296
+msgid "Automatic temperature levels"
+msgstr "Level temperatur otomatis"
+
+#: ../src/thermal.c:297
+msgid "Warning1 Temperatur"
+msgstr "Peringatan1 Temperatur"
+
+#: ../src/thermal.c:298
+msgid "Warning2 Temperatur"
+msgstr "Peringatan2 Temperatur"
+
+#: ../src/thermal.c:340
+msgid "Temperature Monitor"
+msgstr "Monitor Temperatur"
+
+#: ../src/thermal.c:342
+msgid "Display system temperature, by kesler.daniel@gmail.com"
+msgstr "Tampilkan temperatur sistem, oleh kesler.daniel@gmail.com"
+
+
+ 	  	 

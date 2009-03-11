@@ -1,0 +1,39 @@
+# Indonesian translations for lxpanel-kbled package.
+# Copyright (C) 2009 THE lxpanel-kbled'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the lxpanel-kbled package.
+# Andhika Padmawan <andhika.padmawan@gmail.com>, 2009.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: lxpanel-kbled\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2009-02-06 22:11+0100\n"
+"PO-Revision-Date: 2009-03-09 17:10+0700\n"
+"Last-Translator: Andhika Padmawan <andhika.padmawan@gmail.com>\n"
+"Language-Team: Indonesian <translation-team-id@lists.sourceforge.net>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: ../src/kbled.c:273
+msgid "Show CapsLock"
+msgstr "Tampilkan CapsLock"
+
+#: ../src/kbled.c:274
+msgid "Show NumLock"
+msgstr "Tampilkan NumLock"
+
+#: ../src/kbled.c:275
+msgid "Show ScrollLock"
+msgstr "Tampilkan ScrollLock"
+
+#: ../src/kbled.c:285
+msgid "Keyboard Led"
+msgstr "Led Papan Ketik"
+
+#: ../src/kbled.c:287
+msgid "Indicators for CapsLock, NumLock, and ScrollLock keys"
+msgstr "Indikator untuk tombol CapsLock, NumLock, dan ScrollLock"
+
+
+ 	  	 
