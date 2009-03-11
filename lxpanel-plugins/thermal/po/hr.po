@@ -1,0 +1,54 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: lxpanel-thermal_hr\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2009-02-06 22:12+0100\n"
+"PO-Revision-Date: \n"
+"Last-Translator: Boljsa <asjlob AT vip.hr>\n"
+"Language-Team:  <asjlob AT vip.hr>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=iso-8859-2\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Poedit-Language: Croatian\n"
+"X-Poedit-Country: CROATIA\n"
+
+#: ../src/thermal.c:291
+msgid "Normal"
+msgstr "Normalno"
+
+#: ../src/thermal.c:292
+msgid "Warning1"
+msgstr "Upozorenje1"
+
+#: ../src/thermal.c:293
+msgid "Warning2"
+msgstr "Upozorenje2"
+
+#: ../src/thermal.c:294
+msgid "Automatic sensor location"
+msgstr "Automatska lokacija senzora"
+
+#: ../src/thermal.c:295
+msgid "Sensor"
+msgstr "Senzor"
+
+#: ../src/thermal.c:296
+msgid "Automatic temperature levels"
+msgstr "Automatski nivoi temperatura"
+
+#: ../src/thermal.c:297
+msgid "Warning1 Temperatur"
+msgstr "Upozorenje1 Temperatura"
+
+#: ../src/thermal.c:298
+msgid "Warning2 Temperatur"
+msgstr "Upozorenje2 Temperatura"
+
+#: ../src/thermal.c:340
+msgid "Temperature Monitor"
+msgstr "Monitor Temperature"
+
+#: ../src/thermal.c:342
+msgid "Display system temperature, by kesler.daniel@gmail.com"
+msgstr "Prika¾i temperaturu sustava, od kesler.daniel@gmail.com"
+

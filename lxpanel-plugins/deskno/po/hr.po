@@ -1,0 +1,22 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: lxpanel-deskno_hr\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2009-02-06 22:09+0100\n"
+"PO-Revision-Date: \n"
+"Last-Translator: Boljsa <asjlob AT vip.hr>\n"
+"Language-Team:  <asjlob AT vip.hr>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=iso-8859-2\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Poedit-Language: Croatian\n"
+"X-Poedit-Country: CROATIA\n"
+
+#: ../src/deskno.c:92
+msgid "Desktop No / Workspace Name"
+msgstr "Broj Radne Povr퉕ne / Ime Radne Povr퉕ne"
+
+#: ../src/deskno.c:94
+msgid "Display workspace number, by cmeury@users.sf.net"
+msgstr "Prika푝 broj radne povr퉕ne, od cmeury@users.sf.net"
+

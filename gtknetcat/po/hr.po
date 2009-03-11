@@ -1,111 +1,110 @@
-# SOME DESCRIPTIVE TITLE.
-# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
-# This file is distributed under the same license as the PACKAGE package.
-# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
-#
-#, fuzzy
 msgid ""
 msgstr ""
-"Project-Id-Version: PACKAGE VERSION\n"
+"Project-Id-Version: gtknetcat_hr\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2009-02-06 23:13+0100\n"
-"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
-"Language-Team: LANGUAGE <LL@li.org>\n"
+"PO-Revision-Date: \n"
+"Last-Translator: Boljsa <asjlob AT vip.hr>\n"
+"Language-Team:  <asjlob AT vip.hr>\n"
 "MIME-Version: 1.0\n"
-"Content-Type: text/plain; charset=CHARSET\n"
+"Content-Type: text/plain; charset=iso-8859-2\n"
 "Content-Transfer-Encoding: 8bit\n"
+"X-Poedit-Language: Croatian\n"
+"X-Poedit-Country: CROATIA\n"
 
 #. Due to bugs of Glade, titles are not automatically translated
 #: ../src/gtknetcat.py:22
 msgid "File Transmission"
-msgstr ""
+msgstr "Prijenos Podataka"
 
 #: ../src/gtknetcat.py:22
 msgid "Send Files"
-msgstr ""
+msgstr "Po¹alji Datoteke"
 
 #: ../src/gtknetcat.py:22
 msgid "Receive Files"
-msgstr ""
+msgstr "Prihvati Datoteke"
 
 #: ../src/gtknetcat.py:130
 msgid "File transmission failed!"
-msgstr ""
+msgstr "Prijenos datoteka neuspje¹an!"
 
 #: ../src/gtknetcat.py:133
 msgid "Failed"
-msgstr ""
+msgstr "Neuspje¹no"
 
 #: ../src/gtknetcat.py:135
 msgid "Finished"
-msgstr ""
+msgstr "Zavr¹eno"
 
 #: ../src/gtknetcat.py:145
 msgid "Receiving..."
-msgstr ""
+msgstr "Primanje..."
 
 #. ACTION_SEND
 #: ../src/gtknetcat.py:154
 msgid "Sending..."
-msgstr ""
+msgstr "Slanje..."
 
 #: ../src/gtknetcat.py:181
 msgid "Execute command:"
-msgstr ""
+msgstr "Izvr¹i naredbu:"
 
 #: ../src/gtknetcat.py:181
 msgid "Processing..."
-msgstr ""
+msgstr "Obrada..."
 
 #: ../src/gtknetcat.py:209
 msgid "Path"
-msgstr ""
+msgstr "Putanja"
 
 #: ../src/gtknetcat.py:232
 msgid "Select files to send"
-msgstr ""
+msgstr "Odaberite datoteke za slanje"
 
 #: ../data/wizard.glade.h:1
 msgid "Add File"
-msgstr ""
+msgstr "Dodaj Datoteku"
 
 #: ../data/wizard.glade.h:2
 msgid "Add Folder"
-msgstr ""
+msgstr "Dodaj Direktorij"
 
 #: ../data/wizard.glade.h:3
 msgid "Destination Host:"
-msgstr ""
+msgstr "Odredi¹ni Host:"
 
 #: ../data/wizard.glade.h:4
 msgid "Files to Send:"
-msgstr ""
+msgstr "Datoteke za Slanje:"
 
 #: ../data/wizard.glade.h:5
 msgid "Inter-Computer File Transmission"
-msgstr ""
+msgstr "Inter-Raèunalni Prijenos Podataka"
 
 #: ../data/wizard.glade.h:6
 msgid "Listen on Port:"
-msgstr ""
+msgstr "Slu¹aj na Pristupnoj toèki:"
 
 #: ../data/wizard.glade.h:7
 msgid "Port:"
-msgstr ""
+msgstr "Pristupna toèka:"
 
 #: ../data/wizard.glade.h:8
 msgid "Receive files from another computer"
-msgstr ""
+msgstr "Prihvati datoteke sa drugog raèunala"
 
 #: ../data/wizard.glade.h:9
 msgid "Save to Folder: "
-msgstr ""
+msgstr "Spremi u Direktorij:"
 
 #: ../data/wizard.glade.h:10
 msgid "Send files to another computer"
-msgstr ""
+msgstr "©alji datoteke na drugo raèunalo"
 
 #: ../data/wizard.glade.h:11
 msgid "What do you want to do?"
-msgstr ""
+msgstr "©to ¾elite uèiniti?"
+
+
+ 	  	 

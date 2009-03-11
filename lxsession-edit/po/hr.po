@@ -1,63 +1,64 @@
-# SOME DESCRIPTIVE TITLE.
-# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
-# This file is distributed under the same license as the PACKAGE package.
-# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
-#
-#, fuzzy
 msgid ""
 msgstr ""
-"Project-Id-Version: PACKAGE VERSION\n"
+"Project-Id-Version: lxsession-edit_hr\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2009-02-09 02:34+0100\n"
-"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
-"Language-Team: LANGUAGE <LL@li.org>\n"
+"PO-Revision-Date: \n"
+"Last-Translator: Boljsa <asjlob AT vip.hr>\n"
+"Language-Team:  <asjlob AT vip.hr>\n"
 "MIME-Version: 1.0\n"
-"Content-Type: text/plain; charset=CHARSET\n"
+"Content-Type: text/plain; charset=iso-8859-2\n"
 "Content-Transfer-Encoding: 8bit\n"
+"X-Poedit-Language: Croatian\n"
+"X-Poedit-Country: CROATIA\n"
 
 #: ../src/lxsession-edit.c:360
 msgid "Enabled"
-msgstr ""
+msgstr "Omoguæeno"
 
 #: ../src/lxsession-edit.c:365
 msgid "Application"
-msgstr ""
+msgstr "Aplikacija"
 
 #: ../src/lxsession-edit.c:373
 msgid "Comment"
-msgstr ""
+msgstr "Komentar"
 
 #: ../data/lxsession-edit.glade.h:1
 msgid ""
-"<b>Warning:</b> Do <b>NOT</b> touch this unless you know exactly what you "
-"are doing.\n"
+"<b>Warning:</b> Do <b>NOT</b> touch this unless you know exactly what you are doing.\n"
 "\n"
 "<b>NOTE:</b> This setting will take effect on next login."
 msgstr ""
+"<b>Upozorenje:</b>  <b>NE</b> diraj ovo osim ako toèno zna¹ ¹to radi¹.\n"
+"\n"
+"<b>NAPOMENA:</b> Ova postavka æe se primjeniti pri sljedeæoj prijavi."
 
 #: ../data/lxsession-edit.glade.h:4
 msgid "Advanced Options"
-msgstr ""
+msgstr "Napredne Postavke"
 
 #: ../data/lxsession-edit.glade.h:5
 msgid "Applications automatically started after entering desktop:"
-msgstr ""
+msgstr "Aplikacije koje se automatski pokreæu nakon ulaska na radnu povr¹inu:"
 
 #: ../data/lxsession-edit.glade.h:6
 msgid "Automatically Started Applications"
-msgstr ""
+msgstr "Automatski Pokrenute Aplikacije"
 
 #: ../data/lxsession-edit.glade.h:7
 msgid ""
 "Command line used to launch window manager\n"
 "(The default window manager command for LXDE should be openbox-lxde)"
 msgstr ""
+"Komandna linija navikla na pokretanje upravitelja prozora\n"
+"(Standardna naredba za upravitelj prpzora za LXDE trebala bi biti openbox-lxde)"
 
 #: ../data/lxsession-edit.glade.h:9
 msgid "Desktop Session Settings"
-msgstr ""
+msgstr "Postavke Sesije Radne Povr¹ine"
 
 #: ../data/lxsession-edit.glade.h:10
 msgid "Window Manager: "
-msgstr ""
+msgstr "Upravitelj Prozora:"
+

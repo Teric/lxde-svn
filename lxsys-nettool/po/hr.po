@@ -1,56 +1,53 @@
-# SOME DESCRIPTIVE TITLE.
-# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
-# This file is distributed under the same license as the PACKAGE package.
-# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
-#
-#, fuzzy
 msgid ""
 msgstr ""
-"Project-Id-Version: PACKAGE VERSION\n"
+"Project-Id-Version: lxsys-nettool_hr\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2009-02-09 02:47+0100\n"
-"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
-"Language-Team: LANGUAGE <LL@li.org>\n"
+"PO-Revision-Date: \n"
+"Last-Translator: Boljsa <asjlob AT vip.hr>\n"
+"Language-Team:  <asjlob AT vip.hr>\n"
 "MIME-Version: 1.0\n"
-"Content-Type: text/plain; charset=CHARSET\n"
+"Content-Type: text/plain; charset=iso-8859-2\n"
 "Content-Transfer-Encoding: 8bit\n"
+"X-Poedit-Language: Croatian\n"
+"X-Poedit-Country: CROATIA\n"
 
 #. generate title of dialog
 #: ../src/lxsys-nettool.c:65
 #, c-format
 msgid "%s Settings"
-msgstr ""
+msgstr "%s Postavke"
 
 #. create General page
 #: ../src/lxsys-nettool.c:85
 msgid "General"
-msgstr ""
+msgstr "Osnovno"
 
 #: ../src/lxsys-nettool.c:90
 msgid "IP Address:"
-msgstr ""
+msgstr "IP Adresa:"
 
 #: ../src/lxsys-nettool.c:100
 msgid "Netmask:"
-msgstr ""
+msgstr "Netmaska:"
 
 #: ../src/lxsys-nettool.c:110
 msgid "Gateway:"
-msgstr ""
+msgstr "Ulaz:"
 
 #: ../src/lxsys-nettool.c:120
 msgid "Name Server:"
-msgstr ""
+msgstr "Ime Servera:"
 
 #: ../src/lxsys-nettool.c:134
 msgid "_Apply"
-msgstr ""
+msgstr "_Prihvati"
 
 #: ../src/lxsys-nettool.c:135
 msgid "_OK"
-msgstr ""
+msgstr "_OK"
 
 #: ../src/lxsys-nettool.c:136
 msgid "_Cancel"
-msgstr ""
+msgstr "_Odustani"
+

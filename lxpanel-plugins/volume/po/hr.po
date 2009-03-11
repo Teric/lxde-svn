@@ -1,0 +1,29 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: lxpanel-volume_hr\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2009-02-06 22:12+0100\n"
+"PO-Revision-Date: \n"
+"Last-Translator: Boljsa <asjlob AT vip.hr>\n"
+"Language-Team:  <asjlob AT vip.hr>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=iso-8859-2\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Poedit-Language: Croatian\n"
+"X-Poedit-Country: CROATIA\n"
+
+#. FIXME: display current level in tooltip. ex: "Volume Control: 80%"
+#: ../src/volume.c:299
+msgid "Volume control"
+msgstr "Kontrola glasnoæe"
+
+#: ../src/volume.c:311
+msgid "Volume Control"
+msgstr "Kontrola Glasnoæe"
+
+#: ../src/volume-impl.c:109
+msgid "Volume"
+msgstr "Glasnoæa"
+
+
+ 	  	 
