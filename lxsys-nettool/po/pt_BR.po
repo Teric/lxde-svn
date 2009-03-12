@@ -1,17 +1,17 @@
-# SOME DESCRIPTIVE TITLE.
-# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
-# This file is distributed under the same license as the PACKAGE package.
-# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+# Brazilian Translations for lxsys-nettool package.
+# Copyright (C) 2009 The lxsys-netool authors.
+# This file is distributed under the same license as the lxsys-netool package.
+# Henrique P. Machado <zehrique@gmail.com>, 2009.
 #
-#, fuzzy
+
 msgid ""
 msgstr ""
-"Project-Id-Version: PACKAGE VERSION\n"
+"Project-Id-Version: 0.1\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2009-02-09 02:47+0100\n"
-"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
-"Language-Team: LANGUAGE <LL@li.org>\n"
+"PO-Revision-Date: 2009-03-11 19:43-0300\n"
+"Last-Translator: Henrique P. Machado <zehrique@gmail.com>\n"
+"Language-Team: Brazilian Team <ldp-br@bazar2.conectiva.com.br>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -20,37 +20,37 @@ msgstr ""
 #: ../src/lxsys-nettool.c:65
 #, c-format
 msgid "%s Settings"
-msgstr ""
+msgstr "%s - Configurações"
 
 #. create General page
 #: ../src/lxsys-nettool.c:85
 msgid "General"
-msgstr ""
+msgstr "Geral"
 
 #: ../src/lxsys-nettool.c:90
 msgid "IP Address:"
-msgstr ""
+msgstr "Endereço IP:"
 
 #: ../src/lxsys-nettool.c:100
 msgid "Netmask:"
-msgstr ""
+msgstr "Máscara de rede:"
 
 #: ../src/lxsys-nettool.c:110
 msgid "Gateway:"
-msgstr ""
+msgstr "Gateway:"
 
 #: ../src/lxsys-nettool.c:120
 msgid "Name Server:"
-msgstr ""
+msgstr "Servidor de nomes:"
 
 #: ../src/lxsys-nettool.c:134
 msgid "_Apply"
-msgstr ""
+msgstr "_Aplicar"
 
 #: ../src/lxsys-nettool.c:135
 msgid "_OK"
-msgstr ""
+msgstr "_OK"
 
 #: ../src/lxsys-nettool.c:136
 msgid "_Cancel"
-msgstr ""
+msgstr "_Cancelar"
