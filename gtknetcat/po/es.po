@@ -9,19 +9,20 @@ msgstr ""
 "Project-Id-Version: gtknetcat\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2009-02-06 23:12+0100\n"
-"PO-Revision-Date: 2008-12-09 21:23-0500\n"
-"Last-Translator: Julio Napurí Carlos <julionc@gmail.com>\n"
+"PO-Revision-Date: 2009-03-22 21:52+0100\n"
+"Last-Translator: Guillermo Iguaran <johnnyprez@gmail.com>\n"
 "Language-Team: Spanish <es@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Poedit-Language: Spanish\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Pootle 1.1.0\n"
+"X-Poedit-Language: Spanish\n"
 
 #. Due to bugs of Glade, titles are not automatically translated
 #: ../src/gtknetcat.py:22
 msgid "File Transmission"
-msgstr "Transmisión de archivo"
+msgstr "Transferencia de archivo"
 
 #: ../src/gtknetcat.py:22
 msgid "Send Files"
@@ -33,7 +34,7 @@ msgstr "Archivos recibidos"
 
 #: ../src/gtknetcat.py:130
 msgid "File transmission failed!"
-msgstr "¡El envío del archivo ha fallado!"
+msgstr "¡La transferencia del archivo ha fallado!"
 
 #: ../src/gtknetcat.py:133
 msgid "Failed"
@@ -45,12 +46,12 @@ msgstr "Terminado"
 
 #: ../src/gtknetcat.py:145
 msgid "Receiving..."
-msgstr "RRecibiendo..."
+msgstr "Recibiendo..."
 
 #. ACTION_SEND
 #: ../src/gtknetcat.py:154
 msgid "Sending..."
-msgstr "Enviando."
+msgstr "Enviando..."
 
 #: ../src/gtknetcat.py:181
 msgid "Execute command:"
@@ -58,7 +59,7 @@ msgstr "Ejecutar comando:"
 
 #: ../src/gtknetcat.py:181
 msgid "Processing..."
-msgstr "Procesando."
+msgstr "Procesando..."
 
 #: ../src/gtknetcat.py:209
 msgid "Path"
@@ -86,7 +87,7 @@ msgstr "Archivos a enviar:"
 
 #: ../data/wizard.glade.h:5
 msgid "Inter-Computer File Transmission"
-msgstr "Transmisión de archivos entre computadoras"
+msgstr "Transferencia de archivos entre computadoras"
 
 #: ../data/wizard.glade.h:6
 msgid "Listen on Port:"
