@@ -9,13 +9,14 @@ msgstr ""
 "Project-Id-Version: lxshortcut\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2009-02-09 02:43+0100\n"
-"PO-Revision-Date: 2008-12-09 21:25-0500\n"
-"Last-Translator: Julio Napurí Carlos <julionc@gmail.com>\n"
+"PO-Revision-Date: 2009-03-22 23:45+0100\n"
+"Last-Translator: Guillermo Iguaran <johnnyprez@gmail.com>\n"
 "Language-Team: Spanish <es@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Pootle 1.1.0\n"
 "X-Poedit-Language: Spanish\n"
 
 #: ../src/lxshortcut.c:49
@@ -72,7 +73,7 @@ msgstr "Ejecutar en emulador de terminal"
 
 #: ../data/lxshortcut.glade.h:8
 msgid "Tooltip:"
-msgstr "Consejo"
+msgstr "Consejo:"
 
 #: ../data/lxshortcut.glade.h:9
 msgid "Use startup notification"
