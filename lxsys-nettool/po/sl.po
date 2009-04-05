@@ -1,0 +1,54 @@
+﻿msgid ""
+msgstr ""
+"Project-Id-Version: lxsys-nettool\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2009-02-09 02:47+0100\n"
+"PO-Revision-Date: \n"
+"Last-Translator: Matej <paxmanpwnz@gmail.com>\n"
+"Language-Team:  <paxmanpwnz@gmail.com>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=4; plural=(n%100==1 ? 0 : n%100==2 ? 1 : n%100==3 || n%100==4 ? 2 : 3);\n"
+"X-Poedit-Language: Slovenian\n"
+"X-Poedit-Country: SLOVENIA\n"
+
+#. generate title of dialog
+#: ../src/lxsys-nettool.c:65
+#, c-format
+msgid "%s Settings"
+msgstr "%s Nastavitve"
+
+#. create General page
+#: ../src/lxsys-nettool.c:85
+msgid "General"
+msgstr "Splošno"
+
+#: ../src/lxsys-nettool.c:90
+msgid "IP Address:"
+msgstr "IP naslov:"
+
+#: ../src/lxsys-nettool.c:100
+msgid "Netmask:"
+msgstr "Omrežna maska:"
+
+#: ../src/lxsys-nettool.c:110
+msgid "Gateway:"
+msgstr "Prehod:"
+
+#: ../src/lxsys-nettool.c:120
+msgid "Name Server:"
+msgstr "Imenski strežnik:"
+
+#: ../src/lxsys-nettool.c:134
+msgid "_Apply"
+msgstr "_Uporabi"
+
+#: ../src/lxsys-nettool.c:135
+msgid "_OK"
+msgstr "_V redu"
+
+#: ../src/lxsys-nettool.c:136
+msgid "_Cancel"
+msgstr "_Prekliči"
+
