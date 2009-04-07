@@ -3,109 +3,109 @@
 # This file is distributed under the same license as the PACKAGE package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 #
-#, fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2009-02-06 23:13+0100\n"
-"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"PO-Revision-Date: 2009-04-06 10:25+0200\n"
+"Last-Translator: Anony mous <zadintuvas@gmail.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Pootle 1.1.0\n"
 
 #. Due to bugs of Glade, titles are not automatically translated
 #: ../src/gtknetcat.py:22
 msgid "File Transmission"
-msgstr ""
+msgstr "Failo perdavimas"
 
 #: ../src/gtknetcat.py:22
 msgid "Send Files"
-msgstr ""
+msgstr "Siųsti failus"
 
 #: ../src/gtknetcat.py:22
 msgid "Receive Files"
-msgstr ""
+msgstr "Priimti failus"
 
 #: ../src/gtknetcat.py:130
 msgid "File transmission failed!"
-msgstr ""
+msgstr "Nepavyko perduoti failo!"
 
 #: ../src/gtknetcat.py:133
 msgid "Failed"
-msgstr ""
+msgstr "Nepavyko"
 
 #: ../src/gtknetcat.py:135
 msgid "Finished"
-msgstr ""
+msgstr "Baigta"
 
 #: ../src/gtknetcat.py:145
 msgid "Receiving..."
-msgstr ""
+msgstr "Gaunama..."
 
 #. ACTION_SEND
 #: ../src/gtknetcat.py:154
 msgid "Sending..."
-msgstr ""
+msgstr "Siunčiama..."
 
 #: ../src/gtknetcat.py:181
 msgid "Execute command:"
-msgstr ""
+msgstr "Vykdyti komandą:"
 
 #: ../src/gtknetcat.py:181
 msgid "Processing..."
-msgstr ""
+msgstr "Apdorojama..."
 
 #: ../src/gtknetcat.py:209
 msgid "Path"
-msgstr ""
+msgstr "Kelias"
 
 #: ../src/gtknetcat.py:232
 msgid "Select files to send"
-msgstr ""
+msgstr "Pasirinkti failus siuntimui"
 
 #: ../data/wizard.glade.h:1
 msgid "Add File"
-msgstr ""
+msgstr "Pridėti failą"
 
 #: ../data/wizard.glade.h:2
 msgid "Add Folder"
-msgstr ""
+msgstr "Pridėti aplanką"
 
 #: ../data/wizard.glade.h:3
 msgid "Destination Host:"
-msgstr ""
+msgstr "Gavėjas:"
 
 #: ../data/wizard.glade.h:4
 msgid "Files to Send:"
-msgstr ""
+msgstr "Siųsti failus:"
 
 #: ../data/wizard.glade.h:5
 msgid "Inter-Computer File Transmission"
-msgstr ""
+msgstr "Tarpkompiuterinis failų perdavimas"
 
 #: ../data/wizard.glade.h:6
 msgid "Listen on Port:"
-msgstr ""
+msgstr "Klausytis jungties:"
 
 #: ../data/wizard.glade.h:7
 msgid "Port:"
-msgstr ""
+msgstr "Jungtis:"
 
 #: ../data/wizard.glade.h:8
 msgid "Receive files from another computer"
-msgstr ""
+msgstr "Priimti failus iš kito kompiuterio"
 
 #: ../data/wizard.glade.h:9
 msgid "Save to Folder: "
-msgstr ""
+msgstr "Išsaugoti į aplanką: "
 
 #: ../data/wizard.glade.h:10
 msgid "Send files to another computer"
-msgstr ""
+msgstr "Siųsti failus į kitą kompiuterį"
 
 #: ../data/wizard.glade.h:11
 msgid "What do you want to do?"
-msgstr ""
+msgstr "Ką norite daryti?"
