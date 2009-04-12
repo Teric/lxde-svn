@@ -340,9 +340,9 @@ APLIST *wireless_scanning(int iwsockfd, const char *ifname)
 		return NULL;
 	}
 
-	/* Init timeout value -> 250ms between set and first get */
+	/* Init timeout value -> 2500ms between set and first get */
 	tv.tv_sec = 0;
-	tv.tv_usec = 250000;
+	tv.tv_usec = 2500000;
 
 	wrq.u.data.pointer = NULL;
 	wrq.u.data.flags = 0;
@@ -458,7 +458,6 @@ realloc:
 			ap->info = wireless_parse_scanning_event(&iwe, ap->info);
 		}
 		while (ret > 0);
-		printf("\n");
 	}
 	else
 		printf("%-8.16s  No scan results\n\n", ifname);
