@@ -78,5 +78,3 @@ msgstr "Skift Bruger"
 msgid "_Logout"
 msgstr "_Log ud"
 
-#~ msgid "Save current session"
-#~ msgstr "Gem aktuel session"
