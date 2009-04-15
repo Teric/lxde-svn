@@ -3,91 +3,94 @@
 # This file is distributed under the same license as the PACKAGE package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 #
-#, fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2009-02-09 02:43+0100\n"
-"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"PO-Revision-Date: 2009-04-10 01:20+0200\n"
+"Last-Translator: Cilyan Olowen <gaknar@gmail.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Pootle 1.1.0\n"
 
 #: ../src/lxshortcut.c:49
 msgid "input file"
-msgstr ""
+msgstr "fichier d'entrée"
 
 #: ../src/lxshortcut.c:49
+#, fuzzy
 msgid "file name or desktop id"
-msgstr ""
+msgstr "nom du fichier ou identifiant du bureau"
 
 #: ../src/lxshortcut.c:50
 msgid "file name"
-msgstr ""
+msgstr "nom du fichier"
 
 #: ../src/lxshortcut.c:147 ../data/choose-icon.glade.h:3
+#, fuzzy
 msgid "Image files"
-msgstr ""
+msgstr "Fichiers images"
 
 #: ../src/lxshortcut.c:229
 msgid "Choose an executable file"
-msgstr ""
+msgstr "Sélectionnez un fichier exécutable"
 
 #: ../src/lxshortcut.c:235
 msgid "Executable files"
-msgstr ""
+msgstr "Fichier exécutables"
 
 #: ../data/lxshortcut.glade.h:1
 msgid "Advanced"
-msgstr ""
+msgstr "Avancé"
 
 #: ../data/lxshortcut.glade.h:2
+#, fuzzy
 msgid "Application Shortcut"
-msgstr ""
+msgstr "Raccourcis d'application"
 
 #: ../data/lxshortcut.glade.h:3
 msgid "Change _Icon"
-msgstr ""
+msgstr "Changer l'_icône"
 
 #: ../data/lxshortcut.glade.h:4
 msgid "Command:"
-msgstr ""
+msgstr "Commande :"
 
 #: ../data/lxshortcut.glade.h:5
 msgid "General"
-msgstr ""
+msgstr "Général"
 
 #: ../data/lxshortcut.glade.h:6
 msgid "Name:"
-msgstr ""
+msgstr "Nom :"
 
 #: ../data/lxshortcut.glade.h:7
 msgid "Runs in terminal emulator"
-msgstr ""
+msgstr "Lancer dans un terminal"
 
 #: ../data/lxshortcut.glade.h:8
 msgid "Tooltip:"
-msgstr ""
+msgstr "Infobulle :"
 
 #: ../data/lxshortcut.glade.h:9
 msgid "Use startup notification"
-msgstr ""
+msgstr "Notification de lancement"
 
 #: ../data/lxshortcut.glade.h:10
 msgid "_Browse..."
-msgstr ""
+msgstr "_Parcourir..."
 
 #: ../data/choose-icon.glade.h:1
 msgid "<b>Choose Icon From:</b>"
-msgstr ""
+msgstr "<b>Sélectionnez une icône à partir de :</b>"
 
 #: ../data/choose-icon.glade.h:2
 msgid "Choose An Icon..."
-msgstr ""
+msgstr "Sélectionner une icône..."
 
 #: ../data/choose-icon.glade.h:4
 msgid "System icon theme"
-msgstr ""
+msgstr "Thème d'icônes du système"
