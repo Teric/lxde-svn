@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: lxpanel-cpu_hr\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-02-06 22:08+0100\n"
+"POT-Creation-Date: 2009-04-15 22:39+0200\n"
 "PO-Revision-Date: \n"
 "Last-Translator: Boljsa <asjlob AT vip.hr>\n"
 "Language-Team:  <asjlob AT vip.hr>\n"
@@ -19,4 +19,3 @@ msgstr "Monitor Kori¹tenja CPU"
 #: ../src/cpu.c:220
 msgid "Display CPU usage"
 msgstr "Prika¾i kori¹tenje CPU"
-

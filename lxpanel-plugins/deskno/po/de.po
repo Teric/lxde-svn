@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-01-25 15:40+0100\n"
+"POT-Creation-Date: 2009-04-15 22:42+0200\n"
 "PO-Revision-Date: 2009-01-25 15:42+0100\n"
 "Last-Translator: Mario Blättermann <mariobl@gnome.org>\n"
 "Language-Team: German <translation@mailinglist.lxde.org>\n"
@@ -22,4 +22,3 @@ msgstr "Nummer/Name der Arbeitsfläche"
 #: ../src/deskno.c:94
 msgid "Display workspace number, by cmeury@users.sf.net"
 msgstr "Zeigt die Nummer der Arbeitsfläche an, von cmeury@users.sf.net"
-

@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-01-25 15:32+0100\n"
+"POT-Creation-Date: 2009-04-15 22:39+0200\n"
 "PO-Revision-Date: 2009-01-25 15:35+0100\n"
 "Last-Translator: Mario Blättermann <mariobl@gnome.org>\n"
 "Language-Team: German <translation@mailinglist.lxde.org>\n"
@@ -22,4 +22,3 @@ msgstr "CPU-Last-Überwachung"
 #: ../src/cpu.c:220
 msgid "Display CPU usage"
 msgstr "Zeigt die CPU-Benutzung an"
-

@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: lxpanel-netstat_hr\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-02-06 22:11+0100\n"
+"POT-Creation-Date: 2009-04-15 23:16+0200\n"
 "PO-Revision-Date: \n"
 "Last-Translator: Boljsa <asjlob AT vip.hr>\n"
 "Language-Team:  <asjlob AT vip.hr>\n"
@@ -42,9 +42,7 @@ msgstr "Mre¾ni kabel je odspojen"
 msgid "Connection has limited or no connectivity"
 msgstr "Veza je ogranièena ili je nema"
 
-#: ../src/netstat.c:304
-#: ../src/netstat.c:315
-#: ../src/netstat.c:326
+#: ../src/netstat.c:304 ../src/netstat.c:315 ../src/netstat.c:326
 msgid "IP Address:"
 msgstr "IP Adresa:"
 
@@ -52,39 +50,27 @@ msgstr "IP Adresa:"
 msgid "Remote IP:"
 msgstr "Daljinski IP:"
 
-#: ../src/netstat.c:306
-#: ../src/netstat.c:317
-#: ../src/netstat.c:328
+#: ../src/netstat.c:306 ../src/netstat.c:317 ../src/netstat.c:328
 msgid "Netmask:"
 msgstr "Mre¾na maska:"
 
-#: ../src/netstat.c:307
-#: ../src/netstat.c:319
-#: ../src/netstat.c:330
+#: ../src/netstat.c:307 ../src/netstat.c:319 ../src/netstat.c:330
 msgid "Activity"
 msgstr "Aktivnost"
 
-#: ../src/netstat.c:307
-#: ../src/netstat.c:319
-#: ../src/netstat.c:330
+#: ../src/netstat.c:307 ../src/netstat.c:319 ../src/netstat.c:330
 msgid "Sent"
 msgstr "Poslano"
 
-#: ../src/netstat.c:307
-#: ../src/netstat.c:319
-#: ../src/netstat.c:330
+#: ../src/netstat.c:307 ../src/netstat.c:319 ../src/netstat.c:330
 msgid "Received"
 msgstr "Primljeno"
 
-#: ../src/netstat.c:308
-#: ../src/netstat.c:320
-#: ../src/netstat.c:331
+#: ../src/netstat.c:308 ../src/netstat.c:320 ../src/netstat.c:331
 msgid "bytes"
 msgstr "bytes"
 
-#: ../src/netstat.c:309
-#: ../src/netstat.c:321
-#: ../src/netstat.c:332
+#: ../src/netstat.c:309 ../src/netstat.c:321 ../src/netstat.c:332
 msgid "packets"
 msgstr "paketi"
 
@@ -96,13 +82,11 @@ msgstr "Be¾ièno"
 msgid "Protocol:"
 msgstr "Protokol:"
 
-#: ../src/netstat.c:316
-#: ../src/netstat.c:327
+#: ../src/netstat.c:316 ../src/netstat.c:327
 msgid "Broadcast:"
 msgstr "Emitiranje:"
 
-#: ../src/netstat.c:318
-#: ../src/netstat.c:329
+#: ../src/netstat.c:318 ../src/netstat.c:329
 msgid "HW Address:"
 msgstr "HW Adresa:"
 
@@ -131,4 +115,3 @@ msgstr ""
 #: ../src/passwd_gui.c:99
 msgid "Encryption Key:"
 msgstr "©ifrirani Kljuè:"
-

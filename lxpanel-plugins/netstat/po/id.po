@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: lxpanel-netstat\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-02-06 22:11+0100\n"
+"POT-Creation-Date: 2009-04-15 23:16+0200\n"
 "PO-Revision-Date: 2009-03-09 17:14+0700\n"
 "Last-Translator: Andhika Padmawan <andhika.padmawan@gmail.com>\n"
 "Language-Team: Indonesian <translation-team-id@lists.sourceforge.net>\n"
@@ -45,9 +45,7 @@ msgstr "Kabel jaringan dicabut"
 msgid "Connection has limited or no connectivity"
 msgstr "Koneksi terbatas atau tak ada konektivitas"
 
-#: ../src/netstat.c:304
-#: ../src/netstat.c:315
-#: ../src/netstat.c:326
+#: ../src/netstat.c:304 ../src/netstat.c:315 ../src/netstat.c:326
 msgid "IP Address:"
 msgstr "Alamat IP:"
 
@@ -55,39 +53,27 @@ msgstr "Alamat IP:"
 msgid "Remote IP:"
 msgstr "IP Jarak Jauh:"
 
-#: ../src/netstat.c:306
-#: ../src/netstat.c:317
-#: ../src/netstat.c:328
+#: ../src/netstat.c:306 ../src/netstat.c:317 ../src/netstat.c:328
 msgid "Netmask:"
 msgstr "Netmask:"
 
-#: ../src/netstat.c:307
-#: ../src/netstat.c:319
-#: ../src/netstat.c:330
+#: ../src/netstat.c:307 ../src/netstat.c:319 ../src/netstat.c:330
 msgid "Activity"
 msgstr "Aktivitas"
 
-#: ../src/netstat.c:307
-#: ../src/netstat.c:319
-#: ../src/netstat.c:330
+#: ../src/netstat.c:307 ../src/netstat.c:319 ../src/netstat.c:330
 msgid "Sent"
 msgstr "Dikirim"
 
-#: ../src/netstat.c:307
-#: ../src/netstat.c:319
-#: ../src/netstat.c:330
+#: ../src/netstat.c:307 ../src/netstat.c:319 ../src/netstat.c:330
 msgid "Received"
 msgstr "Diterima"
 
-#: ../src/netstat.c:308
-#: ../src/netstat.c:320
-#: ../src/netstat.c:331
+#: ../src/netstat.c:308 ../src/netstat.c:320 ../src/netstat.c:331
 msgid "bytes"
 msgstr "bita"
 
-#: ../src/netstat.c:309
-#: ../src/netstat.c:321
-#: ../src/netstat.c:332
+#: ../src/netstat.c:309 ../src/netstat.c:321 ../src/netstat.c:332
 msgid "packets"
 msgstr "paket"
 
@@ -99,13 +85,11 @@ msgstr "Nirkabel"
 msgid "Protocol:"
 msgstr "Protokol:"
 
-#: ../src/netstat.c:316
-#: ../src/netstat.c:327
+#: ../src/netstat.c:316 ../src/netstat.c:327
 msgid "Broadcast:"
 msgstr "Broadcast:"
 
-#: ../src/netstat.c:318
-#: ../src/netstat.c:329
+#: ../src/netstat.c:318 ../src/netstat.c:329
 msgid "HW Address:"
 msgstr "Alamat Peranti Keras:"
 
@@ -134,6 +118,3 @@ msgstr ""
 #: ../src/passwd_gui.c:99
 msgid "Encryption Key:"
 msgstr "Kunci Enkripsi:"
-
-
- 	  	 

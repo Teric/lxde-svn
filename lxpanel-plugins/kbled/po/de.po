@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-01-25 15:55+0100\n"
+"POT-Creation-Date: 2009-04-15 23:15+0200\n"
 "PO-Revision-Date: 2009-01-25 15:55+0100\n"
 "Last-Translator: Mario Blättermann <mariobl@gnome.org>\n"
 "Language-Team: German <translatio@mailinglists.lxde.org>\n"
@@ -33,4 +33,3 @@ msgstr "Tastatur-LED"
 #: ../src/kbled.c:287
 msgid "Indicators for CapsLock, NumLock, and ScrollLock keys"
 msgstr "Anzeige von Feststelltaste, NumLock-Taste und Rollen-Taste"
-

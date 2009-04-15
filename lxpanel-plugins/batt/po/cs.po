@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: lxpanel-plugins\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-02-03 02:06+0100\n"
+"POT-Creation-Date: 2009-04-15 22:42+0200\n"
 "PO-Revision-Date: \n"
 "Last-Translator: Michal Várady <miko.vaji@gmail.com>\n"
 "Language-Team: \n"
@@ -99,4 +99,3 @@ msgstr "Sledování baterie"
 #: ../src/batt.c:916
 msgid "Display battery status using ACPI"
 msgstr "Zobrazuje stav baterie pomocí rozhraní ACPI"
-

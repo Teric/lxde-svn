@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-01-25 16:08+0100\n"
+"POT-Creation-Date: 2009-04-15 23:16+0200\n"
 "PO-Revision-Date: 2009-01-25 16:15+0100\n"
 "Last-Translator: Mario Blättermann <mariobl@gnome.org>\n"
 "Language-Team: German <translation@mailinglist.lxde.org>\n"
@@ -45,9 +45,7 @@ msgstr "Netzwerkkabel wurde entfernt"
 msgid "Connection has limited or no connectivity"
 msgstr "Verbindung ist eingeschränkt oder nicht erreichbar"
 
-#: ../src/netstat.c:304
-#: ../src/netstat.c:315
-#: ../src/netstat.c:326
+#: ../src/netstat.c:304 ../src/netstat.c:315 ../src/netstat.c:326
 msgid "IP Address:"
 msgstr "IP-Adresse:"
 
@@ -55,39 +53,27 @@ msgstr "IP-Adresse:"
 msgid "Remote IP:"
 msgstr "Entfernte IP-Adresse:"
 
-#: ../src/netstat.c:306
-#: ../src/netstat.c:317
-#: ../src/netstat.c:328
+#: ../src/netstat.c:306 ../src/netstat.c:317 ../src/netstat.c:328
 msgid "Netmask:"
 msgstr "Netzmaske:"
 
-#: ../src/netstat.c:307
-#: ../src/netstat.c:319
-#: ../src/netstat.c:330
+#: ../src/netstat.c:307 ../src/netstat.c:319 ../src/netstat.c:330
 msgid "Activity"
 msgstr "Aktivität"
 
-#: ../src/netstat.c:307
-#: ../src/netstat.c:319
-#: ../src/netstat.c:330
+#: ../src/netstat.c:307 ../src/netstat.c:319 ../src/netstat.c:330
 msgid "Sent"
 msgstr "Gesendet"
 
-#: ../src/netstat.c:307
-#: ../src/netstat.c:319
-#: ../src/netstat.c:330
+#: ../src/netstat.c:307 ../src/netstat.c:319 ../src/netstat.c:330
 msgid "Received"
 msgstr "Empfangen"
 
-#: ../src/netstat.c:308
-#: ../src/netstat.c:320
-#: ../src/netstat.c:331
+#: ../src/netstat.c:308 ../src/netstat.c:320 ../src/netstat.c:331
 msgid "bytes"
 msgstr "Bytes"
 
-#: ../src/netstat.c:309
-#: ../src/netstat.c:321
-#: ../src/netstat.c:332
+#: ../src/netstat.c:309 ../src/netstat.c:321 ../src/netstat.c:332
 msgid "packets"
 msgstr "Pakete"
 
@@ -99,13 +85,11 @@ msgstr "Drahtlos"
 msgid "Protocol:"
 msgstr "Protokoll:"
 
-#: ../src/netstat.c:316
-#: ../src/netstat.c:327
+#: ../src/netstat.c:316 ../src/netstat.c:327
 msgid "Broadcast:"
 msgstr "Broadcast:"
 
-#: ../src/netstat.c:318
-#: ../src/netstat.c:329
+#: ../src/netstat.c:318 ../src/netstat.c:329
 msgid "HW Address:"
 msgstr "HW-Adresse:"
 
@@ -134,4 +118,3 @@ msgstr ""
 #: ../src/passwd_gui.c:99
 msgid "Encryption Key:"
 msgstr "Schlüssel:"
-

@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: lxpanel-kbled\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-02-06 22:11+0100\n"
+"POT-Creation-Date: 2009-04-15 23:15+0200\n"
 "PO-Revision-Date: \n"
 "Last-Translator: Michal Várady <miko.vaji@gmail.com>\n"
 "Language-Team: \n"
@@ -32,4 +32,3 @@ msgstr "LED diody na klávesnici"
 #: ../src/kbled.c:287
 msgid "Indicators for CapsLock, NumLock, and ScrollLock keys"
 msgstr "Indikátory přepínačů CapsLock, NumLock a ScrollLock"
-

@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: lspanel-plugins/therm\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-02-06 22:12+0100\n"
+"POT-Creation-Date: 2009-04-15 23:17+0200\n"
 "PO-Revision-Date: \n"
 "Last-Translator: Michal Várady <miko.vaji@gmail.com>\n"
 "Language-Team: \n"
@@ -52,4 +52,3 @@ msgstr "Sledování teplot"
 #: ../src/thermal.c:342
 msgid "Display system temperature, by kesler.daniel@gmail.com"
 msgstr "Zobrazuje teplotu systému, od kesler.daniel@gmail.com"
-

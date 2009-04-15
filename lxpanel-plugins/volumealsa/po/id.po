@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: lxpanel-volumealsa\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-02-06 22:12+0100\n"
+"POT-Creation-Date: 2009-04-15 23:18+0200\n"
 "PO-Revision-Date: 2009-03-09 17:21+0700\n"
 "Last-Translator: Andhika Padmawan <andhika.padmawan@gmail.com>\n"
 "Language-Team: Indonesian <translation-team-id@lists.sourceforge.net>\n"
@@ -32,4 +32,3 @@ msgstr "Kendali volume"
 #: ../src/volumealsa.c:410
 msgid "Volume Control"
 msgstr "Kendali Volume"
-

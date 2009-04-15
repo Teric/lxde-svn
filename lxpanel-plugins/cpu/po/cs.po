@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: lxpanel-plugins/cpu\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-02-06 22:08+0100\n"
+"POT-Creation-Date: 2009-04-15 22:39+0200\n"
 "PO-Revision-Date: \n"
 "Last-Translator: Michal Várady <miko.vaji@gmail.com>\n"
 "Language-Team: \n"
@@ -20,4 +20,3 @@ msgstr "Sledování využití procesoru"
 #: ../src/cpu.c:220
 msgid "Display CPU usage"
 msgstr "Zobrazuje využití procesoru"
-

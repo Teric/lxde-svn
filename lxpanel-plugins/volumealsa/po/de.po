@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-01-25 15:48+0100\n"
+"POT-Creation-Date: 2009-04-15 23:18+0200\n"
 "PO-Revision-Date: 2009-01-25 15:48+0100\n"
 "Last-Translator: Mario Blättermann <mariobl@gnome.org>\n"
 "Language-Team: German <translation@mailinglist.lxde.org>\n"
@@ -32,4 +32,3 @@ msgstr "Lautstärkeregler"
 #: ../src/volumealsa.c:410
 msgid "Volume Control"
 msgstr "Lautstärkeregler"
-

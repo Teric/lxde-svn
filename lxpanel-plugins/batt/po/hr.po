@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: lxpanel-batt_hr\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-02-06 22:05+0100\n"
+"POT-Creation-Date: 2009-04-15 22:42+0200\n"
 "PO-Revision-Date: \n"
 "Last-Translator: Boljsa <asjlob AT vip.hr>\n"
 "Language-Team:  <asjlob AT vip.hr>\n"
@@ -92,4 +92,3 @@ msgstr "Monitor Baterije"
 #: ../src/batt.c:916
 msgid "Display battery status using ACPI"
 msgstr "Prika¾i status baterije koristeæi ACPI"
-

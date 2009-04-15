@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: lxpanel-cpu\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-02-06 22:08+0100\n"
+"POT-Creation-Date: 2009-04-15 22:39+0200\n"
 "PO-Revision-Date: 2009-03-09 17:05+0700\n"
 "Last-Translator: Andhika Padmawan <andhika.padmawan@gmail.com>\n"
 "Language-Team: Indonesian <translation-team-id@lists.sourceforge.net>\n"
@@ -22,6 +22,3 @@ msgstr "Monitor Penggunaan CPU"
 #: ../src/cpu.c:220
 msgid "Display CPU usage"
 msgstr "Tampilkan penggunaan CPU"
-
-
- 	  	 

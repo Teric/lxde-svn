@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: lxpanel-kbled\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-02-06 22:11+0100\n"
+"POT-Creation-Date: 2009-04-15 23:15+0200\n"
 "PO-Revision-Date: 2009-03-09 17:10+0700\n"
 "Last-Translator: Andhika Padmawan <andhika.padmawan@gmail.com>\n"
 "Language-Team: Indonesian <translation-team-id@lists.sourceforge.net>\n"
@@ -34,6 +34,3 @@ msgstr "Led Papan Ketik"
 #: ../src/kbled.c:287
 msgid "Indicators for CapsLock, NumLock, and ScrollLock keys"
 msgstr "Indikator untuk tombol CapsLock, NumLock, dan ScrollLock"
-
-
- 	  	 
