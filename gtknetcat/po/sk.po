@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gtknetcat\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-02-06 23:13+0100\n"
+"POT-Creation-Date: 2009-04-15 19:19+0200\n"
 "PO-Revision-Date: 2009-02-13 16:44+0100\n"
 "Last-Translator: Ivan Masár <helix84@centrum.sk>\n"
 "Language-Team: Slovak <sk-i18n@lists.linux.sk>\n"
@@ -108,4 +108,3 @@ msgstr "Poslať súbory na iný počítač"
 #: ../data/wizard.glade.h:11
 msgid "What do you want to do?"
 msgstr "Čo si želáte robiť?"
-

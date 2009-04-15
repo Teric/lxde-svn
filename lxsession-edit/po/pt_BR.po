@@ -3,12 +3,11 @@
 # This file is distributed under the same license as the lxsession-edit package.
 # Henrique P. Machado <zehrique@gmail.com>, 2009.
 #
-
 msgid ""
 msgstr ""
 "Project-Id-Version: 0.1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-02-09 02:34+0100\n"
+"POT-Creation-Date: 2009-04-15 19:47+0200\n"
 "PO-Revision-Date: 2009-03-11 19:08-0300\n"
 "Last-Translator: Henrique P. Machado <zehrique@gmail.com>\n"
 "Language-Team: Brazilian Portuguese <ldp-br@bazar2.conectiva.com.br>\n"
@@ -35,8 +34,8 @@ msgid ""
 "\n"
 "<b>NOTE:</b> This setting will take effect on next login."
 msgstr ""
-"<b>Aviso:</b> <b>Não</b> toque nisto a não ser que você saiba exatamente "
-"o que está fazendo.\n"
+"<b>Aviso:</b> <b>Não</b> toque nisto a não ser que você saiba exatamente o "
+"que está fazendo.\n"
 "\n"
 "<b>NOTA:</b> Esta configuração terá efeito somente na próxima sessão."
 
@@ -46,7 +45,8 @@ msgstr "Opções avançadas"
 
 #: ../data/lxsession-edit.glade.h:5
 msgid "Applications automatically started after entering desktop:"
-msgstr "Aplicativos inicializados automaticamente após entrar no ambiente gráfico:"
+msgstr ""
+"Aplicativos inicializados automaticamente após entrar no ambiente gráfico:"
 
 #: ../data/lxsession-edit.glade.h:6
 msgid "Automatically Started Applications"
@@ -58,7 +58,8 @@ msgid ""
 "(The default window manager command for LXDE should be openbox-lxde)"
 msgstr ""
 "Linha de comando usada para lançar o gerenciador de janelas.\n"
-"(O comando do gerenciador de janelas padrão do LXDE deveria ser openbox-lxde)."
+"(O comando do gerenciador de janelas padrão do LXDE deveria ser openbox-"
+"lxde)."
 
 #: ../data/lxsession-edit.glade.h:9
 msgid "Desktop Session Settings"

@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: lxshortcut_hr\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-02-09 02:43+0100\n"
+"POT-Creation-Date: 2009-04-15 19:53+0200\n"
 "PO-Revision-Date: \n"
 "Last-Translator: Boljsa <asjlob AT vip.hr>\n"
 "Language-Team:  <asjlob AT vip,hr>\n"
@@ -24,8 +24,7 @@ msgstr "ime datoteke ili id radne povr¹ine"
 msgid "file name"
 msgstr "im datoteke"
 
-#: ../src/lxshortcut.c:147
-#: ../data/choose-icon.glade.h:3
+#: ../src/lxshortcut.c:147 ../data/choose-icon.glade.h:3
 msgid "Image files"
 msgstr "Slikovne datoteke"
 
@@ -88,6 +87,3 @@ msgstr "Izaberi Ikonu..."
 #: ../data/choose-icon.glade.h:4
 msgid "System icon theme"
 msgstr "Tema sustavske ikone"
-
-
- 	  	 

@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gtknetcat\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-02-06 23:13+0100\n"
+"POT-Creation-Date: 2009-04-15 19:19+0200\n"
 "PO-Revision-Date: \n"
 "Last-Translator: Alain Mendizabal <alainmendi@gmail.com>\n"
 "Language-Team: Basque <alainmendi@gmail.com>\n"
@@ -105,4 +105,3 @@ msgstr "Fitxategiak beste ordenagailu batera bidali"
 #: ../data/wizard.glade.h:11
 msgid "What do you want to do?"
 msgstr "Zer egin nahi duzu?"
-

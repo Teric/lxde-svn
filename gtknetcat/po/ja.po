@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gtknetcat 0.1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-02-18 10:57+0900\n"
+"POT-Creation-Date: 2009-04-15 19:19+0200\n"
 "PO-Revision-Date: 2009-02-18 11:05+0900\n"
 "Last-Translator: Hironao Komatsu <hironao@users.sourceforge.net>\n"
 "Language-Team: Japanese <translation-team-ja@lists.sourceforge.net>\n"
@@ -51,19 +51,19 @@ msgstr "受信中..."
 msgid "Sending..."
 msgstr "送信中..."
 
-#: ../src/gtknetcat.py:179
+#: ../src/gtknetcat.py:181
 msgid "Execute command:"
 msgstr "コマンドの実行:"
 
-#: ../src/gtknetcat.py:179
+#: ../src/gtknetcat.py:181
 msgid "Processing..."
 msgstr "処理中..."
 
-#: ../src/gtknetcat.py:207
+#: ../src/gtknetcat.py:209
 msgid "Path"
 msgstr "パス"
 
-#: ../src/gtknetcat.py:230
+#: ../src/gtknetcat.py:232
 msgid "Select files to send"
 msgstr "送信するファイルの選択"
 

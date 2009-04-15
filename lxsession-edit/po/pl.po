@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: lxsession-edit\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-02-09 02:34+0100\n"
+"POT-Creation-Date: 2009-04-15 19:47+0200\n"
 "PO-Revision-Date: 2009-03-07 13:06-0000\n"
 "Last-Translator: Artur Kruszewski <mazdac@gmail.com>\n"
 "Language-Team: Polish\n"
@@ -31,7 +31,8 @@ msgstr "Komentarz"
 
 #: ../data/lxsession-edit.glade.h:1
 msgid ""
-"<b>Warning:</b> Do <b>NOT</b> touch this unless you know exactly what you are doing.\n"
+"<b>Warning:</b> Do <b>NOT</b> touch this unless you know exactly what you "
+"are doing.\n"
 "\n"
 "<b>NOTE:</b> This setting will take effect on next login."
 msgstr ""
@@ -66,6 +67,3 @@ msgstr "Ustawienia sesji"
 #: ../data/lxsession-edit.glade.h:10
 msgid "Window Manager: "
 msgstr "Menedżer Okien: "
-
-
- 	  	 

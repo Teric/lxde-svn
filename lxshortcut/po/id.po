@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: lxshortcut\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-02-09 02:43+0100\n"
+"POT-Creation-Date: 2009-04-15 19:53+0200\n"
 "PO-Revision-Date: 2009-03-04 22:44+0700\n"
 "Last-Translator: Andhika Padmawan <andhika.padmawan@gmail.com>\n"
 "Language-Team: Indonesian <translation-team-id@lists.sourceforge.net>\n"
@@ -27,8 +27,7 @@ msgstr "nama berkas atau id desktop"
 msgid "file name"
 msgstr "nama berkas"
 
-#: ../src/lxshortcut.c:147
-#: ../data/choose-icon.glade.h:3
+#: ../src/lxshortcut.c:147 ../data/choose-icon.glade.h:3
 msgid "Image files"
 msgstr "Berkas citra"
 
@@ -91,4 +90,3 @@ msgstr "Pilih Ikon..."
 #: ../data/choose-icon.glade.h:4
 msgid "System icon theme"
 msgstr "Tema ikon sistem"
-

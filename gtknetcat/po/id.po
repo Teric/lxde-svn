@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gtknetcat 0.1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-02-06 23:13+0100\n"
+"POT-Creation-Date: 2009-04-15 19:19+0200\n"
 "PO-Revision-Date: 2009-03-04 16:24+0700\n"
 "Last-Translator: Andhika Padmawan <andhika.padmawan@gmail.com>\n"
 "Language-Team: Indonesian <translation-team-id@lists.sourceforge.net>\n"
@@ -108,4 +108,3 @@ msgstr "Kirim berkas ke komputer lain"
 #: ../data/wizard.glade.h:11
 msgid "What do you want to do?"
 msgstr "Apa yang ingin anda lakukan?"
-
