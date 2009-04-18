@@ -8,12 +8,13 @@ msgstr ""
 "Project-Id-Version: lxsession-edit 0.1\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2009-04-15 19:47+0200\n"
-"PO-Revision-Date: 2009-01-07 00:24+0100\n"
-"Last-Translator: Fabio Barone <phonky@gmx.net>\n"
+"PO-Revision-Date: 2009-04-17 19:30+0200\n"
+"Last-Translator: Alessandro Pellizzari <alex@amiran.it>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Pootle 1.1.0\n"
 "X-Poedit-Language: Italian\n"
 "X-Poedit-Country: ITALY\n"
 
@@ -27,7 +28,7 @@ msgstr "Applicazione"
 
 #: ../src/lxsession-edit.c:373
 msgid "Comment"
-msgstr "Commentario"
+msgstr "Commento"
 
 #: ../data/lxsession-edit.glade.h:1
 msgid ""
@@ -36,8 +37,8 @@ msgid ""
 "\n"
 "<b>NOTE:</b> This setting will take effect on next login."
 msgstr ""
-"<b>Attenzione: NON</b> manipolare qui a non che si sappia esattamente quello "
-"che si sta facendo.\n"
+"<b>Attenzione: NON</b> modificare a meno che non si sappia esattamente "
+"quello che si sta facendo.\n"
 "<b>NOTA:</b> Queste impostazioni avranno effetto al prossimo login"
 
 #: ../data/lxsession-edit.glade.h:4
@@ -45,9 +46,8 @@ msgid "Advanced Options"
 msgstr "Opzioni avanzate"
 
 #: ../data/lxsession-edit.glade.h:5
-#, fuzzy
 msgid "Applications automatically started after entering desktop:"
-msgstr "Applicazioni avviate automaticamente all'avvio della scrivania"
+msgstr "Applicazioni avviate automaticamente all'avvio della scrivania:"
 
 #: ../data/lxsession-edit.glade.h:6
 msgid "Automatically Started Applications"
@@ -58,14 +58,13 @@ msgid ""
 "Command line used to launch window manager\n"
 "(The default window manager command for LXDE should be openbox-lxde)"
 msgstr ""
-"Linea di comando usata per avviare l'amministratore finestre\n"
-"(L'amministratore finestre standard per LXDE dovrebbe essere openbox-lxde)"
+"Linea di comando usata per avviare il gestore di finestre\n"
+"(Il gestore di finestre standard per LXDE dovrebbe essere openbox-lxde)"
 
 #: ../data/lxsession-edit.glade.h:9
-#, fuzzy
 msgid "Desktop Session Settings"
-msgstr "Impostazioni della sessione della scrivania"
+msgstr "Impostazioni della sessione"
 
 #: ../data/lxsession-edit.glade.h:10
 msgid "Window Manager: "
-msgstr "Amministratore finestre"
+msgstr "Gestore di finestre: "

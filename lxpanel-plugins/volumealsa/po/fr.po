@@ -3,33 +3,33 @@
 # This file is distributed under the same license as the PACKAGE package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 #
-#, fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2009-04-15 23:18+0200\n"
-"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"PO-Revision-Date: 2009-04-16 14:56+0200\n"
+"Last-Translator: Cilyan Olowen <gaknar@gmail.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Pootle 1.1.0\n"
 
 #. create frame
 #: ../src/volumealsa.c:306
 msgid "Volume"
-msgstr ""
+msgstr "Volume"
 
 #: ../src/volumealsa.c:323
 msgid "Mute"
-msgstr ""
+msgstr "Sourdine"
 
 #. FIXME: display current level in tooltip. ex: "Volume Control: 80%"
 #: ../src/volumealsa.c:396
 msgid "Volume control"
-msgstr ""
+msgstr "Contrôleur du volume"
 
 #: ../src/volumealsa.c:410
 msgid "Volume Control"
-msgstr ""
+msgstr "Contrôleur du volume"
