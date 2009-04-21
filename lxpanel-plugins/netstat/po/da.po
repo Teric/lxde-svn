@@ -3,109 +3,109 @@
 # This file is distributed under the same license as the PACKAGE package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 #
-#, fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2009-04-15 23:16+0200\n"
-"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"PO-Revision-Date: 2009-04-21 12:18+0200\n"
+"Last-Translator: charlie tyrrestrup <chalze06@gmail.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Pootle 1.1.0\n"
 
 #: ../src/netstat.c:165
 msgid "<Hidden Access Point>"
-msgstr ""
+msgstr "<Skjult adgangspunkt>"
 
 #: ../src/netstat.c:198
 msgid "Wireless Networks not found in range"
-msgstr ""
+msgstr "Trådløse netværk blev ikke fundet inden for rækkevidde"
 
 #. Repair
 #: ../src/netstat.c:232
 msgid "Repair"
-msgstr ""
+msgstr "Reparér"
 
 #. interface down
 #: ../src/netstat.c:237
 msgid "Disable"
-msgstr ""
+msgstr "Deaktivér"
 
 #: ../src/netstat.c:296
 msgid "Wireless Connection has no connectivity"
-msgstr ""
+msgstr "Den trådløse forbindelse har ingen forbindelsesevne"
 
 #: ../src/netstat.c:298
 msgid "Network cable is plugged out"
-msgstr ""
+msgstr "Netværkskablet er fjernet"
 
 #: ../src/netstat.c:300
 msgid "Connection has limited or no connectivity"
-msgstr ""
+msgstr "Forbindelsen har begrænset eller ingen forbindelsesevne"
 
 #: ../src/netstat.c:304 ../src/netstat.c:315 ../src/netstat.c:326
 msgid "IP Address:"
-msgstr ""
+msgstr "IP adresse:"
 
 #: ../src/netstat.c:305
 msgid "Remote IP:"
-msgstr ""
+msgstr "Fjern IP:"
 
 #: ../src/netstat.c:306 ../src/netstat.c:317 ../src/netstat.c:328
 msgid "Netmask:"
-msgstr ""
+msgstr "Netmaske:"
 
 #: ../src/netstat.c:307 ../src/netstat.c:319 ../src/netstat.c:330
 msgid "Activity"
-msgstr ""
+msgstr "Aktivitet"
 
 #: ../src/netstat.c:307 ../src/netstat.c:319 ../src/netstat.c:330
 msgid "Sent"
-msgstr ""
+msgstr "Sendt"
 
 #: ../src/netstat.c:307 ../src/netstat.c:319 ../src/netstat.c:330
 msgid "Received"
-msgstr ""
+msgstr "Modtaget"
 
 #: ../src/netstat.c:308 ../src/netstat.c:320 ../src/netstat.c:331
 msgid "bytes"
-msgstr ""
+msgstr "bytes"
 
 #: ../src/netstat.c:309 ../src/netstat.c:321 ../src/netstat.c:332
 msgid "packets"
-msgstr ""
+msgstr "pakker"
 
 #: ../src/netstat.c:312
 msgid "Wireless"
-msgstr ""
+msgstr "Trådløs"
 
 #: ../src/netstat.c:314
 msgid "Protocol:"
-msgstr ""
+msgstr "Protokol:"
 
 #: ../src/netstat.c:316 ../src/netstat.c:327
 msgid "Broadcast:"
-msgstr ""
+msgstr "Broadcast:"
 
 #: ../src/netstat.c:318 ../src/netstat.c:329
 msgid "HW Address:"
-msgstr ""
+msgstr "Hardware adresse:"
 
 #: ../src/netstat.c:468
 msgid "Manage Networks"
-msgstr ""
+msgstr "Håndtér netværk"
 
 #: ../src/netstat.c:470
 msgid "Monitor and Manage networks"
-msgstr ""
+msgstr "Overvåg og håndtér netværk"
 
 #. create dialog
 #: ../src/passwd_gui.c:84
 msgid "Setting Encryption Key"
-msgstr ""
+msgstr "Sæt krypteringsnøgle"
 
 #. messages
 #: ../src/passwd_gui.c:94
@@ -113,7 +113,9 @@ msgid ""
 "This wireless network was encrypted.\n"
 "You must have the encryption key."
 msgstr ""
+"Det trådløse netværk var krypteret\n"
+"Du skal bruge krypteringsnøglen."
 
 #: ../src/passwd_gui.c:99
 msgid "Encryption Key:"
-msgstr ""
+msgstr "Krypteringsnøgle:"
