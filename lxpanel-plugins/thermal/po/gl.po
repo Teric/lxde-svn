@@ -3,55 +3,55 @@
 # This file is distributed under the same license as the PACKAGE package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 #
+#, fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2009-04-15 23:17+0200\n"
-"PO-Revision-Date: 2009-04-21 22:22+0200\n"
-"Last-Translator: Y P <yupadmin@gmail.com>\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
-"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Pootle 1.1.0\n"
 
 #: ../src/thermal.c:291
 msgid "Normal"
-msgstr "Нормально"
+msgstr ""
 
 #: ../src/thermal.c:292
 msgid "Warning1"
-msgstr "Попередження 1"
+msgstr ""
 
 #: ../src/thermal.c:293
 msgid "Warning2"
-msgstr "Попередження 2"
+msgstr ""
 
 #: ../src/thermal.c:294
 msgid "Automatic sensor location"
-msgstr "Автоматичний пошук сенсорів"
+msgstr ""
 
 #: ../src/thermal.c:295
 msgid "Sensor"
-msgstr "Сенсор"
+msgstr ""
 
 #: ../src/thermal.c:296
 msgid "Automatic temperature levels"
-msgstr "Автоматичні рівні температури"
+msgstr ""
 
 #: ../src/thermal.c:297
 msgid "Warning1 Temperatur"
-msgstr "Попередження 1 для температури"
+msgstr ""
 
 #: ../src/thermal.c:298
 msgid "Warning2 Temperatur"
-msgstr "Попередження 2 для температури"
+msgstr ""
 
 #: ../src/thermal.c:340
 msgid "Temperature Monitor"
-msgstr "Монітор температури"
+msgstr ""
 
 #: ../src/thermal.c:342
 msgid "Display system temperature, by kesler.daniel@gmail.com"
-msgstr "Моніторинг температури системи, розробка kesler.daniel@gmail.com"
+msgstr ""
