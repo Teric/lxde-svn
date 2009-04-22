@@ -1,0 +1,84 @@
+Connection Model:
+C: COMMAND ARGS
+S: +OK <PROCESS ID>
+S: +<PROCESS ID> <RESPONSE>
+S: +DONE <PROCESS ID>
+
+COMMAND:
+<command number> <args...>
+
+* Command Number:
+LXNM_VERSION                   0
+LXNM_DEVICE_STATUS             1
+LXNM_DEVICE_INFORMATION        2
+LXNM_ETHERNET_UP               3
+LXNM_ETHERNET_DOWN             4
+LXNM_ETHERNET_REPAIR           5
+LXNM_WIRELESS_UP               6
+LXNM_WIRELESS_DOWN             7
+LXNM_WIRELESS_REPAIR           8
+LXNM_WIRELESS_CONNECT          9
+LXNM_WIRELESS_SCAN             10
+
+* LXNM_DEVICE_STATUS
+[Command Number] <interface>
+
+	Return Data Structure:
+	<interface> <status number> <content>
+
+	Status Number:
+	LXNM_STATUS_MESSAGE			0
+	LXNM_STATUS_NETDEV_CONNECTING		1
+	LXNM_STATUS_NETDEV_CONNECTED 		2
+	LXNM_STATUS_NETDEV_DISCONNECTED 	3
+	LXNM_STATUS_NETDEV_PROBLEM		4
+	LXNM_STATUS_NETDEV_BOTHRS		5
+	LXNM_STATUS_NETDEV_SENDDATA		6
+	LXNM_STATUS_NETDEV_RECVDATA		7
+	LXNM_STATUS_NETDEV_WIRELESS_QUALITY	8
+
+* LXNM_DEVICE_INFORMATION
+[Command Number] <interface> <flags>
+
+	flags:
+	LXNM_FLAGS_DEVICE_INFO_STATUS		(1<<0)
+	LXNM_FLAGS_DEVICE_INFO_TYPE		(1<<1)
+	LXNM_FLAGS_DEVICE_INFO_MAC		(1<<2)
+	LXNM_FLAGS_DEVICE_INFO_IPADDR		(1<<3)
+	LXNM_FLAGS_DEVICE_INFO_BROADCAST	(1<<4)
+	LXNM_FLAGS_DEVICE_INFO_NETMASK		(1<<5)
+	LXNM_FLAGS_DEVICE_INFO_GATEWAY		(1<<6)
+	LXNM_FLAGS_DEVICE_INFO_DESTINATION	(1<<7)
+	LXNM_FLAGS_DEVICE_INFO_QUALITY		(1<<8)
+
+	Return Data Structure:
+	[Length (1 Byte)][Content][...]
+
+	LXNM_FLAGS_DEVICE_INFO_STATUS Will Return:
+		LXNM_STATUS_NETDEV_CONNECTING		1
+		LXNM_STATUS_NETDEV_CONNECTED 		2
+		LXNM_STATUS_NETDEV_DISCONNECTED 	3
+		LXNM_STATUS_NETDEV_PROBLEM		4
+
+	LXNM_FLAGS_DEVICE_INFO_TYPE Will Return:
+		LXNM_CONNECTION_TYPE_ETHERNET    0
+		LXNM_CONNECTION_TYPE_WIRELESS    1
+		LXNM_CONNECTION_TYPE_PPP         2
+
+* LXNM_WIRELESS_UP:
+[Command Number] <interface>
+
+* LXNM_WIRELESS_DOWN:
+[Command Number] <interface>
+
+* LXNM_WIRELESS_REPAIR:
+[Command Number] <interface>
+
+* LXNM_WIRELESS_CONNECT:
+[Command Number] <interface> <essid> <apaddr> <key> <protocol> <key_mgmt> <grpup> <pairwise>
+
+* LXNM_WIRELESS_SCAN:
+[Command Number] <interface>
+
+	Return Data Structure:
+	<essid> <apaddr> <quality> <protocol> <key_mgmt> <grpup> <pairwise>\n
