@@ -33,6 +33,7 @@
 #include <pthread.h>
 
 #include "lxnm.h"
+#include "wireless.h"
 
 static LxND *lxnm;
 
@@ -79,6 +80,28 @@ hex2asc(char *hexsrc)
 	return buf;
 }
 
+static LXNMPID lxnm_pid_register(GIOChannel *gio)
+{
+	gchar *msg;
+	gint len;
+
+	msg = g_strdup_printf("+OK %d\n", lxnm->cur_id);
+	g_io_channel_write_chars(gio, msg, -1, &len, NULL);
+	g_free(msg);
+
+	return lxnm->cur_id++;
+}
+
+static void lxnm_pid_unregister(GIOChannel *gio, LXNMPID id)
+{
+	gchar *msg;
+	gint len;
+
+	msg = g_strdup_printf("+DONE %d\n", id);
+	g_io_channel_write_chars(gio, msg, -1, &len, NULL);
+	g_free(msg);
+}
+
 static gboolean
 lxnm_isifname(const char *ifname)
 {
@@ -95,88 +118,168 @@ lxnm_isifname(const char *ifname)
 static int
 ethernet_up(void *arg)
 {
+	LXNMPID id;
 	char *p;
+	LxThread *lxthread = arg;
+
+	id = lxnm_pid_register(lxthread->gio);
 	/* interface name */
-	p = strtok((char *)arg, " ");
+	p = strtok((char *)lxthread->cmd+2, " ");
 	if (lxnm_isifname(p)) {
 		setenv("LXNM_IFNAME", p, 1);
 		return system(lxnm->setting->eth_up);
 	}
+
+	lxnm_pid_unregister(lxthread->gio, id);
+	g_free(lxthread);
 	return 0;
 }
 
 static int
 ethernet_down(void *arg)
 {
+	LXNMPID id;
 	char *p;
+	LxThread *lxthread = arg;
+
+	id = lxnm_pid_register(lxthread->gio);
 	/* interface name */
-	p = strtok((char *)arg, " ");
+	p = strtok((char *)lxthread->cmd+2, " ");
 	if (lxnm_isifname(p)) {
 		setenv("LXNM_IFNAME", p, 1);
-		return system(lxnm->setting->eth_down);
+		system(lxnm->setting->eth_down);
 	}
+
+	lxnm_pid_unregister(lxthread->gio, id);
+	g_free(lxthread);
 	return 0;
 }
 
 static int
 ethernet_repair(void *arg)
 {
+	LXNMPID id;
 	char *p;
+	LxThread *lxthread = arg;
+
+	id = lxnm_pid_register(lxthread->gio);
 	/* interface name */
-	p = strtok((char *)arg, " ");
+	p = strtok((char *)lxthread->cmd+2, " ");
 	if (lxnm_isifname(p)) {
 		setenv("LXNM_IFNAME", p, 1);
-		return system(lxnm->setting->eth_repair);
+		system(lxnm->setting->eth_repair);
 	}
+
+	lxnm_pid_unregister(lxthread->gio, id);
+	g_free(lxthread);
 	return 0;
 }
 
 static int
 wireless_up(void *arg)
 {
+	LXNMPID id;
 	char *p;
+	LxThread *lxthread = arg;
+
+	id = lxnm_pid_register(lxthread->gio);
 	/* interface name */
-	p = strtok((char *)arg, " ");
+	p = strtok((char *)lxthread->cmd+2, " ");
 	if (lxnm_isifname(p)) {
 		setenv("LXNM_IFNAME", p, 1);
-		return system(lxnm->setting->wifi_up);
+		system(lxnm->setting->wifi_up);
 	}
+
+	lxnm_pid_unregister(lxthread->gio, id);
 	return 0;
 }
 
 static int
 wireless_down(void *arg)
 {
+	LXNMPID id;
 	char *p;
+	LxThread *lxthread = arg;
+
+	id = lxnm_pid_register(lxthread->gio);
 	/* interface name */
-	p = strtok((char *)arg, " ");
+	p = strtok((char *)lxthread->cmd+2, " ");
 	if (lxnm_isifname(p)) {
 		setenv("LXNM_IFNAME", p, 1);
-		return system(lxnm->setting->wifi_down);
+		system(lxnm->setting->wifi_down);
 	}
+
+	lxnm_pid_unregister(lxthread->gio, id);
+	g_free(lxthread);
 	return 0;
 }
 
 static int
 wireless_repair(void *arg)
 {
+	LXNMPID id;
 	char *p;
+	LxThread *lxthread = arg;
+
+	id = lxnm_pid_register(lxthread->gio);
 	/* interface name */
-	p = strtok((char *)arg, " ");
+	p = strtok((char *)lxthread->cmd+2, " ");
 	if (lxnm_isifname(p)) {
 		setenv("LXNM_IFNAME", p, 1);
-		return system(lxnm->setting->wifi_repair);
+		system(lxnm->setting->wifi_repair);
 	}
+
+	lxnm_pid_unregister(lxthread->gio, id);
+	g_free(lxthread);
 	return 0;
 }
 
 static int
+wireless_scan(void *arg)
+{
+	LXNMPID id;
+	int iwsockfd;
+	char *p;
+	APLIST *aplist;
+	APLIST *ptr;
+	ap_info *apinfo;
+	LxThread *lxthread = arg;
+
+	id = lxnm_pid_register(lxthread->gio);
+
+	/* interface name */
+	p = strtok((char *)lxthread->cmd+2, " ");
+	if (lxnm_isifname(p)) {
+		iwsockfd = iw_sockets_open();
+		aplist = wireless_scanning(iwsockfd, p);
+		if (aplist) {
+			ptr = aplist;
+			do {
+				apinfo = ptr->info;
+//				printf("%s:%lf\n", apinfo->essid, (double)apinfo->quality/100);
+				ptr = ptr->next;
+			} while (ptr);
+		}
+//		return system(lxnm->setting->wifi_repair);
+	}
+
+	lxnm_pid_unregister(lxthread->gio, id);
+	g_free(lxthread);
+	return 0;
+}
+
+
+static int
 wireless_connect(void *arg)
 {
+	LXNMPID id;
 	char *p;
+	LxThread *lxthread = arg;
+
+	id = lxnm_pid_register(lxthread->gio);
 	/* <interface> <essid> <apaddr> <key> <protocol> <key_mgmt> <grpup> <pairwise> */
 	/* interface name */
-	p = strtok((char *)arg, " ");
+	p = strtok((char *)lxthread->cmd+2, " ");
 	if (lxnm_isifname(p)) {
 		setenv("LXNM_IFNAME", p, 1);
 		/* ESSID */
@@ -201,19 +304,29 @@ wireless_connect(void *arg)
 		p = strtok(NULL, " ");
 		setenv("LXNM_WIFI_PAIRWISE", cypher_name[atoi(p)], 1);
 
-		return system(lxnm->setting->wifi_connect);
+		system(lxnm->setting->wifi_connect);
 	}
+
+	lxnm_pid_unregister(lxthread->gio, id);
+	g_free(lxthread);
+
 	return 0;
 }
 
 static void
 lxnm_parse_command(GIOChannel *gio, const char *cmd)
 {
-	char *p, *cmdstr;
-	int command;
+	gchar *p, *cmdstr;
+	gchar *msg;
+	gint command;
+	gint len;
 	pthread_t actionThread;
+	LxThread *lxthread;
 
-	cmdstr = g_strdup(cmd);
+	lxthread = g_new0(LxThread, 0);
+	lxthread->gio = gio;
+	lxthread->cmd = g_strdup(cmd);
+
 	/* Command */
 	p = strtok((char *)cmd, " ");
 	command = atoi(p);
@@ -221,31 +334,35 @@ lxnm_parse_command(GIOChannel *gio, const char *cmd)
 		case LXNM_VERSION:
 		case LXNM_ETHERNET_UP:
 			pthread_create(&actionThread, NULL,
-					(void *) ethernet_up, (void *)cmdstr+2);
+					(void *) ethernet_up, (void *)lxthread);
 			break;
 		case LXNM_ETHERNET_DOWN:
 			pthread_create(&actionThread, NULL,
-					(void *) ethernet_down, (void *)cmdstr+2);
+					(void *) ethernet_down, (void *)lxthread);
 			break;
 		case LXNM_ETHERNET_REPAIR:
 			pthread_create(&actionThread, NULL,
-					(void *) ethernet_repair, (void *)cmdstr+2);
+					(void *) ethernet_repair, (void *)lxthread);
 			break;
 		case LXNM_WIRELESS_UP:
 			pthread_create(&actionThread, NULL,
-					(void *) wireless_up, (void *)cmdstr+2);
+					(void *) wireless_up, (void *)lxthread);
 			break;
 		case LXNM_WIRELESS_DOWN:
 			pthread_create(&actionThread, NULL,
-					(void *) wireless_down, (void *)cmdstr+2);
+					(void *) wireless_down, (void *)lxthread);
 			break;
 		case LXNM_WIRELESS_REPAIR:
 			pthread_create(&actionThread, NULL,
-					(void *) wireless_repair, (void *)cmdstr+2);
+					(void *) wireless_repair, (void *)lxthread);
 			break;
 		case LXNM_WIRELESS_CONNECT:
 			pthread_create(&actionThread, NULL,
-					(void *) wireless_connect, (void *)cmdstr+2);
+					(void *) wireless_connect, (void *)lxthread);
+			break;
+		case LXNM_WIRELESS_SCAN:
+			pthread_create(&actionThread, NULL,
+					(void *) wireless_scan, (void *)lxthread);
 			break;
 		default:
 			printf("Unknown command");
@@ -383,6 +500,7 @@ main(void)
 	GKeyFile *keyfile;
 	GKeyFileFlags flags;
 	GError *error = NULL;
+	gchar *strings;
 	pid_t pid;
 
 	/* Run daemon in the background */
@@ -393,6 +511,7 @@ main(void)
 
 	/* initiate socket for network device */
 	lxnm = (LxND *)malloc(sizeof(lxnm));
+	lxnm->cur_id = 0;
 	lxnm->sockfd = socket(AF_INET, SOCK_DGRAM, 0);
 	if (lxnm->sockfd < 0) {
 		g_error("Cannot create socket!");
@@ -413,15 +532,34 @@ main(void)
 	lxnm->setting = (Setting *)malloc(sizeof(Setting));
 
 	/* ethernet setting */
-	lxnm->setting->eth_up = g_key_file_get_string(keyfile, "ethernet", "up", NULL);
-	lxnm->setting->eth_down = g_key_file_get_string(keyfile, "ethernet", "down", NULL);
-	lxnm->setting->eth_repair = g_key_file_get_string(keyfile, "ethernet", "repair", NULL);
+	strings = g_key_file_get_string(keyfile, "ethernet", "up", NULL);
+	lxnm->setting->eth_up = lxnm_handler_new(strings);
+	g_free(strings);
+
+	strings = g_key_file_get_string(keyfile, "ethernet", "down", NULL);
+	lxnm->setting->eth_down = lxnm_handler_new(strings);
+	g_free(strings);
+
+	strings = g_key_file_get_string(keyfile, "ethernet", "repair", NULL);
+	lxnm->setting->eth_repair = lxnm_handler_new(strings);
+	g_free(strings);
 
 	/* wireless setting */
-	lxnm->setting->wifi_up = g_key_file_get_string(keyfile, "wireless", "up", NULL);
-	lxnm->setting->wifi_down = g_key_file_get_string(keyfile, "wireless", "down", NULL);
-	lxnm->setting->wifi_repair = g_key_file_get_string(keyfile, "wireless", "repair", NULL);
-	lxnm->setting->wifi_connect = g_key_file_get_string(keyfile, "wireless", "connect", NULL);
+	strings = g_key_file_get_string(keyfile, "wireless", "up", NULL);
+	lxnm->setting->wifi_up = lxnm_handler_new();
+	g_free(strings);
+
+	strings = g_key_file_get_string(keyfile, "wireless", "down", NULL);
+	lxnm->setting->wifi_down = lxnm_handler_new();
+	g_free(strings);
+
+	strings = g_key_file_get_string(keyfile, "wireless", "repair", NULL);
+	lxnm->setting->wifi_repair = lxnm_handler_new();
+	g_free(strings);
+
+	strings = g_key_file_get_string(keyfile, "wireless", "connect", NULL);
+	lxnm->setting->wifi_connect = lxnm_handler_new();
+	g_free(strings);
 
 	/* LXNM main loop */
 	{

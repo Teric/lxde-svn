@@ -10,9 +10,14 @@ INCLUDES = \
 	$(G_CAST_CHECKS)
 
 lxnm_SOURCES = \
+	handler.c \
+	handler.h \
+	wireless.c \
+	wireless.h \
 	lxnm.h \
 	lxnm.c
 
 lxnm_LDADD = \
 		$(PACKAGE_LIBS) \
-		$(INTLLIBS)
+		$(INTLLIBS) \
+		-liw

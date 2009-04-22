@@ -1,7 +1,10 @@
 #ifndef LXNM_H
 #define LXNM_H
 
+#include "handler.h"
+
 #define LXNM_SOCKET "/var/run/lxnm.socket"
+
 
 /* Command */
 #define LXNM_VERSION                   0
@@ -12,26 +15,35 @@
 #define LXNM_WIRELESS_DOWN             5
 #define LXNM_WIRELESS_REPAIR           6
 #define LXNM_WIRELESS_CONNECT          7
+#define LXNM_WIRELESS_SCAN             8
 
 /* Encryption Type */
 #define LXNM_ENCRYPTION_OFF     0
 #define LXNM_ENCRYPTION_WEP     1
 #define LXNM_ENCRYPTION_WPA_PSK 2
 
+typedef unsigned int LXNMPID;
+
 typedef struct {
-	gchar *eth_up;
-	gchar *eth_down;
-	gchar *eth_repair;
-	gchar *wifi_up;
-	gchar *wifi_down;
-	gchar *wifi_repair;
-	gchar *wifi_connect;
+	LXNMHandler *eth_up;
+	LXNMHandler *eth_down;
+	LXNMHandler *eth_repair;
+	LXNMHandler *wifi_up;
+	LXNMHandler *wifi_down;
+	LXNMHandler *wifi_repair;
+	LXNMHandler *wifi_connect;
 } Setting;
 
 typedef struct {
+	LXNMPID cur_id;
 	int sockfd;
 	Setting *setting;
 } LxND;
+
+typedef struct {
+	GIOChannel *gio;
+	gchar *cmd;
+} LxThread;
 
 typedef struct {
 	char *ifname;
