@@ -110,7 +110,8 @@ main(void)
 
 	/* send command */
 	if (g_io_channel_write_chars(gio,
-				     "7 ath0 1F WEP testest",
+				     //"7 ath0 1F WEP testest",
+				     "8 wlan0",
 				     -1, &len, NULL) == G_IO_STATUS_ERROR)
 		g_error("Error writing!");
 

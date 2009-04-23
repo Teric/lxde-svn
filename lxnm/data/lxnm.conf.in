@@ -1,11 +1,11 @@
 # Network Daemon Configuration file
 [ethernet]
-up=@prefix@/share/lxnm/ethup.sh
-down=@prefix@/share/lxnm/ethdown.sh
-repair=@prefix@/share/lxnm/ethrepair.sh
+up=Execute:@prefix@/share/lxnm/ethup.sh
+down=Execute:@prefix@/share/lxnm/ethdown.sh
+repair=Execute:@prefix@/share/lxnm/ethrepair.sh
 
 [wireless]
-up=@prefix@/share/lxnm/wifiup.sh
-down=@prefix@/share/lxnm/wifidown.sh
-repair=@prefix@/share/lxnm/wifirepair.sh
-connect=@prefix@/share/lxnm/wificonnect.sh
+up=Execute:@prefix@/share/lxnm/wifiup.sh
+down=Execute:@prefix@/share/lxnm/wifidown.sh
+repair=Execute:@prefix@/share/lxnm/wifirepair.sh
+connect=Execute:@prefix@/share/lxnm/wificonnect.sh
