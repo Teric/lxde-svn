@@ -39,11 +39,6 @@ typedef struct {
 } LxND;
 
 typedef struct {
-	GIOChannel *gio;
-	gchar *cmd;
-} LxThread;
-
-typedef struct {
 	char *ifname;
 	char *essid;
 	char *apaddr;

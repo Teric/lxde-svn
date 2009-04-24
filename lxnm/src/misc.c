@@ -19,45 +19,42 @@
 
 #include <glib.h>
 #include <glib/gi18n.h>
+#include <sys/ioctl.h>
+#include <net/if.h>
 #include "lxnm.h"
-#include "thread.h"
-#include "handler.h"
+#include "misc.h"
 
 extern LxND *lxnm;
 
-LXNMHandler *lxnm_handler_new(const gchar *strings)
+char *hex2asc(char *hexsrc)
 {
-	LXNMHandler *handler;
+	char *buf, *tmp;
+	char c[3];
 
-	handler = g_new0(LXNMHandler, 0);
+	buf = malloc(sizeof(char)+strlen(hexsrc)/2);
+	tmp = buf;
 
-	if (!strings) {
-		handler->method = LXNM_HANDLER_METHOD_INTERNAL;
-		handler->value = NULL;
-	} else if (strcmp(strings, "Execute:")==0) {
-		handler->method = LXNM_HANDLER_METHOD_EXECUTE;
-		handler->value = g_strdup(strings+8);
+	for (;*hexsrc!='\0';hexsrc+=2) {
+		c[0] = *hexsrc;
+		c[1] = *(hexsrc+1);
+		c[2] = '\0';
+
+		*tmp = strtol(c, NULL, 16);
+		tmp++;
 	}
 
-	return handler;
+	*tmp = '\0';
+	return buf;
 }
 
-int lxnm_handler_ethernet_up(void *arg)
+gboolean lxnm_isifname(const char *ifname)
 {
-	LXNMPID id;
-	char *p;
-	LxThread *lxthread = arg;
+	struct ifreq ifr;
+	bzero(&ifr, sizeof(ifr));
 
-	id = lxnm_pid_register(lxthread->gio);
-	/* interface name */
-	p = strtok((char *)lxthread->cmd+2, " ");
-	if (lxnm_isifname(p)) {
-		setenv("LXNM_IFNAME", p, 1);
-		return system(lxnm->setting->eth_up);
-	}
+	strncpy(ifr.ifr_name, ifname, sizeof(ifr.ifr_name));
+	if (ioctl(lxnm->sockfd, SIOCGIFFLAGS, &ifr)<0)
+		return FALSE;
 
-	lxnm_pid_unregister(lxthread->gio, id);
-	g_free(lxthread);
-	return 0;
+	return TRUE;
 }
-
