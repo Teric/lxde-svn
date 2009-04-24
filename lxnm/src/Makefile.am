@@ -10,6 +10,8 @@ INCLUDES = \
 	$(G_CAST_CHECKS)
 
 lxnm_SOURCES = \
+	thread.c \
+	thread.h \
 	handler.c \
 	handler.h \
 	wireless.c \

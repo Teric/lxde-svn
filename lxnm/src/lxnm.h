@@ -1,10 +1,10 @@
 #ifndef LXNM_H
 #define LXNM_H
 
+#include "thread.h"
 #include "handler.h"
 
 #define LXNM_SOCKET "/var/run/lxnm.socket"
-
 
 /* Command */
 #define LXNM_VERSION                   0
@@ -21,8 +21,6 @@
 #define LXNM_ENCRYPTION_OFF     0
 #define LXNM_ENCRYPTION_WEP     1
 #define LXNM_ENCRYPTION_WPA_PSK 2
-
-typedef unsigned int LXNMPID;
 
 typedef struct {
 	LXNMHandler *eth_up;

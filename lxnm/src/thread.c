@@ -19,22 +19,29 @@
 
 #include <glib.h>
 #include <glib/gi18n.h>
+#include "lxnm.h"
 #include "thread.h"
-#include "handler.h"
 
-LXNMHandler *lxnm_handler_new(const gchar *strings)
+extern LxND *lxnm;
+
+LXNMPID lxnm_pid_register(GIOChannel *gio)
 {
-	LXNMHandler *handler;
+	gchar *msg;
+	gint len;
 
-	handler = g_new0(LXNMHandler, 0);
+	msg = g_strdup_printf("+OK %d\n", lxnm->cur_id);
+	g_io_channel_write_chars(gio, msg, -1, &len, NULL);
+	g_free(msg);
 
-	if (!strings) {
-		handler->method = LXNM_HANDLER_METHOD_INTERNAL;
-		handler->value = NULL;
-	} else if (strcmp(strings, "Execute:")==0) {
-		handler->method = LXNM_HANDLER_METHOD_EXECUTE;
-		handler->value = g_strdup(strings+8);
-	}
+	return lxnm->cur_id++;
+}
 
-	return handler;
+void lxnm_pid_unregister(GIOChannel *gio, LXNMPID id)
+{
+	gchar *msg;
+	gint len;
+
+	msg = g_strdup_printf("+DONE %d\n", id);
+	g_io_channel_write_chars(gio, msg, -1, &len, NULL);
+	g_free(msg);
 }

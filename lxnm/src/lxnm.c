@@ -33,9 +33,11 @@
 #include <pthread.h>
 
 #include "lxnm.h"
+#include "thread.h"
+#include "handler.h"
 #include "wireless.h"
 
-static LxND *lxnm;
+LxND *lxnm;
 
 static const char *protocol_name[] = {
 	"NONE",
@@ -78,28 +80,6 @@ hex2asc(char *hexsrc)
 
 	*tmp = '\0';
 	return buf;
-}
-
-static LXNMPID lxnm_pid_register(GIOChannel *gio)
-{
-	gchar *msg;
-	gint len;
-
-	msg = g_strdup_printf("+OK %d\n", lxnm->cur_id);
-	g_io_channel_write_chars(gio, msg, -1, &len, NULL);
-	g_free(msg);
-
-	return lxnm->cur_id++;
-}
-
-static void lxnm_pid_unregister(GIOChannel *gio, LXNMPID id)
-{
-	gchar *msg;
-	gint len;
-
-	msg = g_strdup_printf("+DONE %d\n", id);
-	g_io_channel_write_chars(gio, msg, -1, &len, NULL);
-	g_free(msg);
 }
 
 static gboolean
