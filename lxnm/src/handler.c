@@ -19,6 +19,8 @@
 
 #include <glib.h>
 #include <glib/gi18n.h>
+#include <unistd.h>
+#include <sys/wait.h>
 #include "lxnm.h"
 #include "thread.h"
 #include "handler.h"
@@ -42,6 +44,36 @@ LXNMHandler *lxnm_handler_new(const gchar *strings)
 	return handler;
 }
 
+static int lxnm_handler_execute(const gchar *filename, GIOChannel *gio, gint cmd_id)
+{
+	int pid;
+	int pfd[2];
+	int status;
+	gchar buffer[1024];
+
+	/* create pipe */
+	if (pipe(pfd)<0)
+		return -1;
+
+	/* fork to execute external program or scripts */
+	pid = fork();
+	signal(SIGCLD,SIG_IGN);
+
+	if(pid==0) {
+		close(STDOUT_FILENO);
+		dup(pfd[1]);
+		execl(filename, filename, NULL);
+		exit(0);
+	}
+
+	/* waiting for external process */
+	while(waitpid((pid_t)-1, &status, WNOHANG));
+
+	while(read(pfd[0], buffer, sizeof(buffer))) {
+		lxnm_send_message(gio, cmd_id, buffer);
+	}
+}
+
 int lxnm_handler_ethernet_up(void *arg)
 {
 	LXNMPID id;
@@ -50,10 +82,37 @@ int lxnm_handler_ethernet_up(void *arg)
 
 	id = lxnm_pid_register(lxthread->gio);
 	/* interface name */
-	p = strtok((char *)lxthread->cmd+2, " ");
+	p = strtok((char *)lxthread->cmd, " ");
+	p = strtok(NULL, "");
+
 	if (lxnm_isifname(p)) {
-		setenv("LXNM_IFNAME", p, 1);
-		return system(lxnm->setting->eth_up);
+		if (lxnm->setting->eth_up->method==LXNM_HANDLER_METHOD_EXECUTE) {
+			setenv("LXNM_IFNAME", p, 1);
+			lxnm_handler_execute(lxnm->setting->eth_up->value, lxthread->gio, id);
+		}
+	}
+
+	lxnm_pid_unregister(lxthread->gio, id);
+	g_free(lxthread);
+	return 0;
+}
+
+int lxnm_handler_ethernet_down(void *arg)
+{
+	LXNMPID id;
+	char *p;
+	LxThread *lxthread = arg;
+
+	id = lxnm_pid_register(lxthread->gio);
+	/* interface name */
+	p = strtok((char *)lxthread->cmd, " ");
+	p = strtok(NULL, "");
+
+	if (lxnm_isifname(p)) {
+		if (lxnm->setting->eth_down->method==LXNM_HANDLER_METHOD_EXECUTE) {
+			setenv("LXNM_IFNAME", p, 1);
+			lxnm_handler_execute(lxnm->setting->eth_down->value, lxthread->gio, id);
+		}
 	}
 
 	lxnm_pid_unregister(lxthread->gio, id);

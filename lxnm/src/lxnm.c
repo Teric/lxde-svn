@@ -60,26 +60,6 @@ static const char *key_mgmt_name[] = {
 };
 
 static int
-ethernet_down(void *arg)
-{
-	LXNMPID id;
-	char *p;
-	LxThread *lxthread = arg;
-
-	id = lxnm_pid_register(lxthread->gio);
-	/* interface name */
-	p = strtok((char *)lxthread->cmd+2, " ");
-	if (lxnm_isifname(p)) {
-		setenv("LXNM_IFNAME", p, 1);
-		system(lxnm->setting->eth_down);
-	}
-
-	lxnm_pid_unregister(lxthread->gio, id);
-	g_free(lxthread);
-	return 0;
-}
-
-static int
 ethernet_repair(void *arg)
 {
 	LXNMPID id;
@@ -262,7 +242,7 @@ lxnm_parse_command(GIOChannel *gio, const char *cmd)
 			break;
 		case LXNM_ETHERNET_DOWN:
 			pthread_create(&actionThread, NULL,
-					(void *) ethernet_down, (void *)lxthread);
+					(void *) lxnm_handler_ethernet_down, (void *)lxthread);
 			break;
 		case LXNM_ETHERNET_REPAIR:
 			pthread_create(&actionThread, NULL,

@@ -12,5 +12,6 @@ typedef struct {
 
 LXNMHandler *lxnm_handler_new(const gchar *strings);
 int lxnm_handler_ethernet_up(void *arg);
+int lxnm_handler_ethernet_down(void *arg);
 
 #endif
