@@ -20,8 +20,8 @@ sGtk/FileChooserBackend=
 iGtk/ButtonImages=1
 iGtk/MenuImages=1
 #iGtk/MenuBarAccel=1
-#sGtk/CursorThemeName
-#iGtk/CursorThemeSize
+sGtk/CursorThemeName=
+iGtk/CursorThemeSize=18
 #iGtk/ShowInputMethodMenu=1
 #iGtk/ShowUnicodeMenu=1
 #iGtk/TimeoutInitial
@@ -35,3 +35,12 @@ iXft/Antialias=1
 #iXft/DPI
 #sNet/FallbackIconTheme=hicolor
 #iGtk/TouchscreenMode
+
+[Mouse]
+AccFactor=20
+AccThreshold=10
+LeftHanded=0
+
+[Keyboard]
+Delay=500
+Interval=30
