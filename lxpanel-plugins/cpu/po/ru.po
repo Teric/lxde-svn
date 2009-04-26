@@ -3,23 +3,24 @@
 # This file is distributed under the same license as the PACKAGE package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 #
-#, fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2009-04-15 22:39+0200\n"
-"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"PO-Revision-Date: 2009-04-25 07:13+0200\n"
+"Last-Translator: Александр Голубев <ag@lhp.ru>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Pootle 1.1.0\n"
 
 #: ../src/cpu.c:218
 msgid "CPU Usage Monitor"
-msgstr ""
+msgstr "Индикатор использования процессора"
 
+# Как вариант - заменить процессор на ЦП.
 #: ../src/cpu.c:220
 msgid "Display CPU usage"
-msgstr ""
+msgstr "Показать использование процессора"
