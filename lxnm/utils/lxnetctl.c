@@ -27,6 +27,13 @@
 
 #define LXNM_SOCKET "/var/run/lxnm.socket"
 
+static gchar helpmsg[] = {
+	"Usage:\n"
+	"  lxnetctl [interface] up \n"
+	"           [interface] down \n"
+	"           [interface] scan \n"
+};
+
 #if 0
 static void
 lxnetctl_send_message(GIOChannel *gio, const char *cmd, ...)
@@ -63,29 +70,41 @@ lxnetctl_read_channel(GIOChannel *gio, GIOCondition condition, gpointer data)
 	gchar *msg;
 	gsize len;
 
-	if (condition & G_IO_HUP)
-		g_error ("Read end of pipe died!\n");
+//	if (condition & G_IO_HUP)
+//		return FALSE;
 
-	ret = g_io_channel_read_line (gio, &msg, &len, NULL, &err);
+	ret = g_io_channel_read_line(gio, &msg, &len, NULL, &err);
 	if (ret == G_IO_STATUS_ERROR)
 		g_error ("Error reading: %s\n", err->message);
 
-	printf ("Read %u bytes: %s\n", len, msg);
+	if (len > 0)
+		printf("%s\n", msg);
 
-	g_free (msg);
+	g_free(msg);
+
+	if (condition & G_IO_HUP)
+		return FALSE;
 
 	return TRUE;
 }
 
 int
-main(void)
+main(gint argc, gchar** argv)
 {
 	GIOChannel *gio;
+	gchar *command;
 	gsize len;
+	int i;
 	int sockfd;
+	int flags;
 	struct sockaddr_un sa_un;
 
-	/* create socket */
+	if (argc<3) {
+		printf("%s\n", helpmsg);
+		return 0;
+	}
+
+	/* crate socket */
 	sockfd = socket(PF_UNIX, SOCK_STREAM, 0);
 	if (sockfd < 0) {
 		printf("Cannot create socket!");
@@ -104,19 +123,45 @@ main(void)
 		return 1;
 	}
 
+	flags = fcntl(sockfd, F_GETFL, 0);
+        fcntl(sockfd, F_SETFL, flags | O_NONBLOCK);
+
 	gio = g_io_channel_unix_new(sockfd);
 	g_io_channel_set_encoding(gio, NULL, NULL);
 	g_io_add_watch(gio, G_IO_IN | G_IO_HUP, lxnetctl_read_channel, NULL);
 
 	/* send command */
-	if (g_io_channel_write_chars(gio,
-				     //"7 ath0 1F WEP testest",
-				     "8 wlan0",
-				     -1, &len, NULL) == G_IO_STATUS_ERROR)
-		g_error("Error writing!");
+/* "7 ath0 1F WEP testest",*/
+	if (strncmp(argv[2], "up", 2)==0) {
+		command = g_strdup_printf("1 %s\n", argv[1]);
 
-	g_io_channel_flush(gio, NULL);
+		if (g_io_channel_write_chars(gio, command, -1, &len, NULL)==G_IO_STATUS_ERROR)
+			g_error("Error writing!");
 
+		g_free(command);
+		g_io_channel_flush(gio, NULL);
+	} else if (strncmp(argv[2], "down", 4)==0) {
+		command = g_strdup_printf("2 %s\n", argv[1]);
+
+		if (g_io_channel_write_chars(gio, command, -1, &len, NULL)==G_IO_STATUS_ERROR)
+			g_error("Error writing!");
+
+		g_free(command);
+		g_io_channel_flush(gio, NULL);
+	} else if (strncmp(argv[2], "scan", 4)==0) {
+		command = g_strdup_printf("8 %s\n", argv[1]);
+
+		if (g_io_channel_write_chars(gio, command, -1, &len, NULL)==G_IO_STATUS_ERROR)
+			g_error("Error writing!");
+
+		g_free(command);
+		g_io_channel_flush(gio, NULL);
+
+		{
+			GMainLoop *loop = g_main_loop_new(NULL, FALSE);
+			g_main_loop_run(loop);
+		}
+	}
 	return 0;
 }
 
