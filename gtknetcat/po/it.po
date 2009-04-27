@@ -8,12 +8,13 @@ msgstr ""
 "Project-Id-Version: gtknetcat 0.1\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2009-04-15 19:19+0200\n"
-"PO-Revision-Date: 2009-01-07 00:06+0100\n"
-"Last-Translator: Fabio Barone <phonky@gmx.net>\n"
+"PO-Revision-Date: 2009-04-27 17:06+0200\n"
+"Last-Translator: Alessandro Pellizzari <alex@amiran.it>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Pootle 1.1.0\n"
 "X-Poedit-Language: Italian\n"
 "X-Poedit-Country: ITALY\n"
 
@@ -24,11 +25,11 @@ msgstr "Trasmissione file"
 
 #: ../src/gtknetcat.py:22
 msgid "Send Files"
-msgstr "Inviare file"
+msgstr "Invia file"
 
 #: ../src/gtknetcat.py:22
 msgid "Receive Files"
-msgstr "Ricevere file"
+msgstr "Ricevi file"
 
 #: ../src/gtknetcat.py:130
 msgid "File transmission failed!"
@@ -57,7 +58,7 @@ msgstr "Esecuzione comando:"
 
 #: ../src/gtknetcat.py:181
 msgid "Processing..."
-msgstr "In processo ..."
+msgstr "In elaborazione..."
 
 #: ../src/gtknetcat.py:209
 msgid "Path"
@@ -65,15 +66,15 @@ msgstr "Percorso"
 
 #: ../src/gtknetcat.py:232
 msgid "Select files to send"
-msgstr "Selezionare file da inviare"
+msgstr "Seleziona file da inviare"
 
 #: ../data/wizard.glade.h:1
 msgid "Add File"
-msgstr "Aggiungere file"
+msgstr "Aggiungi file"
 
 #: ../data/wizard.glade.h:2
 msgid "Add Folder"
-msgstr "Aggiungere cartella"
+msgstr "Aggiungi cartella"
 
 #: ../data/wizard.glade.h:3
 msgid "Destination Host:"
@@ -97,16 +98,16 @@ msgstr "Porta:"
 
 #: ../data/wizard.glade.h:8
 msgid "Receive files from another computer"
-msgstr "Ricevere file da un altro computer"
+msgstr "Ricevi file da un altro computer"
 
 #: ../data/wizard.glade.h:9
 msgid "Save to Folder: "
-msgstr "Salvare in cartella:"
+msgstr "Salva nella cartella:"
 
 #: ../data/wizard.glade.h:10
 msgid "Send files to another computer"
-msgstr "Inviare file a un altro computer"
+msgstr "Invia file a un altro computer"
 
 #: ../data/wizard.glade.h:11
 msgid "What do you want to do?"
-msgstr "Cosa vorrebbe fare?"
+msgstr "Cosa vuoi fare?"
