@@ -78,7 +78,7 @@ lxnetctl_read_channel(GIOChannel *gio, GIOCondition condition, gpointer data)
 		g_error ("Error reading: %s\n", err->message);
 
 	if (len > 0)
-		printf("%s\n", msg);
+		printf("%s", msg);
 
 	g_free(msg);
 
