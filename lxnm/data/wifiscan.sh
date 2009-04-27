@@ -8,6 +8,7 @@ while read LABEL ARG1 ARG2 ARG3 ARG4 ARG5; do
 		KEYMGMT=
 		APADDR=$ARG4
 	elif [ A"${LABEL%:*}" = A"ESSID" ]; then
+		echo -n "+$LXNM_CMDID "
 		ESSID=${LABEL#*:}
 		ESSID=${ESSID//\"}
 		if [ A"$ESSID" = A ]; then
