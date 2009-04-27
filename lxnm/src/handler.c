@@ -51,14 +51,18 @@ static int lxnm_handler_execute(const gchar *filename, GIOChannel *gio, gint cmd
 	int pid;
 	int pfd[2];
 	int status;
-	int flags;
-	int wait_flags;
+	int len;
+	gchar cmdid[8];
 	gchar *header;
 	gchar buffer[1024] = { 0 };
 
 	/* create pipe */
 	if (pipe(pfd)<0)
 		return -1;
+
+	/* initalizing environment variable */
+	sprintf(cmdid, "%d", cmd_id);
+	setenv("LXNM_CMDID", cmdid, 1);
 
 	/* fork to execute external program or scripts */
 	pid = fork();
@@ -77,18 +81,20 @@ static int lxnm_handler_execute(const gchar *filename, GIOChannel *gio, gint cmd
 	close(pfd[1]);
 
 	/* generate header */
-	header = g_strdup_printf("+%d ", cmd_id);
-	lxnm_send_message(gio, header);
-	g_free(header);
+	//header = g_strdup_printf("+%d ", cmd_id);
+	//lxnm_send_message(gio, header);
+	//g_free(header);
 
 	while(waitpid((pid_t)-1, &status, WNOHANG));
 
-	while(read(pfd[0], buffer, sizeof(buffer))>0) {
+	while((len=read(pfd[0], buffer, sizeof(buffer)))>0) {
 		if (response) lxnm_send_message(gio, buffer);
+
+		bzero(&buffer, len);
 	}
 
 	close(pfd[0]);
-	lxnm_send_message(gio, "\n");
+	//lxnm_send_message(gio, "\n");
 }
 
 int lxnm_handler_ethernet_up(LxThread *lxthread)
@@ -159,7 +165,6 @@ int lxnm_handler_wireless_scan(LxThread *lxthread)
 				break;
 			case LXNM_HANDLER_METHOD_EXECUTE:
 				setenv("LXNM_IFNAME", p, 1);
-				printf("TEST\n");
 				lxnm_handler_execute(lxnm->setting->wifi_scan->value, lxthread->gio, id, TRUE);
 				break;
 		}
