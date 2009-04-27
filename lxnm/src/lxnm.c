@@ -34,7 +34,6 @@
 #include "misc.h"
 #include "thread.h"
 #include "handler.h"
-#include "wireless.h"
 
 LxND *lxnm;
 
@@ -138,39 +137,6 @@ wireless_repair(void *arg)
 	return 0;
 }
 
-static int
-wireless_scan(void *arg)
-{
-	LXNMPID id;
-	int iwsockfd;
-	char *p;
-	APLIST *aplist;
-	APLIST *ptr;
-	ap_info *apinfo;
-	LxThread *lxthread = arg;
-
-	id = lxnm_pid_register(lxthread->gio);
-
-	/* interface name */
-	p = strtok((char *)lxthread->cmd+2, " ");
-	if (lxnm_isifname(p)) {
-		iwsockfd = iw_sockets_open();
-		aplist = wireless_scanning(iwsockfd, p);
-		if (aplist) {
-			ptr = aplist;
-			do {
-				apinfo = ptr->info;
-//				printf("%s:%lf\n", apinfo->essid, (double)apinfo->quality/100);
-				ptr = ptr->next;
-			} while (ptr);
-		}
-//		return system(lxnm->setting->wifi_repair);
-	}
-
-	lxnm_pid_unregister(lxthread->gio, id);
-	g_free(lxthread);
-	return 0;
-}
 
 
 static int
@@ -218,27 +184,23 @@ wireless_connect(void *arg)
 }
 
 static void
-lxnm_parse_command(GIOChannel *gio, const char *cmd)
+lxnm_parse_command(LxThread *lxthread)
 {
 	gchar *p, *cmdstr;
 	gchar *msg;
 	gint command;
 	gint len;
 	pthread_t actionThread;
-	LxThread *lxthread;
-
-	lxthread = g_new0(LxThread, 0);
-	lxthread->gio = gio;
-	lxthread->cmd = g_strdup(cmd);
 
 	/* Command */
-	p = strtok((char *)cmd, " ");
+	p = strtok((char *)lxthread->cmd, " ");
 	command = atoi(p);
 	switch(command) {
 		case LXNM_VERSION:
 		case LXNM_ETHERNET_UP:
-			pthread_create(&actionThread, NULL,
-					(void *) lxnm_handler_ethernet_up, (void *)lxthread);
+			lxnm_handler_ethernet_up(lxthread);
+			//pthread_create(&actionThread, NULL,
+			//		(void *) lxnm_handler_ethernet_up, (void *)lxthread);
 			break;
 		case LXNM_ETHERNET_DOWN:
 			pthread_create(&actionThread, NULL,
@@ -265,8 +227,9 @@ lxnm_parse_command(GIOChannel *gio, const char *cmd)
 					(void *) wireless_connect, (void *)lxthread);
 			break;
 		case LXNM_WIRELESS_SCAN:
-			pthread_create(&actionThread, NULL,
-					(void *) wireless_scan, (void *)lxthread);
+			lxnm_handler_wireless_scan(lxthread);
+//			pthread_create(&actionThread, NULL,
+//					(void *) wireless_scan, (void *)lxthread);
 			break;
 		default:
 			printf("Unknown command");
@@ -290,18 +253,25 @@ lxnm_read_channel(GIOChannel *gio, GIOCondition condition, gpointer data)
 	gchar *msg;
 	gsize len;
 	gsize term;
-//	int cmd;
+	LxThread *lxthread = (LxThread *)data;
+
+//	if (condition & G_IO_HUP)
+//		return FALSE;
 
 	ret = g_io_channel_read_line(gio, &msg, &len, &term, &err);
 	if (ret == G_IO_STATUS_ERROR)
 		g_error("Error reading: %s\n", err->message);
 
-
 	if (len > 0) {
 //		cmd = (int)*msg;
 		msg[term] = '\0';
 //		printf("Command: %d\n", cmd);
-		lxnm_parse_command(gio, msg);
+
+		lxthread->gio_in = gio;
+		lxthread->cmd = g_strdup(msg);
+
+		lxnm_parse_command(lxthread);
+		g_free(lxthread);
 	}
 	g_free(msg);
 
@@ -315,6 +285,7 @@ static gboolean
 lxnm_accept_client(GIOChannel *source, GIOCondition condition, gpointer data G_GNUC_UNUSED)
 {
 	if (condition & G_IO_IN) {
+		LxThread *lxthread;
 		GIOChannel *gio;
 		int fd;
 		int flags;
@@ -333,7 +304,11 @@ lxnm_accept_client(GIOChannel *source, GIOCondition condition, gpointer data G_G
 
 		g_io_channel_set_encoding(gio, NULL, NULL);
 
-		g_io_add_watch(gio, G_IO_IN | G_IO_HUP, lxnm_read_channel, NULL);
+		/* initializing thread data structure */
+		lxthread = g_new0(LxThread, 1);
+		lxthread->gio = gio;
+
+		g_io_add_watch(gio, G_IO_IN | G_IO_HUP, lxnm_read_channel, lxthread);
 
 		g_io_channel_unref(gio);
 	}
@@ -350,11 +325,10 @@ lxnm_init_socket()
 {
 	struct sockaddr_un skaddr;
 	GIOChannel *gio;
-	int skfd;
 
 	/* create socket */
-	skfd = socket(PF_UNIX, SOCK_STREAM, 0);
-	if (skfd < 0)
+	lxnm->sockfd = socket(PF_UNIX, SOCK_STREAM, 0);
+	if (lxnm->sockfd < 0)
 		g_error("Cannot create socket!");
 
 	/* Initiate socket */
@@ -366,11 +340,11 @@ lxnm_init_socket()
 	snprintf(skaddr.sun_path, sizeof(skaddr.sun_path), LXNM_SOCKET);
 
 	/* bind to socket */
-	if (bind(skfd, (struct sockaddr *)&skaddr, sizeof(skaddr)) < 0)
+	if (bind(lxnm->sockfd, (struct sockaddr *)&skaddr, sizeof(skaddr)) < 0)
 		g_error("Bind on socket failed: %s\n", g_strerror(errno));
 
 	/* listen on socket */
-	if (listen(skfd, 5) < 0)
+	if (listen(lxnm->sockfd, 5) < 0)
 		g_error("Listen on socket failed: %s\n", g_strerror(errno));
 
 	/* owner and permision */
@@ -380,14 +354,13 @@ lxnm_init_socket()
 		g_error("Change LXNM_SOCKET permision failed: %s\n", g_strerror(errno));
 
 	/* create I/O channel */
-	gio = g_io_channel_unix_new(skfd);
+	gio = g_io_channel_unix_new(lxnm->sockfd);
 	if (!gio)
 		g_error("Cannot create new GIOChannel!\n");
 
 	/* setting encoding */
 	g_io_channel_set_encoding(gio, NULL, NULL);
 	g_io_channel_set_buffered(gio, FALSE);
-	g_io_channel_set_close_on_unref(gio, TRUE);
 
 	/* I/O channel into the main event loop */
 	if (!g_io_add_watch(gio, G_IO_IN | G_IO_HUP, lxnm_accept_client, NULL))
@@ -408,19 +381,14 @@ main(void)
 	pid_t pid;
 
 	/* Run daemon in the background */
-	pid = fork();
-	if (pid>0) {
-		return 0;
-	}
+//	pid = fork();
+//	if (pid>0) {
+//		return 0;
+//	}
 
 	/* initiate socket for network device */
 	lxnm = (LxND *)malloc(sizeof(lxnm));
 	lxnm->cur_id = 0;
-	lxnm->sockfd = socket(AF_INET, SOCK_DGRAM, 0);
-	if (lxnm->sockfd < 0) {
-		g_error("Cannot create socket!");
-		return -1;
-	}
 
 	/* initiate key_file */
 	keyfile = g_key_file_new();
@@ -463,6 +431,10 @@ main(void)
 
 	strings = g_key_file_get_string(keyfile, "wireless", "connect", NULL);
 	lxnm->setting->wifi_connect = lxnm_handler_new(strings);
+	g_free(strings);
+
+	strings = g_key_file_get_string(keyfile, "wireless", "scan", NULL);
+	lxnm->setting->wifi_scan = lxnm_handler_new(strings);
 	g_free(strings);
 
 	/* LXNM main loop */

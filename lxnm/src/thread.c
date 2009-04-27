@@ -24,16 +24,12 @@
 
 extern LxND *lxnm;
 
-void lxnm_send_message(GIOChannel *gio, LXNMPID id, const gchar *msg)
+void lxnm_send_message(GIOChannel *gio, const gchar *msg)
 {
-	gchar *header;
 	gint len;
 
-	header = g_strdup_printf("+%d ", id);
-	g_io_channel_write_chars(gio, header, -1, &len, NULL);
 	g_io_channel_write_chars(gio, msg, -1, &len, NULL);
 	g_io_channel_flush(gio, NULL);
-	g_free(header);
 }
 
 LXNMPID lxnm_pid_register(GIOChannel *gio)

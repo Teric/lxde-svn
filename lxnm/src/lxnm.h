@@ -30,6 +30,7 @@ typedef struct {
 	LXNMHandler *wifi_down;
 	LXNMHandler *wifi_repair;
 	LXNMHandler *wifi_connect;
+	LXNMHandler *wifi_scan;
 } Setting;
 
 typedef struct {
