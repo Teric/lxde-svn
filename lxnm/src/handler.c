@@ -61,7 +61,7 @@ static int lxnm_handler_execute(const gchar *filename, GIOChannel *gio, gint cmd
 		return -1;
 
 	/* initalizing environment variable */
-	sprintf(cmdid, "%d", cmd_id);
+	sprintf(cmdid, "%u", cmd_id);
 	setenv("LXNM_CMDID", cmdid, 1);
 
 	/* fork to execute external program or scripts */

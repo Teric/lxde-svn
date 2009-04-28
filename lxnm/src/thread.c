@@ -37,7 +37,7 @@ LXNMPID lxnm_pid_register(GIOChannel *gio)
 	gchar *msg;
 	gint len;
 
-	msg = g_strdup_printf("+OK %d\n", lxnm->cur_id);
+	msg = g_strdup_printf("+OK %u\n", lxnm->cur_id);
 	g_io_channel_write_chars(gio, msg, -1, &len, NULL);
 	g_io_channel_flush(gio, NULL);
 	g_free(msg);
@@ -50,7 +50,7 @@ void lxnm_pid_unregister(GIOChannel *gio, LXNMPID id)
 	gchar *msg;
 	gint len;
 
-	msg = g_strdup_printf("+DONE %d\n", id);
+	msg = g_strdup_printf("+DONE %u\n", id);
 	g_io_channel_write_chars(gio, msg, -1, &len, NULL);
 	g_io_channel_flush(gio, NULL);
 	g_free(msg);
