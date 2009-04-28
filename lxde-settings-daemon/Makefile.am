@@ -1,6 +1,6 @@
 SUBDIRS = src
 
-configdir=$(datadir)/lxde
+configdir=$(sysconfdir)/lxde
 config_DATA=\
         config
 
