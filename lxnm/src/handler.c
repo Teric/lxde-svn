@@ -46,7 +46,7 @@ LXNMHandler *lxnm_handler_new(const gchar *strings)
 	return handler;
 }
 
-static int lxnm_handler_execute(const gchar *filename, GIOChannel *gio, gint cmd_id, gboolean response)
+static int lxnm_handler_execute(const gchar *filename, GIOChannel *gio, LXNMPID cmd_id, gboolean response)
 {
 	int pid;
 	int pfd[2];
