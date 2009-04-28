@@ -32,12 +32,12 @@ void lxnm_send_message(GIOChannel *gio, const gchar *msg)
 	g_io_channel_flush(gio, NULL);
 }
 
-LXNMPID lxnm_pid_register(GIOChannel *gio)
+LXNMPID lxnm_pid_register(GIOChannel *gio, gint command)
 {
 	gchar *msg;
 	gint len;
 
-	msg = g_strdup_printf("+OK %u\n", lxnm->cur_id);
+	msg = g_strdup_printf("+OK %d %u\n", command, lxnm->cur_id);
 	g_io_channel_write_chars(gio, msg, -1, &len, NULL);
 	g_io_channel_flush(gio, NULL);
 	g_free(msg);

@@ -27,12 +27,22 @@
 
 #define LXNM_SOCKET "/var/run/lxnm.socket"
 
+typedef unsigned int LXNMPID;
+
+typedef struct {
+	LXNMPID id;
+	gint command;
+	void (*callback)(LXNMPID id, gpointer data);
+} Tasklist;
+
 static gchar helpmsg[] = {
 	"Usage:\n"
 	"  lxnetctl [interface] up \n"
 	"           [interface] down \n"
 	"           [interface] scan \n"
 };
+
+static GList *list = NULL;
 
 #if 0
 static void
@@ -62,12 +72,32 @@ lxnetctl_send_message(GIOChannel *gio, const char *cmd, ...)
 }
 #endif
 
+static void lxnetctl_command_parser(gchar *cmd)
+{
+	Tasklist *task;
+	gchar *p;
+
+	p = strtok(cmd, " ");
+
+	if (strcmp(p, "+OK")) {
+		p = strtok(NULL, " ");
+
+		task = g_new0(Tasklist, 1);
+		task->command = (unsigned int)atoi(p);
+		task->id = (unsigned int)atoi(p);
+
+		/* add to task list */
+		list = g_list_append(list, task);
+	}
+}
+
 static gboolean
 lxnetctl_read_channel(GIOChannel *gio, GIOCondition condition, gpointer data)
 {
 	GIOStatus ret;
 	GError *err = NULL;
 	gchar *msg;
+	gchar *cmd;
 	gsize len;
 
 //	if (condition & G_IO_HUP)
@@ -77,8 +107,11 @@ lxnetctl_read_channel(GIOChannel *gio, GIOCondition condition, gpointer data)
 	if (ret == G_IO_STATUS_ERROR)
 		g_error ("Error reading: %s\n", err->message);
 
-	if (len > 0)
+	if (len > 0) {
 		printf("%s", msg);
+		cmd = g_strdup(msg);
+		lxnetctl_command_parser(cmd);
+	}
 
 	g_free(msg);
 

@@ -10,7 +10,7 @@ typedef struct {
 } LxThread;
 
 void lxnm_send_message(GIOChannel *gio, const gchar *msg);
-LXNMPID lxnm_pid_register(GIOChannel *gio);
+LXNMPID lxnm_pid_register(GIOChannel *gio, gint command);
 void lxnm_pid_unregister(GIOChannel *gio, LXNMPID id);
 
 #endif

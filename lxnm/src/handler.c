@@ -102,7 +102,7 @@ int lxnm_handler_ethernet_up(LxThread *lxthread)
 	LXNMPID id;
 	char *p;
 
-	id = lxnm_pid_register(lxthread->gio);
+	id = lxnm_pid_register(lxthread->gio, LXNM_ETHERNET_UP);
 	/* interface name */
 	p = strtok(NULL, " ");
 
@@ -122,7 +122,7 @@ int lxnm_handler_ethernet_down(LxThread *lxthread)
 	LXNMPID id;
 	char *p;
 
-	id = lxnm_pid_register(lxthread->gio);
+	id = lxnm_pid_register(lxthread->gio, LXNM_ETHERNET_DOWN);
 	/* interface name */
 	p = strtok(NULL, "");
 
@@ -146,7 +146,7 @@ int lxnm_handler_wireless_scan(LxThread *lxthread)
 	APLIST *ptr;
 	ap_info *apinfo;
 
-	id = lxnm_pid_register(lxthread->gio);
+	id = lxnm_pid_register(lxthread->gio, LXNM_WIRELESS_SCAN);
 	/* interface name */
 	p = strtok(NULL, "");
 

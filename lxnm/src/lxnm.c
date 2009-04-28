@@ -65,7 +65,7 @@ ethernet_repair(void *arg)
 	char *p;
 	LxThread *lxthread = arg;
 
-	id = lxnm_pid_register(lxthread->gio);
+	id = lxnm_pid_register(lxthread->gio, LXNM_ETHERNET_REPAIR);
 	/* interface name */
 	p = strtok((char *)lxthread->cmd+2, " ");
 	if (lxnm_isifname(p)) {
@@ -85,7 +85,7 @@ wireless_up(void *arg)
 	char *p;
 	LxThread *lxthread = arg;
 
-	id = lxnm_pid_register(lxthread->gio);
+	id = lxnm_pid_register(lxthread->gio, LXNM_WIRELESS_UP);
 	/* interface name */
 	p = strtok((char *)lxthread->cmd+2, " ");
 	if (lxnm_isifname(p)) {
@@ -104,7 +104,7 @@ wireless_down(void *arg)
 	char *p;
 	LxThread *lxthread = arg;
 
-	id = lxnm_pid_register(lxthread->gio);
+	id = lxnm_pid_register(lxthread->gio, LXNM_WIRELESS_DOWN);
 	/* interface name */
 	p = strtok((char *)lxthread->cmd+2, " ");
 	if (lxnm_isifname(p)) {
@@ -124,7 +124,7 @@ wireless_repair(void *arg)
 	char *p;
 	LxThread *lxthread = arg;
 
-	id = lxnm_pid_register(lxthread->gio);
+	id = lxnm_pid_register(lxthread->gio, LXNM_WIRELESS_REPAIR);
 	/* interface name */
 	p = strtok((char *)lxthread->cmd+2, " ");
 	if (lxnm_isifname(p)) {
@@ -146,7 +146,7 @@ wireless_connect(void *arg)
 	char *p;
 	LxThread *lxthread = arg;
 
-	id = lxnm_pid_register(lxthread->gio);
+	id = lxnm_pid_register(lxthread->gio, LXNM_WIRELESS_CONNECT);
 	/* <interface> <essid> <apaddr> <key> <protocol> <key_mgmt> <grpup> <pairwise> */
 	/* interface name */
 	p = strtok((char *)lxthread->cmd+2, " ");
