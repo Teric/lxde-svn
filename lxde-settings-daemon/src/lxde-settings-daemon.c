@@ -165,7 +165,32 @@ static void load_settings()
 	{
 		int i;
         const char group[] = "GTK";
-        char** keys = g_key_file_get_keys( kf, group, NULL, NULL ), **key;
+        char** keys, **key;
+
+        /* Mouse cursor (does this work?) */
+        str = g_key_file_get_string( kf, group, "sGtk/CursorThemeName", NULL);
+        val = g_key_file_get_integer(kf, group, "iGtk/CursorThemeSize", NULL);
+        if(str || val > 0)
+        {
+            buf = g_string_sized_new(100);
+            if(str)
+            {
+                if(*str)
+                    g_string_append_printf(buf, "Xcursor.theme:%s\n", str);
+                g_free(str);
+            }
+            g_string_append(buf, "Xcursor.theme_core:true\n");
+            if(val > 0)
+                g_string_append_printf(buf, "Xcursor.size:%d\n", val);
+            merge_xrdb( buf->str, buf->len );
+            g_string_free(buf, TRUE);
+        }
+
+        /* Load mouse and keyboard settings */
+        configure_input(kf);
+
+        /* Load GTK+ settings */
+        keys = g_key_file_get_keys( kf, group, NULL, NULL );
         for( key = keys; *key; ++key )
         {
             const char* name = *key + 1;
@@ -220,37 +245,15 @@ static void load_settings()
             }
 		}
 
-        /* Mouse cursor */
-        str = g_key_file_get_string( kf, group, "sGtk/CursorThemeName", NULL);
-        val = g_key_file_get_integer(kf, group, "iGtk/CursorThemeSize", NULL);
-        if(str || val > 0)
-        {
-            buf = g_string_sized_new(100);
-            if(str)
-            {
-                if(*str)
-                    g_string_append_printf(buf, "Xcursor.theme:%s\n", str);
-                g_free(str);
-            }
-            g_string_append(buf, "Xcursor.theme_core:true\n");
-            if(val > 0)
-                g_string_append_printf(buf, "Xcursor.size:%d\n", val);
-            merge_xrdb( buf->str, buf->len );
-            g_string_free(buf, TRUE);
-        }
-
-        /* Load mouse and keyboard settings */
-        configure_input(kf);
-
 		for( i = 0; managers[i]; ++i )
 			xsettings_manager_notify( managers [i] );
 	}
 	g_key_file_free( kf );
 }
 
-static gboolean create_settings(  )
+static gboolean create_settings()
 {
-	int 	n_screens = ScreenCount (dpy);
+	int n_screens = ScreenCount(dpy);
 	int i;
 	gboolean terminated = FALSE;
 
@@ -336,7 +339,7 @@ int main(int argc, char** argv)
 	XSetSelectionOwner( dpy, CMD_ATOM, DefaultRootWindow( dpy ), CurrentTime );
 	XUngrabServer( dpy );
 
-	if( ! create_settings( dpy ) )
+	if( ! create_settings() )
 		return 1;
 
 	load_settings();

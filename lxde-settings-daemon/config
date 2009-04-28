@@ -6,8 +6,6 @@
 #iNet/CursorBlinkTime
 sNet/ThemeName=Clearlooks
 sNet/IconThemeName=nuoveXT2
-#iGtk/CanChangeAccels=0
-#cGtk/ColorPalette
 sGtk/FontName=Sans 10
 #iGtk/IconSizes
 #sGtk/KeyThemeName
@@ -15,19 +13,11 @@ iGtk/ToolbarStyle=3
 #iGtk/ToolbarIconSize
 #iGtk/IMPreeditStyle
 #iGtk/IMStatusStyle
-#sGtk/Modules
 sGtk/FileChooserBackend=
 iGtk/ButtonImages=1
 iGtk/MenuImages=1
-#iGtk/MenuBarAccel=1
 sGtk/CursorThemeName=
 iGtk/CursorThemeSize=18
-#iGtk/ShowInputMethodMenu=1
-#iGtk/ShowUnicodeMenu=1
-#iGtk/TimeoutInitial
-#iGtk/TimeoutRepeat
-#cGtk/ColorScheme
-#iGtk/EnableAnimations=1
 iXft/Antialias=1
 #iXft/Hinting
 #iXft/HintStyle
