@@ -199,12 +199,9 @@ lxnm_parse_command(LxThread *lxthread)
 		case LXNM_VERSION:
 		case LXNM_ETHERNET_UP:
 			lxnm_handler_ethernet_up(lxthread);
-			//pthread_create(&actionThread, NULL,
-			//		(void *) lxnm_handler_ethernet_up, (void *)lxthread);
 			break;
 		case LXNM_ETHERNET_DOWN:
-			pthread_create(&actionThread, NULL,
-					(void *) lxnm_handler_ethernet_down, (void *)lxthread);
+			lxnm_handler_ethernet_down(lxthread);
 			break;
 		case LXNM_ETHERNET_REPAIR:
 			pthread_create(&actionThread, NULL,
@@ -228,21 +225,12 @@ lxnm_parse_command(LxThread *lxthread)
 			break;
 		case LXNM_WIRELESS_SCAN:
 			lxnm_handler_wireless_scan(lxthread);
-//			pthread_create(&actionThread, NULL,
-//					(void *) wireless_scan, (void *)lxthread);
 			break;
 		default:
 			printf("Unknown command");
 			break;
 	}
 
-	/* Args */
-/*
-	p = strtok(NULL, " ");
-	for (i=0;p;i++,p=strtok(NULL, " ")) {
-		printf("%s\n", p);
-	}
-*/
 }
 
 static gboolean
@@ -253,24 +241,28 @@ lxnm_read_channel(GIOChannel *gio, GIOCondition condition, gpointer data)
 	gchar *msg;
 	gsize len;
 	gsize term;
-	LxThread *lxthread = (LxThread *)data;
+	LxThread *lxthread;
 
-//	if (condition & G_IO_HUP)
-//		return FALSE;
+	if (condition & G_IO_HUP)
+		return FALSE;
 
 	ret = g_io_channel_read_line(gio, &msg, &len, &term, &err);
 	if (ret == G_IO_STATUS_ERROR)
 		g_error("Error reading: %s\n", err->message);
 
 	if (len > 0) {
+		/* initializing thread data structure */
+		lxthread = g_new0(LxThread, 1);
+		lxthread->gio = gio;
+
 //		cmd = (int)*msg;
 		msg[term] = '\0';
 //		printf("Command: %d\n", cmd);
 
-		lxthread->gio_in = gio;
 		lxthread->cmd = g_strdup(msg);
 
 		lxnm_parse_command(lxthread);
+		g_free(lxthread->cmd);
 		g_free(lxthread);
 	}
 	g_free(msg);
@@ -295,8 +287,8 @@ lxnm_accept_client(GIOChannel *source, GIOCondition condition, gpointer data G_G
 		if (fd < 0)
 			g_error("Accept failed: %s\n", g_strerror(errno));
 
-		flags = fcntl(fd, F_GETFL, 0);
-		fcntl(fd, F_SETFL, flags | O_NONBLOCK);
+		//flags = fcntl(fd, F_GETFL, 0);
+		//fcntl(fd, F_SETFL, flags | O_NONBLOCK);
 
 		gio = g_io_channel_unix_new(fd);
 		if (!gio)
@@ -304,11 +296,7 @@ lxnm_accept_client(GIOChannel *source, GIOCondition condition, gpointer data G_G
 
 		g_io_channel_set_encoding(gio, NULL, NULL);
 
-		/* initializing thread data structure */
-		lxthread = g_new0(LxThread, 1);
-		lxthread->gio = gio;
-
-		g_io_add_watch(gio, G_IO_IN | G_IO_HUP, lxnm_read_channel, lxthread);
+		g_io_add_watch(gio, G_IO_IN | G_IO_HUP, lxnm_read_channel, NULL);
 
 		g_io_channel_unref(gio);
 	}

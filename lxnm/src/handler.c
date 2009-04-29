@@ -53,7 +53,6 @@ static int lxnm_handler_execute(const gchar *filename, GIOChannel *gio, LXNMPID 
 	int status;
 	int len;
 	gchar cmdid[8];
-	gchar *header;
 	gchar buffer[1024] = { 0 };
 
 	/* create pipe */
@@ -70,22 +69,14 @@ static int lxnm_handler_execute(const gchar *filename, GIOChannel *gio, LXNMPID 
 
 	if(pid==0) {
 		close(STDOUT_FILENO);
-		//close(pfd[0]);
 		dup(pfd[1]);
-		/* FIXME: using exec* functions to replace system() */
-		system(filename);
-		//close(pfd[1]);
+		execlp(filename, filename, NULL);
 		exit(0);
 	}
 
 	close(pfd[1]);
 
-	/* generate header */
-	//header = g_strdup_printf("+%d ", cmd_id);
-	//lxnm_send_message(gio, header);
-	//g_free(header);
-
-	while(waitpid((pid_t)-1, &status, WNOHANG));
+	while(waitpid((pid_t)pid, &status, WNOHANG));
 
 	while((len=read(pfd[0], buffer, sizeof(buffer)))>0) {
 		if (response) lxnm_send_message(gio, buffer);
@@ -94,7 +85,6 @@ static int lxnm_handler_execute(const gchar *filename, GIOChannel *gio, LXNMPID 
 	}
 
 	close(pfd[0]);
-	//lxnm_send_message(gio, "\n");
 }
 
 int lxnm_handler_ethernet_up(LxThread *lxthread)

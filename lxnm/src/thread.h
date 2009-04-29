@@ -5,7 +5,6 @@ typedef unsigned int LXNMPID;
 
 typedef struct {
 	GIOChannel *gio;
-	GIOChannel *gio_in;
 	gchar *cmd;
 } LxThread;
 

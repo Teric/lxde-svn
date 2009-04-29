@@ -25,6 +25,17 @@
 #include <errno.h>
 #include <string.h>
 
+/* Command */
+#define LXNM_VERSION                   0
+#define LXNM_ETHERNET_UP               1
+#define LXNM_ETHERNET_DOWN             2
+#define LXNM_ETHERNET_REPAIR           3
+#define LXNM_WIRELESS_UP               4
+#define LXNM_WIRELESS_DOWN             5
+#define LXNM_WIRELESS_REPAIR           6
+#define LXNM_WIRELESS_CONNECT          7
+#define LXNM_WIRELESS_SCAN             8
+
 #define LXNM_SOCKET "/var/run/lxnm.socket"
 
 typedef unsigned int LXNMPID;
@@ -33,7 +44,8 @@ typedef struct {
 	LXNMPID id;
 	gint command;
 	void (*callback)(LXNMPID id, gpointer data);
-} Tasklist;
+	void (*release)(LXNMPID id, gpointer data);
+} Task;
 
 static gchar helpmsg[] = {
 	"Usage:\n"
@@ -44,50 +56,139 @@ static gchar helpmsg[] = {
 
 static GList *list = NULL;
 
-#if 0
-static void
-lxnetctl_send_message(GIOChannel *gio, const char *cmd, ...)
+char *hex2asc(char *hexsrc)
 {
-	GString *str;
-	va_list args;
-	const char *cmdarg;
+	char *buf, *tmp;
+	char c[3];
 
-	str = g_string_new(cmd);
+	buf = malloc(sizeof(char)+strlen(hexsrc)/2);
+	tmp = buf;
 
-	va_start(args, cmd);
+	for (;*hexsrc;hexsrc+=2) {
+		c[0] = *hexsrc;
+		c[1] = *(hexsrc+1);
+		c[2] = '\0';
 
-	cmdarg = va_arg(args, const char *);
-	while(cmdarg != NULL) {
-		str = g_string_append_c(str, ' ');
-		str = g_string_append(str, cmdarg);
-
-		cmdarg = va_arg(args, const char *);
+		*tmp = strtol(c, NULL, 16);
+		tmp++;
 	}
 
-	va_end(args);
-
-	str = g_string_append_c(str, '\n');
-
-	//netcommon_write_chars_all (channel, str->str, str->len, NULL);
+	*tmp = '\0';
+	return buf;
 }
-#endif
+
+static void lxnetctl_release(LXNMPID id, gpointer data)
+{
+	exit(0);
+}
+
+static void lxnetctl_wireless_scan(LXNMPID id, gpointer data)
+{
+	gchar *p;
+	gchar *content = (gchar *)data;
+
+	/* ESSID */
+	p = strtok(content, " ");
+	printf("%16s\t", p);
+
+	/* BSSID */
+	p = strtok(NULL, " ");
+	printf("%s\t", p);
+
+	/* QUALITY */
+	p = strtok(NULL, " ");
+	printf("%s\t", p);
+
+	/* ENCRYPTION */
+	p = strtok(NULL, " ");
+	if (strcmp(p, "WPA")!=0) {
+		printf("%s", p);
+	} else {
+		printf("%s\t", p);
+
+		/* key management */
+		p = strtok(NULL, " ");
+		printf("%s\t", p);
+
+		/* Group */
+		p = strtok(NULL, " ");
+		printf("%s\t", p);
+
+		/* Pairwise */
+		p = strtok(NULL, " ");
+		printf("%s", p);
+	}
+}
 
 static void lxnetctl_command_parser(gchar *cmd)
 {
-	Tasklist *task;
+	Task *task;
+	LXNMPID pid;
+	GList *data;
 	gchar *p;
+
+	if (*cmd!='+')
+		return;
 
 	p = strtok(cmd, " ");
 
-	if (strcmp(p, "+OK")) {
+	if (strcmp(p, "+OK")==0) {
 		p = strtok(NULL, " ");
 
-		task = g_new0(Tasklist, 1);
-		task->command = (unsigned int)atoi(p);
-		task->id = (unsigned int)atoi(p);
+		/* create a task */
+		task = g_new0(Task, 1);
+		task->command = atoi(p);
+
+		p = strtok(NULL, " ");
+		task->id = (LXNMPID)atoi(p);
+		task->release = lxnetctl_release;
+
+		switch(task->command) {
+			case LXNM_ETHERNET_UP:
+				break;
+			case LXNM_ETHERNET_DOWN:
+				break;
+			case LXNM_WIRELESS_UP:
+				break;
+			case LXNM_WIRELESS_DOWN:
+				break;
+			case LXNM_WIRELESS_SCAN:
+				task->callback = lxnetctl_wireless_scan;
+				break;
+		}
 
 		/* add to task list */
 		list = g_list_append(list, task);
+	} else if (list) {
+		if (strcmp(p, "+DONE")==0) {
+			p = strtok(NULL, " ");
+			pid = (LXNMPID)atoi(p);
+
+			/* find task */
+			for (data=list;data;data=g_list_next(data)) {
+				task = (Task *)data->data;
+				if (task->id==pid) {
+					task->release(pid, NULL);
+					break;
+				}
+			}
+
+			list = g_list_remove(list, task);
+		} else {
+			pid = (LXNMPID)atoi(p+1);
+
+			/* find task */
+			for (data=list;data;data=g_list_next(data)) {
+				task = (Task *)data->data;
+				if (task->id==pid) {
+					/* skip to content area */
+					for (;*p;p++);
+					task->callback(pid, p+1);
+					break;
+				}
+			}
+
+		}
 	}
 }
 
@@ -100,23 +201,29 @@ lxnetctl_read_channel(GIOChannel *gio, GIOCondition condition, gpointer data)
 	gchar *cmd;
 	gsize len;
 
-//	if (condition & G_IO_HUP)
-//		return FALSE;
+	if (condition & G_IO_HUP) {
+		exit(0);
+		return FALSE;
+	}
 
 	ret = g_io_channel_read_line(gio, &msg, &len, NULL, &err);
 	if (ret == G_IO_STATUS_ERROR)
 		g_error ("Error reading: %s\n", err->message);
 
 	if (len > 0) {
-		printf("%s", msg);
-		cmd = g_strdup(msg);
-		lxnetctl_command_parser(cmd);
+		if (msg[0]!='\n') {
+			//printf("%s", msg);
+			cmd = g_strdup(msg);
+			lxnetctl_command_parser(cmd);
+		}
 	}
 
 	g_free(msg);
 
-	if (condition & G_IO_HUP)
+	if (condition & G_IO_HUP) {
+		exit(0);
 		return FALSE;
+	}
 
 	return TRUE;
 }
