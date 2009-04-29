@@ -32,5 +32,6 @@ AC_SUBST(GLIB_LIBS)
 AC_OUTPUT([
   Makefile
   src/Makefile
+  man/Makefile
 ])
 

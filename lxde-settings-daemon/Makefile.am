@@ -1,4 +1,4 @@
-SUBDIRS = src
+SUBDIRS = src man
 
 configdir=$(sysconfdir)/lxde
 config_DATA=\
