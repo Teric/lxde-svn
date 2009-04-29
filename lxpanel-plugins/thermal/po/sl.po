@@ -3,55 +3,55 @@
 # This file is distributed under the same license as the PACKAGE package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 #
-#, fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2009-04-15 23:17+0200\n"
-"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"PO-Revision-Date: 2009-04-29 11:59+0200\n"
+"Last-Translator: Matej <paxmanpwnz@gmail.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Pootle 1.1.0\n"
 
 #: ../src/thermal.c:291
 msgid "Normal"
-msgstr ""
+msgstr "Normalno"
 
 #: ../src/thermal.c:292
 msgid "Warning1"
-msgstr ""
+msgstr "Opozorilo1"
 
 #: ../src/thermal.c:293
 msgid "Warning2"
-msgstr ""
+msgstr "Opozorilo2"
 
 #: ../src/thermal.c:294
 msgid "Automatic sensor location"
-msgstr ""
+msgstr "Samodejno zaznaj senzorje"
 
 #: ../src/thermal.c:295
 msgid "Sensor"
-msgstr ""
+msgstr "Senzor"
 
 #: ../src/thermal.c:296
 msgid "Automatic temperature levels"
-msgstr ""
+msgstr "Samodejno nastavi temperaturni prag"
 
 #: ../src/thermal.c:297
 msgid "Warning1 Temperatur"
-msgstr ""
+msgstr "Pozor1 Temperatura"
 
 #: ../src/thermal.c:298
 msgid "Warning2 Temperatur"
-msgstr ""
+msgstr "Pozor2 Temperatura"
 
 #: ../src/thermal.c:340
 msgid "Temperature Monitor"
-msgstr ""
+msgstr "Nadzornik temperatur"
 
 #: ../src/thermal.c:342
 msgid "Display system temperature, by kesler.daniel@gmail.com"
-msgstr ""
+msgstr "Prikazovalnik temperatur v sistemu, avtor kesler.daniel@gmail.com"
