@@ -1,6 +1,6 @@
 #!/bin/sh
 
-while read LABEL ARG1 ARG2 ARG3 ARG4; do
+while read LABEL ARG1 ARG2 ARG3 ARG4 ARG5; do
 	if [ A"$LABEL" = A"Cell" ]; then
 		PROTO=
 		GROUP=
