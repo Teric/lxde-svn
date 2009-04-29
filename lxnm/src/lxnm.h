@@ -6,6 +6,8 @@
 
 #define LXNM_SOCKET "/var/run/lxnm.socket"
 
+#define LXNM_PROTOCOL "1.0"
+
 /* Command */
 #define LXNM_VERSION                   0
 #define LXNM_ETHERNET_UP               1

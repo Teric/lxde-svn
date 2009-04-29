@@ -76,7 +76,7 @@ static int lxnm_handler_execute(const gchar *filename, GIOChannel *gio, LXNMPID 
 
 	close(pfd[1]);
 
-	while(waitpid((pid_t)pid, &status, WNOHANG));
+	//while(waitpid((pid_t)pid, &status, WNOHANG));
 
 	while((len=read(pfd[0], buffer, sizeof(buffer)))>0) {
 		if (response) lxnm_send_message(gio, buffer);
@@ -86,6 +86,20 @@ static int lxnm_handler_execute(const gchar *filename, GIOChannel *gio, LXNMPID 
 
 	close(pfd[0]);
 }
+
+int lxnm_handler_version(LxThread *lxthread)
+{
+	LXNMPID id;
+	gchar *msg;
+
+	id = lxnm_pid_register(lxthread->gio, LXNM_VERSION);
+	msg = g_strdup_printf("+%u " LXNM_PROTOCOL "\n", id);
+	lxnm_send_message(lxthread->gio, msg);
+	lxnm_pid_unregister(lxthread->gio, id);
+	g_free(msg);
+	return 0;
+}
+
 
 int lxnm_handler_ethernet_up(LxThread *lxthread)
 {

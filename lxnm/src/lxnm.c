@@ -197,6 +197,7 @@ lxnm_parse_command(LxThread *lxthread)
 	command = atoi(p);
 	switch(command) {
 		case LXNM_VERSION:
+			lxnm_handler_version(lxthread);
 		case LXNM_ETHERNET_UP:
 			lxnm_handler_ethernet_up(lxthread);
 			break;
@@ -287,8 +288,8 @@ lxnm_accept_client(GIOChannel *source, GIOCondition condition, gpointer data G_G
 		if (fd < 0)
 			g_error("Accept failed: %s\n", g_strerror(errno));
 
-		//flags = fcntl(fd, F_GETFL, 0);
-		//fcntl(fd, F_SETFL, flags | O_NONBLOCK);
+		flags = fcntl(fd, F_GETFL, 0);
+		fcntl(fd, F_SETFL, flags | O_NONBLOCK);
 
 		gio = g_io_channel_unix_new(fd);
 		if (!gio)

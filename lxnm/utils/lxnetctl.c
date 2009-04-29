@@ -40,18 +40,21 @@
 
 typedef unsigned int LXNMPID;
 
-typedef struct {
+typedef struct _Task Task;
+struct _Task {
 	LXNMPID id;
 	gint command;
-	void (*callback)(LXNMPID id, gpointer data);
-	void (*release)(LXNMPID id, gpointer data);
-} Task;
+	gboolean result;
+	void (*callback)(Task *task, gpointer data);
+	void (*release)(Task *task, gpointer data);
+};
 
 static gchar helpmsg[] = {
 	"Usage:\n"
 	"  lxnetctl [interface] up \n"
 	"           [interface] down \n"
 	"           [interface] scan \n"
+	"           version \n"
 };
 
 static GList *list = NULL;
@@ -77,46 +80,59 @@ char *hex2asc(char *hexsrc)
 	return buf;
 }
 
-static void lxnetctl_release(LXNMPID id, gpointer data)
+static void lxnetctl_release(Task *task, gpointer data)
 {
 	exit(0);
 }
 
-static void lxnetctl_wireless_scan(LXNMPID id, gpointer data)
+static void lxnetctl_protocol_version(Task *task, gpointer data)
+{
+	gchar *content = (gchar *)data;
+
+	printf("LXNM protocol version: %s", content);
+}
+
+static void lxnetctl_wireless_scan(Task *task, gpointer data)
 {
 	gchar *p;
 	gchar *content = (gchar *)data;
 
+	if (!task->result) {
+		task->result = TRUE;
+		/* show name colums */
+		printf("%16s  %17s  Quality  Encryption  keymgmt  Group  Pairware\n", "ESSID", "BSSID");
+	}
+
 	/* ESSID */
 	p = strtok(content, " ");
-	printf("%16s\t", p);
+	printf("%16s  ", p);
 
 	/* BSSID */
 	p = strtok(NULL, " ");
-	printf("%s\t", p);
+	printf("%s  ", p);
 
 	/* QUALITY */
 	p = strtok(NULL, " ");
-	printf("%s\t", p);
+	printf("%7s   ", p);
 
 	/* ENCRYPTION */
 	p = strtok(NULL, " ");
 	if (strcmp(p, "WPA")!=0) {
-		printf("%s", p);
+		printf("%10s", p);
 	} else {
-		printf("%s\t", p);
+		printf("%9s  ", p);
 
 		/* key management */
 		p = strtok(NULL, " ");
-		printf("%s\t", p);
+		printf("%7s  ", p);
 
 		/* Group */
 		p = strtok(NULL, " ");
-		printf("%s\t", p);
+		printf("%5s  ", p);
 
 		/* Pairwise */
 		p = strtok(NULL, " ");
-		printf("%s", p);
+		printf("%9s", p);
 	}
 }
 
@@ -137,6 +153,7 @@ static void lxnetctl_command_parser(gchar *cmd)
 
 		/* create a task */
 		task = g_new0(Task, 1);
+		task->result = FALSE;
 		task->command = atoi(p);
 
 		p = strtok(NULL, " ");
@@ -144,6 +161,9 @@ static void lxnetctl_command_parser(gchar *cmd)
 		task->release = lxnetctl_release;
 
 		switch(task->command) {
+			case LXNM_VERSION:
+				task->callback = lxnetctl_protocol_version;
+				break;
 			case LXNM_ETHERNET_UP:
 				break;
 			case LXNM_ETHERNET_DOWN:
@@ -183,7 +203,7 @@ static void lxnetctl_command_parser(gchar *cmd)
 				if (task->id==pid) {
 					/* skip to content area */
 					for (;*p;p++);
-					task->callback(pid, p+1);
+					task->callback(task, p+1);
 					break;
 				}
 			}
@@ -240,8 +260,10 @@ main(gint argc, gchar** argv)
 	struct sockaddr_un sa_un;
 
 	if (argc<3) {
-		printf("%s\n", helpmsg);
-		return 0;
+		if (strcmp(argv[1], "version")!=0) {
+			printf("%s\n", helpmsg);
+			return 0;
+		}
 	}
 
 	/* crate socket */
@@ -272,7 +294,19 @@ main(gint argc, gchar** argv)
 
 	/* send command */
 /* "7 ath0 1F WEP testest",*/
-	if (strncmp(argv[2], "up", 2)==0) {
+	if (strncmp(argv[1], "version", 7)==0) {
+		command = g_strdup_printf("%d %s\n", LXNM_VERSION, argv[1]);
+		if (g_io_channel_write_chars(gio, command, -1, &len, NULL)==G_IO_STATUS_ERROR)
+			g_error("Error writing!");
+
+		g_free(command);
+		g_io_channel_flush(gio, NULL);
+
+		{
+			GMainLoop *loop = g_main_loop_new(NULL, FALSE);
+			g_main_loop_run(loop);
+		}
+	} else if (strncmp(argv[2], "up", 2)==0) {
 		command = g_strdup_printf("1 %s\n", argv[1]);
 
 		if (g_io_channel_write_chars(gio, command, -1, &len, NULL)==G_IO_STATUS_ERROR)
