@@ -259,11 +259,14 @@ main(gint argc, gchar** argv)
 	int flags;
 	struct sockaddr_un sa_un;
 
-	if (argc<3) {
-		if (strcmp(argv[1], "version")!=0) {
+	if (argc>1) {
+		if ((strncmp(argv[1], "version", 7)!=0)&&(argc<3)) {
 			printf("%s\n", helpmsg);
 			return 0;
 		}
+	} else {
+		printf("%s\n", helpmsg);
+		return 0;
 	}
 
 	/* crate socket */
