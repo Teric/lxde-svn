@@ -1,57 +1,57 @@
-# SOME DESCRIPTIVE TITLE.
-# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
-# This file is distributed under the same license as the PACKAGE package.
-# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+# Brazilian Portuguese translation of lxpanel-plugin thermal.
+# Copyright (C) 2009 The LXDE Team.
+# This file is distributed under the same license as the thermal package.
+# Og Maciel <ogmaciel@gnome.org>, 2009.
 #
-#, fuzzy
 msgid ""
 msgstr ""
-"Project-Id-Version: PACKAGE VERSION\n"
+"Project-Id-Version: thermal\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-04-15 23:17+0200\n"
-"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
-"Language-Team: LANGUAGE <LL@li.org>\n"
+"POT-Creation-Date: 2009-04-30 00:01-0400\n"
+"PO-Revision-Date: 2009-04-30 00:01-0400\n"
+"Last-Translator: Og Maciel <ogmaciel@gnome.org>\n"
+"Language-Team: Brazilian Portuguese <ldp-br@bazar2.conectiva.com.br>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
 
 #: ../src/thermal.c:291
 msgid "Normal"
-msgstr ""
+msgstr "Normal"
 
 #: ../src/thermal.c:292
 msgid "Warning1"
-msgstr ""
+msgstr "Aviso1"
 
 #: ../src/thermal.c:293
 msgid "Warning2"
-msgstr ""
+msgstr "Aviso2"
 
 #: ../src/thermal.c:294
 msgid "Automatic sensor location"
-msgstr ""
+msgstr "Localização automática do sensor"
 
 #: ../src/thermal.c:295
 msgid "Sensor"
-msgstr ""
+msgstr "Sensor"
 
 #: ../src/thermal.c:296
 msgid "Automatic temperature levels"
-msgstr ""
+msgstr "Níveis automáticos de temperatura"
 
 #: ../src/thermal.c:297
-msgid "Warning1 Temperatur"
-msgstr ""
+msgid "Warning1 Temperature"
+msgstr "Aviso1 temperatura"
 
 #: ../src/thermal.c:298
-msgid "Warning2 Temperatur"
-msgstr ""
+msgid "Warning2 Temperature"
+msgstr "Aviso2 temperatura"
 
 #: ../src/thermal.c:340
 msgid "Temperature Monitor"
-msgstr ""
+msgstr "Monitor de temperatura"
 
 #: ../src/thermal.c:342
 msgid "Display system temperature, by kesler.daniel@gmail.com"
-msgstr ""
+msgstr "Mostra a temperatura do sistema, por kesler.daniel@gmail.com"
