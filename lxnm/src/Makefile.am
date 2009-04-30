@@ -10,6 +10,8 @@ INCLUDES = \
 	$(G_CAST_CHECKS)
 
 lxnm_SOURCES = \
+	status.c \
+	status.h \
 	misc.c \
 	misc.h \
 	thread.c \

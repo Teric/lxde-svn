@@ -27,14 +27,16 @@
 
 /* Command */
 #define LXNM_VERSION                   0
-#define LXNM_ETHERNET_UP               1
-#define LXNM_ETHERNET_DOWN             2
-#define LXNM_ETHERNET_REPAIR           3
-#define LXNM_WIRELESS_UP               4
-#define LXNM_WIRELESS_DOWN             5
-#define LXNM_WIRELESS_REPAIR           6
-#define LXNM_WIRELESS_CONNECT          7
-#define LXNM_WIRELESS_SCAN             8
+#define LXNM_DEVICE_STATUS             1
+#define LXNM_DEVICE_INFORMATION        2
+#define LXNM_ETHERNET_UP               3
+#define LXNM_ETHERNET_DOWN             4
+#define LXNM_ETHERNET_REPAIR           5
+#define LXNM_WIRELESS_UP               6
+#define LXNM_WIRELESS_DOWN             7
+#define LXNM_WIRELESS_REPAIR           8
+#define LXNM_WIRELESS_CONNECT          9
+#define LXNM_WIRELESS_SCAN             10
 
 #define LXNM_SOCKET "/var/run/lxnm.socket"
 
@@ -221,10 +223,8 @@ lxnetctl_read_channel(GIOChannel *gio, GIOCondition condition, gpointer data)
 	gchar *cmd;
 	gsize len;
 
-	if (condition & G_IO_HUP) {
+	if (condition & G_IO_HUP)
 		exit(0);
-		return FALSE;
-	}
 
 	ret = g_io_channel_read_line(gio, &msg, &len, NULL, &err);
 	if (ret == G_IO_STATUS_ERROR)
@@ -239,11 +239,6 @@ lxnetctl_read_channel(GIOChannel *gio, GIOCondition condition, gpointer data)
 	}
 
 	g_free(msg);
-
-	if (condition & G_IO_HUP) {
-		exit(0);
-		return FALSE;
-	}
 
 	return TRUE;
 }
@@ -292,6 +287,7 @@ main(gint argc, gchar** argv)
         fcntl(sockfd, F_SETFL, flags | O_NONBLOCK);
 
 	gio = g_io_channel_unix_new(sockfd);
+	g_io_channel_set_flags(gio,(GIOFlags)(g_io_channel_get_flags(gio) | G_IO_FLAG_NONBLOCK), NULL); 
 	g_io_channel_set_encoding(gio, NULL, NULL);
 	g_io_add_watch(gio, G_IO_IN | G_IO_HUP, lxnetctl_read_channel, NULL);
 
@@ -310,7 +306,7 @@ main(gint argc, gchar** argv)
 			g_main_loop_run(loop);
 		}
 	} else if (strncmp(argv[2], "up", 2)==0) {
-		command = g_strdup_printf("1 %s\n", argv[1]);
+		command = g_strdup_printf("%d %s\n", LXNM_ETHERNET_UP, argv[1]);
 
 		if (g_io_channel_write_chars(gio, command, -1, &len, NULL)==G_IO_STATUS_ERROR)
 			g_error("Error writing!");
@@ -318,7 +314,7 @@ main(gint argc, gchar** argv)
 		g_free(command);
 		g_io_channel_flush(gio, NULL);
 	} else if (strncmp(argv[2], "down", 4)==0) {
-		command = g_strdup_printf("2 %s\n", argv[1]);
+		command = g_strdup_printf("%d %s\n", LXNM_ETHERNET_DOWN, argv[1]);
 
 		if (g_io_channel_write_chars(gio, command, -1, &len, NULL)==G_IO_STATUS_ERROR)
 			g_error("Error writing!");
@@ -326,7 +322,7 @@ main(gint argc, gchar** argv)
 		g_free(command);
 		g_io_channel_flush(gio, NULL);
 	} else if (strncmp(argv[2], "scan", 4)==0) {
-		command = g_strdup_printf("8 %s\n", argv[1]);
+		command = g_strdup_printf("%d %s\n", LXNM_WIRELESS_SCAN, argv[1]);
 
 		if (g_io_channel_write_chars(gio, command, -1, &len, NULL)==G_IO_STATUS_ERROR)
 			g_error("Error writing!");
