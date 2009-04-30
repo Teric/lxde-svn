@@ -300,11 +300,6 @@ main(gint argc, gchar** argv)
 
 		g_free(command);
 		g_io_channel_flush(gio, NULL);
-
-		{
-			GMainLoop *loop = g_main_loop_new(NULL, FALSE);
-			g_main_loop_run(loop);
-		}
 	} else if (strncmp(argv[2], "up", 2)==0) {
 		command = g_strdup_printf("%d %s\n", LXNM_ETHERNET_UP, argv[1]);
 
@@ -313,6 +308,7 @@ main(gint argc, gchar** argv)
 
 		g_free(command);
 		g_io_channel_flush(gio, NULL);
+		return 0;
 	} else if (strncmp(argv[2], "down", 4)==0) {
 		command = g_strdup_printf("%d %s\n", LXNM_ETHERNET_DOWN, argv[1]);
 
@@ -321,6 +317,7 @@ main(gint argc, gchar** argv)
 
 		g_free(command);
 		g_io_channel_flush(gio, NULL);
+		return 0
 	} else if (strncmp(argv[2], "scan", 4)==0) {
 		command = g_strdup_printf("%d %s\n", LXNM_WIRELESS_SCAN, argv[1]);
 
@@ -329,11 +326,12 @@ main(gint argc, gchar** argv)
 
 		g_free(command);
 		g_io_channel_flush(gio, NULL);
+	}
 
-		{
-			GMainLoop *loop = g_main_loop_new(NULL, FALSE);
-			g_main_loop_run(loop);
-		}
+	/* waiting for response from LXNM Daemon */
+	{
+		GMainLoop *loop = g_main_loop_new(NULL, FALSE);
+		g_main_loop_run(loop);
 	}
 	return 0;
 }
