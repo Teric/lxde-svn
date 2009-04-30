@@ -317,7 +317,7 @@ main(gint argc, gchar** argv)
 
 		g_free(command);
 		g_io_channel_flush(gio, NULL);
-		return 0
+		return 0;
 	} else if (strncmp(argv[2], "scan", 4)==0) {
 		command = g_strdup_printf("%d %s\n", LXNM_WIRELESS_SCAN, argv[1]);
 

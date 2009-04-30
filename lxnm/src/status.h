@@ -8,10 +8,11 @@ typedef enum {
 } DeviceType;
 
 typedef struct {
-	gint       ref;
-	gchar     *ifname;
-	DeviceType type; 
-	gpointer   info;
+	gint        ref;
+	gchar      *ifname;
+	DeviceType  type; 
+	gpointer    info;
+	GList      *clients; /* who is listening for this interface */
 } InterfaceStatus;
 
 typedef struct {
@@ -58,5 +59,9 @@ typedef struct {
 	IECypher          group;
 	IECypher          pairwise;
 } WirelessInfo;
+
+void lxnm_status_register(const gchar *ifname, DeviceType devtype);
+void lxnm_status_unregister(const gchar *ifname);
+DeviceType lxnm_status_get_device_type(const gchar *ifname);
 
 #endif

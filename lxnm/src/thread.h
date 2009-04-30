@@ -1,9 +1,8 @@
 #ifndef LXNM_THREAD_H
 #define LXNM_THREAD_H
 
-typedef unsigned int LXNMPID;
-
 typedef struct {
+	LXNMClient *client;
 	GIOChannel *gio;
 	gchar *cmd;
 } LxThread;

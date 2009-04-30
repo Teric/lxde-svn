@@ -1,8 +1,7 @@
 #ifndef LXNM_H
 #define LXNM_H
 
-#include "thread.h"
-#include "handler.h"
+#include "port.h"
 
 #define LXNM_SOCKET "/var/run/lxnm.socket"
 
@@ -20,6 +19,9 @@
 #define LXNM_WIRELESS_REPAIR           8
 #define LXNM_WIRELESS_CONNECT          9
 #define LXNM_WIRELESS_SCAN             10
+
+typedef unsigned int LXNMPID;
+typedef unsigned int LXNMClientID;
 
 typedef enum {
 	LXNM_ENCRYPTION_OFF,
@@ -42,6 +44,7 @@ typedef enum {
 	LXNM_CYPHER_CCMP
 } IECypher;
 
+typedef struct _LXNMHandler LXNMHandler;
 typedef struct {
 	LXNMHandler *eth_up;
 	LXNMHandler *eth_down;
@@ -54,7 +57,13 @@ typedef struct {
 } Setting;
 
 typedef struct {
-	LXNMPID  cur_id;
+	LXNMClientID  id;
+	GIOChannel   *gio;
+} LXNMClient;
+
+typedef struct {
+	LXNMPID       cur_id;
+	LXNMClientID  cur_cid;
 	int      sockfd;
 	Setting *setting;
 	GList   *ifstatus;

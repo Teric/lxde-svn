@@ -52,6 +52,10 @@ lxnm_parse_command(LxThread *lxthread)
 	switch(command) {
 		case LXNM_VERSION:
 			lxnm_handler_version(lxthread);
+			break;
+		case LXNM_DEVICE_STATUS:
+			lxnm_handler_device_status(lxthread);
+			break;
 		case LXNM_ETHERNET_UP:
 			lxnm_handler_ethernet_up(lxthread);
 			break;
@@ -103,6 +107,7 @@ lxnm_read_channel(GIOChannel *gio, GIOCondition condition, gpointer data)
 	if (len > 0) {
 		/* initializing thread data structure */
 		lxthread = g_new0(LxThread, 1);
+		lxthread->client = (LXNMClient *)data;
 		lxthread->gio = gio;
 
 //		cmd = (int)*msg;
@@ -127,7 +132,7 @@ static gboolean
 lxnm_accept_client(GIOChannel *source, GIOCondition condition, gpointer data G_GNUC_UNUSED)
 {
 	if (condition & G_IO_IN) {
-		LxThread *lxthread;
+		LXNMClient *client;
 		GIOChannel *gio;
 		int fd;
 		int flags;
@@ -147,7 +152,12 @@ lxnm_accept_client(GIOChannel *source, GIOCondition condition, gpointer data G_G
 		g_io_channel_set_flags(gio,(GIOFlags)(g_io_channel_get_flags(gio) | G_IO_FLAG_NONBLOCK), NULL);
 		g_io_channel_set_encoding(gio, NULL, NULL);
 
-		g_io_add_watch(gio, G_IO_IN | G_IO_HUP, lxnm_read_channel, NULL);
+		/* Initializing Client own data structure */
+		client = g_new0(LXNMClient, 1);
+		client->id = lxnm->cur_cid++;
+		client->gio = gio;
+
+		g_io_add_watch(gio, G_IO_IN | G_IO_HUP, lxnm_read_channel, client);
 
 		g_io_channel_unref(gio);
 	}
@@ -228,6 +238,7 @@ main(void)
 	/* initiate socket for network device */
 	lxnm = (LxND *)malloc(sizeof(lxnm));
 	lxnm->cur_id = 0;
+	lxnm->cur_cid = 0;
 	lxnm->ifstatus = NULL;
 
 	/* initiate key_file */

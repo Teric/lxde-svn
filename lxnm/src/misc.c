@@ -21,6 +21,7 @@
 #include <glib/gi18n.h>
 #include <sys/ioctl.h>
 #include <net/if.h>
+#include <iwlib.h>
 #include "lxnm.h"
 #include "misc.h"
 
@@ -49,6 +50,7 @@ char *hex2asc(char *hexsrc)
 
 gboolean lxnm_isifname(const char *ifname)
 {
+#ifdef OS_Linux
 	struct ifreq ifr;
 	bzero(&ifr, sizeof(ifr));
 
@@ -57,4 +59,51 @@ gboolean lxnm_isifname(const char *ifname)
 		return FALSE;
 
 	return TRUE;
+#else
+	/* FIXME: Help us to support other operating systems */
+	return FALSE;
+#endif
+}
+
+gboolean lxnm_isppp(const char *ifname)
+{
+#ifdef OS_Linux
+	struct ifreq ifr;
+	bzero(&ifr, sizeof(ifr));
+
+	strncpy(ifr.ifr_name, ifname, sizeof(ifr.ifr_name));
+	if (ioctl(lxnm->sockfd, SIOCGIFFLAGS, &ifr)<0)
+		return FALSE;
+
+	if (ifr.ifr_flags & IFF_POINTOPOINT)
+		return TRUE;
+	else
+		return FALSE;
+#else
+	/* FIXME: Help us to support other operating systems */
+	return FALSE;
+#endif
+}
+
+gboolean lxnm_iswireless(const gchar *ifname)
+{
+#ifdef OS_Linux
+	gint iwsockfd;
+	gint has_iwrange;
+	struct iw_range iwrange;
+
+	/* open socket for wireless */
+	iwsockfd = iw_sockets_open();
+
+	/* get wireless device informations */
+	has_iwrange = (iw_get_range_info(iwsockfd, ifname, &iwrange)>=0);
+
+	if (!(has_iwrange) || (iwrange.we_version_compiled < 14))
+		return FALSE;
+	else
+		return TRUE;
+#else
+	/* FIXME: Help us to support other operating systems */
+	return FALSE;
+#endif
 }

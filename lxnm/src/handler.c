@@ -25,6 +25,7 @@
 #include "lxnm.h"
 #include "thread.h"
 #include "handler.h"
+#include "status.h"
 #include "wireless.h"
 
 extern LxND *lxnm;
@@ -119,6 +120,23 @@ int lxnm_handler_version(LxThread *lxthread)
 	lxnm_send_message(lxthread->gio, msg);
 	lxnm_pid_unregister(lxthread->gio, id);
 	g_free(msg);
+	return 0;
+}
+
+int lxnm_handler_device_status(LxThread *lxthread)
+{
+	LXNMPID id;
+	char *p;
+
+	id = lxnm_pid_register(lxthread->gio, LXNM_DEVICE_STATUS);
+	/* interface name */
+	p = strtok(NULL, " ");
+
+	if (lxnm_isifname(p)) {
+		lxnm_status_register(p, lxnm_status_get_device_type(p));
+	}
+
+	lxnm_pid_unregister(lxthread->gio, id);
 	return 0;
 }
 
