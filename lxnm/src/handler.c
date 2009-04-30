@@ -115,10 +115,10 @@ int lxnm_handler_version(LxThread *lxthread)
 	LXNMPID id;
 	gchar *msg;
 
-	id = lxnm_pid_register(lxthread->gio, LXNM_VERSION);
+	id = lxnm_pid_register(lxthread->client->gio, LXNM_VERSION);
 	msg = g_strdup_printf("+%u " LXNM_PROTOCOL "\n", id);
-	lxnm_send_message(lxthread->gio, msg);
-	lxnm_pid_unregister(lxthread->gio, id);
+	lxnm_send_message(lxthread->client->gio, msg);
+	lxnm_pid_unregister(lxthread->client->gio, id);
 	g_free(msg);
 	return 0;
 }
@@ -128,7 +128,7 @@ int lxnm_handler_device_status(LxThread *lxthread)
 	LXNMPID id;
 	char *p;
 
-	id = lxnm_pid_register(lxthread->gio, LXNM_DEVICE_STATUS);
+	id = lxnm_pid_register(lxthread->client->gio, LXNM_DEVICE_STATUS);
 	/* interface name */
 	p = strtok(NULL, " ");
 
@@ -136,7 +136,7 @@ int lxnm_handler_device_status(LxThread *lxthread)
 		lxnm_status_register(p, lxnm_status_get_device_type(p));
 	}
 
-	lxnm_pid_unregister(lxthread->gio, id);
+	lxnm_pid_unregister(lxthread->client->gio, id);
 	return 0;
 }
 
@@ -145,18 +145,18 @@ int lxnm_handler_ethernet_up(LxThread *lxthread)
 	LXNMPID id;
 	char *p;
 
-	id = lxnm_pid_register(lxthread->gio, LXNM_ETHERNET_UP);
+	id = lxnm_pid_register(lxthread->client->gio, LXNM_ETHERNET_UP);
 	/* interface name */
 	p = strtok(NULL, " ");
 
 	if (lxnm_isifname(p)) {
 		if (lxnm->setting->eth_up->method==LXNM_HANDLER_METHOD_EXECUTE) {
 			setenv("LXNM_IFNAME", p, 1);
-			lxnm_handler_execute(lxnm->setting->eth_up->value, lxthread->gio, id, FALSE);
+			lxnm_handler_execute(lxnm->setting->eth_up->value, lxthread->client->gio, id, FALSE);
 		}
 	}
 
-	lxnm_pid_unregister(lxthread->gio, id);
+	lxnm_pid_unregister(lxthread->client->gio, id);
 	return 0;
 }
 
@@ -165,18 +165,18 @@ int lxnm_handler_ethernet_down(LxThread *lxthread)
 	LXNMPID id;
 	char *p;
 
-	id = lxnm_pid_register(lxthread->gio, LXNM_ETHERNET_DOWN);
+	id = lxnm_pid_register(lxthread->client->gio, LXNM_ETHERNET_DOWN);
 	/* interface name */
 	p = strtok(NULL, "");
 
 	if (lxnm_isifname(p)) {
 		if (lxnm->setting->eth_down->method==LXNM_HANDLER_METHOD_EXECUTE) {
 			setenv("LXNM_IFNAME", p, 1);
-			lxnm_handler_execute(lxnm->setting->eth_down->value, lxthread->gio, id, FALSE);
+			lxnm_handler_execute(lxnm->setting->eth_down->value, lxthread->client->gio, id, FALSE);
 		}
 	}
 
-	lxnm_pid_unregister(lxthread->gio, id);
+	lxnm_pid_unregister(lxthread->client->gio, id);
 	return 0;
 }
 
@@ -185,18 +185,18 @@ int lxnm_handler_ethernet_repair(LxThread *lxthread)
 	LXNMPID id;
 	char *p;
 
-	id = lxnm_pid_register(lxthread->gio, LXNM_ETHERNET_REPAIR);
+	id = lxnm_pid_register(lxthread->client->gio, LXNM_ETHERNET_REPAIR);
 	/* interface name */
 	p = strtok(NULL, "");
 
 	if (lxnm_isifname(p)) {
 		if (lxnm->setting->eth_repair->method==LXNM_HANDLER_METHOD_EXECUTE) {
 			setenv("LXNM_IFNAME", p, 1);
-			lxnm_handler_execute(lxnm->setting->eth_repair->value, lxthread->gio, id, FALSE);
+			lxnm_handler_execute(lxnm->setting->eth_repair->value, lxthread->client->gio, id, FALSE);
 		}
 	}
 
-	lxnm_pid_unregister(lxthread->gio, id);
+	lxnm_pid_unregister(lxthread->client->gio, id);
 	return 0;
 }
 
@@ -205,18 +205,18 @@ int lxnm_handler_wireless_up(LxThread *lxthread)
 	LXNMPID id;
 	char *p;
 
-	id = lxnm_pid_register(lxthread->gio, LXNM_WIRELESS_UP);
+	id = lxnm_pid_register(lxthread->client->gio, LXNM_WIRELESS_UP);
 	/* interface name */
 	p = strtok(NULL, " ");
 
 	if (lxnm_isifname(p)) {
 		if (lxnm->setting->eth_up->method==LXNM_HANDLER_METHOD_EXECUTE) {
 			setenv("LXNM_IFNAME", p, 1);
-			lxnm_handler_execute(lxnm->setting->wifi_up->value, lxthread->gio, id, FALSE);
+			lxnm_handler_execute(lxnm->setting->wifi_up->value, lxthread->client->gio, id, FALSE);
 		}
 	}
 
-	lxnm_pid_unregister(lxthread->gio, id);
+	lxnm_pid_unregister(lxthread->client->gio, id);
 	return 0;
 }
 
@@ -225,18 +225,18 @@ int lxnm_handler_wireless_down(LxThread *lxthread)
 	LXNMPID id;
 	char *p;
 
-	id = lxnm_pid_register(lxthread->gio, LXNM_WIRELESS_DOWN);
+	id = lxnm_pid_register(lxthread->client->gio, LXNM_WIRELESS_DOWN);
 	/* interface name */
 	p = strtok(NULL, "");
 
 	if (lxnm_isifname(p)) {
 		if (lxnm->setting->eth_down->method==LXNM_HANDLER_METHOD_EXECUTE) {
 			setenv("LXNM_IFNAME", p, 1);
-			lxnm_handler_execute(lxnm->setting->wifi_down->value, lxthread->gio, id, FALSE);
+			lxnm_handler_execute(lxnm->setting->wifi_down->value, lxthread->client->gio, id, FALSE);
 		}
 	}
 
-	lxnm_pid_unregister(lxthread->gio, id);
+	lxnm_pid_unregister(lxthread->client->gio, id);
 	return 0;
 }
 
@@ -245,18 +245,18 @@ int lxnm_handler_wireless_repair(LxThread *lxthread)
 	LXNMPID id;
 	char *p;
 
-	id = lxnm_pid_register(lxthread->gio, LXNM_WIRELESS_REPAIR);
+	id = lxnm_pid_register(lxthread->client->gio, LXNM_WIRELESS_REPAIR);
 	/* interface name */
 	p = strtok(NULL, "");
 
 	if (lxnm_isifname(p)) {
 		if (lxnm->setting->wifi_repair->method==LXNM_HANDLER_METHOD_EXECUTE) {
 			setenv("LXNM_IFNAME", p, 1);
-			lxnm_handler_execute(lxnm->setting->wifi_repair->value, lxthread->gio, id, FALSE);
+			lxnm_handler_execute(lxnm->setting->wifi_repair->value, lxthread->client->gio, id, FALSE);
 		}
 	}
 
-	lxnm_pid_unregister(lxthread->gio, id);
+	lxnm_pid_unregister(lxthread->client->gio, id);
 	return 0;
 }
 
@@ -265,7 +265,7 @@ int lxnm_handler_wireless_connect(LxThread *lxthread)
 	LXNMPID id;
 	char *p;
 
-	id = lxnm_pid_register(lxthread->gio, LXNM_WIRELESS_CONNECT);
+	id = lxnm_pid_register(lxthread->client->gio, LXNM_WIRELESS_CONNECT);
 	/* <interface> <essid> <apaddr> <key> <protocol> <key_mgmt> <grpup> <pairwise> */
 	/* interface name */
 	p = strtok(NULL, "");
@@ -295,11 +295,11 @@ int lxnm_handler_wireless_connect(LxThread *lxthread)
 			p = strtok(NULL, " ");
 			setenv("LXNM_WIFI_PAIRWISE", cypher_name[atoi(p)], 1);
 
-			lxnm_handler_execute(lxnm->setting->wifi_connect->value, lxthread->gio, id, FALSE);
+			lxnm_handler_execute(lxnm->setting->wifi_connect->value, lxthread->client->gio, id, FALSE);
 		}
 	}
 
-	lxnm_pid_unregister(lxthread->gio, id);
+	lxnm_pid_unregister(lxthread->client->gio, id);
 	return 0;
 }
 
@@ -316,7 +316,7 @@ int lxnm_handler_wireless_scan(LxThread *lxthread)
 	p = strtok(NULL, "");
 
 	if (lxnm_isifname(p)) {
-		id = lxnm_pid_register(lxthread->gio, LXNM_WIRELESS_SCAN);
+		id = lxnm_pid_register(lxthread->client->gio, LXNM_WIRELESS_SCAN);
 
 		switch (lxnm->setting->wifi_scan->method) {
 			case LXNM_HANDLER_METHOD_INTERNAL:
@@ -332,10 +332,10 @@ int lxnm_handler_wireless_scan(LxThread *lxthread)
 				break;
 			case LXNM_HANDLER_METHOD_EXECUTE:
 				setenv("LXNM_IFNAME", p, 1);
-				lxnm_handler_execute(lxnm->setting->wifi_scan->value, lxthread->gio, id, TRUE);
+				lxnm_handler_execute(lxnm->setting->wifi_scan->value, lxthread->client->gio, id, TRUE);
 				break;
 		}
-		lxnm_pid_unregister(lxthread->gio, id);
+		lxnm_pid_unregister(lxthread->client->gio, id);
 	}
 
 	return 0;

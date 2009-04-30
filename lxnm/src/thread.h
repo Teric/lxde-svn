@@ -3,7 +3,6 @@
 
 typedef struct {
 	LXNMClient *client;
-	GIOChannel *gio;
 	gchar *cmd;
 } LxThread;
 

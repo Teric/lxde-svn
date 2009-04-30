@@ -97,8 +97,10 @@ lxnm_read_channel(GIOChannel *gio, GIOCondition condition, gpointer data)
 	gsize term;
 	LxThread *lxthread;
 
-	if (condition & G_IO_HUP)
+	if (condition & G_IO_HUP) {
+		g_free(data);
 		return FALSE;
+	}
 
 	ret = g_io_channel_read_line(gio, &msg, &len, &term, &err);
 	if (ret == G_IO_STATUS_ERROR)
@@ -108,7 +110,6 @@ lxnm_read_channel(GIOChannel *gio, GIOCondition condition, gpointer data)
 		/* initializing thread data structure */
 		lxthread = g_new0(LxThread, 1);
 		lxthread->client = (LXNMClient *)data;
-		lxthread->gio = gio;
 
 //		cmd = (int)*msg;
 		msg[term] = '\0';
@@ -121,9 +122,6 @@ lxnm_read_channel(GIOChannel *gio, GIOCondition condition, gpointer data)
 		g_free(lxthread);
 	}
 	g_free(msg);
-
-	if (condition & G_IO_HUP)
-		return FALSE;
 
 	return TRUE;
 }
