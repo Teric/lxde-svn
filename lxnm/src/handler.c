@@ -87,14 +87,17 @@ static int lxnm_handler_execute(const gchar *filename, GIOChannel *gio, LXNMPID 
 
 	/* fork to execute external program or scripts */
 	pid = fork();
+	if (pid<0)
+		return;
+
 	signal(SIGCLD, SIG_IGN);
 
-	if(pid==0) {
+	if (pid==0) {
 		close(STDOUT_FILENO);
 		dup(pfd[1]);
 		execlp(filename, filename, NULL);
 		exit(0);
-	}
+	} 
 
 	close(pfd[1]);
 
