@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2009-04-15 22:42+0200\n"
-"PO-Revision-Date: 2009-04-16 18:15+0200\n"
+"PO-Revision-Date: 2009-05-01 12:05+0200\n"
 "Last-Translator: Ahmad Farghal <ahmad.farghal@gmail.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -28,7 +28,7 @@ msgstr "البطارية: مشحونة بنسبة %d%%، %s"
 
 #: ../src/batt.c:390
 msgid "charging finished"
-msgstr "تم الشحن"
+msgstr "انتهى الشحن"
 
 #: ../src/batt.c:390
 msgid "charging"

@@ -8,12 +8,13 @@ msgstr ""
 "Project-Id-Version: GTKNetcat\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2009-04-15 19:19+0200\n"
-"PO-Revision-Date: 2009-01-27 14:40+0200\n"
+"PO-Revision-Date: 2009-05-01 12:04+0200\n"
 "Last-Translator: Ahmad Farghal <ahmad.farghal@gmail.com>\n"
 "Language-Team: Arabic\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Pootle 1.1.0\n"
 
 #. Due to bugs of Glade, titles are not automatically translated
 #: ../src/gtknetcat.py:22
@@ -42,12 +43,12 @@ msgstr "تم"
 
 #: ../src/gtknetcat.py:145
 msgid "Receiving..."
-msgstr "الاستقبال..."
+msgstr "يستقبل..."
 
 #. ACTION_SEND
 #: ../src/gtknetcat.py:154
 msgid "Sending..."
-msgstr "الإرسال..."
+msgstr "يرسل..."
 
 #: ../src/gtknetcat.py:181
 msgid "Execute command:"
@@ -79,7 +80,7 @@ msgstr "المضيف المُستقبِل:"
 
 #: ../data/wizard.glade.h:4
 msgid "Files to Send:"
-msgstr "الملفات التي سيتم إرسالها:"
+msgstr "الملفات التي ستُرسل:"
 
 #: ../data/wizard.glade.h:5
 msgid "Inter-Computer File Transmission"
