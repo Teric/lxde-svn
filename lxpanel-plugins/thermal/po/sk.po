@@ -1,57 +1,57 @@
-# SOME DESCRIPTIVE TITLE.
+# Slovak translation of thermal.
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
-# This file is distributed under the same license as the PACKAGE package.
-# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+# This file is distributed under the same license as the thermal package.
+# Ivan Masár <helix84@centrum.sk>, 2009.
 #
-#, fuzzy
 msgid ""
 msgstr ""
-"Project-Id-Version: PACKAGE VERSION\n"
+"Project-Id-Version: thermal\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2009-04-15 23:17+0200\n"
-"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
-"Language-Team: LANGUAGE <LL@li.org>\n"
+"PO-Revision-Date: 2009-04-27 18:16+0100\n"
+"Last-Translator: Ivan Masár <helix84@centrum.sk>\n"
+"Language-Team: Slovak <sk-i18n@lists.linux.sk>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
 #: ../src/thermal.c:291
 msgid "Normal"
-msgstr ""
+msgstr "Normálna"
 
 #: ../src/thermal.c:292
 msgid "Warning1"
-msgstr ""
+msgstr "Upozornenie1"
 
 #: ../src/thermal.c:293
 msgid "Warning2"
-msgstr ""
+msgstr "Upozornenie2"
 
 #: ../src/thermal.c:294
 msgid "Automatic sensor location"
-msgstr ""
+msgstr "Automatické umiestnenie snímača"
 
 #: ../src/thermal.c:295
 msgid "Sensor"
-msgstr ""
+msgstr "Snímač"
 
 #: ../src/thermal.c:296
 msgid "Automatic temperature levels"
-msgstr ""
+msgstr "Automatické teplotné úrovne"
 
 #: ../src/thermal.c:297
 msgid "Warning1 Temperatur"
-msgstr ""
+msgstr "Teplota Upozornenie1"
 
 #: ../src/thermal.c:298
 msgid "Warning2 Temperatur"
-msgstr ""
+msgstr "Teplota Upozornenie2"
 
 #: ../src/thermal.c:340
 msgid "Temperature Monitor"
-msgstr ""
+msgstr "Monitor teploty"
 
 #: ../src/thermal.c:342
 msgid "Display system temperature, by kesler.daniel@gmail.com"
-msgstr ""
+msgstr "Zobrazenie teploty systému, kesler.daniel@gmail.com"
+
