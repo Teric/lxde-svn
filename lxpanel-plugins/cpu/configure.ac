@@ -35,7 +35,7 @@ LXPANEL_MODULE="-avoid-version \
 -no-undefined "'-export-symbols-regex "^[[^_]].*"'
 AC_SUBST(LXPANEL_MODULE)
 
-ALL_LINGUAS="cs de"
+ALL_LINGUAS="ar cs da de es et eu fa fi fr gl hr hu id it ja ko lt ml nb nl nn pl ps pt pt_BR ru sk sl sv tr uk vi zh_CN zh_TW"
 AM_GLIB_GNU_GETTEXT
 
 AC_OUTPUT([
