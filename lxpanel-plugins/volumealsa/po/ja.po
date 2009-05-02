@@ -1,17 +1,17 @@
-# SOME DESCRIPTIVE TITLE.
-# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
-# This file is distributed under the same license as the PACKAGE package.
-# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+# Japanese translations for lxpanel-volumealsa package
+# lxpanel-volumealsa
+# Copyright (C) 2008 THE lxpanel-volumealsa'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the lxpanel-volumealsa package.
+# Hironao Komatsu <hironao@users.sourceforge.net>, 2009.
 #
-#, fuzzy
 msgid ""
 msgstr ""
-"Project-Id-Version: PACKAGE VERSION\n"
+"Project-Id-Version: lxpanel-volumealsa 0.1\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2009-04-15 23:18+0200\n"
-"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
-"Language-Team: LANGUAGE <LL@li.org>\n"
+"PO-Revision-Date: 2009-05-01 20:54+0900\n"
+"Last-Translator: Hironao Komatsu <hironao@users.sourceforge.net>\n"
+"Language-Team: ja_JP <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -19,17 +19,17 @@ msgstr ""
 #. create frame
 #: ../src/volumealsa.c:306
 msgid "Volume"
-msgstr ""
+msgstr "ボリューム"
 
 #: ../src/volumealsa.c:323
 msgid "Mute"
-msgstr ""
+msgstr "消音"
 
 #. FIXME: display current level in tooltip. ex: "Volume Control: 80%"
 #: ../src/volumealsa.c:396
 msgid "Volume control"
-msgstr ""
+msgstr "音量コントロール"
 
 #: ../src/volumealsa.c:410
 msgid "Volume Control"
-msgstr ""
+msgstr "音量コントロール"

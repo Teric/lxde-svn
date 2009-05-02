@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: lxsession-edit 0.1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-04-15 19:47+0200\n"
-"PO-Revision-Date: 2009-02-18 12:49+0900\n"
+"POT-Creation-Date: 2009-05-01 18:33+0900\n"
+"PO-Revision-Date: 2009-05-01 18:33+0900\n"
 "Last-Translator: Hironao Komatsu <hironao@users.sourceforge.net>\n"
 "Language-Team: Japanese <translation-team-ja@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
@@ -46,7 +46,6 @@ msgid "Advanced Options"
 msgstr "高度な設定"
 
 #: ../data/lxsession-edit.glade.h:5
-#, fuzzy
 msgid "Applications automatically started after entering desktop:"
 msgstr "デスクトップ環境下で自動的に開始するアプリケーション:"
 
