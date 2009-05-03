@@ -103,7 +103,7 @@ static void lxnetctl_device_list(Task *task, gpointer data)
 	gchar *p;
 	gchar *content = (gchar *)data;
 
-	*(contect+strlen(content)) = '\0';
+	*(content+strlen(content)-1) = '\0';
 
 	p = strtok(content, " ");
 	if (!p)
@@ -253,13 +253,19 @@ lxnetctl_read_channel(GIOChannel *gio, GIOCondition condition, gpointer data)
 	if (ret == G_IO_STATUS_ERROR)
 		g_error ("Error reading: %s\n", err->message);
 
-	if (len > 0) {
-		if (msg[0]!='\n') {
-			//printf("%s", msg);
-			cmd = g_strdup(msg);
-			lxnetctl_command_parser(cmd);
+	do {
+		if (len > 0) {
+			if (msg[0]!='\n') {
+				//printf("%s", msg);
+				cmd = g_strdup(msg);
+				lxnetctl_command_parser(cmd);
+			}
 		}
-	}
+
+		ret = g_io_channel_read_line(gio, &msg, &len, NULL, &err);
+		if (ret == G_IO_STATUS_ERROR)
+			g_error ("Error reading: %s\n", err->message);
+	} while(ret!=G_IO_STATUS_EOF);
 
 	g_free(msg);
 

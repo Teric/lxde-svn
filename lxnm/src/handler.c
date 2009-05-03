@@ -98,8 +98,6 @@ static int lxnm_handler_execute(const gchar *filename, GIOChannel *gio, LXNMPID 
 	} else { 
 		close(pfd[1]);
 
-		//while(waitpid((pid_t)pid, &status, WNOHANG));
-
 		if (response) {
 			while((len=read(pfd[0], buffer, 1023))>0) {
 				buffer[len] = '\0';
@@ -108,7 +106,6 @@ static int lxnm_handler_execute(const gchar *filename, GIOChannel *gio, LXNMPID 
 		}
 
 		close(pfd[0]);
-		//while(waitpid((pid_t)pid, &status, WNOHANG));
 		waitpid((pid_t)pid, &status, 0);
 	}
 }

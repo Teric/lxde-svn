@@ -12,3 +12,4 @@ up=Execute:@prefix@/share/lxnm/wifiup.sh
 down=Execute:@prefix@/share/lxnm/wifidown.sh
 repair=Execute:@prefix@/share/lxnm/wifirepair.sh
 connect=Execute:@prefix@/share/lxnm/wificonnect.sh
+scan=Execute:@prefix@/share/lxnm/wifiscan.sh
