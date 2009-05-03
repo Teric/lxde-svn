@@ -9,7 +9,8 @@ lxnm_scripts_DATA = \
 	wifiup.sh \
 	wifidown.sh \
 	wifirepair.sh \
-	wificonnect.sh
+	wificonnect.sh \
+	wifiscan.sh
 
 lxnm_scriptsdir= $(datadir)/lxnm
 

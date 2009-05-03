@@ -12,6 +12,7 @@ struct _LXNMHandler {
 
 LXNMHandler *lxnm_handler_new(const gchar *strings);
 int lxnm_handler_version(LxThread *lxthread);
+int lxnm_handler_device_list(LxThread *lxthread);
 int lxnm_handler_device_status(LxThread *lxthread);
 int lxnm_handler_ethernet_up(LxThread *lxthread);
 int lxnm_handler_ethernet_down(LxThread *lxthread);

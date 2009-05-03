@@ -60,8 +60,9 @@ typedef struct {
 	IECypher          pairwise;
 } WirelessInfo;
 
-void lxnm_status_register(const gchar *ifname, DeviceType devtype);
-void lxnm_status_unregister(const gchar *ifname);
+void lxnm_status_register(const gchar *ifname, DeviceType devtype, LXNMClient *client);
+void lxnm_status_unregister(const gchar *ifname, LXNMClient *client);
 DeviceType lxnm_status_get_device_type(const gchar *ifname);
+void lxnm_status_push(InterfaceStatus *ifstat, const gchar *msg);
 
 #endif

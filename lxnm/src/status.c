@@ -23,7 +23,7 @@
 
 extern LxND *lxnm;
 
-void lxnm_status_register(const gchar *ifname, DeviceType devtype)
+void lxnm_status_register(const gchar *ifname, DeviceType devtype, LXNMClient *client)
 {
 	InterfaceStatus *ifstat;
 	GList *list;
@@ -33,6 +33,7 @@ void lxnm_status_register(const gchar *ifname, DeviceType devtype)
 		ifstat = (InterfaceStatus *)list->data;
 		if (strcmp(ifstat->ifname, ifname)==0) {
 			ifstat->ref++;
+			ifstat->clients = g_list_append(ifstat->clients, client);
 			has_reg = TRUE;
 			break;
 		}
@@ -44,13 +45,14 @@ void lxnm_status_register(const gchar *ifname, DeviceType devtype)
 		ifstat->ifname = g_strdup(ifname);
 		ifstat->type = devtype;
 		ifstat->info = NULL;
+		ifstat->clients = g_list_append(ifstat->clients, client);
 
 		/* add to list */
 		lxnm->ifstatus = g_list_append(lxnm->ifstatus, ifstat);
 	}
 }
 
-void lxnm_status_unregister(const gchar *ifname)
+void lxnm_status_unregister(const gchar *ifname, LXNMClient *client)
 {
 	InterfaceStatus *ifstat;
 	GList *list;
@@ -59,6 +61,7 @@ void lxnm_status_unregister(const gchar *ifname)
 		ifstat = (InterfaceStatus *)list->data;
 		if (strcmp(ifstat->ifname, ifname)==0) {
 			if (ifstat->ref>1) {
+				ifstat->clients = g_list_remove(ifstat->clients, client);
 				ifstat->ref--;
 			} else {
 				lxnm->ifstatus = g_list_remove(lxnm->ifstatus, ifstat);
@@ -81,4 +84,17 @@ DeviceType lxnm_status_get_device_type(const gchar *ifname)
 		return LXNM_CONNECTION_TYPE_PPP;
 	else
 		return LXNM_CONNECTION_TYPE_ETHERNET;
+}
+
+void lxnm_status_push(InterfaceStatus *ifstat, const gchar *msg)
+{
+	LXNMClient *client;
+	GList *list;
+
+	/* push status to all of client */
+	for (list=ifstat->clients;list;g_list_next(list)) {
+		client = (LXNMClient *)list->data;
+
+		lxnm_send_message(client->gio, msg);
+	}
 }

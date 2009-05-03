@@ -70,12 +70,13 @@ LXNMHandler *lxnm_handler_new(const gchar *strings)
 
 static int lxnm_handler_execute(const gchar *filename, GIOChannel *gio, LXNMPID cmd_id, gboolean response)
 {
-	int pid;
+	int len;
 	int pfd[2];
 	int status;
-	int len;
+	pid_t pid;
 	gchar cmdid[8];
 	gchar buffer[1024] = { 0 };
+
 
 	/* create pipe */
 	if (pipe(pfd)<0)
@@ -87,30 +88,29 @@ static int lxnm_handler_execute(const gchar *filename, GIOChannel *gio, LXNMPID 
 
 	/* fork to execute external program or scripts */
 	pid = fork();
-	if (pid<0)
+	if (pid<0) {
 		return;
-
-	signal(SIGCLD, SIG_IGN);
-
-	if (pid==0) {
-		close(STDOUT_FILENO);
-		dup(pfd[1]);
+	} else if (pid==0) {
+		dup2(pfd[1], STDOUT_FILENO);
+		close(STDIN_FILENO);
 		execlp(filename, filename, NULL);
 		exit(0);
-	} 
+	} else { 
+		close(pfd[1]);
 
-	close(pfd[1]);
+		//while(waitpid((pid_t)pid, &status, WNOHANG));
 
-	//while(waitpid((pid_t)pid, &status, WNOHANG));
+		if (response) {
+			while((len=read(pfd[0], buffer, 1023))>0) {
+				buffer[len] = '\0';
+				lxnm_send_message(gio, buffer);
+			}
+		}
 
-	while((len=read(pfd[0], buffer, 1023))>0) {
-		buffer[len] = '\0';
-
-		if (response) lxnm_send_message(gio, buffer);
+		close(pfd[0]);
+		//while(waitpid((pid_t)pid, &status, WNOHANG));
+		waitpid((pid_t)pid, &status, 0);
 	}
-
-	close(pfd[0]);
-	close(pfd[2]);
 }
 
 int lxnm_handler_version(LxThread *lxthread)
@@ -126,6 +126,24 @@ int lxnm_handler_version(LxThread *lxthread)
 	return 0;
 }
 
+int lxnm_handler_device_list(LxThread *lxthread)
+{
+	LXNMPID id;
+
+	id = lxnm_pid_register(lxthread->client->gio, LXNM_DEVICE_LIST);
+	switch (lxnm->setting->iflist->method) {
+		case LXNM_HANDLER_METHOD_INTERNAL:
+			/* FIXME: support this feature for each operating system */
+			break;
+		case LXNM_HANDLER_METHOD_EXECUTE:
+			lxnm_handler_execute(lxnm->setting->iflist->value, lxthread->client->gio, id, TRUE);
+			break;
+	}
+	lxnm_pid_unregister(lxthread->client->gio, id);
+
+	return 0;
+}
+
 int lxnm_handler_device_status(LxThread *lxthread)
 {
 	LXNMPID id;
@@ -136,7 +154,7 @@ int lxnm_handler_device_status(LxThread *lxthread)
 	p = strtok(NULL, " ");
 
 	if (lxnm_isifname(p)) {
-		lxnm_status_register(p, lxnm_status_get_device_type(p));
+		lxnm_status_register(p, lxnm_status_get_device_type(p), lxthread->client);
 	}
 
 	lxnm_pid_unregister(lxthread->client->gio, id);

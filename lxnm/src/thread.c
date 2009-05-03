@@ -32,22 +32,20 @@ void lxnm_send_message(GIOChannel *gio, const gchar *msg)
 
 LXNMPID lxnm_pid_register(GIOChannel *gio, gint command)
 {
-	gchar *msg;
+	gchar msg[32];
 
-	msg = g_strdup_printf("+OK %d %u\n", command, lxnm->cur_id);
+	sprintf(msg, "+OK %d %u\n", command, lxnm->cur_id);
 	g_io_channel_write_chars(gio, msg, -1, NULL, NULL);
 	g_io_channel_flush(gio, NULL);
-	g_free(msg);
 
 	return lxnm->cur_id++;
 }
 
 void lxnm_pid_unregister(GIOChannel *gio, LXNMPID id)
 {
-	gchar *msg;
+	gchar msg[32];
 
-	msg = g_strdup_printf("+DONE %u\n", id);
+	sprintf(msg, "+DONE %u\n", id);
 	g_io_channel_write_chars(gio, msg, -1, NULL, NULL);
 	g_io_channel_flush(gio, NULL);
-	g_free(msg);
 }

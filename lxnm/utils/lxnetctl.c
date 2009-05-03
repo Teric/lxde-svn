@@ -26,17 +26,20 @@
 #include <string.h>
 
 /* Command */
-#define LXNM_VERSION                   0
-#define LXNM_DEVICE_STATUS             1
-#define LXNM_DEVICE_INFORMATION        2
-#define LXNM_ETHERNET_UP               3
-#define LXNM_ETHERNET_DOWN             4
-#define LXNM_ETHERNET_REPAIR           5
-#define LXNM_WIRELESS_UP               6
-#define LXNM_WIRELESS_DOWN             7
-#define LXNM_WIRELESS_REPAIR           8
-#define LXNM_WIRELESS_CONNECT          9
-#define LXNM_WIRELESS_SCAN             10
+typedef enum {
+	LXNM_VERSION,
+	LXNM_DEVICE_LIST,
+	LXNM_DEVICE_STATUS,
+	LXNM_DEVICE_INFORMATION,
+	LXNM_ETHERNET_UP,
+	LXNM_ETHERNET_DOWN,
+	LXNM_ETHERNET_REPAIR,
+	LXNM_WIRELESS_UP,
+	LXNM_WIRELESS_DOWN,
+	LXNM_WIRELESS_REPAIR,
+	LXNM_WIRELESS_CONNECT,
+	LXNM_WIRELESS_SCAN
+} LXNMCommand;
 
 #define LXNM_SOCKET "/var/run/lxnm.socket"
 
@@ -56,6 +59,7 @@ static gchar helpmsg[] = {
 	"  lxnetctl [interface] up \n"
 	"           [interface] down \n"
 	"           [interface] scan \n"
+	"           list \n"
 	"           version \n"
 };
 
@@ -92,6 +96,22 @@ static void lxnetctl_protocol_version(Task *task, gpointer data)
 	gchar *content = (gchar *)data;
 
 	printf("LXNM protocol version: %s", content);
+}
+
+static void lxnetctl_device_list(Task *task, gpointer data)
+{
+	gchar *p;
+	gchar *content = (gchar *)data;
+
+	*(contect+strlen(content)) = '\0';
+
+	p = strtok(content, " ");
+	if (!p)
+		return;
+
+	do {
+		printf("%s\n", p);
+	} while((p = strtok(NULL, " ")));
 }
 
 static void lxnetctl_wireless_scan(Task *task, gpointer data)
@@ -165,6 +185,9 @@ static void lxnetctl_command_parser(gchar *cmd)
 		switch(task->command) {
 			case LXNM_VERSION:
 				task->callback = lxnetctl_protocol_version;
+				break;
+			case LXNM_DEVICE_LIST:
+				task->callback = lxnetctl_device_list;
 				break;
 			case LXNM_ETHERNET_UP:
 				break;
@@ -255,7 +278,7 @@ main(gint argc, gchar** argv)
 	struct sockaddr_un sa_un;
 
 	if (argc>1) {
-		if ((strncmp(argv[1], "version", 7)!=0)&&(argc<3)) {
+		if ((strncmp(argv[1], "version", 7)!=0)&&(strncmp(argv[1], "list", 4)!=0)&&(argc<3)) {
 			printf("%s\n", helpmsg);
 			return 0;
 		}
@@ -293,7 +316,14 @@ main(gint argc, gchar** argv)
 
 	/* send command */
 /* "7 ath0 1F WEP testest",*/
-	if (strncmp(argv[1], "version", 7)==0) {
+	if (strncmp(argv[1], "list", 4)==0) {
+		command = g_strdup_printf("%d %s\n", LXNM_DEVICE_LIST, argv[1]);
+		if (g_io_channel_write_chars(gio, command, -1, &len, NULL)==G_IO_STATUS_ERROR)
+			g_error("Error writing!");
+
+		g_free(command);
+		g_io_channel_flush(gio, NULL);
+	} else if (strncmp(argv[1], "version", 7)==0) {
 		command = g_strdup_printf("%d %s\n", LXNM_VERSION, argv[1]);
 		if (g_io_channel_write_chars(gio, command, -1, &len, NULL)==G_IO_STATUS_ERROR)
 			g_error("Error writing!");

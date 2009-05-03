@@ -4,21 +4,25 @@ S: +OK <COMMAND> <PROCESS ID>
 S: +<PROCESS ID> <RESPONSE>
 S: +DONE <PROCESS ID>
 
+For Status:
+S: +STAT <LXNM_DEVICE_STATUS Data Structure>
+
 COMMAND:
 <command number> <args...>
 
 * Command Number:
 LXNM_VERSION                   0
-LXNM_DEVICE_STATUS             1
-LXNM_DEVICE_INFORMATION        2
-LXNM_ETHERNET_UP               3
-LXNM_ETHERNET_DOWN             4
-LXNM_ETHERNET_REPAIR           5
-LXNM_WIRELESS_UP               6
-LXNM_WIRELESS_DOWN             7
-LXNM_WIRELESS_REPAIR           8
-LXNM_WIRELESS_CONNECT          9
-LXNM_WIRELESS_SCAN             10
+LXNM_DEVICE_LIST               1
+LXNM_DEVICE_STATUS             2
+LXNM_DEVICE_INFORMATION        3
+LXNM_ETHERNET_UP               4
+LXNM_ETHERNET_DOWN             5
+LXNM_ETHERNET_REPAIR           6
+LXNM_WIRELESS_UP               7
+LXNM_WIRELESS_DOWN             8
+LXNM_WIRELESS_REPAIR           9
+LXNM_WIRELESS_CONNECT          10
+LXNM_WIRELESS_SCAN             11
 
 * LXNM_DEVICE_STATUS
 [Command Number] <interface>

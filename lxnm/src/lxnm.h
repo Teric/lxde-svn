@@ -8,17 +8,20 @@
 #define LXNM_PROTOCOL "1.0"
 
 /* Command */
-#define LXNM_VERSION                   0
-#define LXNM_DEVICE_STATUS             1
-#define LXNM_DEVICE_INFORMATION        2
-#define LXNM_ETHERNET_UP               3
-#define LXNM_ETHERNET_DOWN             4
-#define LXNM_ETHERNET_REPAIR           5
-#define LXNM_WIRELESS_UP               6
-#define LXNM_WIRELESS_DOWN             7
-#define LXNM_WIRELESS_REPAIR           8
-#define LXNM_WIRELESS_CONNECT          9
-#define LXNM_WIRELESS_SCAN             10
+typedef enum {
+	LXNM_VERSION,
+	LXNM_DEVICE_LIST,
+	LXNM_DEVICE_STATUS,
+	LXNM_DEVICE_INFORMATION,
+	LXNM_ETHERNET_UP,
+	LXNM_ETHERNET_DOWN,
+	LXNM_ETHERNET_REPAIR,
+	LXNM_WIRELESS_UP,
+	LXNM_WIRELESS_DOWN,
+	LXNM_WIRELESS_REPAIR,
+	LXNM_WIRELESS_CONNECT,
+	LXNM_WIRELESS_SCAN
+} LXNMCommand;
 
 typedef unsigned int LXNMPID;
 typedef unsigned int LXNMClientID;
@@ -46,6 +49,7 @@ typedef enum {
 
 typedef struct _LXNMHandler LXNMHandler;
 typedef struct {
+	LXNMHandler *iflist;
 	LXNMHandler *eth_up;
 	LXNMHandler *eth_down;
 	LXNMHandler *eth_repair;

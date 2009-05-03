@@ -53,6 +53,9 @@ lxnm_parse_command(LxThread *lxthread)
 		case LXNM_VERSION:
 			lxnm_handler_version(lxthread);
 			break;
+		case LXNM_DEVICE_LIST:
+			lxnm_handler_device_list(lxthread);
+			break;
 		case LXNM_DEVICE_STATUS:
 			lxnm_handler_device_status(lxthread);
 			break;
@@ -251,6 +254,11 @@ main(void)
 
 
 	lxnm->setting = (Setting *)malloc(sizeof(Setting));
+
+	/* general setting */
+	strings = g_key_file_get_string(keyfile, "general", "iflist", NULL);
+	lxnm->setting->iflist = lxnm_handler_new(strings);
+	g_free(strings);
 
 	/* ethernet setting */
 	strings = g_key_file_get_string(keyfile, "ethernet", "up", NULL);
