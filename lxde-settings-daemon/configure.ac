@@ -1,5 +1,5 @@
 AC_PREREQ([2.57])
-AC_INIT(lxde-settings-daemon,[0.4], [],lxde-settings-daemon)
+AC_INIT(lxde-settings-daemon,[0.4.1], [],lxde-settings-daemon)
 AM_INIT_AUTOMAKE([dist-bzip2 no-dist-gzip])
 dnl AC_PROG_INTLTOOL(, [no-xml])
 dnl AM_MAINTAINER_MODE
