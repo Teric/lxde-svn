@@ -9,7 +9,7 @@ if [ "x${ACLOCAL_DIR}" != "x" ]; then
 fi
 
 ${ACLOCAL:-aclocal$AM_VERSION} ${ACLOCAL_ARG}
-#${AUTOHEADER:-autoheader$AC_VERSION}
+${AUTOHEADER:-autoheader$AC_VERSION}
 # AUTOMAKE=${AUTOMAKE:-automake$AM_VERSION} libtoolize -c --automake --force
 # AUTOMAKE=${AUTOMAKE:-automake$AM_VERSION} intltoolize -c --automake --force
 ${AUTOMAKE:-automake$AM_VERSION} --add-missing --copy --include-deps
