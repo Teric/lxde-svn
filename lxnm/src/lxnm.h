@@ -53,11 +53,13 @@ typedef struct {
 	LXNMHandler *eth_up;
 	LXNMHandler *eth_down;
 	LXNMHandler *eth_repair;
+	LXNMHandler *eth_info;
 	LXNMHandler *wifi_up;
 	LXNMHandler *wifi_down;
 	LXNMHandler *wifi_repair;
 	LXNMHandler *wifi_connect;
 	LXNMHandler *wifi_scan;
+	LXNMHandler *wifi_info;
 } Setting;
 
 typedef struct {

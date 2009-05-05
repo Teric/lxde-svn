@@ -14,13 +14,13 @@ typedef struct {
 	gpointer    info;
 	GList      *clients; /* who is listening for this interface */
 } InterfaceStatus;
+typedef void InterfaceInfo;
 
 typedef struct {
 	gboolean enable;
 	gboolean plugged;
 	gboolean connected;
 
-	gchar *ifname;
 	gchar *mac;
 	gchar *ipaddr;
 	gchar *dest;
@@ -38,7 +38,6 @@ typedef struct {
 	gboolean plugged;
 	gboolean connected;
 
-	gchar *ifname;
 	gchar *mac;
 	gchar *ipaddr;
 	gchar *dest;

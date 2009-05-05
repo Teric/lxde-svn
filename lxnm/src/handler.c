@@ -18,7 +18,6 @@
  */
 
 #include <glib.h>
-#include <glib/gi18n.h>
 #include <unistd.h>
 #include <fcntl.h>
 #include <sys/wait.h>
@@ -74,9 +73,8 @@ static int lxnm_handler_execute(const gchar *filename, GIOChannel *gio, LXNMPID 
 	int pfd[2];
 	int status;
 	pid_t pid;
-	gchar cmdid[8];
-	gchar buffer[1024] = { 0 };
-
+	char cmdid[8];
+	char buffer[1024] = { 0 };
 
 	/* create pipe */
 	if (pipe(pfd)<0)
@@ -91,11 +89,13 @@ static int lxnm_handler_execute(const gchar *filename, GIOChannel *gio, LXNMPID 
 	if (pid<0) {
 		return;
 	} else if (pid==0) {
+		/* child process */
 		dup2(pfd[1], STDOUT_FILENO);
 		close(STDIN_FILENO);
 		execlp(filename, filename, NULL);
 		exit(0);
 	} else { 
+		/* parent process */
 		close(pfd[1]);
 
 		if (response) {
@@ -338,6 +338,7 @@ int lxnm_handler_wireless_scan(LxThread *lxthread)
 
 		switch (lxnm->setting->wifi_scan->method) {
 			case LXNM_HANDLER_METHOD_INTERNAL:
+#ifdef OS_Linux
 				iwsockfd = iw_sockets_open();
 				aplist = wireless_scanning(iwsockfd, p);
 				if (aplist) {
@@ -347,6 +348,7 @@ int lxnm_handler_wireless_scan(LxThread *lxthread)
 						ptr = ptr->next;
 					} while (ptr);
 				}
+#endif
 				break;
 			case LXNM_HANDLER_METHOD_EXECUTE:
 				setenv("LXNM_IFNAME", p, 1);

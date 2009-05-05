@@ -6,6 +6,7 @@ iflist=Execute:@prefix@/share/lxnm/iflist.sh
 up=Execute:@prefix@/share/lxnm/ethup.sh
 down=Execute:@prefix@/share/lxnm/ethdown.sh
 repair=Execute:@prefix@/share/lxnm/ethrepair.sh
+info=Execute:@prefix@/share/lxnm/ethinfo.sh
 
 [wireless]
 up=Execute:@prefix@/share/lxnm/wifiup.sh
@@ -13,3 +14,4 @@ down=Execute:@prefix@/share/lxnm/wifidown.sh
 repair=Execute:@prefix@/share/lxnm/wifirepair.sh
 connect=Execute:@prefix@/share/lxnm/wificonnect.sh
 scan=Execute:@prefix@/share/lxnm/wifiscan.sh
+info=Execute:@prefix@/share/lxnm/wifiinfo.sh

@@ -28,7 +28,6 @@
 #include <fcntl.h>
 #include <errno.h>
 #include <string.h>
-#include <pthread.h>
 
 #include "lxnm.h"
 #include "misc.h"
@@ -273,6 +272,10 @@ main(void)
 	lxnm->setting->eth_repair = lxnm_handler_new(strings);
 	g_free(strings);
 
+	strings = g_key_file_get_string(keyfile, "ethernet", "info", NULL);
+	lxnm->setting->eth_info = lxnm_handler_new(strings);
+	g_free(strings);
+
 	/* wireless setting */
 	strings = g_key_file_get_string(keyfile, "wireless", "up", NULL);
 	lxnm->setting->wifi_up = lxnm_handler_new(strings);
@@ -292,6 +295,10 @@ main(void)
 
 	strings = g_key_file_get_string(keyfile, "wireless", "scan", NULL);
 	lxnm->setting->wifi_scan = lxnm_handler_new(strings);
+	g_free(strings);
+
+	strings = g_key_file_get_string(keyfile, "wireless", "info", NULL);
+	lxnm->setting->wifi_info = lxnm_handler_new(strings);
 	g_free(strings);
 
 	/* LXNM main loop */
