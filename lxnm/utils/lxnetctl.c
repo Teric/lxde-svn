@@ -59,6 +59,7 @@ static gchar helpmsg[] = {
 	"  lxnetctl [interface] up \n"
 	"           [interface] down \n"
 	"           [interface] scan \n"
+	"           [interface] info \n"
 	"           list \n"
 	"           version \n"
 };
@@ -112,6 +113,11 @@ static void lxnetctl_device_list(Task *task, gpointer data)
 	do {
 		printf("%s\n", p);
 	} while((p = strtok(NULL, " ")));
+}
+
+static void lxnetctl_device_info(Task *task, gpointer data)
+{
+	printf("%s", data);
 }
 
 static void lxnetctl_wireless_scan(Task *task, gpointer data)
@@ -188,6 +194,9 @@ static void lxnetctl_command_parser(gchar *cmd)
 				break;
 			case LXNM_DEVICE_LIST:
 				task->callback = lxnetctl_device_list;
+				break;
+			case LXNM_DEVICE_INFORMATION:
+				task->callback = lxnetctl_device_info;
 				break;
 			case LXNM_ETHERNET_UP:
 				break;
@@ -347,6 +356,15 @@ main(gint argc, gchar** argv)
 		return 0;
 	} else if (strncmp(argv[2], "down", 4)==0) {
 		command = g_strdup_printf("%d %s\n", LXNM_ETHERNET_DOWN, argv[1]);
+
+		if (g_io_channel_write_chars(gio, command, -1, &len, NULL)==G_IO_STATUS_ERROR)
+			g_error("Error writing!");
+
+		g_free(command);
+		g_io_channel_flush(gio, NULL);
+		return 0;
+	} else if (strncmp(argv[2], "info", 4)==0) {
+		command = g_strdup_printf("%d %s\n", LXNM_DEVICE_INFORMATION, argv[1]);
 
 		if (g_io_channel_write_chars(gio, command, -1, &len, NULL)==G_IO_STATUS_ERROR)
 			g_error("Error writing!");
