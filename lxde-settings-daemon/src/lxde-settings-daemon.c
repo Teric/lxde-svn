@@ -127,7 +127,7 @@ static void configure_input(GKeyFile* kf)
                                  accel_factor, 10, accel_threshold);
     }
 
-    left_handed = g_key_file_get_int(kf, "Mouse", "LeftHanded", NULL);
+    left_handed = g_key_file_get_integer(kf, "Mouse", "LeftHanded", NULL);
     set_left_handed_mouse(left_handed);
 
     /* Keyboard settings */
@@ -146,9 +146,9 @@ static void configure_input(GKeyFile* kf)
         }
     }
 
-    beep = g_key_file_get_int(kf, "Keyboard", "Beep", NULL);
+    beep = g_key_file_get_integer(kf, "Keyboard", "Beep", NULL);
     values.bell_percent = beep ? -1 : 0;
-    XChangeKeyboardControl(GDK_DISPLAY(), KBBellPercent, &values);
+    XChangeKeyboardControl(dpy, KBBellPercent, &values);
 }
 
 static void load_settings()
