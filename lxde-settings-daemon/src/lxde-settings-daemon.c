@@ -113,9 +113,11 @@ static void set_left_handed_mouse( gboolean mouse_left_handed )
 
 static void configure_input(GKeyFile* kf)
 {
+    XKeyboardControl values;
+
     /* Mouse settings */
     int accel_factor, accel_threshold, delay, interval;
-    gboolean left_handed;
+    gboolean left_handed, beep;
 
     accel_factor = g_key_file_get_integer(kf, "Mouse", "AccFactor", NULL);
     accel_threshold = g_key_file_get_integer(kf, "Mouse", "AccThreshold", NULL);
@@ -125,7 +127,7 @@ static void configure_input(GKeyFile* kf)
                                  accel_factor, 10, accel_threshold);
     }
 
-    left_handed = g_key_file_get_boolean(kf, "Mouse", "LeftHanded", NULL);
+    left_handed = g_key_file_get_int(kf, "Mouse", "LeftHanded", NULL);
     set_left_handed_mouse(left_handed);
 
     /* Keyboard settings */
@@ -143,6 +145,10 @@ static void configure_input(GKeyFile* kf)
             XkbSetAutoRepeatRate(dpy, XkbUseCoreKbd, delay, interval);
         }
     }
+
+    beep = g_key_file_get_int(kf, "Keyboard", "Beep", NULL);
+    values.bell_percent = beep ? -1 : 0;
+    XChangeKeyboardControl(GDK_DISPLAY(), KBBellPercent, &values);
 }
 
 static void load_settings()
