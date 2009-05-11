@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2009-04-15 19:47+0200\n"
-"PO-Revision-Date: 2009-04-10 01:25+0200\n"
+"PO-Revision-Date: 2009-05-09 03:24+0200\n"
 "Last-Translator: Cilyan Olowen <gaknar@gmail.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -61,7 +61,6 @@ msgstr ""
 "(La commande par défaut pour LXDE devrait être openbox-lxde)"
 
 #: ../data/lxsession-edit.glade.h:9
-#, fuzzy
 msgid "Desktop Session Settings"
 msgstr "Paramètres de la session"
 

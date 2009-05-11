@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2009-04-15 19:53+0200\n"
-"PO-Revision-Date: 2009-04-10 01:20+0200\n"
+"PO-Revision-Date: 2009-05-09 02:47+0200\n"
 "Last-Translator: Cilyan Olowen <gaknar@gmail.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -21,16 +21,14 @@ msgid "input file"
 msgstr "fichier d'entrée"
 
 #: ../src/lxshortcut.c:49
-#, fuzzy
 msgid "file name or desktop id"
-msgstr "nom du fichier ou identifiant du bureau"
+msgstr "chemin complet d'un fichier .desktop ou nom seul"
 
 #: ../src/lxshortcut.c:50
 msgid "file name"
-msgstr "nom du fichier"
+msgstr "Nom de fichier"
 
 #: ../src/lxshortcut.c:147 ../data/choose-icon.glade.h:3
-#, fuzzy
 msgid "Image files"
 msgstr "Fichiers images"
 
@@ -40,16 +38,15 @@ msgstr "Sélectionnez un fichier exécutable"
 
 #: ../src/lxshortcut.c:235
 msgid "Executable files"
-msgstr "Fichier exécutables"
+msgstr "Fichiers exécutables"
 
 #: ../data/lxshortcut.glade.h:1
 msgid "Advanced"
 msgstr "Avancé"
 
 #: ../data/lxshortcut.glade.h:2
-#, fuzzy
 msgid "Application Shortcut"
-msgstr "Raccourcis d'application"
+msgstr "Raccourci vers une application"
 
 #: ../data/lxshortcut.glade.h:3
 msgid "Change _Icon"

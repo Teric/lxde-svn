@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2009-04-15 23:16+0200\n"
-"PO-Revision-Date: 2009-04-16 14:49+0200\n"
+"PO-Revision-Date: 2009-05-09 03:58+0200\n"
 "Last-Translator: Cilyan Olowen <gaknar@gmail.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -21,9 +21,8 @@ msgid "<Hidden Access Point>"
 msgstr "<Point d'accès caché>"
 
 #: ../src/netstat.c:198
-#, fuzzy
 msgid "Wireless Networks not found in range"
-msgstr "Les réseaux Wifi n'ont pas été trouvés dans l'intervalle donné"
+msgstr "Aucun réseau sans fil trouvé à proximité."
 
 #. Repair
 #: ../src/netstat.c:232
