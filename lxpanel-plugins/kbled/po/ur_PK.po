@@ -1,0 +1,41 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: lxpanel-kbled\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2009-04-15 23:15+0200\n"
+"PO-Revision-Date: 2009-05-09 14:29+0500\n"
+"Last-Translator: Muhammad Ali Makki <makki.ma@gmail.com>\n"
+"Language-Team: Urdu <makki.ma@gmail.com>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Poedit-Language: Urdu\n"
+"X-Poedit-Country: PAKISTAN\n"
+"X-Poedit-SourceCharset: utf-8\n"
+
+#: ../src/kbled.c:273
+msgid "Show CapsLock"
+msgstr "کیپس لاک دکھائیں"
+
+#: ../src/kbled.c:274
+msgid "Show NumLock"
+msgstr "نم لاک دکھائیں"
+
+#: ../src/kbled.c:275
+msgid "Show ScrollLock"
+msgstr "سکرول لاک دکھائیں"
+
+#: ../src/kbled.c:285
+msgid "Keyboard Led"
+msgstr "کیبورڈ ایل ای ڈی"
+
+#: ../src/kbled.c:287
+msgid "Indicators for CapsLock, NumLock, and ScrollLock keys"
+msgstr "نشان کار برائے کیپس لاک، نم لاک، اور سکرول لاک کلیدیں"
+
