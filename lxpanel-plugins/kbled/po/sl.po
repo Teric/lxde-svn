@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2009-04-15 23:15+0200\n"
-"PO-Revision-Date: 2009-04-29 11:52+0200\n"
+"PO-Revision-Date: 2009-05-17 12:44+0200\n"
 "Last-Translator: Matej <paxmanpwnz@gmail.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -30,7 +30,7 @@ msgstr "Prikaži ScrollLock"
 
 #: ../src/kbled.c:285
 msgid "Keyboard Led"
-msgstr ""
+msgstr "LED prikazovalnik tipkovnice"
 
 #: ../src/kbled.c:287
 msgid "Indicators for CapsLock, NumLock, and ScrollLock keys"
