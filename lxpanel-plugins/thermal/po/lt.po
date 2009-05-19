@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2009-04-15 23:17+0200\n"
-"PO-Revision-Date: 2009-05-06 08:54+0200\n"
+"PO-Revision-Date: 2009-05-19 14:51+0200\n"
 "Last-Translator: Julius Vitkauskas <zadintuvas@gmail.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -18,15 +18,15 @@ msgstr ""
 
 #: ../src/thermal.c:291
 msgid "Normal"
-msgstr ""
+msgstr "Normalus"
 
 #: ../src/thermal.c:292
 msgid "Warning1"
-msgstr ""
+msgstr "Perspėjimas1"
 
 #: ../src/thermal.c:293
 msgid "Warning2"
-msgstr ""
+msgstr "Perspėjimas2"
 
 #: ../src/thermal.c:294
 msgid "Automatic sensor location"
@@ -42,11 +42,11 @@ msgstr "Automatiniai temperatūros lygiai"
 
 #: ../src/thermal.c:297
 msgid "Warning1 Temperatur"
-msgstr ""
+msgstr "Perspėjimas1 temperatūra"
 
 #: ../src/thermal.c:298
 msgid "Warning2 Temperatur"
-msgstr ""
+msgstr "Perspėjimas2 temperatūra"
 
 #: ../src/thermal.c:340
 msgid "Temperature Monitor"
