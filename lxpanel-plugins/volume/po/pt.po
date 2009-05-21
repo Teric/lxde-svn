@@ -31,5 +31,3 @@ msgstr "Controlo de Volume"
 msgid "Volume"
 msgstr "Volume"
 
-
- 	  	 

@@ -38,5 +38,3 @@ msgstr "Led do Teclado"
 msgid "Indicators for CapsLock, NumLock, and ScrollLock keys"
 msgstr "Indicadores de teclas CapsLock, NumLock, and ScrollLock"
 
-
- 	  	 

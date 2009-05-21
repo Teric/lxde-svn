@@ -26,5 +26,3 @@ msgstr "Monitor de utilização do CPU"
 msgid "Display CPU usage"
 msgstr "Apresentar utilização do CPU"
 
-
- 	  	 

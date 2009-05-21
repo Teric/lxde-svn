@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: thermal-plugin\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-04-15 23:17+0200\n"
-"PO-Revision-Date: 2009-05-05 17:00-0000\n"
+"POT-Creation-Date: 2009-04-30 00:01-0400\n"
+"PO-Revision-Date: 2009-05-19 12:31-0000\n"
 "Last-Translator: Sérgio Marques <smarquespt@gmail.com>\n"
 "Language-Team: Portuguese\n"
 "MIME-Version: 1.0\n"
@@ -43,11 +43,11 @@ msgid "Automatic temperature levels"
 msgstr "Níveis automáticos de temperatura"
 
 #: ../src/thermal.c:297
-msgid "Warning1 Temperatur"
+msgid "Warning1 Temperature"
 msgstr "Aviso1 Temperatura"
 
 #: ../src/thermal.c:298
-msgid "Warning2 Temperatur"
+msgid "Warning2 Temperature"
 msgstr "Aviso2 Temperatura"
 
 #: ../src/thermal.c:340

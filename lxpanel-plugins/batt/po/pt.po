@@ -100,5 +100,3 @@ msgstr "Monitor de Bateria"
 msgid "Display battery status using ACPI"
 msgstr "Apresentar estado de bateria usando ACPI"
 
-
- 	  	 
