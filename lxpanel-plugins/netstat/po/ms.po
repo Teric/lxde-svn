@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2009-04-30 00:07-0400\n"
-"PO-Revision-Date: 2009-05-22 19:58+0200\n"
+"PO-Revision-Date: 2009-05-23 15:22+0200\n"
 "Last-Translator: Payne Samad Loh <sploh77@yahoo.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -22,7 +22,7 @@ msgstr "<Poin Akses Tersembunyi>"
 
 #: ../src/netstat.c:198
 msgid "Wireless Networks not found in range"
-msgstr "Rangkaian-rangkaian wayarles tidak dijumpai dalam julat"
+msgstr "Rangkaian-rangkaian tanpa wayar tidak dijumpai dalam julat"
 
 #. Repair
 #: ../src/netstat.c:232
@@ -36,7 +36,7 @@ msgstr "Lumpuh"
 
 #: ../src/netstat.c:296
 msgid "Wireless Connection has no connectivity"
-msgstr "Sambungan tanpa wayar tiada kesambungan"
+msgstr "Sambungan tanpa wayar tiada penyambungan"
 
 #: ../src/netstat.c:298
 msgid "Network cable is plugged out"
@@ -44,7 +44,7 @@ msgstr "Kabel rangkaian di keluarkan"
 
 #: ../src/netstat.c:300
 msgid "Connection has limited or no connectivity"
-msgstr "Sambungan dihadkan atau tiada kesambungan"
+msgstr "Sambungan dihadkan atau tiada penyambungan"
 
 #: ../src/netstat.c:304 ../src/netstat.c:315 ../src/netstat.c:326
 msgid "IP Address:"
@@ -80,7 +80,7 @@ msgstr "paket-paket"
 
 #: ../src/netstat.c:312
 msgid "Wireless"
-msgstr "Wayarles"
+msgstr "Tanpa wayar"
 
 #: ../src/netstat.c:314
 msgid "Protocol:"
@@ -113,7 +113,7 @@ msgid ""
 "This wireless network was encrypted.\n"
 "You must have the encryption key."
 msgstr ""
-"Rangkaian wayarles ini telah disulitkan.\n"
+"Rangkaian tanpa wayar ini telah disulitkan.\n"
 "Anda mesti ada kunci penyulitan itu."
 
 #: ../src/passwd_gui.c:99
