@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2009-04-29 23:29-0400\n"
-"PO-Revision-Date: 2009-05-22 03:42+0200\n"
+"PO-Revision-Date: 2009-05-22 21:51+0200\n"
 "Last-Translator: Payne Samad Loh <sploh77@yahoo.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -51,7 +51,7 @@ msgstr "Tiada bateri dijumpai"
 
 #: ../src/batt.c:874
 msgid "Hide if there is no battery"
-msgstr "Sembunyi jikalau tiada bateri"
+msgstr "Sorokkan jikalau tiada bateri"
 
 #: ../src/batt.c:876
 msgid "Alarm command"
@@ -95,4 +95,4 @@ msgstr "Monitor Bateri"
 
 #: ../src/batt.c:916
 msgid "Display battery status using ACPI"
-msgstr "Paparkan status bateri menggunakan ACPI"
+msgstr "Pamerkan status bateri menggunakan ACPI"

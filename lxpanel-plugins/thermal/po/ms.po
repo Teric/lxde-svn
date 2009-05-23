@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2009-04-30 00:01-0400\n"
-"PO-Revision-Date: 2009-05-21 22:45+0200\n"
+"PO-Revision-Date: 2009-05-22 21:54+0200\n"
 "Last-Translator: Payne Samad Loh <sploh77@yahoo.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -38,7 +38,7 @@ msgstr "Penderia"
 
 #: ../src/thermal.c:296
 msgid "Automatic temperature levels"
-msgstr "Tahap-tahap suhu automatik"
+msgstr "Pengtahapan suhu automatik"
 
 #: ../src/thermal.c:297
 msgid "Warning1 Temperature"
