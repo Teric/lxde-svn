@@ -27,8 +27,7 @@ msgstr "Megjegyzés"
 
 #: ../data/lxsession-edit.glade.h:1
 msgid ""
-"<b>Warning:</b> Do <b>NOT</b> touch this unless you know exactly what you "
-"are doing.\n"
+"<b>Warning:</b> Do <b>NOT</b> touch this unless you know exactly what you are doing.\n"
 "\n"
 "<b>NOTE:</b> This setting will take effect on next login."
 msgstr ""
@@ -41,7 +40,6 @@ msgid "Advanced Options"
 msgstr "Haladó lehetőségek"
 
 #: ../data/lxsession-edit.glade.h:5
-#, fuzzy
 msgid "Applications automatically started after entering desktop:"
 msgstr "Az asztali környezetbe érkezéskor önműködően induló alkalmazások:"
 
@@ -64,3 +62,4 @@ msgstr "Asztali folyamat beállításai"
 #: ../data/lxsession-edit.glade.h:10
 msgid "Window Manager: "
 msgstr "Ablakkezelő: "
+

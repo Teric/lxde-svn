@@ -15,27 +15,28 @@ msgstr ""
 
 #: ../src/lxshortcut.c:49
 msgid "input file"
-msgstr ""
+msgstr "bemeneti fájl"
 
 #: ../src/lxshortcut.c:49
 msgid "file name or desktop id"
-msgstr ""
+msgstr "fájlnév vagy asztalazonosító"
 
 #: ../src/lxshortcut.c:50
 msgid "file name"
-msgstr ""
+msgstr "fájlnév"
 
-#: ../src/lxshortcut.c:147 ../data/choose-icon.glade.h:3
+#: ../src/lxshortcut.c:147
+#: ../data/choose-icon.glade.h:3
 msgid "Image files"
-msgstr ""
+msgstr "Képfájlok"
 
 #: ../src/lxshortcut.c:229
 msgid "Choose an executable file"
-msgstr ""
+msgstr "Válassz egy futtatható fájlt"
 
 #: ../src/lxshortcut.c:235
 msgid "Executable files"
-msgstr ""
+msgstr "Futtatható fájlok"
 
 #: ../data/lxshortcut.glade.h:1
 msgid "Advanced"
@@ -71,7 +72,7 @@ msgstr "Eszköztipp:"
 
 #: ../data/lxshortcut.glade.h:9
 msgid "Use startup notification"
-msgstr ""
+msgstr "Indítási jelentés használata"
 
 #: ../data/lxshortcut.glade.h:10
 msgid "_Browse..."
@@ -91,9 +92,8 @@ msgstr "Rendszer ikon téma"
 
 #~ msgid "[FILE]"
 #~ msgstr "[FÁJL]"
-
 #~ msgid "gtk-cancel"
 #~ msgstr "Mégsem"
-
 #~ msgid "gtk-ok"
 #~ msgstr "Ok"
+
