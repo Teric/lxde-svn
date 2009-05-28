@@ -3,14 +3,13 @@
 # This file is distributed under the same license as the PACKAGE package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 #
-#, fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2009-04-15 22:42+0200\n"
-"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"PO-Revision-Date: 2009-05-28 17:47+0100\n"
+"Last-Translator: Zsolt Peter Basak <shiki@biomernok.hu>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -19,80 +18,81 @@ msgstr ""
 #: ../src/batt.c:379
 #, c-format
 msgid "Battery: %d%% charged, %d:%02d until full"
-msgstr ""
+msgstr "Akkumulátor töltöttség: %d%%, még %d:%02d a teljes feltöltésig"
 
 #: ../src/batt.c:388
 #, c-format
 msgid "Battery: %d%% charged, %s"
-msgstr ""
+msgstr "Akkumulátor töltöttség: %d%%, %s"
 
 #: ../src/batt.c:390
 msgid "charging finished"
-msgstr ""
+msgstr "feltöltés befejezve"
 
 #: ../src/batt.c:390
 msgid "charging"
-msgstr ""
+msgstr "töltés"
 
 #: ../src/batt.c:395
 #, c-format
 msgid "Battery: %d%% charged, %d:%02d left"
-msgstr ""
+msgstr "Akkumulátor töltöttség: %d%%, még %d:%02d van hátra"
 
 #: ../src/batt.c:401
 #, c-format
 msgid "Battery: %d%% charged"
-msgstr ""
+msgstr "Akkumulátor töltöttség: %d%%"
 
 #: ../src/batt.c:449
 #, c-format
 msgid "No batteries found"
-msgstr ""
+msgstr "Nem található akkumulátor"
 
 #: ../src/batt.c:874
 msgid "Hide if there is no battery"
-msgstr ""
+msgstr "Elrejtés, ha nincs akkumulátor"
 
 #: ../src/batt.c:876
 msgid "Alarm command"
-msgstr ""
+msgstr "Figyelmeztetés parancs"
 
 #: ../src/batt.c:877
 msgid "Alarm time (minutes left)"
-msgstr ""
+msgstr "Figyelmeztetessen, ha a hátralévő idő kevesebb, mint"
 
 #: ../src/batt.c:878
 msgid "Background color"
-msgstr ""
+msgstr "Háttérszín"
 
 #: ../src/batt.c:879
 msgid "Charging color 1"
-msgstr ""
+msgstr "Töltés színe 1"
 
 #: ../src/batt.c:880
 msgid "Charging color 2"
-msgstr ""
+msgstr "Töltés színe 2"
 
 #: ../src/batt.c:881
 msgid "Discharging color 1"
-msgstr ""
+msgstr "Kisütés színe 1"
 
 #: ../src/batt.c:882
 msgid "Discharging color 2"
-msgstr ""
+msgstr "Kisütés színe 2"
 
 #: ../src/batt.c:883
 msgid "Border width"
-msgstr ""
+msgstr "A keret mérete"
 
 #: ../src/batt.c:884
 msgid "Size"
-msgstr ""
+msgstr "Méret"
 
 #: ../src/batt.c:914
 msgid "Battery Monitor"
-msgstr ""
+msgstr "Akkumulátor-figyelő"
 
 #: ../src/batt.c:916
 msgid "Display battery status using ACPI"
-msgstr ""
+msgstr "Akkumulátor állapotának kijelzése ACPI segítségével"
+

@@ -3,14 +3,13 @@
 # This file is distributed under the same license as the PACKAGE package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 #
-#, fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2009-04-15 23:17+0200\n"
-"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"PO-Revision-Date: 2009-05-28 17:54+0100\n"
+"Last-Translator: Zsolt Peter Basak <shiki@biomernok.hu>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -18,40 +17,41 @@ msgstr ""
 
 #: ../src/thermal.c:291
 msgid "Normal"
-msgstr ""
+msgstr "Normál"
 
 #: ../src/thermal.c:292
 msgid "Warning1"
-msgstr ""
+msgstr "Figyelmeztetés1"
 
 #: ../src/thermal.c:293
 msgid "Warning2"
-msgstr ""
+msgstr "Figyelmeztetés2"
 
 #: ../src/thermal.c:294
 msgid "Automatic sensor location"
-msgstr ""
+msgstr "Automata érzékelő elhelyezés"
 
 #: ../src/thermal.c:295
 msgid "Sensor"
-msgstr ""
+msgstr "Érzékelő"
 
 #: ../src/thermal.c:296
 msgid "Automatic temperature levels"
-msgstr ""
+msgstr "Automata hőmérséklet szintek"
 
 #: ../src/thermal.c:297
 msgid "Warning1 Temperatur"
-msgstr ""
+msgstr "Figyelmeztetés1 Hőmérséklet"
 
 #: ../src/thermal.c:298
 msgid "Warning2 Temperatur"
-msgstr ""
+msgstr "Figyelmeztetés2 Hőmérséklet"
 
 #: ../src/thermal.c:340
 msgid "Temperature Monitor"
-msgstr ""
+msgstr "Hőmérsékletfigyelő"
 
 #: ../src/thermal.c:342
 msgid "Display system temperature, by kesler.daniel@gmail.com"
-msgstr ""
+msgstr "Rendszerhő-kijelző: kesler.daniel@gmail.com"
+
