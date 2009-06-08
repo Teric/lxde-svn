@@ -3,6 +3,7 @@
  *
  * Copyright (C) 2007 by Greg McNew <gmcnew@gmail.com>
  * Copyright (C) 2008 by Hong Jen Yee <pcman.tw@gmail.com>
+ * Copyright (C) 2009 by Juergen Hoetzel <juergen@archlinux.org>
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -920,7 +921,7 @@ PluginClass batt_plugin_class = {
 
     type        : "batt",
     name        : N_("Battery Monitor"),
-    version     : "1.0",
+    version     : "2.0",
     description : N_("Display battery status using ACPI"),
 
     constructor : constructor,
