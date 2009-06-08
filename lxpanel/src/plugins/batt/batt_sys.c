@@ -185,11 +185,16 @@ GList  *acpi_sys_find_devices()
     }
     while ( ( entry = g_dir_read_name (dir) ) != NULL )  
     {
-	g_message( "Parsing %s", entry );
-	
+	gchar *type;
 	GHashTable *hash_table = acpi_sys_get_info(entry);
-	g_hash_table_foreach( hash_table, ghcallback, NULL );
-	devices = g_list_append ( devices, hash_table );
+	type = g_hash_table_lookup( hash_table, "type" );
+	if ( ( type != NULL ) &&  ! ( g_ascii_strcasecmp( type, "battery" ) ) )
+	{
+	    g_hash_table_foreach( hash_table, ghcallback, NULL );
+	    devices = g_list_append ( devices, hash_table );
+	}
+	else 
+	    g_hash_table_destroy( hash_table );
     }
     g_dir_close( dir );
     return devices;
