@@ -129,21 +129,17 @@ static void parse_info_file(GHashTable *hash_table,
 			    char *filename, char *given_attr)
 {
     FILE *fd;
-    char buf[BUF_SIZE];
-    
-    fd = fopen(filename, "r");
-    if (!fd)
-	return;
+    char *buf = NULL;
 
-    while (fgets(buf, BUF_SIZE, fd) != NULL) {
-	struct field *f;
+    if ( g_file_get_contents( filename, &buf, NULL, NULL) == TRUE ) 
+    {
 	/* shrug: we need to rewrite this */
+	struct field *f;
 	f = parse_field(buf, given_attr);
-	if (!f) 
-	    continue;
-	g_hash_table_insert(hash_table, f->attr, f->value );
+	if (f) 
+	    g_hash_table_insert(hash_table, f->attr, f->value );
+	g_free( buf );
     }
-    fclose(fd);
 }
 
 
@@ -169,7 +165,9 @@ void  ghcallback (gpointer key_p,
 			       gpointer user_data) 
 {
   gchar *str = (gchar*) key_p;
-  g_message("str:%s", str);
+  gchar *val = (gchar* ) value_p;
+  
+  g_message("str:%s:%s", str, val);
   
 }
 
