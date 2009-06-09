@@ -61,33 +61,6 @@ struct field {
     char *value;
 };
 
-static struct field *parse_field(char *buf, char *given_attr)
-{
-    
-    struct field *rval;
-    char *p;
-    char *attr;
-    char *value;
-
-    attr = calloc(BUF_SIZE, sizeof(char));
-    value = calloc(BUF_SIZE, sizeof(char));
-    rval = malloc(sizeof(struct field));
-    if (!rval || !attr || !value) {
-	fprintf(stderr, "Out of memory. Could not allocate memory in parse_field.\n");
-	exit(1);
-    }
-
-    p = buf;
-    strncpy(attr, given_attr, BUF_SIZE);
-    strncpy(value, p, BUF_SIZE);
-    g_strchomp(attr);
-    g_strchomp(value);    
-
-    rval->attr = attr;
-    rval->value = value;
-    return rval;
-}
-
 static void parse_info_file(GHashTable *hash_table, 
 			    char *filename, char *given_attr)
 {
@@ -95,16 +68,9 @@ static void parse_info_file(GHashTable *hash_table,
 
     if ( g_file_get_contents( filename, &buf, NULL, NULL) == TRUE ) 
     {
-	/* shrug: we need to rewrite this */
-	struct field *f;
-	f = parse_field(buf, given_attr);
-	if (f) 
-	{
-	    g_hash_table_insert(hash_table, g_ascii_strdown( f->attr, - 1 ), g_strdup( f->value ) );
-	    free( f->value );
-	    free( f->attr );
-	    free( f );
-	}
+	gchar *value = g_strdup( buf );
+	value = g_strstrip( value );
+	g_hash_table_insert(hash_table, given_attr, value );
 	g_free( buf );
     }
 }
