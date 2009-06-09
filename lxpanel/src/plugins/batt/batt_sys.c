@@ -63,11 +63,11 @@ struct field {
 
 static struct field *parse_field(char *buf, char *given_attr)
 {
+    
     struct field *rval;
     char *p;
     char *attr;
     char *value;
-    int has_attr = 0;
 
     attr = calloc(BUF_SIZE, sizeof(char));
     value = calloc(BUF_SIZE, sizeof(char));
@@ -80,10 +80,9 @@ static struct field *parse_field(char *buf, char *given_attr)
     p = buf;
     strncpy(attr, given_attr, BUF_SIZE);
     strncpy(value, p, BUF_SIZE);
-    if (attr[strlen(attr) - 1] == '\n')
-	attr[strlen(attr) - 1] = '\0';
-    if (value[strlen(value) - 1] == '\n')
-	value[strlen(value) - 1] = '\0';
+    g_strchomp(attr);
+    g_strchomp(value);    
+
     rval->attr = attr;
     rval->value = value;
     return rval;
