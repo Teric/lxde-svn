@@ -74,7 +74,6 @@ struct field {
     char *value;
 };
 
-
 static struct field *parse_field(char *buf, char *given_attr)
 {
     struct field *rval;
@@ -128,7 +127,6 @@ static struct field *parse_field(char *buf, char *given_attr)
 static void parse_info_file(GHashTable *hash_table, 
 			    char *filename, char *given_attr)
 {
-    FILE *fd;
     char *buf = NULL;
 
     if ( g_file_get_contents( filename, &buf, NULL, NULL) == TRUE ) 
@@ -137,7 +135,12 @@ static void parse_info_file(GHashTable *hash_table,
 	struct field *f;
 	f = parse_field(buf, given_attr);
 	if (f) 
-	    g_hash_table_insert(hash_table, f->attr, f->value );
+	{
+	    g_hash_table_insert(hash_table, g_ascii_strdown( f->attr, - 1 ), g_ascii_strdown( f->value, - 1 ) );
+	    free( f->value );
+	    free( f->attr );
+	    free( f );
+	}
 	g_free( buf );
     }
 }
@@ -159,6 +162,9 @@ GHashTable *acpi_sys_get_info(const gchar *device_name ) {
 
     return hash_table;
 }
+
+
+
 
 void  ghcallback (gpointer key_p,
 			       gpointer value_p,
