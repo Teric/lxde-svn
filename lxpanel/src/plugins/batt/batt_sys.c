@@ -145,6 +145,189 @@ static void parse_info_file(GHashTable *hash_table,
     }
 }
 
+static int get_unit_value(char *value)
+{
+    int n = -1;
+    sscanf(value, "%d", &n);
+    return n;
+}
+
+void print_battery_information(GHashTable *hash_table, int show_capacity)
+{
+    int battery_num = 1;
+    int remaining_capacity = -1;
+    int remaining_energy = -1;
+    int present_rate = -1;
+    int voltage = -1;
+    int design_capacity = -1;
+    int design_capacity_unit = -1;
+    int last_capacity = -1;
+    int last_capacity_unit = -1;
+    int hours, minutes, seconds;
+    int percentage;
+    char *state = NULL, *poststr;
+    int type_battery = TRUE;
+    char capacity_unit[4] = "mAh";
+    gpointer value_p;
+    
+    if ( ( value_p = g_hash_table_lookup( hash_table, "remaining capacity" ) ) != NULL ) 
+    {
+	remaining_capacity = get_unit_value((gchar*) value_p);
+	if (!state)
+	    state = "available";
+    }
+    if ( ( value_p = g_hash_table_lookup( hash_table, "charge_now") ) != NULL ) 
+    {
+	remaining_capacity = get_unit_value((gchar*) value_p ) / 1000;
+	if (!state)
+	    state = "available";
+    }
+    if ( ( value_p = g_hash_table_lookup( hash_table, "energy_now") ) != NULL ) 
+    {
+	remaining_energy = get_unit_value((gchar*) value_p) / 1000;
+	if (!state)
+	    state = ("available");
+    }
+    
+    if ( ( value_p = g_hash_table_lookup( hash_table, "present rate") ) != NULL ) 
+	present_rate = get_unit_value((gchar*) value_p);
+
+    if ( ( value_p = g_hash_table_lookup( hash_table, "current_now") ) != NULL ) 
+	present_rate = get_unit_value((gchar*) value_p)/ 1000;
+
+    if ( ( value_p = g_hash_table_lookup( hash_table, "last full capacity") ) != NULL )  
+    {
+	last_capacity = get_unit_value((gchar*) value_p);
+    	if (!state)
+	    state = ("available");
+    }
+
+    if ( ( value_p = g_hash_table_lookup( hash_table, "charge_full") ) != NULL )  
+    {
+	last_capacity = get_unit_value((gchar*) value_p) / 1000;
+    	if (!state)
+	    state = ("available");
+    }
+
+    if ( ( value_p = g_hash_table_lookup( hash_table, "energy_full") ) != NULL )  
+    {
+	last_capacity_unit = get_unit_value((gchar*) value_p) / 1000;
+    	if (!state)
+	    state = ("available");
+    }
+    
+    if ( ( value_p = g_hash_table_lookup( hash_table, "charge_full_design") ) != NULL )  
+	design_capacity = get_unit_value((gchar*) value_p) / 1000;
+
+    if ( ( value_p = g_hash_table_lookup( hash_table, "energy_full_design") ) != NULL )  
+	design_capacity_unit = get_unit_value((gchar*) value_p) / 1000;
+
+    if ( ( value_p = g_hash_table_lookup( hash_table, "type") ) != NULL )  
+	type_battery = (strcasecmp((gchar*) value_p, "battery") == 0);
+
+    if ( ( value_p = g_hash_table_lookup( hash_table, "charging state") )!= NULL )      
+	state = (gchar*) value_p;
+
+    if ( ( value_p = g_hash_table_lookup( hash_table, "state") ) != NULL )      
+	state = (gchar*) value_p;
+
+    if ( ( value_p = g_hash_table_lookup( hash_table, "voltage_now") ) != NULL )  
+	voltage = get_unit_value((gchar*) value_p) / 1000;
+    
+    if ( type_battery )
+    {
+	if (state) {
+	    /* convert energy values (in mWh) to charge values (in mAh) if needed and possible */
+	    if (last_capacity_unit != -1 && last_capacity == -1) {
+		if (voltage != -1) {
+		    last_capacity = last_capacity_unit * 1000 / voltage;
+		} else {
+		    last_capacity = last_capacity_unit;
+		    strcpy(capacity_unit, "mWh");
+		}
+	    }
+	    if (design_capacity_unit != -1 && design_capacity == -1) {
+		if (voltage != -1) {
+		    design_capacity = design_capacity_unit * 1000 / voltage;
+		} else {
+		    design_capacity = design_capacity_unit;
+		    strcpy(capacity_unit, "mWh");
+		}
+	    }
+	    if (remaining_energy != -1 && remaining_capacity == -1) {
+		if (voltage != -1) {
+		    remaining_capacity = remaining_energy * 1000 / voltage;
+		    present_rate = present_rate * 1000 / voltage;
+		} else {
+		    remaining_capacity = remaining_energy;
+		}
+	    }
+	    if (last_capacity < MIN_CAPACITY)
+		percentage = 0;
+	    else
+		percentage = remaining_capacity * 100 / last_capacity;
+	    
+		if (percentage > 100)
+		    percentage = 100;
+
+		printf("%s %d: %s, %d%%", BATTERY_DESC, battery_num - 1, state, percentage);
+		
+		if (present_rate == -1) {
+		    poststr = "rate information unavailable";
+		    seconds = -1;
+		} else if (!strcasecmp(state, "charging")) {
+		    if (present_rate > MIN_PRESENT_RATE) {
+			seconds = 3600 * (last_capacity - remaining_capacity) / present_rate;
+			poststr = " until charged";
+		    } else {
+			poststr = "charging at zero rate - will never fully charge.";
+			seconds = -1;
+		    }
+		} else if (!strcasecmp(state, "discharging")) {
+		    if (present_rate > MIN_PRESENT_RATE) {
+			seconds = 3600 * remaining_capacity / present_rate;
+			poststr = " remaining";
+		    } else {
+			poststr = "discharging at zero rate - will never fully discharge.";
+			seconds = -1;
+		    }
+		} else {
+		    poststr = NULL;
+		    seconds = -1;
+		}
+
+		if (seconds > 0) {
+		    hours = seconds / 3600;
+		    seconds -= 3600 * hours;
+		    minutes = seconds / 60;
+		    seconds -= 60 * minutes;
+		    printf(", %02d:%02d:%02d%s", hours, minutes, seconds, poststr);
+		} else if (poststr != NULL) {
+		    printf(", %s", poststr);
+		}
+		
+		printf("\n");
+
+		if (show_capacity && design_capacity > 0) {
+		    if (last_capacity <= 100) {
+			/* some broken systems just give a percentage here */
+			percentage = last_capacity;
+			last_capacity = percentage * design_capacity / 100;
+		    } else {
+			percentage = last_capacity * 100 / design_capacity;
+		    }
+		    if (percentage > 100)
+			percentage = 100;
+
+		    printf ("%s %d: design capacity %d %s, last full capacity %d %s = %d%%\n",
+			    BATTERY_DESC, battery_num - 1, design_capacity, capacity_unit, last_capacity, capacity_unit, percentage);
+		}
+	}
+    }
+    
+}
+
+
 
 GHashTable *acpi_sys_get_info(const gchar *device_name ) {
 
