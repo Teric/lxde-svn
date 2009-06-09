@@ -78,29 +78,7 @@ static struct field *parse_field(char *buf, char *given_attr)
     }
 
     p = buf;
-    if (!given_attr) {
-	while (*(p++)) {
-	    if (*p == ':') {
-		strncpy(attr, buf, p - buf);
-		has_attr = 1;
-		break;
-	    }
-	}
-	if (!has_attr) {
-	    free(attr);
-	    free(value);
-	    free(rval);
-	    return NULL;
-	}
-	if (*p == ' ')
-	    p++;
-	while (*(p++)) {
-	    if (*p != ' ')
-		break;
-	}
-    } else {
-	strncpy(attr, given_attr, BUF_SIZE);
-    }
+    strncpy(attr, given_attr, BUF_SIZE);
     strncpy(value, p, BUF_SIZE);
     if (attr[strlen(attr) - 1] == '\n')
 	attr[strlen(attr) - 1] = '\0';
