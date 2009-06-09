@@ -45,6 +45,7 @@
 #include <string.h>
 
 #include "dbg.h"
+#include "batt.h"
 #include "misc.h" /* used for the line struct */
 #include "panel.h" /* used to determine panel orientation */
 #include "plugin.h"
@@ -58,15 +59,6 @@
 /* The last MAX_SAMPLES samples are averaged when charge rates are evaluated.
    This helps prevent spikes in the "time left" values the user sees. */
 #define MAX_SAMPLES 10
-
-typedef struct {
-    char* name;
-    int capacity,   /* unit: mWh */
-        charge,     /* unit: mWh */
-        is_charging,
-        last_rate,   /* unit: mW */
-        rate;       /* unit: mW */
-}batt_info;
 
 typedef struct {
     char *alarmCommand,

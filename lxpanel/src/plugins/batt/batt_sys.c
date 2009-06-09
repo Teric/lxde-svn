@@ -53,19 +53,6 @@ static struct file_list sys_list[] = {
     {"online", "online"},
     {"status", "charging state"},
     {"type", "type"},
-    {"temp", "sys_temp"},
-    {"trip_point_0_type", "trip_point_0_type"},
-    {"trip_point_0_temp", "trip_point_0_temp"},
-    {"trip_point_1_type", "trip_point_1_type"},
-    {"trip_point_1_temp", "trip_point_1_temp"},
-    {"trip_point_2_type", "trip_point_2_type"},
-    {"trip_point_2_temp", "trip_point_2_temp"},
-    {"trip_point_3_type", "trip_point_3_type"},
-    {"trip_point_3_temp", "trip_point_3_temp"},
-    {"trip_point_4_type", "trip_point_4_type"},
-    {"trip_point_4_temp", "trip_point_4_temp"},
-    {"cur_state", "cur_state"},
-    {"max_state", "max_state"},
     {NULL, NULL}
 };
 
