@@ -136,7 +136,7 @@ static void parse_info_file(GHashTable *hash_table,
 	f = parse_field(buf, given_attr);
 	if (f) 
 	{
-	    g_hash_table_insert(hash_table, g_ascii_strdown( f->attr, - 1 ), g_ascii_strdown( f->value, - 1 ) );
+	    g_hash_table_insert(hash_table, g_ascii_strdown( f->attr, - 1 ), g_strdup( f->value ) );
 	    free( f->value );
 	    free( f->attr );
 	    free( f );
@@ -380,6 +380,9 @@ GList  *acpi_sys_find_devices()
 	if ( ( type != NULL ) &&  ! ( g_ascii_strcasecmp( type, "battery" ) ) )
 	{
 	    g_hash_table_foreach( hash_table, ghcallback, NULL );
+
+	    print_battery_information(hash_table, 1);
+
 	    devices = g_list_append ( devices, hash_table );
 	}
 	else 
