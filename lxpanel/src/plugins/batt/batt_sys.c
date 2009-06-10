@@ -92,10 +92,6 @@ battery* battery_new() {
     return b;
 }
 
-struct field {
-    char *attr;
-    char *value;
-};
 
 static gchar* parse_info_file(char *filename)
 {
@@ -120,9 +116,6 @@ static int get_unit_value(char *value)
 
 void print_battery_information(battery *b, int show_capacity)
 {
-
-    gpointer value_p;
-    
     if ( b->type_battery )
     {
 	if (b->state) {
@@ -229,7 +222,7 @@ battery* acpi_sys_get_info(const gchar *device_name ) {
 	GString *filename = g_string_new( ACPI_PATH_SYS_POWER_SUPPY );
 	g_string_append_printf ( filename, "/%s/%s", device_name, 
 				 sys_list[i].file );
-	if ((file_content = parse_info_file(sys_file)) != NULL) {
+	if ((file_content = parse_info_file(filename->str)) != NULL) {
 	    
 	    if ( strcmp("remaining capacity", sys_file ) == 0 ) {
 		b->remaining_capacity = get_unit_value((gchar*) file_content);
@@ -237,7 +230,7 @@ battery* acpi_sys_get_info(const gchar *device_name ) {
 		    b->state = "available";
 	    }
 	    else if ( strcmp("charge_now", sys_file ) == 0 ) {
-		b->remaining_capacity = get_unit_value((gchar*) file_content);
+		b->remaining_capacity = get_unit_value((gchar*) file_content) / 1000;
 		if (!b->state)
 		    b->state = "available";
 	    }
@@ -275,8 +268,8 @@ battery* acpi_sys_get_info(const gchar *device_name ) {
 	    }
 
 	    g_string_free( filename, TRUE );
-	    i++;
 	}
+	i++;
     }
     return b;
 }
@@ -311,7 +304,6 @@ GList  *acpi_sys_find_devices()
     }
     while ( ( entry = g_dir_read_name (dir) ) != NULL )  
     {
-	gchar *type;
 	battery *b = acpi_sys_get_info(entry);
 	print_battery_information( b, 1 );
     }
