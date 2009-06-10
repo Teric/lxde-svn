@@ -34,6 +34,8 @@
 
 typedef struct battery {
     int battery_num;
+    /* path to battery dir */
+    const gchar *path;			
     int remaining_capacity;
     int remaining_energy;
     int present_rate;
@@ -50,6 +52,7 @@ typedef struct battery {
 } battery;
 
 battery *acpi_sys_get_battery();
+void acpi_sys_update_battery_information( battery *b );
 void print_battery_information(battery *b, int show_capacity);
 
 #endif

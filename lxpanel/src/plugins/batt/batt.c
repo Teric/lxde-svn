@@ -32,7 +32,6 @@
 /* FIXME:
  *  Here are somethings need to be improvec:
  *  1. Replace pthread stuff with gthread counterparts for portability.
- *  2. Check "/proc/acpi/ac_adapter" for AC power.
  *  3. Add an option to hide the plugin when AC power is used or there is no battery.
  *  4. Handle failure gracefully under systems other than Linux.
 */
@@ -46,15 +45,11 @@
 
 #include "dbg.h"
 #include "batt.h"
+#include "batt_sys.h"
 #include "misc.h" /* used for the line struct */
 #include "panel.h" /* used to determine panel orientation */
 #include "plugin.h"
 #include "glib-mem.h" /* compatibility macros for g_slice* */
-
-#define BATTERY_DIRECTORY "/proc/acpi/battery/" /* must be slash-terminated */
-#define BATTERY_SYSFS_DIRECTORY "/sys/class/power_supply/"
-#define AC_ADAPTER_STATE_FILE "/proc/acpi/ac_adapter/AC0/state"
-#define AC_ADAPTER_STATE_SYSFS_FILE "/sys/class/power_supply/AC0/online"
 
 /* The last MAX_SAMPLES samples are averaged when charge rates are evaluated.
    This helps prevent spikes in the "time left" values the user sees. */
@@ -114,7 +109,7 @@ static void batt_info_free( batt_info* bi )
     g_slice_free( batt_info, bi );
 }
 
-static gboolean get_batt_info( batt_info* bi, gboolean use_sysfs )
+static gboolean get_batt_info( battery* bi )
 {
     FILE *info;
     char buf[ 256 ];
