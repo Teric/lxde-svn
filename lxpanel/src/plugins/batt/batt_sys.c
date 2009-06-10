@@ -240,7 +240,7 @@ battery* acpi_sys_get_info(const gchar *device_name ) {
 		    b->state = "available";
 	    }
 	    else if ( strcmp("current_now", sys_file ) == 0 ) {
-		b->present_rate = get_unit_value((gchar*) file_content);
+		b->present_rate = get_unit_value((gchar*) file_content) / 1000;
 	    }
 	    else if ( strcmp("charge_full", sys_file ) == 0 ) {
 		b->last_capacity = get_unit_value((gchar*) file_content) / 1000;
