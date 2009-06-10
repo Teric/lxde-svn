@@ -35,23 +35,6 @@
 #include <stdlib.h>
 #include <string.h>
 
-typedef struct battery {
-    int battery_num;
-    int remaining_capacity;
-    int remaining_energy;
-    int present_rate;
-    int voltage;
-    int design_capacity;
-    int design_capacity_unit;
-    int last_capacity;
-    int last_capacity_unit;
-    int hours, minutes, seconds;
-    int percentage;
-    char *state, *poststr;
-    char* capacity_unit;
-    int type_battery;
-} battery;
-
 battery* battery_new() {
     static int battery_num = 1;
     battery * b = g_new0 ( battery, 1 );
@@ -265,12 +248,11 @@ battery* acpi_sys_get_info(const gchar *device_name ) {
     return b;
 }
 
-GList  *acpi_sys_find_devices()
-{
-    GList *devices = NULL;
+battery *acpi_sys_get_battery() {
     GError * error = NULL;
     const gchar *entry;
     GDir * dir = g_dir_open( ACPI_PATH_SYS_POWER_SUPPY, 0, &error );
+    battery *b = NULL;
     if ( dir == NULL ) 
     {
 	g_warning( "NO ACPI/sysfs support in kernel: %s", error->message );
@@ -278,12 +260,15 @@ GList  *acpi_sys_find_devices()
     }
     while ( ( entry = g_dir_read_name (dir) ) != NULL )  
     {
-	battery *b = acpi_sys_get_info(entry);
-	print_battery_information( b, 1 );
+	b = acpi_sys_get_info(entry);
+	if ( b->type_battery == TRUE ) 
+	    break;
+	/* ignore non-batteries */
+	else 			
+	    g_free(b);
     }
     g_dir_close( dir );
-    return devices;
-    
+    return b;
 }
 
 

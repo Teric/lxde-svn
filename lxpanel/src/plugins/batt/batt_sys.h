@@ -32,6 +32,24 @@
 
 #include <glib.h>
 
-GList*  acpi_sys_find_devices();
+typedef struct battery {
+    int battery_num;
+    int remaining_capacity;
+    int remaining_energy;
+    int present_rate;
+    int voltage;
+    int design_capacity;
+    int design_capacity_unit;
+    int last_capacity;
+    int last_capacity_unit;
+    int hours, minutes, seconds;
+    int percentage;
+    char *state, *poststr;
+    char* capacity_unit;
+    int type_battery;
+} battery;
+
+battery *acpi_sys_get_battery();
+void print_battery_information(battery *b, int show_capacity);
 
 #endif
