@@ -35,27 +35,6 @@
 #include <stdlib.h>
 #include <string.h>
 
-struct file_list {
-    char *file;
-};
-
-
-static struct file_list sys_list[] = {
-    {"current_now"},
-    {"charge_now"},
-    {"energy_now"},
-    {"voltage_now"},
-    {"voltage_min_design"},
-    {"charge_full"},
-    {"energy_full"},
-    {"charge_full_design"},
-    {"energy_full_design"},
-    {"online"},
-    {"status"},
-    {"type"},
-    {NULL}
-};
-
 typedef struct battery {
     int battery_num;
     int remaining_capacity;
@@ -206,22 +185,39 @@ void print_battery_information(battery *b, int show_capacity)
 		}
 	}
     }
-    
-}
+}    
+
 
 
 
 battery* acpi_sys_get_info(const gchar *device_name ) {
 
     int i = 0;
+    const gchar *sys_list[] = {
+	"current_now",
+	"charge_now",
+	"energy_now",
+	"voltage_now",
+	"voltage_min_design",
+	"charge_full",
+	"energy_full",
+	"charge_full_design",
+	"energy_full_design",
+	"online",
+	"status",
+	"type",
+	NULL
+    };
+    const gchar *sys_file;
+
     battery *b = battery_new();
-    char *sys_file;
-    while ( (sys_file = sys_list[i].file) != NULL ) 
-    {
+
+    while ( (sys_file = sys_list[i]) != NULL ) {
+    
 	gchar *file_content;
 	GString *filename = g_string_new( ACPI_PATH_SYS_POWER_SUPPY );
 	g_string_append_printf ( filename, "/%s/%s", device_name, 
-				 sys_list[i].file );
+				 sys_file );
 	if ((file_content = parse_info_file(filename->str)) != NULL) {
 	    
 	    if ( strcmp("charge_now", sys_file ) == 0 ) {
