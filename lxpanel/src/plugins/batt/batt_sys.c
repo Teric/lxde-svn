@@ -224,12 +224,7 @@ battery* acpi_sys_get_info(const gchar *device_name ) {
 				 sys_list[i].file );
 	if ((file_content = parse_info_file(filename->str)) != NULL) {
 	    
-	    if ( strcmp("remaining capacity", sys_file ) == 0 ) {
-		b->remaining_capacity = get_unit_value((gchar*) file_content);
-		if (!b->state)
-		    b->state = "available";
-	    }
-	    else if ( strcmp("charge_now", sys_file ) == 0 ) {
+	    if ( strcmp("charge_now", sys_file ) == 0 ) {
 		b->remaining_capacity = get_unit_value((gchar*) file_content) / 1000;
 		if (!b->state)
 		    b->state = "available";
@@ -273,23 +268,6 @@ battery* acpi_sys_get_info(const gchar *device_name ) {
     }
     return b;
 }
-
-
-
-
-
-
-void  ghcallback (gpointer key_p,
-			       gpointer value_p,
-			       gpointer user_data) 
-{
-  gchar *str = (gchar*) key_p;
-  gchar *val = (gchar* ) value_p;
-  
-  g_message("str:%s:%s", str, val);
-  
-}
-
 
 GList  *acpi_sys_find_devices()
 {
