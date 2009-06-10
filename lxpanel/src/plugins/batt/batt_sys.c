@@ -1,7 +1,7 @@
 /*
  *      batt_sys.h
  *      
- *      Copyright 2008 Juergen Hötzel <juergen@archlinux.org>
+ *      Copyright 2009 Juergen Hötzel <juergen@archlinux.org>
  * 		
  * 	Parts shameless stolen and glibified from acpi package  
  * 	Copyright (C) 2001  Grahame Bowland <grahame@angrygoats.net>
