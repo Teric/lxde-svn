@@ -37,23 +37,23 @@
 
 struct file_list {
     char *file;
-    char *attr;
 };
 
+
 static struct file_list sys_list[] = {
-    {"current_now", "current_now"},
-    {"charge_now", "charge_now"},
-    {"energy_now", "energy_now"},
-    {"voltage_now", "voltage_now"},
-    {"voltage_min_design", "voltage_min_design"},
-    {"charge_full", "charge_full"},
-    {"energy_full", "energy_full"},
-    {"charge_full_design", "charge_full_design"},
-    {"energy_full_design", "energy_full_design"},
-    {"online", "online"},
-    {"status", "charging state"},
-    {"type", "type"},
-    {NULL, NULL}
+    {"current_now"},
+    {"charge_now"},
+    {"energy_now"},
+    {"voltage_now"},
+    {"voltage_min_design"},
+    {"charge_full"},
+    {"energy_full"},
+    {"charge_full_design"},
+    {"energy_full_design"},
+    {"online"},
+    {"status"},
+    {"type"},
+    {NULL}
 };
 
 struct field {
@@ -155,7 +155,7 @@ void print_battery_information(GHashTable *hash_table, int show_capacity)
     if ( ( value_p = g_hash_table_lookup( hash_table, "type") ) != NULL )  
 	type_battery = (strcasecmp((gchar*) value_p, "battery") == 0);
 
-    if ( ( value_p = g_hash_table_lookup( hash_table, "charging state") )!= NULL )      
+    if ( ( value_p = g_hash_table_lookup( hash_table, "status") )!= NULL )      
 	state = (gchar*) value_p;
 
     if ( ( value_p = g_hash_table_lookup( hash_table, "state") ) != NULL )      
@@ -268,7 +268,7 @@ GHashTable *acpi_sys_get_info(const gchar *device_name ) {
 	GString *filename = g_string_new( ACPI_PATH_SYS_POWER_SUPPY );
 	g_string_append_printf ( filename, "/%s/%s", device_name, 
 				 sys_list[i].file );
-	parse_info_file(hash_table, filename->str, sys_list[i].attr);
+	parse_info_file(hash_table, filename->str, sys_list[i].file);
 	g_string_free( filename, TRUE );
 	i++;
     }
