@@ -91,7 +91,6 @@ typedef struct {
     sem_t alarmProcessLock;
     GList* batteries;
     gboolean has_ac_adapter;
-    gboolean use_sysfs;
 } batt;
 
 
@@ -102,162 +101,6 @@ typedef struct {
 
 static void destructor(Plugin *p);
 static void update_display(batt *b, gboolean repaint);
-
-static void batt_info_free( batt_info* bi )
-{
-    g_free( bi->name );
-    g_slice_free( batt_info, bi );
-}
-
-static gboolean get_batt_info( battery* bi )
-{
-    FILE *info;
-    char buf[ 256 ];
-
-    /* Open the info file */
-    if (use_sysfs)
-        g_snprintf(buf, 256, "%s%s/charge_full", BATTERY_SYSFS_DIRECTORY, bi->name);
-    else
-        g_snprintf(buf, 256, "%s%s/info", BATTERY_DIRECTORY, bi->name);
-    if ((info = fopen(buf, "r"))) {
-        /* Read the file until the battery's capacity is found or until
-           there are no more lines to be read */
-        if (use_sysfs)
-            while( fgets(buf, 256, info) &&
-                    ! sscanf(buf, "%ld", &bi->capacity) );
-        else
-            while( fgets(buf, 256, info) &&
-                    ! sscanf(buf, "last full capacity: %d",
-                    &bi->capacity) );
-        fclose(info);
-        return TRUE;
-    }
-    return FALSE;
-}
-
-static gboolean get_batt_state( batt_info* bi, gboolean use_sysfs )
-{
-    FILE *state;
-    char buf[ 512 ];
-    
-    if (use_sysfs)
-        g_snprintf( buf, 512, "%s%s/uevent", BATTERY_SYSFS_DIRECTORY, bi->name );
-    else
-        g_snprintf( buf, 512, "%s%s/state", BATTERY_DIRECTORY, bi->name );
-    if((state = fopen( buf, "r"))) {
-        char *pstr;
-        fread(buf, sizeof(buf), 1, state);
-
-        char thisState = 'c';
-
-        if (use_sysfs) {
-            /* Read the file until the battery's charging state is found or
-               until there are no more lines to be read */
-            if (pstr = strstr(buf, "POWER_SUPPLY_STATUS="))
-                thisState = *(pstr + 20);
-
-            /* Read the file until the battery's charge/discharge rate is
-               found or until there are no more lines to be read */
-            if (pstr = strstr(buf, "POWER_SUPPLY_CURRENT_NOW=")) {
-                pstr += 25;
-                sscanf (pstr, "%ld",&bi->rate );
-
-                if( bi->rate < 0 )
-                    bi->rate = 0;
-            }
-
-            /* Read the file until the battery's charge is found or until
-               there are no more lines to be read */
-            if (pstr = strstr (buf, "POWER_SUPPLY_CHARGE_NOW=")) {
-                pstr += 24;
-                sscanf (pstr, "%ld", &bi->charge);
-            }
-
-            /* thisState will be 'c' if the batter is charging and 'd'
-               otherwise */
-            bi->is_charging = !( thisState - 'C' );
-        } else {
-            /* Read the file until the battery's charging state is found or
-               until there are no more lines to be read */
-            if (pstr = strstr(buf, "charging state:"))
-                thisState = *(pstr + 25);
-
-            /* Read the file until the battery's charge/discharge rate is
-               found or until there are no more lines to be read */
-            if (pstr = strstr(buf, "present rate:")) {
-                //pstr += 13;
-                pstr += 25;
-                sscanf (pstr, "%d",&bi->rate );
-
-                if( bi->rate < 0 )
-                    bi->rate = 0;
-            }
-
-            /* Read the file until the battery's charge is found or until
-               there are no more lines to be read */
-            if (pstr = strstr (buf, "remaining capacity:")) {
-                pstr += 25;
-                sscanf (pstr, "%d",&bi->charge);
-            }
-	    
-            /* thisState will be 'c' if the batter is charging and 'd'
-               otherwise */
-            bi->is_charging = !( thisState - 'c' );
-        }
-
-
-
-        fclose(state);
-        return TRUE;
-    }
-    return FALSE;
-}
-
-static gboolean check_ac_adapter( batt* b )
-{
-    FILE *state;
-    char buf[ 256 ];
-    char* pstr;
-
-    if (!(state = fopen( AC_ADAPTER_STATE_FILE, "r"))) {
-        if ((state = fopen( AC_ADAPTER_STATE_SYSFS_FILE, "r"))) {
-			b->use_sysfs = TRUE;
-        } else {
-            return FALSE;
-        }
-    }
-
-    gboolean has_ac_adapter = FALSE;
-    if (b->use_sysfs) {
-        while( fgets(buf, 256, state) &&
-                ! sscanf(buf, "%d", &has_ac_adapter) );
-    } else {
-        while( fgets(buf, 256, state) &&
-                ! ( pstr = strstr(buf, "state:") ) );
-        if( pstr )
-        {
-            pstr += 6;
-            while( *pstr && *pstr == ' ' )
-                ++pstr;
-            if( pstr[0] == 'o' && pstr[1] == 'n' )
-                has_ac_adapter = TRUE;
-        }
-    }
-
-    fclose(state);
-
-    /* if the state of AC adapter changed, is_charging of the batteries might change, too. */
-    if( has_ac_adapter != b->has_ac_adapter )
-    {
-        /* g_debug( "ac_state_changed: %d", has_ac_adapter ); */
-        b->has_ac_adapter = has_ac_adapter;
-        /* update the state of all batteries */
-        g_list_foreach( b->batteries, (GFunc)get_batt_state,
-                &b->use_sysfs );
-        update_display( b, TRUE );
-    }
-    return TRUE;
-}
 
 /* alarmProcess takes the address of a dynamically allocated alarm struct (which
    it must free). It ensures that alarm commands do not run concurrently. */
@@ -273,41 +116,9 @@ static void * alarmProcess(void *arg) {
 }
 
 
-/* addRate adds a charge/discharge rate to the array of samples and returns the
-   average of all the rates in the array */
-static int addRate(batt *b, int isCharging, int lastRate) {
-
-    /* Clear the rate samples array if the charge/discharge status has just
-       changed */
-    if (b->wasCharging != isCharging) {
-        b->wasCharging = isCharging;
-        b->numSamples = b->rateSamplesSum = 0;
-    }
-
-    /* The rateSamples array acts as a circular array-based queue with a fixed
-       size. If it is full, there's a meaningful value at index numSamples which
-       should be subtracted from the sum before the new value is added; if it
-       isn't full, the value at index numSamples does not need to be
-       considered. */
-    int currentIndex = b->numSamples % MAX_SAMPLES;
-    if (b->numSamples >= MAX_SAMPLES)
-        b->rateSamplesSum -= b->rateSamples[currentIndex];
-    b->rateSamples[currentIndex] = lastRate;
-    b->rateSamplesSum += lastRate;
-
-    /* Increment numSamples, but don't let it get too big. As long as it's
-       greater than MAX_SAMPLES, we'll know that the next sample will be
-       replacing an older one. */
-    if (++b->numSamples >= MAX_SAMPLES * 2)
-        b->numSamples -= MAX_SAMPLES;
-
-    RET(b->rateSamplesSum / MIN(b->numSamples, MAX_SAMPLES));
-
-}
-
 /* FIXME:
    Don't repaint if percentage of remaining charge and remaining time aren't changed. */
-void update_display(batt *b, gboolean repaint) {
+void update_display(battery *b, gboolean repaint) {
     GList* l;
     char tooltip[ 256 ];
 
@@ -323,45 +134,36 @@ void update_display(batt *b, gboolean repaint) {
     /* draw background */
     gdk_draw_rectangle(b->pixmap, b->bg, TRUE, 0, 0, b->width, b->height);
 
-    if( b->batteries )
+    /* fixme: only one battery supported */
+    /* Add the last rate to the array of recent samples and get the average
+       rate */
+
+    isCharging = ( strcasecmp ( b->state, "charging" ) == 0 )?TRUE:FALSE;
+
+    /* Consider running the alarm command */
+    if (! isCharging && rate && 
+	( ( 3600 * (b->last_capacity - b->remaining_capacity) / b->present_rate ) < b->alarmTime ) ) 
     {
-        /* Calculate the total capacity, charge, and charge/discharge rate */
-        for( l = b->batteries; l; l = l->next )
-        {
-            batt_info* bi = (batt_info*)l->data;
-            capacity += bi->capacity;
-            charge += bi->charge;
-            lastRate += bi->rate;
-            if( bi->is_charging )
-                isCharging = TRUE;
-        }
-
-        /* Add the last rate to the array of recent samples and get the average
-           rate */
-        rate = addRate(b, isCharging, lastRate);
-
-        /* Consider running the alarm command */
-        if (! isCharging && rate && charge * 60 / rate <= b->alarmTime) {
-
-            /* Alarms should not run concurrently; determine whether an alarm is
-               already running */
-            int alarmCanRun;
-            sem_getvalue(&(b->alarmProcessLock), &alarmCanRun);
-
-            /* Run the alarm command if it isn't already running */
-            if (alarmCanRun) {
-
-                alarm *a = (alarm *) malloc(sizeof(alarm));
-                a->command = b->alarmCommand;
-                a->lock = &(b->alarmProcessLock);
-
-                /* Manage the alarm process in a new thread, which which will be
-                   responsible for freeing the alarm struct it's given */
-                pthread_t alarmThread;
-                pthread_create(&alarmThread, NULL, alarmProcess, a);
-
-            }
-        }
+	/* Shrug this should be done using glibs process functions */
+	/* Alarms should not run concurrently; determine whether an alarm is
+	   already running */
+	int alarmCanRun;
+	sem_getvalue(&(b->alarmProcessLock), &alarmCanRun);
+	
+	/* Run the alarm command if it isn't already running */
+	if (alarmCanRun) {
+	    
+	    alarm *a = (alarm *) malloc(sizeof(alarm));
+	    a->command = b->alarmCommand;
+	    a->lock = &(b->alarmProcessLock);
+	    
+	    /* Manage the alarm process in a new thread, which which will be
+	       responsible for freeing the alarm struct it's given */
+	    pthread_t alarmThread;
+	    pthread_create(&alarmThread, NULL, alarmProcess, a);
+	    
+	}
+    }
 
         /* Make a tooltip string, and display remaining charge time if the battery
            is charging or remaining life if it's discharging */
