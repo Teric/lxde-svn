@@ -25,7 +25,7 @@
 #include <lxpanel/plugin.h>
 #include "gmenu-dlg.h"
 
-#define RCFILE    "/usr/share/xfce4/panel-plugins/gmenu/gtkrc"
+#define RCFILE  PACKAGE_DATA_DIR  "/lxpanel/gmenu/gtkrc"
 
 typedef struct {
     GtkWidget * button;

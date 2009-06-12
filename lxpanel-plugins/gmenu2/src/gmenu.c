@@ -27,7 +27,7 @@
 #include "gmenu-dlg.h"
 #include "menu.h"
 
-#define ICON_MENU "/usr/share/icons/hicolor/48x48/apps/menu.png"
+#define ICON_MENU PACKAGE_DATA_DIR "/lxpanel/gmenu/menu-button.png"
 
 typedef struct {
     Plugin* plugin;
