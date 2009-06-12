@@ -34,9 +34,9 @@ typedef struct {
     char * cmd;
 }btn_t;
 
-void on_click(GtkWidget * button, char * cmd)
+void on_click(GtkWidget * button, btn_t * btn )
 {
-    g_spawn_command_line_async( cmd , NULL );
+    g_spawn_command_line_async( btn->cmd , NULL );
 }
 
 void  gmenu_button_new( btn_t * btn,
@@ -58,7 +58,7 @@ void  gmenu_button_new( btn_t * btn,
     gtk_button_set_alignment ((GtkButton*)btn->button,0.0,0.5);
 
     g_signal_connect (G_OBJECT (btn->button), "clicked",
-              G_CALLBACK (on_click),btn->cmd);
+              G_CALLBACK (on_click),btn);
     
     return;
 }
@@ -66,38 +66,44 @@ void  gmenu_button_new( btn_t * btn,
 GtkWidget * gmenu_create_right_menubar()
 {
     GtkWidget * right_menubar = gtk_vbox_new(FALSE,6);
-   
-    btn_t home; 
-    gmenu_button_new( &home, GTK_STOCK_HOME, _("My Documents"), "pcmanfm ~/",
+  
+    btn_t * home = g_slice_new0( btn_t );
+    gmenu_button_new( home, GTK_STOCK_HOME, _("My Documents"), "pcmanfm ~/",
                       GTK_ICON_SIZE_LARGE_TOOLBAR );
-    gtk_box_pack_start (GTK_BOX (right_menubar), home.button , FALSE, FALSE,0);
+    gtk_box_pack_start (GTK_BOX (right_menubar), home -> button , FALSE, FALSE,0);
+    gtk_widget_set_name(home->button,"GMenuButton");
 
-    btn_t package_manager; 
-    gmenu_button_new( &package_manager, "summon", _("Package manager"), "",
+    btn_t * package_manager  = g_slice_new0( btn_t );
+    gmenu_button_new( package_manager, "summon", _("Package manager"), "",
                       GTK_ICON_SIZE_LARGE_TOOLBAR );
-    gtk_box_pack_start (GTK_BOX (right_menubar), package_manager.button , FALSE, FALSE,0);
+    gtk_box_pack_start (GTK_BOX (right_menubar), package_manager->button , FALSE, FALSE,0);
+    gtk_widget_set_name(package_manager->button,"GMenuButton");
 
     gtk_box_pack_start (GTK_BOX (right_menubar), gtk_hseparator_new() , FALSE, FALSE,0);
 
-    btn_t terminal; 
-    gmenu_button_new( &terminal, "gnome-terminal", _("Terminal"), "lxterminal",
+    btn_t * terminal = g_slice_new0( btn_t );
+    gmenu_button_new( terminal, "gnome-terminal", _("Terminal"), "lxterminal",
                       GTK_ICON_SIZE_LARGE_TOOLBAR );
-    gtk_box_pack_start (GTK_BOX (right_menubar), terminal.button , FALSE, FALSE,0);
+    gtk_box_pack_start (GTK_BOX (right_menubar), terminal->button , FALSE, FALSE,0);
+    gtk_widget_set_name(terminal->button,"GMenuButton");
 
-    btn_t run; 
-    gmenu_button_new( &run, GTK_STOCK_EXECUTE, _("Run"), "gtkrun",
+    btn_t * run = g_slice_new0( btn_t );
+    gmenu_button_new( run, GTK_STOCK_EXECUTE, _("Run"), "gtkrun",
                       GTK_ICON_SIZE_LARGE_TOOLBAR );
-    gtk_box_pack_start (GTK_BOX (right_menubar), run.button , FALSE, FALSE,0);
+    gtk_box_pack_start (GTK_BOX (right_menubar), run->button , FALSE, FALSE,0);
+    gtk_widget_set_name(run->button,"GMenuButton");
 
-    btn_t lock; 
-    gmenu_button_new( &lock, "system-lock-screen", _("Lock Screen"), "guano-lock",
+    btn_t * lock = g_slice_new0( btn_t );
+    gmenu_button_new( lock, "system-lock-screen", _("Lock Screen"), "guano-lock",
                       GTK_ICON_SIZE_LARGE_TOOLBAR );
-    gtk_box_pack_start (GTK_BOX (right_menubar), lock.button , FALSE, FALSE,0);
+    gtk_box_pack_start (GTK_BOX (right_menubar), lock->button , FALSE, FALSE,0);
+    gtk_widget_set_name(lock->button,"GMenuButton");
 
-    btn_t quit; 
-    gmenu_button_new( &quit, GTK_STOCK_QUIT, _("Quit"), "guano-logout",
+    btn_t * quit = g_slice_new0( btn_t );
+    gmenu_button_new( quit, GTK_STOCK_QUIT, _("Quit"), "guano-logout",
                       GTK_ICON_SIZE_LARGE_TOOLBAR );
-    gtk_box_pack_start (GTK_BOX (right_menubar), quit.button , FALSE, FALSE,0);
+    gtk_box_pack_start (GTK_BOX (right_menubar), quit->button , FALSE, FALSE,0);
+    gtk_widget_set_name(quit->button,"GMenuButton");
 
     return right_menubar;
 }

@@ -4,8 +4,67 @@ style "panel-menu"
 }
 widget "Gmenu" style "panel-menu"
 
-style "widgets"
+style "menu-buttons"
 {
-	font_name = "Sans 20"
+    GtkButton::default_border                    = {0, 0, 0, 0}
+    GtkButton::default_outside_border            = {0, 0, 0, 0}
+    GtkButton::child_displacement_x              = 0
+    GtkButton::child_displacement_y              = 1
+    GtkButton::default_spacing                   = 4
+    GtkButton::focus-padding                     = 0
+    GtkCheckButton::indicator_size               = 8
+    GtkMenuBar::internal-padding                 = 1
+    GtkMenuBar::shadow_type                      = out
+    GtkHandleBox::shadow_type                    = out
+    GtkMenuItem::selected_shadow_type            = etched-in
+    GtkPaned::handle_full_size                   = 1
+    GtkPaned::handle_size                        = 4
+    GtkRadioButton::indicator_size               = 10
+    GtkRange::slider_width                       = 12
+    GtkRange::stepper_size                       = 10
+    GtkRange::stepper_spacing                    = 0
+    GtkRange::trough_border                      = 0
+    GtkScrollbar::has_backward_stepper           = 1
+    GtkScrollbar::has_secondary_backward_stepper = 0
+    GtkScrollbar::min_slider_length              = 10
+    GtkToolbar::shadow_type                      = out
+    GtkWidget::focus-line-width                  = 1
+    GtkWidget::focus_padding                     = 1 
+    GtkWidget::interior_focus                    = 1 
+    GtkWidget::internal_padding                  = 2 
+    GtkEntry::cursor_color                       = "#fcfcfc"
+    GtkEntry::secondary_cursor_color             = "#fcfcfc"
+    GtkTextView::cursor_color                    = "#fcfcfc"
+    GtkTextView::secondary_cursor_color          = "#fcfcfc"
+    GtkEntry::cursor_aspect_ratio                = 0.1
+    GtkEntry::cursor_aspect_ratio                = 0.1
+    
+    xthickness             = 1
+    ythickness             = 1
+
+
+    base[ACTIVE]      = "#2f519a"
+    base[INSENSITIVE] = "#303030"
+    base[NORMAL]      = "#121212"
+    base[PRELIGHT]    = "#002849"
+    base[SELECTED]    = "#003263"
+
+    bg[ACTIVE]        = "#151515"
+    bg[INSENSITIVE]   = "#303030"
+    bg[NORMAL]        = "#232323"
+    bg[PRELIGHT]      = "#003263"
+    bg[SELECTED]      = "#002849"
+
+    fg[ACTIVE]        = "#dadada"
+    fg[INSENSITIVE]   = "#151515"
+    fg[NORMAL]        = "#ffffff"
+    fg[PRELIGHT]      = "#fcfcfc"
+    fg[SELECTED]      = "#fcfcfc"
+
+    text[ACTIVE]      = "#fcfcfc"
+    text[INSENSITIVE] = "#fcfcfc"
+    text[NORMAL]      = "#fcfcfc"
+    text[PRELIGHT]    = "#fcfcfc"
+    text[SELECTED]    = "#fcfcfc"
 }
-widget "GmenuButtons" style "widgets"
+widget "*GMenuButton*" style "menu-buttons"
