@@ -1,0 +1,11 @@
+style "panel-menu"
+{
+	bg_pixmap[NORMAL] = "menu.png"
+}
+widget "Gmenu" style "panel-menu"
+
+style "widgets"
+{
+	font_name = "Sans 20"
+}
+widget "GmenuButtons" style "widgets"
