@@ -1,6 +1,6 @@
 [Desktop Entry]
 Type=Application
-Icon=
+Icon=xfwm4.png
 Exec=lxsession-edit
 Name=Desktop Session Settings
 Name[zh_TW]=桌面工作階段設定
