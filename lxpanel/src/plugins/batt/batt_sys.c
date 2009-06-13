@@ -272,4 +272,10 @@ battery *battery_get() {
     return b;
 }
 
+gboolean battery_is_charging( battery *b )
+{
+    return ( strcasecmp( b->state, "Unknown" ) == 0
+	     || strcasecmp( b->state, "Charging" ) == 0 );
+}
+
 
