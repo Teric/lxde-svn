@@ -51,8 +51,8 @@ typedef struct battery {
     int type_battery;
 } battery;
 
-battery *acpi_sys_get_battery();
-void acpi_sys_update_battery_information( battery *b );
-void print_battery_information(battery *b, int show_capacity);
+battery *battery_get();
+void battery_update( battery *b );
+void battery_print(battery *b, int show_capacity);
 
 #endif

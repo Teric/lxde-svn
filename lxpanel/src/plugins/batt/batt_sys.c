@@ -76,7 +76,7 @@ static int get_unit_value(char *value)
     return n;
 }
 
-void print_battery_information(battery *b, int show_capacity)
+void battery_print(battery *b, int show_capacity)
 {
     if ( b->type_battery )
     {
@@ -171,7 +171,7 @@ void print_battery_information(battery *b, int show_capacity)
 }    
 
 
-void acpi_sys_update_battery_information( battery *b ) {
+void battery_update( battery *b ) {
     int i = 0;
     const gchar *sys_list[] = {
 	"current_now",
@@ -248,7 +248,7 @@ static battery* acpi_sys_get_battery_from_dir (const gchar *device_name ) {
     return b;
 }
 
-battery *acpi_sys_get_battery() {
+battery *battery_get() {
     GError * error = NULL;
     const gchar *entry;
     GDir * dir = g_dir_open( ACPI_PATH_SYS_POWER_SUPPY, 0, &error );
@@ -261,7 +261,7 @@ battery *acpi_sys_get_battery() {
     while ( ( entry = g_dir_read_name (dir) ) != NULL )  
     {
 	b = acpi_sys_get_battery_from_dir(entry);
-	acpi_sys_update_battery_information ( b );
+	battery_update ( b );
 	if ( b->type_battery == TRUE ) 
 	    break;
 	/* ignore non-batteries */
